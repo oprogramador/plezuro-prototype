@@ -24,9 +24,10 @@
 using MyCollections;
 using System;
 using System.Collections.Generic;
+using lib;
 
 namespace MyTypes.MyClasses {
-	public class ReferenceT : Pointer<IVariable>, IVariable {
+	public class ReferenceT : Pointer<IVariable>, IVariable, ITypeConvertible {
 		public ReferenceT(IVariable iv) :  base(iv) {
 			ID = ObjectContainer.Instance.Add(this);
 			Console.WriteLine("reference ctor");
@@ -76,6 +77,10 @@ namespace MyTypes.MyClasses {
 
 		string IStringable.ToString() {
 			return ""+Value;
+		}
+
+		public object Convert() {
+			return Value;
 		}
 	}
 }

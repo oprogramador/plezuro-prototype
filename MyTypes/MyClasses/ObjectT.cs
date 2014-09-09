@@ -66,7 +66,7 @@ namespace MyTypes.MyClasses {
 			"dic",		(Func<ITuplable,IVariable>) ((x) => new DictionaryT(x.ToArray())),
 			DotSymbol,	(Func<IVariable,SoftLink,DotFunc>) ((x,f) => new DotFunc(f.ToProc(x), x)),
 			";",		(Func<IVariable,IVariable,IVariable>) ((x,y) => y),
-			//"=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { x.Value=y; return y;}),
+			"=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { x.Value=y; return y;}),
 			":=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { 
 				Console.WriteLine(":=\ny="+y+" type="+y.GetType()+"clone="+y.Clone()+" type="+y.Clone().GetType());
 				x.Value=(IVariable)y.Clone(); return y;}),
@@ -81,7 +81,7 @@ namespace MyTypes.MyClasses {
 			"==",		(Func<IVariable,IVariable,bool>) ((x,y) => x.CompareTo(y)==0 ),
 			"===",		(Func<IVariable,IVariable,bool>) ((x,y) => x==y ),
 			"&&",	(Func<ReferenceT,PointerT>) ((x) => new PointerT(x)),
-			"=",		(Func<ITuplable,ITuplable,ITuplable>) 
+			/*"=",		(Func<ITuplable,ITuplable,ITuplable>) 
 					((xx,yy) => { 
 						Console.WriteLine("xx="+xx+" type="+xx.GetType());
 						Console.WriteLine("yy="+xx+" type="+yy.GetType());
@@ -92,6 +92,7 @@ namespace MyTypes.MyClasses {
 						((ReferenceT)x[i]).Value = y[i];
 					}
 					return xx;}),
+			*/
 			};
 
 		private static object[] toRefArray(object[] ar) {
