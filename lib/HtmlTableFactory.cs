@@ -1,5 +1,5 @@
 /*
- * HtmlTable.cs
+ * HtmlTableFactory.cs
  * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -25,22 +25,10 @@ using System;
 using System.Collections;
 
 namespace lib {
-	abstract class HtmlTable {
-		protected IEnumerable array { get; private set; }
-	
-		private int border;
-
-		public int Border { get {return border;} set {}}
-		public HtmlTable SetBorder(int b) {
-			border = b;
-			return this;
+	static class HtmlTableFactory {
+		public static HtmlTable Create(IEnumerable ie) {
+			foreach(var i in ie) if(!(SimpleTypeConverter.Convert(i) is IDictionary)) return new HtmlArrayTable(ie);
+			return new HtmlDicTable(ie);
 		}
-
-		public HtmlTable(IEnumerable ar) {
-			border = 0;
-			array = ar;
-		}
-
-		public abstract string Generate();
 	}
 }

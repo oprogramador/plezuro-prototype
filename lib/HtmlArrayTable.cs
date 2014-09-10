@@ -1,5 +1,5 @@
 /*
- * HtmlTable.cs
+ * HtmlArrayTable.cs
  * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -25,22 +25,22 @@ using System;
 using System.Collections;
 
 namespace lib {
-	abstract class HtmlTable {
-		protected IEnumerable array { get; private set; }
-	
-		private int border;
-
-		public int Border { get {return border;} set {}}
-		public HtmlTable SetBorder(int b) {
-			border = b;
-			return this;
+	class HtmlArrayTable : HtmlTable {
+		public HtmlArrayTable(IEnumerable ar) : base(ar) {
 		}
 
-		public HtmlTable(IEnumerable ar) {
-			border = 0;
-			array = ar;
+		public override string Generate() {
+			string ret = "<table border=\""+Border+"\">";
+			foreach(var rowi in array) {
+				ret += "<tr>";
+				var row = SimpleTypeConverter.Convert(rowi);
+				if(row is IEnumerable) foreach(var cell in (IEnumerable)row) ret += "<td>"+SimpleTypeConverter.Convert(cell)+"</td>";
+				else ret += "<td>"+row+"</td>";
+				ret += "</tr>";
+			}
+			ret += "</table>";
+			return ret;
 		}
 
-		public abstract string Generate();
 	}
 }

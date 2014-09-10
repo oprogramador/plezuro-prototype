@@ -22,6 +22,7 @@
  
 
 using System;
+using System.Collections.Generic;
 
 namespace Tests {
 	class TestUnit {
@@ -53,7 +54,13 @@ namespace Tests {
 			}*/
 			//object[] ar = new object[]{"dwe","as"};
 			//ar[0] = 45;
-			Console.WriteLine(new lib.HtmlTable(new object[]{new object[]{1,9,2.3}, new object[]{3,"asd",9}, 4444}).SetBorder(2).Generate());
+			//Console.WriteLine(new lib.HtmlArrayTable(new object[]{new object[]{1,9,2.3}, new object[]{3,"asd",9}, 4444}).SetBorder(2).Generate());
+			Console.WriteLine(lib.HtmlTableFactory.Create(new object[]{
+						new Dictionary<object,object>(){{"one",1}, {"two", 2}},
+						new Dictionary<object,object>(){{"three",3}, {"two", 2}},
+						new Dictionary<object,object>(){{"one",10}, {"two", 2}},
+						22211
+						}).SetBorder(2).Generate());
 		}
 
 		public TestUnit() {

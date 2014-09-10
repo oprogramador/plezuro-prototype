@@ -69,7 +69,7 @@ namespace MyTypes.MyClasses {
 			"toSet",	(Func<ListT,IVariable>) ((x) => new SetT(x)),
 			"map",		(Func<IPrintable,ListT,ProcedureT,ListT>) 
 						((p,x,f) => new ListT(x.Select( i => Evaluator.Eval(f,p,new TupleT(new object[]{i}))))),
-			"html",		(Func<ListT,string>) ((x) => new HtmlTable(x).SetBorder(2).Generate()),
+			"html",		(Func<ListT,string>) ((x) => HtmlTableFactory.Create(x).SetBorder(2).Generate()),
 			"<<",		(Func<ListT,IVariable,ListT>) ((a,v) => {a.Add((IVariable)v.Clone()); return a;} ),
 			">>",		(Func<ListT,ReferenceT,ListT>) ((a,v) => {v.Value=(IVariable)a.Pop(); return a;} ),
 			"+",		(Func<ListT,ListT,ListT>) ((x,y) => (ListT)x.Concat(y)),
