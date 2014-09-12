@@ -32,10 +32,14 @@ namespace lib {
 
 		public HtmlDicTable(IEnumerable ar) : base(ar) {
 			properties = new HashSet<object>();
+			var strprops = new HashSet<string>();
 			foreach(var i in ar) {
 				//if(i is IDictionary) properties.UnionWith( ((IDictionary)i).Keys );
 				try {
-					foreach(var k in ((IDictionary)SimpleTypeConverter.Convert(i)).Keys) if(!properties.Contains(k)) properties.Add(k);
+					foreach(var k in ((IDictionary)SimpleTypeConverter.Convert(i)).Keys) if(!strprops.Contains(""+k)) {
+						properties.Add(k);
+						strprops.Add(""+k);
+					}
 				} catch {}
 			}
 		}
