@@ -51,6 +51,8 @@ namespace MyTypes.MyClasses {
 		}
 		
 		IVariable[] ITuplable.ToArray() {
+			var ar = Value.ToArray();
+			if(ar.Length!=1) return ar;
 			return new IVariable[]{this};
 		}
 

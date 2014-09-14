@@ -44,7 +44,7 @@ namespace MyTypes {
 			var argnr = argt.Length-1;
 			if(argt[0] == typeof(IPrintable)) argnr--;
 			bool stat = argt[0]==typeof(IPrintable);
-			bool vararg = argt[0]==typeof(ITuplable) && argnr-(stat?1:0)<2;
+			bool vararg = argt[0]==typeof(ITuplable);// && argnr-(stat?1:0)<2;
 			//return (Func<ReferenceT>)  (() => new ReferenceT( toMyType( ((Func<ReferenceT>)f)()  ) ));
 			var lambda = (Func<IPrintable,object[],ReferenceT>) ((p,argss) => {
 				var args = new List<object>(argss);
@@ -61,7 +61,7 @@ namespace MyTypes {
 					//}
 				}
 				else for(int i=0; i<args.Count; i++) {
-					args[i] = TypeTrans.toRef( TypeTrans.toMyType( TypeTrans.dereference(args[i],typeof(IVariable))) );
+					args[i] = TypeTrans.toRef( TypeTrans.toMyType( args[i]) );
 				}
 				Co.Log("#fun="+fun,2);
 				Co.Log("#vararg="+vararg+" stat="+stat,2);
@@ -78,7 +78,7 @@ namespace MyTypes {
 					foreach(var i in args.ToArray()) Co.Log("args: i="+i+" type="+i.GetType(),2);
 					Co.Log("args.ToArray="+args.ToArray(),2);
 					String strres = ""+res;
-					res	= vararg ? ((Func<ITuplable,IVariable>)fun).Invoke(tup) : 
+					res	= //vararg ? ((Func<ITuplable,IVariable>)fun).Invoke(tup) : 
 							fun.DynamicInvoke(args.ToArray());
 					Co.Log("xxx="+xxx+" res="+strres+" preres="+res+" type="+res.GetType(),2);
 				} catch(Exception e) {

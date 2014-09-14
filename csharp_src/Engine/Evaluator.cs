@@ -224,7 +224,7 @@ namespace Engine {
 			while(list.Count>0) {
 				internProcess();
 			}
-			Result = TypeTrans.toMyType( TypeTrans.tryCall( TypeTrans.dereference(output.Pop()), this) );
+			Result = TypeTrans.toMyType( /*TypeTrans.tryCall(*/ TypeTrans.dereference(output.Pop())/*, this)*/ );
 		}
 		
 		public int CompareTo(object ob) {

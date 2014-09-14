@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using MyCollections;
 using Engine;
 using System.Linq;
+using lib;
 
 namespace MyTypes.MyClasses {
 	class ObjectT : IVariable {
@@ -55,6 +56,29 @@ namespace MyTypes.MyClasses {
 		public static readonly ClassT MyClass;
 		private static readonly Dictionary<string,Method> myMethods;
 
+		private static object assignLambdaMaker(bool isClone) {
+			var cloneF = (Func<object,IVariable>) ((x) => (IVariable)(isClone ? ((IVariable)x).Clone() : x));
+
+			return (Func<ITuplable,ITuplable,ITuplable>) ((xx,yy) => { 
+				var x = xx.ToArray();
+				if(x.Length<1) return xx;
+				var yall = new List<object>(yy.ToArray()).Select((i) => ((IVariable)i).Clone()).ToList();
+				if(yall.Count>x.Length) {
+					var y = yall.Take(x.Length-1).ToArray();
+					var ylast = new TupleT(yall.Skip(x.Length-1));
+					for(int i=0; i<x.Length-1; i++) {
+						((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
+					}
+					((ReferenceT)x[x.Length-1]).Value = ylast;
+				} else {
+					var y = yall.ToArray();
+					for(int i=0; i<x.Length; i++) {
+						((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
+					}
+				}
+				return xx;
+			});
+		}
 
 		private static object[] lambdas = {
 			"class", 	(Func<IVariable,ClassT>) ((x) => x.GetClass()),
@@ -66,11 +90,19 @@ namespace MyTypes.MyClasses {
 			"dic",		(Func<ITuplable,IVariable>) ((x) => new DictionaryT(x.ToArray())),
 			DotSymbol,	(Func<IVariable,SoftLink,DotFunc>) ((x,f) => new DotFunc(f.ToProc(x), x)),
 			";",		(Func<IVariable,IVariable,IVariable>) ((x,y) => y),
-			"=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { x.Value=y; return y;}),
-			":=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { 
-				Console.WriteLine(":=\ny="+y+" type="+y.GetType()+"clone="+y.Clone()+" type="+y.Clone().GetType());
-				x.Value=(IVariable)y.Clone(); return y;}),
+			//"=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { x.Value=y; return y;}),
+			//":=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { 
+			//			Console.WriteLine(":=\ny="+y+" type="+y.GetType()+"clone="+y.Clone()+" type="+y.Clone().GetType());
+			//			x.Value=(IVariable)y.Clone();
+			//			return y;
+			//		}),
 			",", 		(Func<ITuplable,ITuplable,ITuplable>) ((a,b) => TupleT.Concat(a,b)),
+			"<->",		(Func<ReferenceT,ReferenceT,ReferenceT>) ((a,b) => { 
+						var c=a.Value;
+						a.Value=b.Value;
+						b.Value=c;
+						return b; 
+					}),
 			":",		(Func<IVariable, IVariable, PairT>) ((x,y) => new PairT(x,y)),
 			"<=>",		(Func<IVariable,IVariable,double>) ((x,y) => x.CompareTo(y) ),
 			">=",		(Func<IVariable,IVariable,bool>) ((x,y) => x.CompareTo(y)>=0 ),
@@ -81,19 +113,9 @@ namespace MyTypes.MyClasses {
 			"==",		(Func<IVariable,IVariable,bool>) ((x,y) => x.CompareTo(y)==0 ),
 			"===",		(Func<IVariable,IVariable,bool>) ((x,y) => x==y ),
 			"&&",	(Func<ReferenceT,PointerT>) ((x) => new PointerT(x)),
-			/*"=",		(Func<ITuplable,ITuplable,ITuplable>) 
-					((xx,yy) => { 
-						Console.WriteLine("xx="+xx+" type="+xx.GetType());
-						Console.WriteLine("yy="+xx+" type="+yy.GetType());
-						var x = xx.ToArray();
-						var y = yy.ToArray();
-						for(int i=0; i<x.Length; i++) {
-						Console.WriteLine("i="+i+" x="+x[i]+" type="+x[i].GetType()+" y="+y[i]+" type="+y[i].GetType());
-						((ReferenceT)x[i]).Value = y[i];
-					}
-					return xx;}),
-			*/
-			};
+			":=",		assignLambdaMaker(true),
+			"=",		assignLambdaMaker(false),
+		};
 
 		private static object[] toRefArray(object[] ar) {
 			object[] ret = new object[ar.Length];

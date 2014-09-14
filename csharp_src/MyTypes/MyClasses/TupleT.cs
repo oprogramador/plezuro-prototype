@@ -49,8 +49,8 @@ namespace MyTypes.MyClasses {
 			TupleT ret = new TupleT();
 			Console.WriteLine("a="+General.EnumToString(a.ToArray()));
 			Console.WriteLine("b="+General.EnumToString(b.ToArray()));
-			foreach(var i in (a is ReferenceT ? ((ReferenceT)a).Value : a).ToArray()) ret.Add(i);
-			foreach(var i in (b is ReferenceT ? ((ReferenceT)b).Value : b).ToArray()) ret.Add(i);
+			foreach(var i in a.ToArray()) ret.Add(TypeTrans.toRef(i));
+			foreach(var i in b.ToArray()) ret.Add(TypeTrans.toRef(i));
 			return ret;
 		}
 
