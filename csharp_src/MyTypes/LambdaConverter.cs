@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using MyTypes.MyClasses;
 using MyCollections;
+using lib;
 
 namespace MyTypes {
 	static class LambdaConverter {
@@ -47,47 +48,47 @@ namespace MyTypes {
 			//return (Func<ReferenceT>)  (() => new ReferenceT( toMyType( ((Func<ReferenceT>)f)()  ) ));
 			var lambda = (Func<IPrintable,object[],ReferenceT>) ((p,argss) => {
 				var args = new List<object>(argss);
-				Console.WriteLine("fun="+fun);
-				Console.WriteLine("vararg="+vararg+" stat="+stat);
-				Console.WriteLine("args="+General.EnumToString(argss));
+				Co.Log("fun="+fun,2);
+				Co.Log("vararg="+vararg+" stat="+stat,2);
+				Co.Log("args="+General.EnumToString(argss),2);
 				if(!vararg) for(int i=0; i<args.Count; i++) { 
-					Console.WriteLine("i="+i+" argt="+argt[i+(stat?1:0)]);
+					Co.Log("i="+i+" argt="+argt[i+(stat?1:0)],2);
 					//if(argt[i+(stat?1:0)] != typeof(ITuplable)) {
 					//
 						args[i] = TypeTrans.dereference(args[i], argt[i+(stat?1:0)]);
-						args[i] = TypeTrans.tryCall(args[i], p, argt[i+(stat?1:0)]);
+						//args[i] = TypeTrans.tryCall(args[i], p, argt[i+(stat?1:0)]);
 						args[i] = TypeTrans.adaptType(args[i], argt[i+(stat?1:0)]);
 					//}
 				}
 				else for(int i=0; i<args.Count; i++) {
 					args[i] = TypeTrans.toRef( TypeTrans.toMyType( TypeTrans.dereference(args[i],typeof(IVariable))) );
 				}
-				Console.WriteLine("#fun="+fun);
-				Console.WriteLine("#vararg="+vararg+" stat="+stat);
-				Console.WriteLine("#args="+General.EnumToString(args));
+				Co.Log("#fun="+fun,2);
+				Co.Log("#vararg="+vararg+" stat="+stat,2);
+				Co.Log("#args="+General.EnumToString(args));
 				if(stat) args.Insert(0,p);
-				Console.WriteLine("##args="+General.EnumToString(args));
+				Co.Log("##args="+General.EnumToString(args),2);
 				object  res = null;
 				int xxx=20;
 				xxx++;
-				Console.WriteLine("xxx="+xxx);
+				Co.Log("xxx="+xxx,2);
 				try {	
 					var tup = new TupleT(args);
-					Console.WriteLine("tup="+tup);
-					foreach(var i in args.ToArray()) Console.WriteLine("args: i="+i+" type="+i.GetType());
-					Console.WriteLine("args.ToArray="+args.ToArray());
+					Co.Log("tup="+tup,2);
+					foreach(var i in args.ToArray()) Co.Log("args: i="+i+" type="+i.GetType(),2);
+					Co.Log("args.ToArray="+args.ToArray(),2);
 					String strres = ""+res;
 					res	= vararg ? ((Func<ITuplable,IVariable>)fun).Invoke(tup) : 
 							fun.DynamicInvoke(args.ToArray());
-					Console.WriteLine("xxx="+xxx+" res="+strres+" preres="+res+" type="+res.GetType());
+					Co.Log("xxx="+xxx+" res="+strres+" preres="+res+" type="+res.GetType(),2);
 				} catch(Exception e) {
-					Console.WriteLine("e:"+e); 
+					Co.Log("e:"+e,2); 
 					throw new ArgumentException();
 				}
 				xxx++;
-				Console.WriteLine("rrr");
+				Co.Log("rrr",2);
 				if(res is double) TypeTrans.checkInfNaN(res);
-				Console.WriteLine("xxx="+xxx+" res="+res+" type="+res.GetType());
+				Co.Log("xxx="+xxx+" res="+res+" type="+res.GetType(),2);
 				return TypeTrans.toRef( toMyType(res) );
 			});
 			return new BuiltinFunc(lambda, argnr, stat, vararg);

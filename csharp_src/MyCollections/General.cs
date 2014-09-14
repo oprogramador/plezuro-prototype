@@ -33,6 +33,44 @@ namespace MyCollections {
 			return "["+str+"]";
 		}
 
+		public static int Compare(IEnumerable a, IEnumerable b) {
+			var ae = a.GetEnumerator();
+			var be = b.GetEnumerator();
+			var an = ae.MoveNext();
+			var bn = be.MoveNext();
+			while(true) {
+				if(!an && bn) return -1;
+				if(an && !bn) return 1;
+				if(!an && !bn) return 0;
+				Console.WriteLine("gener cmp ae="+ae.Current+" be="+be.Current);
+				try {
+					int cmp = CompareDE(ae.Current, be.Current);
+					if(cmp!=0) return cmp;
+				} catch(Exception e) {
+					Console.WriteLine("e: "+e);
+					return 0;
+				}
+				an = ae.MoveNext();
+				bn = be.MoveNext();
+			}
+		}
+
+		public static int CompareDE(object a, object b) {
+			if(a is DictionaryEntry && b is DictionaryEntry) {
+				var ae = (DictionaryEntry)a;
+				var be = (DictionaryEntry)b;
+				int cmp = 0;
+				if(ae.Key is IComparable) cmp = ((IComparable)ae.Key).CompareTo(be.Key);
+				else if(be.Key is IComparable) cmp = ((IComparable)be.Key).CompareTo(ae.Key);
+				if(cmp!=0) return cmp;
+				if(ae.Value is IComparable) cmp = ((IComparable)ae.Value).CompareTo(be.Value);
+				return cmp;
+			}
+			if(a is IComparable) return ((IComparable)a).CompareTo(b);
+			if(b is IComparable) return ((IComparable)b).CompareTo(a);
+			return 0;
+		}
+
 		public static bool Converges(string str, string ch, int index) {
 			for(int i=index; i<str.Length && i-index<ch.Length; i++) if(str[i] != ch[i-index]) return false;
 			return true;

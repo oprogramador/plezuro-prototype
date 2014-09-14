@@ -75,7 +75,8 @@ namespace MyTypes.MyClasses {
 
 
 		private static object[] lambdas = {
-			ObjectT.FunctionSymbol,	(Func<IPrintable,DotFunc,ITuplable,object>) ((p,f,a) => { Co.WL("dotlambda a="+a); return f.Call(p, a.ToArray());}),
+			ObjectT.FunctionSymbol,	(Func<IPrintable,DotFunc,ITuplable,object>) 
+				((p,f,a) => { Co.WL("dotlambda a="+a+" f="+f); return f.Call(p, a.ToArray());}),
 		};
 		
 		static DotFunc() {

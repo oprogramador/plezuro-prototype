@@ -19,9 +19,11 @@
  * 
  * 
  */
- 
+
 
 using System;
+using System.Diagnostics;
+using System.Linq;
 
 namespace lib {
 	class Co {
@@ -31,6 +33,14 @@ namespace lib {
 
 		public static void W(string str) {
 			Console.Write(str);
+		}
+
+		public static void Log(string str, int n = -1) {
+			StackTrace stackTrace = new StackTrace();
+			StackFrame[] stackFrames = stackTrace.GetFrames();
+			if(n<0) n = stackFrames.Length-1;
+			var msg = string.Join(", ",stackFrames.Select((i) => i.GetMethod().DeclaringType+"."+i.GetMethod().Name).ToList().Skip(1).Take(n).ToArray());
+			Console.WriteLine("log at ["+msg+"] : "+str+"\n");
 		}
 	}
 }

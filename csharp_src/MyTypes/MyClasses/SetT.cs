@@ -84,8 +84,7 @@ namespace MyTypes.MyClasses {
 		public int CompareTo(object ob) {
 			int pre = TypeT.PreCompare(this,ob);
 			if(pre!=0) return pre;
-			//foreach(var i in e) 
-			return 0;
+			return General.Compare(this, (IEnumerable)ob); 
 		} 
 
 		public object Clone() {

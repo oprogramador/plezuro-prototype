@@ -57,36 +57,46 @@ namespace Tests {
 			//Console.WriteLine(new lib.HtmlArrayTable(new object[]{new object[]{1,9,2.3}, new object[]{3,"asd",9}, 4444}).SetBorder(2).Generate());
 			MyTypes.VariableFactory.GetInstance();
 			var db = DataFixtures.DataFixtures.GetInstance();
+		}
+
+		public TestUnit() {
+			//just4fun();
+			//testGenerics();
+			//testHtml();
+			testGener();
+		}
+
+		private void testHtml() {
 			Console.WriteLine(lib.HtmlTableFactory.Create(new object[]{
 						new Dictionary<object,object>(){{"one",1}, {"two", 2}},
 						new Dictionary<object,object>(){{"three",3}, {"two", 2}},
 						new Dictionary<object,object>(){{"one",10}, {"two", 2}},
 						22211
 						}).SetBorder(2).Generate());
-			testGenerics();
 		}
 
-		public TestUnit() {
-			just4fun();
+		private void testGener() {
+			int cmp = MyCollections.General.Compare(new int[]{23,4,122}, new int[]{23,4,122});
+			Console.WriteLine("gener cmp="+cmp);
 		}
 
 		private void testGenerics() {
-			var l = (System.Collections.Generic.List<int>) CreateList(typeof(int), new object[]{1,9,34,2.0,"wfwefw",13});
+			var l = (System.Collections.Generic.List<int>) createList(typeof(int), new object[]{1,9,34,2.0,"wfwefw",13});
 			Console.WriteLine("list: ");
 			foreach(var i in l) Console.WriteLine(i);
-			SwapFirstTwoElements(l);
+			swapFirstTwoElements(l);
 			Console.WriteLine("list: ");
 			foreach(var i in l) Console.WriteLine(i);
 		}
 
-		private static void SwapFirstTwoElements<T>(System.Collections.Generic.List<T> l) {
+		private static void swapFirstTwoElements<T>(System.Collections.Generic.List<T> l) {
 			if(l.Count<2) return;
 			T c = l[0];
 			l[0] = l[1];
 			l[1] = c;
 		}
 
-		private static System.Collections.IList CreateList(Type t, object[] data) {
+		private static System.Collections.IList createList(Type t, object[] data) {
 			Type listType = typeof(List<>).MakeGenericType(new [] { t } );
 			var l =  (System.Collections.IList)Activator.CreateInstance(listType);
 			foreach(var i in data) if(i.GetType().IsAssignableFrom(t)) l.Add(i);

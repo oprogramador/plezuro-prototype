@@ -81,7 +81,9 @@ namespace MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			return 0;
+			int pre = TypeT.PreCompare(this,ob);
+			if(pre!=0) return pre;
+			return General.Compare(this, (IEnumerable)ob); 
 		}
 
 		public object Clone() {
@@ -121,7 +123,7 @@ namespace MyTypes.MyClasses {
 
 		public override string ToString() {
 			string ret = "{";
-			foreach(var i in Keys) ret += (ret=="{" ? "" : ", ")+i+":"+this[i];
+			foreach(var i in Keys) ret += (ret=="{" ? "" : ", ")+TypeTrans.dereference(i)+":"+TypeTrans.dereference(this[i]);
 			ret += "}";
 			return ret;
 		}
