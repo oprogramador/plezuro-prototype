@@ -100,6 +100,9 @@ namespace MyTypes.MyClasses {
 		public static readonly ClassT MyClass;
 		private static readonly Dictionary<string,Method> myMethods;
 
+		public static object[] Constants = {
+			"db",	DataFixtures.DataFixtures.GetInstance()
+		};
 
 		private static object[] lambdas = {
 			"len",		(Func<SetT,double>) ((a) => a.Count),

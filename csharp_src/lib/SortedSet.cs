@@ -28,6 +28,7 @@ using System.Linq;
 namespace System.Collections.Generic {
 	class SortedSet<T> : SortedDictionary<T,int> {
 		public void Add(T x) {
+			Console.WriteLine("sortedset x="+x);
 			base.Add(x,0);
 		}
 

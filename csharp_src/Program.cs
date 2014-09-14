@@ -30,10 +30,6 @@ using Gui;
 
 namespace Program {
 	class Program {
-		private static void test() {
-			Debug.Assert(Engine.Parser.Parse("2+3").Equals("5"));
-		}
-
 		private static void startGui() {
 			Application.Run(new MainWindow(Engine.Engine.GetInstance().IOMap, 600, 400));
 		}

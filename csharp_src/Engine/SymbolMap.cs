@@ -94,7 +94,7 @@ namespace Engine {
 					},
 			*/
 
-		public static void AddSymbols(object[] sym) {
+		public static void AddSymbols(List<object> sym) {
 			Console.WriteLine("symbols");
 			foreach(var i in sym) Console.WriteLine("sym: "+i);
 			foreach(var i in sym) Symbols.Add(i);
@@ -167,10 +167,7 @@ namespace Engine {
 			NullType priv_null = new NullType();
 			*/
 
-			AddSymbols(BooleanT.Constants);
-			AddSymbols(NullType.Constants);
-			AddSymbols(Number.Constants);
-			AddSymbols(EmptyT.Constants);
+			AddSymbols(VariableFactory.GetInstance().Constants);
 
 			OperPriorityDic = new Dictionary<string,int>();
 			BiOperSet = new HashSet<string>();

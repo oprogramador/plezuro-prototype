@@ -1,5 +1,5 @@
 /*
- * City.cs
+ * DataFixtures.cs
  * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -24,11 +24,38 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using MyTypes.MyClasses;
 
 namespace DataFixtures {
-	class City : List<Dictionary<object,object>> {
-		public City() {
-			string txt = File.ReadAllText("res/db.txt");
+	class DataFixtures : SetT {
+		private static DataFixtures instance;
+
+		public static DataFixtures GetInstance() { 
+			if(instance==null) instance = new DataFixtures();
+			return instance;
+		}
+
+		private void load() {
+			var sr = new StreamReader("res/world.db");
+			string line;
+			while((line=sr.ReadLine()) != null) {
+				var ar = line.Split('\t');
+				var record = new Dictionary<object,object>();
+				for(int i=0; i+1<ar.Length; i+=2) record[ar[i]] = ar[i+1];
+				Console.WriteLine("record="+record);
+				Console.WriteLine("record.count="+record.Count);
+				Console.WriteLine("ar.length="+ar.Length);
+				foreach(var i in record) Console.WriteLine("key: "+i.Key+" value: "+i.Value);
+				Add(new DictionaryT(record));
+			}
+		}
+
+		private DataFixtures() {
+			try {
+				load();
+			} catch(Exception e){
+				Console.WriteLine("error with reading database file e: "+e);
+			}
 		}
 	}
 }
