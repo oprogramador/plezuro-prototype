@@ -63,10 +63,34 @@ namespace Tests {
 						new Dictionary<object,object>(){{"one",10}, {"two", 2}},
 						22211
 						}).SetBorder(2).Generate());
+			testGenerics();
 		}
 
 		public TestUnit() {
 			just4fun();
+		}
+
+		private void testGenerics() {
+			var l = (System.Collections.Generic.List<int>) CreateList(typeof(int), new object[]{1,9,34,2.0,"wfwefw",13});
+			Console.WriteLine("list: ");
+			foreach(var i in l) Console.WriteLine(i);
+			SwapFirstTwoElements(l);
+			Console.WriteLine("list: ");
+			foreach(var i in l) Console.WriteLine(i);
+		}
+
+		private static void SwapFirstTwoElements<T>(System.Collections.Generic.List<T> l) {
+			if(l.Count<2) return;
+			T c = l[0];
+			l[0] = l[1];
+			l[1] = c;
+		}
+
+		private static System.Collections.IList CreateList(Type t, object[] data) {
+			Type listType = typeof(List<>).MakeGenericType(new [] { t } );
+			var l =  (System.Collections.IList)Activator.CreateInstance(listType);
+			foreach(var i in data) if(i.GetType().IsAssignableFrom(t)) l.Add(i);
+			return l;
 		}
 	}
 }
