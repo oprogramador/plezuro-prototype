@@ -36,7 +36,7 @@ namespace MyTypes.MyClasses {
 
 		public object Call(IPrintable p, object[] args) {
 			//foreach(var i in args) Console.WriteLine("i="+i+" type="+i.GetType());
-			return p.EvalDyn(this, p, new TupleT(args));
+			return p.EvalDyn(this, p, TupleT.MakeTuplable(args));
 		}
 
 		public override object Clone() {
@@ -49,7 +49,7 @@ namespace MyTypes.MyClasses {
 
 		private static object[] lambdas = {
 			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f, p)),
-			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, p, new TupleT(a)) ),
+			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, p, TupleT.MakeTuplable(a.ToArray())) ),
 			"while",	(Func<IPrintable,ProcedureT,ProcedureT,object>) 
 					((p, con, o) => { object ret=new NullType(); 
 						while(p.EvalDyn(con,p).Equals(true)) ret=p.EvalDyn(o,p); return ret; } ),

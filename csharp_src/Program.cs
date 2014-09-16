@@ -35,9 +35,8 @@ namespace Program {
 		}
 
 		private static void startConsole(string[] args) {
-			var l = new MyTypes.MyClasses.TupleT(args);
-			l.RemoveAt(0);
-			Console.WriteLine( Engine.Parser.Parse(System.IO.File.ReadAllText(args[0]).TrimEnd('\n'), l) );
+			var l = new List<object>(args).Skip(1).ToArray();
+			Console.WriteLine( Engine.Parser.Parse(System.IO.File.ReadAllText(args[0]).TrimEnd('\n'), MyTypes.MyClasses.TupleT.MakeTuplable(l)) );
 		}
 
 		public static void Main(string[] args) {

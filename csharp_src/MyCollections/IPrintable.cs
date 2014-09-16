@@ -32,7 +32,7 @@ namespace MyCollections {
 		void PrintLine(object ob);
 		IPrintable Parent{ get; }
 		ITextable Stream{ get; }
-		TupleT Args{ get; }
+		ITuplable Args{ get; }
 		bool Clear();
 		ConcurrentDictionary<string,object> LocalVars{ get; }
 	}

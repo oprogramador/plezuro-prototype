@@ -75,7 +75,7 @@ namespace MyTypes {
 				xxx++;
 				Co.Log("xxx="+xxx,2);
 				try {	
-					var tup = new TupleT(args);
+					var tup = TupleT.MakeTuplable(args.ToArray());
 					Co.Log("tup="+tup,2);
 					foreach(var i in args.ToArray()) Co.Log("args: i="+i+" type="+i.GetType(),2);
 					Co.Log("args.ToArray="+args.ToArray(),2);

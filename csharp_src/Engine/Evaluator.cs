@@ -33,7 +33,7 @@ namespace Engine {
 		private WStack<object> list;
 		private ProcedureT output;
 		
-		public TupleT Args { get; private set; }
+		public ITuplable Args { get; private set; }
 
 		public ConcurrentDictionary<string,object> LocalVars { get; private set; }
 
@@ -44,7 +44,7 @@ namespace Engine {
 
 		public IVariable Result { get; private set; }
 
-		public Evaluator(ProcedureT list, IPrintable p, TupleT args)  {
+		public Evaluator(ProcedureT list, IPrintable p, ITuplable args)  {
 			try {
 				Parent = p;
 				Args = args;
@@ -53,7 +53,7 @@ namespace Engine {
 			} catch{ throw; }
 		}
 
-		public Evaluator(ProcedureT list, ITextable stream, TupleT args) {
+		public Evaluator(ProcedureT list, ITextable stream, ITuplable args) {
 			try {
 				Args = args;
 				Stream = stream;
@@ -77,14 +77,14 @@ namespace Engine {
 
 		}
 
-		public Evaluator(ProcedureT p, ITextable t) : this(p,t,new TupleT()) {
+		public Evaluator(ProcedureT p, ITextable t) : this(p,t,new EmptyT()) {
 		}
 
 		public static object Eval(ProcedureT list, IPrintable pr) {
 			return new Evaluator(list, pr, pr.Args).Result;
 		}
 	
-		public object EvalDyn(ProcedureT list, IPrintable pr, TupleT args) {
+		public object EvalDyn(ProcedureT list, IPrintable pr, ITuplable args) {
 			return new Evaluator(list, pr, args).Result;
 		}	
 
@@ -92,11 +92,11 @@ namespace Engine {
 			return new Evaluator(list, pr, pr.Args).Result;
 		}
 
-		public static object Eval(ProcedureT list, IPrintable pr, TupleT args) {
+		public static object Eval(ProcedureT list, IPrintable pr, ITuplable args) {
 			return new Evaluator(list, pr, args).Result;
 		}
 
-		public static object Eval(ProcedureT list, ITextable stream, TupleT args) {
+		public static object Eval(ProcedureT list, ITextable stream, ITuplable args) {
 			return new Evaluator(list, stream, args).Result;
 		}
 

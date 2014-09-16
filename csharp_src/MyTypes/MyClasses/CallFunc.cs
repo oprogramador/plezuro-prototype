@@ -27,7 +27,7 @@ using MyCollections;
 
 namespace MyTypes.MyClasses {
 	class CallFunc : IVariable {
-		public TupleT Args { 
+		public ITuplable Args { 
 			get; 
 			private set; 
 		}
@@ -39,7 +39,7 @@ namespace MyTypes.MyClasses {
 			Proc = p;
 		}
 
-		public CallFunc(ICallable p, TupleT args) {
+		public CallFunc(ICallable p, ITuplable args) {
 			ID = ObjectContainer.Instance.Add(this);
 			Proc = p;
 			Args = args;
@@ -47,7 +47,7 @@ namespace MyTypes.MyClasses {
 
 		public CallFunc Push(object ob) {
 			Console.WriteLine("tomytype ob ="+TypeTrans.toMyType(ob)+" type="+TypeTrans.toMyType(ob));
-			Args.Add( TypeTrans.toMyType(ob) );
+			Args = TupleT.Add( Args, TypeTrans.toMyType(ob) );
 			return this;
 		}
 

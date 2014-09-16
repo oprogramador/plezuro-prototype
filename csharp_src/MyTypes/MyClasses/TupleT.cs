@@ -38,6 +38,12 @@ namespace MyTypes.MyClasses {
 			foreach(var i in ie) Add( TypeTrans.toMyType(i) );
 		}
 
+		public static ITuplable MakeTuplable(object[] ar) {
+			if(ar.Length==0) return new EmptyT();
+			else if(ar.Length==1) {lib.Co.Log("mtar[1]="+ar[1]); return (ITuplable)ar[1]; }
+			else return new TupleT(ar);
+		}
+
 		public override object Clone() {
 			return new TupleT(this);
 		}

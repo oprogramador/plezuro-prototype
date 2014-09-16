@@ -48,15 +48,15 @@ namespace Engine {
 			return new Parser(str,null,null).Result;
 		}
 
-		public static object Parse(string str, TupleT args) {
+		public static object Parse(string str, ITuplable args) {
 			return new Parser(str,null,args).Result;
 		}
 
-		public static object Parse(string str, IPrintable p, TupleT args) {
+		public static object Parse(string str, IPrintable p, ITuplable args) {
 			return new Parser(str, p, args).Result;
 		}
 
-		public Parser(string str, IPrintable p, TupleT args) {
+		public Parser(string str, IPrintable p, ITuplable args) {
 			try {
 				IsCorrectSyntax = true;
 				var tokens = new Tokenizer(str).Output;
@@ -69,7 +69,7 @@ namespace Engine {
 			}
 		}
 
-		public Parser(string str, ITextable input, ITextable output, TupleT args) {
+		public Parser(string str, ITextable input, ITextable output, ITuplable args) {
 			try {
 				IsCorrectSyntax = true;
 				var tokens = new Tokenizer(str).Output;
