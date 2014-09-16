@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using MyCollections;
+using Engine;
 
 namespace MyTypes.MyClasses {
 	public class TupleT : SList<IVariable>, IVariable {

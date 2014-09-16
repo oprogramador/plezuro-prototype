@@ -72,9 +72,10 @@ namespace MyTypes.MyClasses {
 					((ReferenceT)x[x.Length-1]).Value = ylast;
 				} else {
 					var y = yall.ToArray();
-					for(int i=0; i<x.Length; i++) {
+					for(int i=0; i<yall.Count; i++) {
 						((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
 					}
+					for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());
 				}
 				return xx;
 			});
@@ -84,7 +85,8 @@ namespace MyTypes.MyClasses {
 			"class", 	(Func<IVariable,ClassT>) ((x) => x.GetClass()),
 			"print",	(Func<IPrintable,object,object>) ((p,o) => { p.Print( ((IStringable)o).ToString() ); return o; } ),
 			"printl",	(Func<IPrintable,object,object>) ((p,o) => { p.PrintLine( ((IStringable)o).ToString() ); return o; } ),
-			SymbolMap.ListSymbol,	(Func<ITuplable,IVariable>) ((x) => new ListT(x.ToArray())),
+			SymbolMap.ListSymbol,	(Func<ITuplable,IVariable>) ((x) => {lib.Co.Log("objlog x="+x); return new ListT(x.ToArray());}),
+			"clone",	(Func<IVariable,IVariable>) ((x) => (IVariable)x.Clone()),
 			"lent",		(Func<ITuplable,IVariable>) ((x) => new Number(x.ToArray().Length)),
 			"set",		(Func<ITuplable,IVariable>) ((x) => new SetT(x.ToArray())),
 			"dic",		(Func<ITuplable,IVariable>) ((x) => new DictionaryT(x.ToArray())),

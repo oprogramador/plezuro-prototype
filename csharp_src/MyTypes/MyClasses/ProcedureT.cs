@@ -49,7 +49,7 @@ namespace MyTypes.MyClasses {
 
 		private static object[] lambdas = {
 			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f, p)),
-			"applyF",	(Func<IPrintable,ProcedureT,ITuplable,object>) ((p, f, a) => p.EvalDyn(f, p, new TupleT(a.ToArray())) ),
+			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, p, new TupleT(a)) ),
 			"while",	(Func<IPrintable,ProcedureT,ProcedureT,object>) 
 					((p, con, o) => { object ret=new NullType(); 
 						while(p.EvalDyn(con,p).Equals(true)) ret=p.EvalDyn(o,p); return ret; } ),

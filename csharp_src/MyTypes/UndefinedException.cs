@@ -1,5 +1,5 @@
 /*
- * SList.cs
+ * UndefinedException.cs
  * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -21,39 +21,10 @@
  */
  
 
-using System.Collections;
 using System;
-using System.Collections.Generic;using MyTypes;
-using MyTypes.MyClasses;
 
-namespace MyCollections {
-	public class SList<T> : CList<T>, ICompCloneable where T : ICompCloneable {
-		
-		public SList() : base() {
-
-		}
-
-		public SList(IEnumerable ie) {
-			lib.Co.Log("init=", 2);
-			foreach(var item in ie)  {
-				lib.Co.Log("item="+item, 2);
-				Add((T)(item is ICompCloneable ? ((ICompCloneable)item).Clone() : Variable.Convert(item)));
-			}
-		}
-		
-		public virtual object Clone() {
-			return new SList<T>(this);
-		}
-
-		public static implicit operator SList<T>(List<object> l) {
-			return new SList<T>(l);
-		}
-
-		public SList<T> Concat(SList<T> st) {
-			var ret = new SList<T>(this);
-			ret.AddRange(st);
-			return ret;
-		}
+namespace MyTypes {
+	class UndefinedException : Exception {
 
 	}
 }

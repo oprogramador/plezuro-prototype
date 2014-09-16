@@ -45,6 +45,8 @@ namespace MyTypes {
 			if(argt[0] == typeof(IPrintable)) argnr--;
 			bool stat = argt[0]==typeof(IPrintable);
 			bool vararg = argt[0]==typeof(ITuplable);// && argnr-(stat?1:0)<2;
+			bool tupvar = false;
+			if(argt.Length==2) if(argt[0]==typeof(ITuplable) && argt[1]==typeof(IVariable)) tupvar = true;
 			//return (Func<ReferenceT>)  (() => new ReferenceT( toMyType( ((Func<ReferenceT>)f)()  ) ));
 			var lambda = (Func<IPrintable,object[],ReferenceT>) ((p,argss) => {
 				var args = new List<object>(argss);
@@ -78,7 +80,7 @@ namespace MyTypes {
 					foreach(var i in args.ToArray()) Co.Log("args: i="+i+" type="+i.GetType(),2);
 					Co.Log("args.ToArray="+args.ToArray(),2);
 					String strres = ""+res;
-					res	= //vararg ? ((Func<ITuplable,IVariable>)fun).Invoke(tup) : 
+					res	= tupvar ? ((Func<ITuplable,IVariable>)fun).Invoke(tup) : 
 							fun.DynamicInvoke(args.ToArray());
 					Co.Log("xxx="+xxx+" res="+strres+" preres="+res+" type="+res.GetType(),2);
 				} catch(Exception e) {

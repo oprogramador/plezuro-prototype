@@ -30,6 +30,7 @@ namespace MyTypes.MyClasses {
 			{typeof(InfinityException), "infinity"},
 			{typeof(NaNException), "NaN"},
 			{typeof(ModuleNotFoundException), "module not found"},
+			{typeof(UndefinedException), "undefined"},
 			//{typeof(EmptyArgException), "empty set"},
 			{typeof(NotComparableException), "invalid object type"},
 			{typeof(ArgumentException), "invalid operation"},
