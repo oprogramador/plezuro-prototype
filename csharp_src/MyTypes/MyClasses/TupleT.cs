@@ -40,13 +40,13 @@ namespace MyTypes.MyClasses {
 
 		public static ITuplable MakeTuplable(object[] ar) {
 			if(ar.Length==0) return new EmptyT();
-			else if(ar.Length==1) {lib.Co.Log("mtar[0]="+ar[0]); return (ITuplable)ar[0]; }
+			else if(ar.Length==1) {lib.Co.Log("mtar[0]="+ar[0]+" type="+ar[0].GetType()); return TypeTrans.toMyType(ar[0]); }
 			else return new TupleT(ar);
 		}
 
 		public static ITuplable MakeTuplable(object ob) {
 			if(ob is object[]) return MakeTuplable((object[])ob);
-			return (ITuplable)ob;
+			return TypeTrans.toMyType(ob);
 		}
 
 		public override object Clone() {

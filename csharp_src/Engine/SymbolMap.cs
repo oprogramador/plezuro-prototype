@@ -96,7 +96,6 @@ namespace Engine {
 			"<<",
 			">>",	
 			"?",	
-			":",	
 			"|",	
 			"&",	
 			"<=>",	
@@ -117,6 +116,7 @@ namespace Engine {
 				ObjectT.FunctionSymbol,
 				ObjectT.DotSymbol,
 			},	
+			":",	
 		};
 
 		private static readonly string[] UniOpers = {

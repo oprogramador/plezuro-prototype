@@ -59,7 +59,12 @@ namespace MyTypes.MyClasses {
 		private static object[] lambdas = {
 			"get",		(Func<ListT,double,object>) ((a,i) => ((ReferenceT)a[(int)i]).Value ),
 			"len",		(Func<ListT,double>) ((a) => a.Count),
-			SymbolMap.RefSymbol, (Func<ListT,double,object>) ((a,i) => {Console.WriteLine("list.ref a="+a+" ref="+a[(int)i]+" type="+a[(int)i].GetType()); return a[(int)i];} ),
+			SymbolMap.RefSymbol, (Func<ListT,IVariable,object>) ((a,i) => a.Index(i) ),
+			"each",		(Func<IPrintable,ListT,ProcedureT,object>)
+						((p, ar, f) => { object ret=new NullType();
+						foreach(IVariable i in ar) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(i));
+						return ret; 
+					} ),
 			"where",	(Func<IPrintable,ListT,ProcedureT,ListT>) 
 					((p,x,f) => new ListT( x.Where( i => Evaluator.Eval(f,p,TupleT.MakeTuplable(i)).Equals(true) ).ToList() ) ),
 			"map",		(Func<IPrintable,ListT,ProcedureT,ListT>) 
@@ -119,5 +124,21 @@ namespace MyTypes.MyClasses {
 			return "["+str+"]";
 		}
 
+		private IVariable numIndex(int i) {
+			return (IVariable)(i>=0 ? this[i] : this[Count+i]);
+		}
+
+		private IVariable pairIndex(int beg, int end) {
+			var ret = new TupleT();
+			for(int i=beg; i<end; i++) ret.Add(numIndex(i));
+			return ret;
+		}
+
+		public IVariable Index(IVariable iv) {
+			var i = TypeTrans.dereference(iv);
+			if(i is Number) return numIndex((int)((Number)i).Value);
+			if(i is PairT) return pairIndex((int)((Number)((PairT)iv).Key).Value, (int)((Number)((PairT)iv).Value).Value);
+			return null;
+		}
 	}
 }
