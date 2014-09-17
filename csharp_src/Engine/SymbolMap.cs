@@ -50,19 +50,6 @@ namespace Engine {
 			/*
 			"oper",		(Func<string,object>) ((x) => Engine.GetInstance().SymbolMap[x]),
 			"operd",	(Func<string,Type,object>) ((x,t) => ((FuncDictionary)Engine.GetInstance().SymbolMap[x])[t]),
-			"orderBy",	(Func<IPrintable,ListT,ProcedureT,ListT>) 
-					((p,x,f) => new ListT(x.OrderBy( 
-						a => Evaluator.Eval(f,p,new TupleT((new object[]{a}))) 
-					).ToList()) ),
-			"orderByD",	(Func<IPrintable,ListT,ProcedureT,ListT>) 
-					((p,x,f) => new ListT(x.OrderByDescending( 
-						a => Evaluator.Eval(f,p,new TupleT((new object[]{a}))) 
-					).ToList()) ),
-			"groupBy",	(Func<IPrintable,ListT,ProcedureT,ListT>)	
-					((p,x,f) => new ListT(x.GroupBy(
-						a => {var bb=Evaluator.Eval(f,p,new TupleT((new object[]{a}))); 
-							Console.WriteLine("bb="+bb+" type="+bb.GetType()); return bb;}
-					).Select(a => {var cc=new ListT(a.ToList()); Console.WriteLine("cc="+cc); return cc;} ).ToList()) ),
 			"for",		(Func<IPrintable,TupleT,ProcedureT,object>)
 					((p, up, o) => { object ret=Evaluator.Eval((ProcedureT)up[0],p); 
 						while(Evaluator.Eval((ProcedureT)up[1],p).Equals(true)){ ret=Evaluator.Eval(o,p); Evaluator.Eval((ProcedureT)up[2],p); }

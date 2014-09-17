@@ -60,15 +60,32 @@ namespace MyTypes.MyClasses {
 			"get",		(Func<ListT,double,object>) ((a,i) => ((ReferenceT)a[(int)i]).Value ),
 			"len",		(Func<ListT,double>) ((a) => a.Count),
 			SymbolMap.RefSymbol, (Func<ListT,double,object>) ((a,i) => {Console.WriteLine("list.ref a="+a+" ref="+a[(int)i]+" type="+a[(int)i].GetType()); return a[(int)i];} ),
+			"where",	(Func<IPrintable,ListT,ProcedureT,ListT>) 
+					((p,x,f) => new ListT( x.Where( i => Evaluator.Eval(f,p,TupleT.MakeTuplable(i)).Equals(true) ).ToList() ) ),
+			"map",		(Func<IPrintable,ListT,ProcedureT,ListT>) 
+					((p,x,f) => new ListT( x.Select( i => Evaluator.Eval(f,p,TupleT.MakeTuplable(i)) ).ToList() ) ),
 			"sort",		(Func<ListT,ListT>) ((x) => {var y=new ListT(x); y.Sort(); return y; } ),
+			"orderBy",	(Func<IPrintable,ListT,ProcedureT,ListT>) 
+					((p,x,f) => new ListT(x.OrderBy( 
+						a => Evaluator.Eval(f,p,TupleT.MakeTuplable(a)) 
+					).ToList()) ),
+			"orderByD",	(Func<IPrintable,ListT,ProcedureT,ListT>) 
+					((p,x,f) => new ListT(x.OrderByDescending( 
+						a => Evaluator.Eval(f,p,TupleT.MakeTuplable(a)) 
+					).ToList()) ),
+			"groupBy",	(Func<IPrintable,ListT,ProcedureT,ListT>)	
+					((p,x,f) => new ListT(x.GroupBy(
+						a => {
+							var bb=Evaluator.Eval(f,p,TupleT.MakeTuplable(a)); 
+							Console.WriteLine("bb="+bb+" type="+bb.GetType()); return bb;
+						}
+					).Select(a => {var cc=new ListT(a.ToList()); Console.WriteLine("cc="+cc); return cc;} ).ToList()) ),
 			"reverse",	(Func<ListT,ListT>) ((a) => {var b=new ListT(a); b.Reverse(); return b;}),
 			"max",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Max()).Value),
 			"min",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Min()).Value),
 			"median",	(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Median()).Value),
 			"remove",	(Func<ListT,double,ListT>) ((x,i) => {var y=(ListT)x.Clone(); y.RemoveAt((int)i); return y;}),
 			"toSet",	(Func<ListT,IVariable>) ((x) => new SetT(x)),
-			"map",		(Func<IPrintable,ListT,ProcedureT,ListT>) 
-						((p,x,f) => new ListT(x.Select( i => Evaluator.Eval(f,p,new TupleT(new object[]{i}))))),
 			"html",		(Func<ListT,string>) ((x) => HtmlTableFactory.Create(x).SetBorder(2).Generate()),
 			"<<",		(Func<ListT,IVariable,ListT>) ((a,v) => {a.Add((IVariable)v.Clone()); return a;} ),
 			">>",		(Func<ListT,ReferenceT,ListT>) ((a,v) => {v.Value=(IVariable)a.Pop(); return a;} ),
