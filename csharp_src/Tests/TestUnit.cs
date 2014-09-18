@@ -26,6 +26,7 @@ using System.Collections.Generic;
 
 namespace Tests {
 	class TestUnit {
+		private System.Threading.Thread t1,t2;
 
 		private void just4fun() {
 			//System.Console.WriteLine(null+4);
@@ -63,7 +64,31 @@ namespace Tests {
 			//just4fun();
 			//testGenerics();
 			//testHtml();
+			threads();
 			testGener();
+		}
+
+		private void threads() {
+			t1 = new System.Threading.Thread(new System.Threading.ThreadStart(run1));
+			t2 = new System.Threading.Thread(new System.Threading.ThreadStart(run2));
+			t1.Start();
+			t2.Start();
+		}
+
+		private void run1() {
+			for(int i=0; i<20; i++) {
+				Console.WriteLine("t1: "+i);
+				System.Threading.Thread.Sleep(1);
+				if(i>10) t2.Abort(); 
+			}
+		}
+
+		private void run2() {
+			for(int i=0; i<20; i++) {
+				Console.WriteLine("t2: "+i);
+				System.Threading.Thread.Sleep(1);
+				if(i>10) t1.Abort(); 
+			}
 		}
 
 		private void testHtml() {

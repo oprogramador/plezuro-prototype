@@ -1,5 +1,5 @@
 /*
- * IOMap.cs
+ * IRefreshable.cs
  * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -22,28 +22,9 @@
  
 
 using System;
-using System.Collections.Generic;
-using MyCollections;
-using Controller;
 
-namespace Engine {
-	class IOMap : Dictionary<ITextable, IOutputable>, IRefreshable {
-		private Parser par;
-		private ITextable t;
-
-		public IOMap() {
-
-		}
-
-		public void Process(ITextable t) {
-			this.t = t;
-			this[t].Text = "";
-			par = new Parser(this, t.Text, t, this[t], null);
-		}
-
-		public void Refresh() {
-			this[t].Text += par.Str;
-			this[t].ShowError(!par.IsCorrectSyntax);
-		}
+namespace Controller {
+	interface IRefreshable {
+		void Refresh();
 	}
 }

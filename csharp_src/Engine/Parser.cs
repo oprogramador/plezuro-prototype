@@ -22,12 +22,17 @@
  
 
 using System;
-using System.Collections.Generic;using MyCollections;
+using System.Collections.Generic;
+using MyCollections;
 using MyTypes;
 using MyTypes.MyClasses;
+using System.Threading;
+using Controller;
 
 namespace Engine {
 	class Parser {
+		private static List<Thread> threads;
+		private IRefreshable ir;
 
 		public string Str {
 			get {
@@ -56,7 +61,30 @@ namespace Engine {
 			return new Parser(str, p, args).Result;
 		}
 
+		static Parser() {
+			threads = new List<Thread>();
+		}
+
 		public Parser(string str, IPrintable p, ITuplable args) {
+			var t = new Thread(() => init(str,p,args));
+			threads.Add(t);
+			t.Start();
+		}
+
+		public Parser(string str, ITextable input, ITextable output, ITuplable args) {
+			var t = new Thread(() => init(str,input,output,args));
+			threads.Add(t);
+			t.Start();
+		}
+
+		public Parser(IRefreshable ir, string str, ITextable input, ITextable output, ITuplable args) {
+			this.ir = ir;
+			var t = new Thread(() => init(str,input,output,args));
+			threads.Add(t);
+			t.Start();
+		}
+
+		private void init(string str, IPrintable p, ITuplable args) {
 			try {
 				IsCorrectSyntax = true;
 				var tokens = new Tokenizer(str).Output;
@@ -67,9 +95,11 @@ namespace Engine {
 				IsCorrectSyntax = false;
 				Result = new ErrorText(e);
 			}
+			if(ir!=null) ir.Refresh();
+			Console.WriteLine("parser init iscorrect="+IsCorrectSyntax+" res="+Result);
 		}
 
-		public Parser(string str, ITextable input, ITextable output, ITuplable args) {
+		private void init(string str, ITextable input, ITextable output, ITuplable args) {
 			try {
 				IsCorrectSyntax = true;
 				var tokens = new Tokenizer(str).Output;
@@ -81,6 +111,12 @@ namespace Engine {
 				IsCorrectSyntax = false;
 				Result = new ErrorText(e);
 			}
+			if(ir!=null) ir.Refresh();
+			Console.WriteLine("parser init iscorrect="+IsCorrectSyntax+" res="+Result);
+		}
+
+		public static void Stop() {
+			foreach(var t in threads) t.Abort();
 		}
 	}
 }
