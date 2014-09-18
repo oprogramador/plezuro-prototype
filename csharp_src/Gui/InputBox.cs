@@ -24,7 +24,8 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System;
-using System.Collections.Generic;using Engine;
+using System.Collections.Generic;
+using Engine;
 using MyCollections;
 
 namespace Gui {
@@ -46,6 +47,7 @@ namespace Gui {
 		}
 	
 		void KeyDownFun(object sender, KeyEventArgs e) {
+			if(e.KeyCode == Keys.F12) Parser.Stop();
 			if(AutoRefresh) map.Process(this);
 		}
 

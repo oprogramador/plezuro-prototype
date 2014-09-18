@@ -129,9 +129,9 @@ namespace MyTypes.MyClasses {
 		}
 
 		private IVariable pairIndex(int beg, int end) {
-			var ret = new TupleT();
-			for(int i=beg; i<end; i++) ret.Add(numIndex(i));
-			return ret;
+			var list = new ListT();
+			for(int i=beg; i<end; i++) list.Add(numIndex(i));
+			return (IVariable)TupleT.MakeTuplable(list.ToArray());
 		}
 
 		public IVariable Index(IVariable iv) {

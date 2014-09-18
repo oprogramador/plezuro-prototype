@@ -116,6 +116,7 @@ namespace Engine {
 				ObjectT.FunctionSymbol,
 				ObjectT.DotSymbol,
 			},	
+			"..",
 			":",	
 		};
 

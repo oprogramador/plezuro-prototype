@@ -40,6 +40,8 @@ namespace Gui {
 		
 		public void ShowError(bool b) {
 			BackColor = b ? errorCol : normalCol;
+			Console.WriteLine("output text="+Text);
+			Refresh();
 		}
 
 		public void ColorIn(List<Token> tokens) {
