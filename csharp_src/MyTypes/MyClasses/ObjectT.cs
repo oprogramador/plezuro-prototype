@@ -73,6 +73,7 @@ namespace MyTypes.MyClasses {
 				} else {
 					var y = yall.ToArray();
 					for(int i=0; i<yall.Count; i++) {
+						lib.Co.Log("x[i]="+x[i]+" type="+ x[i].GetType()+" y[i]="+y[i]+" type="+y[i].GetType());
 						((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
 					}
 					for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());

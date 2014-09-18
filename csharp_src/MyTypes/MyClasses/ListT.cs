@@ -59,7 +59,7 @@ namespace MyTypes.MyClasses {
 		private static object[] lambdas = {
 			"get",		(Func<ListT,double,object>) ((a,i) => ((ReferenceT)a[(int)i]).Value ),
 			"len",		(Func<ListT,double>) ((a) => a.Count),
-			SymbolMap.RefSymbol, (Func<ListT,IVariable,object>) ((a,i) => a.Index(i) ),
+			SymbolMap.RefSymbol, (Func<ListT,double,object>) ((a,i) => a[(int)i] ),
 			"each",		(Func<IPrintable,ListT,ProcedureT,object>)
 						((p, ar, f) => { object ret=new NullType();
 						foreach(IVariable i in ar) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(i));
@@ -125,6 +125,7 @@ namespace MyTypes.MyClasses {
 		}
 
 		private IVariable numIndex(int i) {
+			lib.Co.Log("i="+i+" this[i]="+this[i]+" type="+this[i].GetType(), 2);
 			return (IVariable)(i>=0 ? this[i] : this[Count+i]);
 		}
 
