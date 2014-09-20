@@ -56,6 +56,7 @@ namespace Gui {
 		}
 
 		public void ColorIn(List<Token> tokens) {
+			/*
 			myTokens = tokens;
 			int pos = 0;
 			int startCursorPosition = SelectionStart;
@@ -72,6 +73,7 @@ namespace Gui {
 			}
 			SelectionStart = startCursorPosition;
 			SelectionLength = selectionLength;
+			*/
 		}
 
 	}

@@ -25,6 +25,7 @@ using MyCollections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Text;
 using Engine;
 
@@ -100,6 +101,7 @@ namespace MyTypes.MyClasses {
 						return ""+s;
 						}),
 			"#",	(Func<IPrintable,StringT,object>) ((p,t) => t.Hash(p) ),
+			"=~",	(Func<string,string,bool>) ((r,t) => new Regex(r).IsMatch(t)),
 		};
 		
 		static StringT() {

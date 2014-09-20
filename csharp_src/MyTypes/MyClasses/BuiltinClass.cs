@@ -25,14 +25,22 @@ using System;
 using System.Collections.Generic;
 using MyTypes.MyClasses;
 
-namespace MyTypes {
+namespace MyTypes.MyClasses {
 	class BuiltinClass : ClassT {
 		public Type Type{ get; private set; }
+		public static new ClassT MyClass;
 
 		public BuiltinClass(string name, List<ClassT> parents, Dictionary<string,Method> methods, PackageT package, Type type) 
 		: base(name,parents,methods,package) {
 			Type = type;
 		}	
+
+		public override ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Class", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
+			return MyClass;
+		}	
+
 
 		public override string ToString() {
 			return "builtinClass "+Name;

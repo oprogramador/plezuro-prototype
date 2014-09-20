@@ -76,20 +76,18 @@ namespace MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
+		public static ClassT MyClass;
+		//private static readonly Dictionary<string,Method> myMethods;
 
-		private static object[] lambdas = {
+		protected static object[] lambdas = {
+			"parents",	(Func<ClassT,ListT>) ((c) => new ListT(c.Parents)),
 		};
 		
-		static ClassT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Class", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ClassT) ); 
-		}
-
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Class", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
 			return MyClass;
-		}
+		}	
 
 		public object ObValue {
 			get { return this; }

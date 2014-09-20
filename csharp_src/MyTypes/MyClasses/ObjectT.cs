@@ -19,7 +19,7 @@
  * 
  * 
  */
- 
+
 
 using System;
 using System.Collections.Generic;
@@ -53,33 +53,33 @@ namespace MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
+		public static ClassT MyClass;
+		//private static readonly Dictionary<string,Method> myMethods;
 
 		private static object assignLambdaMaker(bool isClone) {
 			var cloneF = (Func<object,IVariable>) ((x) => (IVariable)(isClone ? ((IVariable)x).Clone() : x));
 
 			return (Func<ITuplable,ITuplable,ITuplable>) ((xx,yy) => { 
-				var x = xx.ToArray();
-				if(x.Length<1) return xx;
-				var yall = new List<object>(yy.ToArray()).Select((i) => ((IVariable)i).Clone()).ToList();
-				if(yall.Count>x.Length) {
+					var x = xx.ToArray();
+					if(x.Length<1) return xx;
+					var yall = new List<object>(yy.ToArray()).Select((i) => ((IVariable)i).Clone()).ToList();
+					if(yall.Count>x.Length) {
 					var y = yall.Take(x.Length-1).ToArray();
 					var ylast = new TupleT(yall.Skip(x.Length-1));
 					for(int i=0; i<x.Length-1; i++) {
-						((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
+					((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
 					}
 					((ReferenceT)x[x.Length-1]).Value = ylast;
-				} else {
+					} else {
 					var y = yall.ToArray();
 					for(int i=0; i<yall.Count; i++) {
-						lib.Co.Log("x[i]="+x[i]+" type="+ x[i].GetType()+" y[i]="+y[i]+" type="+y[i].GetType());
-						((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
+					lib.Co.Log("x[i]="+x[i]+" type="+ x[i].GetType()+" y[i]="+y[i]+" type="+y[i].GetType());
+					((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
 					}
 					for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());
-				}
-				return xx;
-			});
+					}
+					return xx;
+					});
 		}
 
 		private static object[] lambdas = {
@@ -101,10 +101,10 @@ namespace MyTypes.MyClasses {
 			//		}),
 			",", 		(Func<ITuplable,ITuplable,ITuplable>) ((a,b) => TupleT.Concat(a,b)),
 			"<->",		(Func<ReferenceT,ReferenceT,ReferenceT>) ((a,b) => { 
-						var c=a.Value;
-						a.Value=b.Value;
-						b.Value=c;
-						return b; 
+					var c=a.Value;
+					a.Value=b.Value;
+					b.Value=c;
+					return b; 
 					}),
 			":",		(Func<IVariable, IVariable, PairT>) ((x,y) => new PairT(x,y)),
 			"<=>",		(Func<IVariable,IVariable,double>) ((x,y) => x.CompareTo(y) ),
@@ -125,15 +125,20 @@ namespace MyTypes.MyClasses {
 			for(int i=0; i<ar.Length; i++) ret[i] = new ReferenceT((IVariable)ar[i]);
 			return ret;
 		}
-	
+
 		static ObjectT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Object", new List<ClassT>(){}, myMethods, PackageT.Lang, typeof(ObjectT) ); 
+			StaticGetClass();
+		}
+
+		public static ClassT StaticGetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Object", new List<ClassT>(){}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ObjectT) );
+			return MyClass;
 		}
 
 		public ClassT GetClass() {
-			return MyClass;
-		}
+			return StaticGetClass();
+		}	
 
 		public object ObValue {
 			get { return this; }
