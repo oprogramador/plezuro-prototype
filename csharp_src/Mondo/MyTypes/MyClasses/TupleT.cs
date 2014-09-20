@@ -1,0 +1,113 @@
+/*
+ * TupleT.cs
+ * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * 
+ * 
+ */
+ 
+
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using Mondo.MyCollections;
+using Mondo.Engine;
+
+namespace Mondo.MyTypes.MyClasses {
+	public class TupleT : SList<IVariable>, IVariable {
+		public TupleT() :  base() {
+			ID = ObjectContainer.Instance.Add(this);
+		}
+
+		public TupleT(IEnumerable ie) :  base() {
+			ID = ObjectContainer.Instance.Add(this);
+			foreach(var i in ie) Add( TypeTrans.toMyType(i) );
+		}
+
+		public static ITuplable MakeTuplable(object[] ar) {
+			if(ar.Length==0) return new EmptyT();
+			else if(ar.Length==1) {lib.Co.Log("mtar[0]="+ar[0]+" type="+ar[0].GetType()); return TypeTrans.toMyType(ar[0]); }
+			else return new TupleT(ar);
+		}
+
+		public static ITuplable MakeTuplable(object ob) {
+			if(ob is object[]) return MakeTuplable((object[])ob);
+			return TypeTrans.toMyType(ob);
+		}
+
+		public override object Clone() {
+			return new TupleT(this);
+		}
+
+		public TupleT Concat(TupleT st) {
+			return (TupleT)Concat(st,typeof(TupleT));
+		}
+
+		public static ITuplable Concat(ITuplable a, ITuplable b) {
+			TupleT ret = new TupleT();
+			Console.WriteLine("a="+General.EnumToString(a.ToArray()));
+			Console.WriteLine("b="+General.EnumToString(b.ToArray()));
+			foreach(var i in a.ToArray()) ret.Add(TypeTrans.toRef(i));
+			foreach(var i in b.ToArray()) ret.Add(TypeTrans.toRef(i));
+			return ret;
+		}
+
+		public static ITuplable Add(ITuplable t, IVariable v) {
+			if(t is EmptyT) return v;
+			if(t is TupleT) { ((TupleT)t).Add(v); return t; }
+			var ret = new TupleT();
+			ret.Add(t.ToArray()[0]);
+			ret.Add(v);
+			return ret;
+		}	
+
+		IVariable[] ITuplable.ToArray() {
+			return ToArray();
+		}
+
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
+
+
+		private static object[] lambdas = {
+
+		};
+		
+		static TupleT() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "Tuple", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(TupleT) ); 
+		}
+
+		public ClassT GetClass() {
+			return MyClass;
+		}
+
+		public object ObValue {
+			get { return this; }
+			set { }
+		}
+
+		public int ID { get; private set; }
+
+		public override string ToString() {
+			string str = "";
+			foreach(var item in this) str += (str=="" ? "" : ",") +((IStringable)item).ToString();
+			return "("+str+")";
+		}
+ 
+	}
+}
