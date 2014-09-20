@@ -36,7 +36,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is string) return Value.CompareTo(ob);
 			if(ob is SoftLink) return Value.CompareTo(((SoftLink)ob).Value);
@@ -63,21 +63,20 @@ namespace Mondo.MyTypes.MyClasses {
 			return "soft link: "+Value;
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
+		public static ClassT MyClass;
 
 		private static object[] lambdas = {
 			ObjectT.FunctionSymbol,	(Func<IPrintable,SoftLink,ITuplable,object>) ((p,f,a) => {Co.WL("softlambda"); var ar=a.ToArray(); return f.ToProc(ar).Call(p, ar);}),
 		};
 		
-		static SoftLink() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "SoftLink", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(SoftLink) ); 
-		}
-
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "SoftLink", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(SoftLink) );
 			return MyClass;
-		}
+		}	
 	}
 }

@@ -38,7 +38,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is RangeT) return beg.CompareTo(((RangeT)ob).beg);
 			return 0;
@@ -56,8 +56,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
+		public static ClassT MyClass;
 
 		public static object[] Constants = {
 		};
@@ -65,14 +64,15 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
 		};
 		
-		static RangeT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Range", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(RangeT) ); 
-		}
-
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Range", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(RangeT) );
 			return MyClass;
-		}
+		}	
 
 		public object ObValue {
 			get { return this; }

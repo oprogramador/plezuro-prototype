@@ -81,7 +81,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			return General.Compare(this, (IEnumerable)ob); 
 		}
@@ -94,9 +94,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
+		public static ClassT MyClass;
 
 		private static object[] lambdas = {
 			SymbolMap.RefSymbol,	(Func<DictionaryT,IVariable,ReferenceT>) ((a,i) => (ReferenceT)a[new ReferenceT(i)] ),
@@ -107,14 +105,15 @@ namespace Mondo.MyTypes.MyClasses {
 			"<<",		(Func<DictionaryT,PairT,DictionaryT>) ((a,v) => {a.Add((PairT)v.Clone()); return a;} ),
 		};
 		
-		static DictionaryT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Dictionary", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DictionaryT) ); 
-		}
-
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Dictionary", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(DictionaryT) );
 			return MyClass;
-		}
+		}	
 
 		public object ObValue {
 			get { return this; }

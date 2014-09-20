@@ -36,11 +36,11 @@ namespace Mondo.Engine {
 	class SymbolMap : ConcurrentDictionary<string, object> {
 
 
-		public static readonly string MainDelimiter = ";";
-		public static readonly string EmptySymbol = "empty";
-		public static readonly string ListSymbol = "array";
-		public static readonly string RefSymbol = "ref";
-		public static readonly string ArgsSymbol = "args";
+		public const string MainDelimiter = ";";
+		public const string EmptySymbol = "empty";
+		public const string ListSymbol = "array";
+		public const string RefSymbol = "ref";
+		public const string ArgsSymbol = "args";
 
 		private static object[] lambdas = {
 			"clear",	(Func<IPrintable,object>) ((p) => p.Clear() ),

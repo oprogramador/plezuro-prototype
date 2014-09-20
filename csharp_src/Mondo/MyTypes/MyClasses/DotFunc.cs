@@ -56,7 +56,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is DotFunc) Proc.CompareTo(((DotFunc)ob).Proc);
 			return 0;
@@ -70,23 +70,22 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
+		public static ClassT MyClass;
 
 		private static object[] lambdas = {
 			ObjectT.FunctionSymbol,	(Func<IPrintable,DotFunc,ITuplable,object>) 
 				((p,f,a) => { Co.WL("dotlambda a="+a+" f="+f); return f.Call(p, a.ToArray());}),
 		};
 		
-		static DotFunc() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "DotFunc", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DotFunc) ); 
-		}
-
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "DotFunc", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(DotFunc) );
 			return MyClass;
-		}
+		}	
 
 		public object ObValue {
 			get { return this; }

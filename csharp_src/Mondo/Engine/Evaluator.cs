@@ -126,7 +126,7 @@ namespace Mondo.Engine {
 			object[] args = new object[argnr];
 			Console.WriteLine("argnr="+argnr);
 			Console.WriteLine("output="+output);
-			for(int i=argnr-1; i>=0; i--) args[i] = output.Pop();
+			for(int i=argnr-1; i>=0; i--) args[i] = TypeTrans.dereference(output.Pop());
 			Console.WriteLine("args="+General.EnumToString(args));
 			var proc = ClassT.GetClass(args).GetMethod(oper).Proc;
 			output.Push( proc.Call(this,args) );
@@ -230,7 +230,7 @@ namespace Mondo.Engine {
 		}
 		
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			return 0;
 		}

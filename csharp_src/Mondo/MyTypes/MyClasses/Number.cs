@@ -35,7 +35,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is Number) return Value.CompareTo(((Number)ob).Value);
 			return -1;
@@ -49,10 +49,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-
-		private static readonly Dictionary<string,Method> myMethods;
-
+		public static ClassT MyClass;
 
 		public static object[] Constants = {
 			"pi",		Math.PI,
@@ -92,14 +89,15 @@ namespace Mondo.MyTypes.MyClasses {
 			return (Func<Number,Number,Number>) ((x,y) => new Number(((Func<double,double,double>)f)(x.Value, y.Value)));
 		}
 
-		static Number() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Number", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(Number) ); 
-		}
-
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Number", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(Number) );
 			return MyClass;
-		}
+		}	
 
 		public override string ToString() {
 			return ""+Value;

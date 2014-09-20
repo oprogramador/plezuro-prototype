@@ -34,7 +34,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is BooleanT) return Value.CompareTo(((BooleanT)ob).Value);
 			return 0;
@@ -52,8 +52,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
+		public static ClassT MyClass;
 
 		public static object[] Constants = {
 			"true",		true,
@@ -68,14 +67,11 @@ namespace Mondo.MyTypes.MyClasses {
 			"!",	(Func<bool,bool>) ((x) => !x),
 		};
 		
-		static BooleanT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Boolean", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(BooleanT) ); 
-		}
-
 		public ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Boolean", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(BooleanT) );
 			return MyClass;
-		}
+		}	
 
 		public override bool Equals(object ob) {
 			if(ob is bool) return (bool)ob == Value;

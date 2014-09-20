@@ -53,7 +53,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is string) return Value.CompareTo(ob);
 			if(ob is StringT) return Value.CompareTo(((StringT)ob).Value);
@@ -79,8 +79,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return Value;
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
+		public static ClassT MyClass;
 
 		private static object[] lambdas = {
 			"len",		(Func<string,double>) ((a) => a.Length),
@@ -105,14 +104,18 @@ namespace Mondo.MyTypes.MyClasses {
 		};
 		
 		static StringT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "String", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(StringT) ); 
 			revEscape = escapeChars.ToDictionary(x => x.Value, x => x.Key);
 		}
 
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "String", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(StringT) );
 			return MyClass;
-		}
+		}	
 
 		class MiniParser : IParseable {
 			public object Parse(string str, ITextable t) {

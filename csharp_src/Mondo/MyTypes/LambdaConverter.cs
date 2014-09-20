@@ -31,7 +31,11 @@ namespace Mondo.MyTypes {
 	static class LambdaConverter {
 		public static Dictionary<string,Method> Convert(object[] lambdas) {
 			var ret = new Dictionary<string,Method>();
-			for(int i=0; i<lambdas.Length; i+=2) ret.Add( (string)lambdas[i], toPublicMethod( toMyLambda((Delegate)lambdas[i+1]) ) );
+			Co.Log("before");
+			for(int i=0; i<lambdas.Length; i+=2) {
+				Co.Log("i="+i+" lambda="+lambdas[i]);	
+				ret.Add( (string)lambdas[i], toPublicMethod( toMyLambda((Delegate)lambdas[i+1]) ) );
+			}
 			return ret;
 		}
 
@@ -100,16 +104,7 @@ namespace Mondo.MyTypes {
 			if(ob is double) return new Number((double)ob);
 			if(ob is bool) return new BooleanT((bool)ob);
 			if(ob is string) return new StringT((string)ob);
-			if(ob is Type) return new TypeT((Type)ob);
 			return (IVariable)ob;
-		}
-
-		public static object toSimpleType(object ob) {
-			if(ob is Number) return ((Number)ob).Value;
-			if(ob is BooleanT) return ((BooleanT)ob).Value;
-			if(ob is StringT) return ((StringT)ob).Value;
-			if(ob is TypeT) return ((TypeT)ob).Value;
-			return ob;
 		}
 	}
 }

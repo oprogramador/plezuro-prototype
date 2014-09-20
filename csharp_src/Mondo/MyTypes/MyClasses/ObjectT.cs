@@ -40,7 +40,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			//int pre = TypeT.PreCompare(this,ob);
+			//int pre = ClassT.PreCompare(this,ob);
 			//if(pre!=0) return pre;
 			return 0;
 		}
@@ -124,10 +124,6 @@ namespace Mondo.MyTypes.MyClasses {
 			object[] ret = new object[ar.Length];
 			for(int i=0; i<ar.Length; i++) ret[i] = new ReferenceT((IVariable)ar[i]);
 			return ret;
-		}
-
-		static ObjectT() {
-			StaticGetClass();
 		}
 
 		public static ClassT StaticGetClass() {

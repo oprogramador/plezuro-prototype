@@ -58,7 +58,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is CallFunc) Proc.CompareTo(((CallFunc)ob).Proc);
 			return 0;
@@ -72,22 +72,21 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
+		public static ClassT MyClass;
 
 		private static object[] lambdas = {
 
 		};
 		
-		static CallFunc() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "CallFunc", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(CallFunc) ); 
-		}
-
 		public ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "CallFunc",
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(CallFunc) );
 			return MyClass;
-		}
+		}	
 
 		public object ObValue {
 			get { return Proc; }

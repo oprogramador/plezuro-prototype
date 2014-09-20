@@ -37,7 +37,11 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public override ClassT GetClass() {
 			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Class", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
+				new BuiltinClass( "Class", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(ClassT) );
 			return MyClass;
 		}	
 

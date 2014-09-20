@@ -38,7 +38,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is PairT) {
 				pre = Key.CompareTo(((PairT)ob).Key);
@@ -57,23 +57,22 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
+		public static ClassT MyClass;
 
 		private static object[] lambdas = {
 			"key",		(Func<PairT,IVariable>) ((x) => x.Key),
 			"value",	(Func<PairT,IVariable>) ((x) => x.Value),
 		};
 		
-		static PairT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Pair", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(PairT) ); 
-		}
-
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Pair", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(PairT) );
 			return MyClass;
-		}
+		}	
 
 		public object ObValue {
 			get { return this; }

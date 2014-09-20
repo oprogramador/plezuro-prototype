@@ -79,22 +79,21 @@ namespace Mondo.MyTypes.MyClasses {
 			return ToArray();
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
+		public static ClassT MyClass;
 
 		private static object[] lambdas = {
 
 		};
 		
-		static TupleT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Tuple", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(TupleT) ); 
-		}
-
-		public ClassT GetClass() {
+		public virtual ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Tuple", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(TupleT) );
 			return MyClass;
-		}
+		}	
 
 		public object ObValue {
 			get { return this; }

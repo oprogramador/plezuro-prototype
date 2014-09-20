@@ -63,7 +63,7 @@ namespace Mondo.MyCollections {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is WStack<T>) return new SList<ICompCloneable>(this).CompareTo(new SList<ICompCloneable>((WStack<T>)ob));
 			return 0;

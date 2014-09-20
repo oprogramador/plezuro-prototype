@@ -48,6 +48,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public Method GetMethod(string name) {
+			Console.WriteLine("getmethod this="+this+" name="+name);
 			try {
 				return methods[name];
 			} catch {
@@ -65,9 +66,14 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			//int pre = TypeT.PreCompare(this,ob);
-			//if(pre!=0) return pre;
-			//if(ob is ClassT) return Name.CompareTo(((ClassT)ob).Name);
+			int pre = ClassT.PreCompare(this,ob);
+			if(pre!=0) return pre;
+			if(ob is ClassT) return Name.CompareTo(((ClassT)ob).Name);
+			return 0;
+		}
+
+		public static int PreCompare(object a, object b) {
+			if(a is IVariable && b is IVariable) return ((IVariable)a).GetClass().Name.CompareTo(((IVariable)b).GetClass().Name);
 			return 0;
 		}
 
@@ -84,12 +90,16 @@ namespace Mondo.MyTypes.MyClasses {
 
 		protected static object[] lambdas = {
 			"parents",	(Func<ClassT,ListT>) ((c) => new ListT(c.Parents)),
-			//"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
+			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
 		};
 
 		public virtual ClassT GetClass() {
 			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Class", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
+				new BuiltinClass( "Class",
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(ClassT) );
 			return MyClass;
 		}	
 

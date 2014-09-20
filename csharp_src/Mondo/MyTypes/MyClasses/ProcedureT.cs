@@ -43,9 +43,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new ProcedureT(this);
 		}
 
-		public static new readonly ClassT MyClass;
-		public static readonly Dictionary<string,Method> myMethods;
-
+		public static new ClassT MyClass;
 
 		private static object[] lambdas = {
 			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f, p)),
@@ -57,13 +55,15 @@ namespace Mondo.MyTypes.MyClasses {
 						((p,f) => {var w=Stopwatch.StartNew(); p.EvalDyn(f,p); return w.ElapsedMilliseconds;}),
 		};
 		
-		static ProcedureT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Procedure", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ProcedureT) ); 
-		}
-
 		public override ClassT GetClass() {
+			if(MyClass==null) MyClass = 
+				new BuiltinClass( "Procedure", 
+						new List<ClassT>(){ObjectT.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(ProcedureT) );
 			return MyClass;
-		}
+		}	
+
 	}
 }
