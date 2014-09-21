@@ -48,7 +48,6 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public Method GetMethod(string name) {
-			Console.WriteLine("getmethod this="+this+" name="+name);
 			try {
 				return methods[name];
 			} catch {
@@ -95,11 +94,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public virtual ClassT GetClass() {
 			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Class",
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(ClassT) );
+				new BuiltinClass( "Class", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
 			return MyClass;
 		}	
 

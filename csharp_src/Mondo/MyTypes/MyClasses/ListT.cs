@@ -52,7 +52,9 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
+
 
 		private static object[] lambdas = {
 			"get",		(Func<ListT,double,object>) ((a,i) => ((ReferenceT)a[(int)i]).Value ),
@@ -100,15 +102,14 @@ namespace Mondo.MyTypes.MyClasses {
 						}),
 		};
 		
-		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "List", 
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(ListT) );
+		static ListT() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "List", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ListT) ); 
+		}
+
+		public ClassT GetClass() {
 			return MyClass;
-		}	
+		}
 
 		public object ObValue {
 			get { return this; }

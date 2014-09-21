@@ -94,7 +94,9 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
+
 
 		private static object[] lambdas = {
 			SymbolMap.RefSymbol,	(Func<DictionaryT,IVariable,ReferenceT>) ((a,i) => (ReferenceT)a[new ReferenceT(i)] ),
@@ -105,15 +107,14 @@ namespace Mondo.MyTypes.MyClasses {
 			"<<",		(Func<DictionaryT,PairT,DictionaryT>) ((a,v) => {a.Add((PairT)v.Clone()); return a;} ),
 		};
 		
-		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Dictionary", 
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(DictionaryT) );
+		static DictionaryT() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "Dictionary", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DictionaryT) ); 
+		}
+
+		public ClassT GetClass() {
 			return MyClass;
-		}	
+		}
 
 		public object ObValue {
 			get { return this; }

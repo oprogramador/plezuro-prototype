@@ -72,21 +72,22 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
+
 
 		private static object[] lambdas = {
 
 		};
 		
+		static CallFunc() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "CallFunc", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(CallFunc) ); 
+		}
+
 		public ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "CallFunc",
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(CallFunc) );
 			return MyClass;
-		}	
+		}
 
 		public object ObValue {
 			get { return Proc; }

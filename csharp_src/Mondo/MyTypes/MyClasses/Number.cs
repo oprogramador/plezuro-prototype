@@ -49,7 +49,10 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+
+		private static readonly Dictionary<string,Method> myMethods;
+
 
 		public static object[] Constants = {
 			"pi",		Math.PI,
@@ -89,15 +92,14 @@ namespace Mondo.MyTypes.MyClasses {
 			return (Func<Number,Number,Number>) ((x,y) => new Number(((Func<double,double,double>)f)(x.Value, y.Value)));
 		}
 
-		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Number", 
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(Number) );
+		static Number() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "Number", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(Number) ); 
+		}
+
+		public ClassT GetClass() {
 			return MyClass;
-		}	
+		}
 
 		public override string ToString() {
 			return ""+Value;

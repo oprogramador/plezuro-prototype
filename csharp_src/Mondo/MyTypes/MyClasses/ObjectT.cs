@@ -126,6 +126,10 @@ namespace Mondo.MyTypes.MyClasses {
 			return ret;
 		}
 
+		static ObjectT() {
+			StaticGetClass();
+		}
+
 		public static ClassT StaticGetClass() {
 			if(MyClass==null) MyClass = 
 				new BuiltinClass( "Object", new List<ClassT>(){}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ObjectT) );

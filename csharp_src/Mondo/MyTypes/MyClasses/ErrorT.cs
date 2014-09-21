@@ -60,21 +60,22 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
+
 
 		private static object[] lambdas = {
 			"msg",		(Func<ErrorT,string>) ((x) => ""+x.Exception),
 		};
 		
-		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Error", 
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(ErrorT) );
+		static ErrorT() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "Error", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ErrorT) ); 
+		}
+
+		public ClassT GetClass() {
 			return MyClass;
-		}	
+		}
 
 		public object ObValue {
 			get { return this; }

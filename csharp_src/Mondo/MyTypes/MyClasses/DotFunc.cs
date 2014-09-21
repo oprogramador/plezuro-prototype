@@ -70,22 +70,23 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
+
 
 		private static object[] lambdas = {
 			ObjectT.FunctionSymbol,	(Func<IPrintable,DotFunc,ITuplable,object>) 
 				((p,f,a) => { Co.WL("dotlambda a="+a+" f="+f); return f.Call(p, a.ToArray());}),
 		};
 		
-		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "DotFunc", 
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(DotFunc) );
+		static DotFunc() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "DotFunc", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DotFunc) ); 
+		}
+
+		public ClassT GetClass() {
 			return MyClass;
-		}	
+		}
 
 		public object ObValue {
 			get { return this; }

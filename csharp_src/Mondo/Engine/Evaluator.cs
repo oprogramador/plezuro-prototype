@@ -126,7 +126,7 @@ namespace Mondo.Engine {
 			object[] args = new object[argnr];
 			Console.WriteLine("argnr="+argnr);
 			Console.WriteLine("output="+output);
-			for(int i=argnr-1; i>=0; i--) args[i] = TypeTrans.dereference(output.Pop());
+			for(int i=argnr-1; i>=0; i--) args[i] = output.Pop();
 			Console.WriteLine("args="+General.EnumToString(args));
 			var proc = ClassT.GetClass(args).GetMethod(oper).Proc;
 			output.Push( proc.Call(this,args) );

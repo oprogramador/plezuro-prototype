@@ -52,7 +52,8 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
 
 		public static object[] Constants = {
 			"true",		true,
@@ -67,11 +68,14 @@ namespace Mondo.MyTypes.MyClasses {
 			"!",	(Func<bool,bool>) ((x) => !x),
 		};
 		
+		static BooleanT() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "Boolean", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(BooleanT) ); 
+		}
+
 		public ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Boolean", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(BooleanT) );
 			return MyClass;
-		}	
+		}
 
 		public override bool Equals(object ob) {
 			if(ob is bool) return (bool)ob == Value;

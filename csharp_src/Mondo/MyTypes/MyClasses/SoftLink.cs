@@ -63,20 +63,21 @@ namespace Mondo.MyTypes.MyClasses {
 			return "soft link: "+Value;
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
+
 
 		private static object[] lambdas = {
 			ObjectT.FunctionSymbol,	(Func<IPrintable,SoftLink,ITuplable,object>) ((p,f,a) => {Co.WL("softlambda"); var ar=a.ToArray(); return f.ToProc(ar).Call(p, ar);}),
 		};
 		
-		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "SoftLink", 
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(SoftLink) );
+		static SoftLink() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "SoftLink", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(SoftLink) ); 
+		}
+
+		public ClassT GetClass() {
 			return MyClass;
-		}	
+		}
 	}
 }

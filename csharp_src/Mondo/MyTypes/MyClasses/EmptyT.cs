@@ -47,7 +47,8 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{};
 		}
 
-		public static ClassT MyClass;
+		public static readonly ClassT MyClass;
+		private static readonly Dictionary<string,Method> myMethods;
 
 		public static object[] Constants = {
 			SymbolMap.EmptySymbol,	new EmptyT(),
@@ -57,15 +58,14 @@ namespace Mondo.MyTypes.MyClasses {
 			SymbolMap.ListSymbol,	(Func<EmptyT,IVariable>) ((x) => new ListT()),
 		};
 		
-		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Empty", 
-						new List<ClassT>(){ObjectT.StaticGetClass()},
-						LambdaConverter.Convert(lambdas),
-						PackageT.Lang,
-						typeof(EmptyT) );
+		static EmptyT() {
+			myMethods = LambdaConverter.Convert( lambdas );
+ 			MyClass = new BuiltinClass( "Empty", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(EmptyT) ); 
+		}
+
+		public ClassT GetClass() {
 			return MyClass;
-		}	
+		}
 
 		public object ObValue {
 			get { return this; }
