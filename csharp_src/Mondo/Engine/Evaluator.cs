@@ -46,9 +46,10 @@ namespace Mondo.Engine {
 
 		public Evaluator(ProcedureT list, IPrintable p, ITuplable args)  {
 			try {
+				Console.WriteLine("evaluator ctor list="+list+" p="+p+" args="+args);
 				Parent = p;
 				Args = args;
-				Stream = p.Stream;
+				Stream = p!=null ? p.Stream : null;
 				init(list);
 			} catch{ throw; }
 		}

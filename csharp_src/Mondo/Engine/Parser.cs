@@ -66,9 +66,10 @@ namespace Mondo.Engine {
 		}
 
 		public Parser(string str, IPrintable p, ITuplable args) {
-			var t = new Thread(() => init(str,p,args));
-			threads.Add(t);
-			t.Start();
+			init(str,p,args);
+			//var t = new Thread(() => init(str,p,args));
+			//threads.Add(t);
+			//t.Start();
 		}
 
 		public Parser(string str, ITextable input, ITextable output, ITuplable args) {
@@ -86,6 +87,7 @@ namespace Mondo.Engine {
 
 		private void init(string str, IPrintable p, ITuplable args) {
 			try {
+				Console.WriteLine("parser init p="+p);
 				IsCorrectSyntax = true;
 				var tokens = new Tokenizer(str).Output;
 				var convTokens = new TokenConverter(new List<Token>(tokens)).Output;
