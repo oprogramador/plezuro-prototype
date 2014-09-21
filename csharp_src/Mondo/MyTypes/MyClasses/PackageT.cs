@@ -43,7 +43,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			//int pre = TypeT.PreCompare(this,ob);
+			//int pre = ClassT.PreCompare(this,ob);
 			//if(pre!=0) return pre;
 			//if(ob is PackageT) return Name.CompareTo(((PackageT)ob).Name);
 			return 0;
@@ -60,6 +60,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public static ClassT MyClass;
 
 		protected static object[] lambdas = {
+			"package",	(Func<PackageT,IVariable>) ((c) => (c.Package!=null ? (IVariable)c.Package : (IVariable)new NullType())),
 		};
 
 		public virtual ClassT GetClass() {

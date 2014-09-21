@@ -73,13 +73,13 @@ namespace Mondo.MyCollections {
 			if(ob is Number) if(t == typeof(double)) return ((Number)ob).Value;
 			if(ob is BooleanT) if(t == typeof(bool)) return ((BooleanT)ob).Value;
 			if(ob is StringT) if(t == typeof(string)) return ((StringT)ob).Value;
-			if(ob is TypeT) if(t == typeof(Type)) return ((TypeT)ob).Value;
+			//if(ob is TypeT) if(t == typeof(Type)) return ((TypeT)ob).Value;
 			if(ob is BuiltinFunc) if(t == typeof(Delegate)) return ((BuiltinFunc)ob).Proc;
 			//if(ob is PointerT) if(t == typeof(ReferenceT)) return ((PointerT)ob).Value;
 			if(ob is double) if(t == typeof(IVariable)) return new Number((double)ob);
 			if(ob is bool) if(t == typeof(IVariable)) return new BooleanT((bool)ob);
 			if(ob is string) if(t == typeof(IVariable)) return new StringT((string)ob);
-			if(ob is Type) if(t == typeof(IVariable)) return new TypeT((Type)ob);
+			//if(ob is Type) if(t == typeof(IVariable)) return new TypeT((Type)ob);
 			//if(ob is Delegate) if(t == typeof(IVariable)) return new BuiltinFunc((Delegate)ob);
 			//if(ob is ReferenceT) if(t == typeof(PointerT)) return new PointerT((ReferenceT)ob);
 			return ob;	
@@ -89,7 +89,7 @@ namespace Mondo.MyCollections {
 			if(ob is double) return new Number((double)ob);
 			if(ob is bool) return new BooleanT((bool)ob);
 			if(ob is string) return new StringT((string)ob);
-			if(ob is Type) return new TypeT((Type)ob);
+			//if(ob is Type) return new TypeT((Type)ob);
 			//if(ob is Delegate) return new BuiltinFunc((Delegate)ob);
 			return ob;
 		}
@@ -98,7 +98,7 @@ namespace Mondo.MyCollections {
 			if(ob is Number) return ((Number)ob).Value;
 			if(ob is BooleanT) return ((BooleanT)ob).Value;
 			if(ob is StringT) return ((StringT)ob).Value;
-			if(ob is TypeT) return ((TypeT)ob).Value;
+			//if(ob is TypeT) return ((TypeT)ob).Value;
 			//if(ob is Delegate) return new BuiltinFunc((Delegate)ob);
 			return ob;
 		}

@@ -100,16 +100,8 @@ namespace Mondo.MyTypes {
 			if(ob is double) return new Number((double)ob);
 			if(ob is bool) return new BooleanT((bool)ob);
 			if(ob is string) return new StringT((string)ob);
-			if(ob is Type) return new TypeT((Type)ob);
+			//if(ob is Type) return new TypeT((Type)ob);
 			return (IVariable)ob;
-		}
-
-		public static object toSimpleType(object ob) {
-			if(ob is Number) return ((Number)ob).Value;
-			if(ob is BooleanT) return ((BooleanT)ob).Value;
-			if(ob is StringT) return ((StringT)ob).Value;
-			if(ob is TypeT) return ((TypeT)ob).Value;
-			return ob;
 		}
 	}
 }

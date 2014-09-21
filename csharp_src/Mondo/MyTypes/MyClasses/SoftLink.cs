@@ -36,7 +36,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public int ID { get; private set; }
 
 		public int CompareTo(object ob) {
-			int pre = TypeT.PreCompare(this,ob);
+			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is string) return Value.CompareTo(ob);
 			if(ob is SoftLink) return Value.CompareTo(((SoftLink)ob).Value);
