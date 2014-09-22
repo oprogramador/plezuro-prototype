@@ -105,7 +105,7 @@ namespace Mondo.Engine {
 			try {
 				IsCorrectSyntax = true;
 				var tokens = new Tokenizer(str).Output;
-				//if(input!=null) input.ColorIn(tokens);
+				if(input!=null) input.ColorIn(tokens);
 				var convTokens = new TokenConverter(new List<Token>(tokens)).Output;
 				var ws = new RPN(convTokens).Output;
 				Result = args==null ? Evaluator.Eval(ws, output) : Evaluator.Eval(ws, output, args);

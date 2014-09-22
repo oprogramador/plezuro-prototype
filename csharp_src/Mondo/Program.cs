@@ -26,6 +26,7 @@ using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Mondo.Gui;
 
 namespace Mondo.Program {
@@ -41,14 +42,19 @@ namespace Mondo.Program {
 
 		public static void Main(string[] args) {
 			try {
+				Application.ThreadException += new ThreadExceptionEventHandler(excHandle);
 				System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
 				Engine.Engine.GetInstance();
 				new Tests.TestUnit();
 				if(args.Length>0) startConsole(args);
 				else startGui();
 			} catch(Exception e) {
-				System.Console.WriteLine(""+e);
+				System.Console.WriteLine("e: "+e);
 			}
+		}
+
+		private static void excHandle(object sender, ThreadExceptionEventArgs e) {
+			Console.WriteLine("e: "+e);
 		}
 	}
 }

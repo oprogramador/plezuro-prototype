@@ -88,7 +88,10 @@ namespace Mondo.MyTypes.MyClasses {
 			"reverse",	(Func<string,string>) ((a) => {var c=a.ToCharArray(); Array.Reverse(c); return new string(c);}),
 			"ord",		(Func<string,double>) ((x) => (double)x[0]),
 			"fromF",	(Func<string,object>) ((x) => { try{ return System.IO.File.ReadAllText(x); }catch{ return new NullType(); }}),
-			"toF",		(Func<string,string,bool>) ((f,x) => { try{ System.IO.File.WriteAllText(f,x); return true; }catch{ return false; }}),
+			"toF",		(Func<string,string,bool>) ((x,f) => { try{ System.IO.File.WriteAllText(f,x); return true; }catch{ return false; }}),
+			"put",		(Func<string,string,bool>) ((f,x) => { try{ System.IO.File.WriteAllText(f,x); return true; }catch{ return false; }}),
+			"putA",		(Func<string,string,bool>) ((f,x) => { try{ System.IO.File.AppendAllText(f,x); return true; }catch{ return false; }}),
+			"append",	(Func<string,string,bool>) ((x,f) => { try{ System.IO.File.AppendAllText(f,x); return true; }catch{ return false; }}),
 			"load",		(Func<IPrintable,string,object>) 
 					((p,x) => { try{ return Parser.Parse(System.IO.File.ReadAllText(x).TrimEnd('\n'), p, null); } 
 						catch{ throw new ModuleNotFoundException(); }

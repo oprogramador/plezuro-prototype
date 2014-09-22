@@ -19,7 +19,7 @@
  * 
  * 
  */
- 
+
 
 using System.Windows.Forms;
 using System.Drawing;
@@ -36,7 +36,7 @@ namespace Mondo.Gui {
 			get;
 			set;
 		}
-		
+
 		public InputBox(IOMap map, int x, int y, int w, int h) : base(x,y,w,h) {
 			this.map = map;
 			//BackColor = Color.Green;
@@ -45,7 +45,7 @@ namespace Mondo.Gui {
 			//KeyDown += new KeyEventHandler(ColorEv);
 			KeyPress += new KeyPressEventHandler(ColorEv);
 		}
-	
+
 		void KeyDownFun(object sender, KeyEventArgs e) {
 			if(e.KeyCode == Keys.F12) Parser.Stop();
 			if(AutoRefresh) map.Process(this);
@@ -56,24 +56,24 @@ namespace Mondo.Gui {
 		}
 
 		public void ColorIn(List<Token> tokens) {
-			/*
-			myTokens = tokens;
-			int pos = 0;
-			int startCursorPosition = SelectionStart;
-			int selectionLength = SelectionLength;
-			foreach(var t in tokens) {
-				if(pos+t.Text.Length >= Text.Length) break;
-				Select(pos, pos+t.Text.Length);
-				try{
-					SelectionColor = VisualSyntax.SyntaxColors[t.Type];
-				} catch(Exception e) {
-					Console.WriteLine("color e: "+e);
+			try {
+				myTokens = tokens;
+				int pos = 0;
+				int startCursorPosition = SelectionStart;
+				int selectionLength = SelectionLength;
+				foreach(var t in tokens) {
+					//if(pos+t.Text.Length >= Text.Length) break;
+					Select(pos, pos+t.Text.Length);
+					try{
+						SelectionColor = VisualSyntax.SyntaxColors[t.Type];
+					} catch(Exception e) {
+						Console.WriteLine("color e: "+e);
+					}
+					pos += t.Text.Length;
 				}
-				pos += t.Text.Length;
-			}
-			SelectionStart = startCursorPosition;
-			SelectionLength = selectionLength;
-			*/
+				SelectionStart = startCursorPosition;
+				SelectionLength = selectionLength;
+			} catch {}
 		}
 
 	}
