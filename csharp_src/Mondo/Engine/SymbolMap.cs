@@ -42,10 +42,6 @@ namespace Mondo.Engine {
 		public static readonly string RefSymbol = "ref";
 		public static readonly string ArgsSymbol = "args";
 
-		private static object[] lambdas = {
-			"clear",	(Func<IPrintable,object>) ((p) => p.Clear() ),
-		};
-
 		private static readonly List<object> Symbols = new List<object>();
 			/*
 			"oper",		(Func<string,object>) ((x) => Engine.GetInstance().SymbolMap[x]),

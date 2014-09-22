@@ -213,7 +213,7 @@ namespace Mondo.Engine {
 				for(int i=0; i<StrB.Length; ) {
 					TokenTypes t = detectType(i);
 					var ob = match(ref i,t);
-					if(!(ob is NullArg)) Output.Add(ob);
+					Output.Add(ob);
 					//if(!(t==TokenTypes.WhiteSpace || t==TokenTypes.OneLineComment || t==TokenTypes.MultiLineComment)) lastType = t;
 				}
 				//dotCpl((TokenTypes)(-1));

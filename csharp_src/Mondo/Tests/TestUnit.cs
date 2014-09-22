@@ -28,40 +28,7 @@ namespace Mondo.Tests {
 	class TestUnit {
 		private System.Threading.Thread t1,t2;
 
-		private void just4fun() {
-			//System.Console.WriteLine(null+4);
-			//Engine.Engine.GetInstance();
-			//test();
-			/*var f = (Func<System.Collections.Generic.List<int>,int>) (x => 3);
-			Type t = f.GetType();
-			Console.WriteLine("t="+t+" gen:"+t.IsGenericType+" func:"+(t.GetGenericTypeDefinition()==typeof(Func<,>)));
-			Type[] pars = t.GetGenericArguments();
-			Console.WriteLine(pars[0].GetGenericArguments()[0]);
-			foreach(var p in pars) Console.WriteLine("p="+p+" int:"+(p==typeof(int)));
-			var st = new Stopwatch();
-			st.Start();
-			Console.WriteLine(Engine.Parser.Parse(System.IO.File.ReadAllText("primes.ml")));
-			st.Stop();
-			Console.WriteLine("ticks="+st.Elapsed.TotalMilliseconds);
-			Console.WriteLine(MyCollections.General.Converges("ala ma kota","maw",4));
-			*/
-			//int xx = new int[]{1,2,3}[3];
-			//Console.WriteLine(string.Concat(Enumerable.Repeat("asd",4)));
-			/*var x = new System.Collections.Generic.List<int>(new int[]{1,90,21,234,51,0,29,56,783,34,56,123,94});	
-			var y = x.GroupBy( a => a%10 ).Select( a => a.ToList() ).ToList();
-			foreach(var i in y){
-				foreach(var j in (System.Collections.Generic.List<int>)i) Console.WriteLine(j);
-				Console.WriteLine(",");
-			}*/
-			//object[] ar = new object[]{"dwe","as"};
-			//ar[0] = 45;
-			//Console.WriteLine(new lib.HtmlArrayTable(new object[]{new object[]{1,9,2.3}, new object[]{3,"asd",9}, 4444}).SetBorder(2).Generate());
-			MyTypes.VariableFactory.GetInstance();
-			var db = DataFixtures.DataFixtures.GetInstance();
-		}
-
 		public TestUnit() {
-			//just4fun();
 			//testGenerics();
 			//testHtml();
 			//threads();
