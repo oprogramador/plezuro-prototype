@@ -30,7 +30,6 @@ namespace Mondo.MyTypes.MyClasses {
 	public class ReferenceT : Pointer<IVariable>, IVariable, ITypeConvertible {
 		public ReferenceT(IVariable iv) :  base(iv) {
 			ID = ObjectContainer.Instance.Add(this);
-			Console.WriteLine("reference ctor");
 		}
 
 		public static Type GetType(object ob) {

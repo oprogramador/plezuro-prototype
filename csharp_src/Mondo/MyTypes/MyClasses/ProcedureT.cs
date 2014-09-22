@@ -36,7 +36,6 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public object Call(IPrintable p, object[] args) {
-			//foreach(var i in args) Console.WriteLine("i="+i+" type="+i.GetType());
 			return p.EvalDyn(this, p, TupleT.MakeTuplable(args));
 		}
 

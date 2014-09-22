@@ -73,7 +73,6 @@ namespace Mondo.MyTypes.MyClasses {
 					} else {
 					var y = yall.ToArray();
 					for(int i=0; i<yall.Count; i++) {
-					lib.Co.Log("x[i]="+x[i]+" type="+ x[i].GetType()+" y[i]="+y[i]+" type="+y[i].GetType());
 					((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
 					}
 					for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());
@@ -86,7 +85,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"class", 	(Func<IVariable,ClassT>) ((x) => x.GetClass()),
 			"print",	(Func<IPrintable,object,object>) ((p,o) => { p.Print( ((IStringable)o).ToString() ); return o; } ),
 			"printl",	(Func<IPrintable,object,object>) ((p,o) => { p.PrintLine( ((IStringable)o).ToString() ); return o; } ),
-			SymbolMap.ListSymbol,	(Func<ITuplable,IVariable>) ((x) => {lib.Co.Log("objlog x="+x); return new ListT(x.ToArray());}),
+			SymbolMap.ListSymbol,	(Func<ITuplable,IVariable>) ((x) => new ListT(x.ToArray())),
 			"clone",	(Func<IVariable,IVariable>) ((x) => (IVariable)x.Clone()),
 			"lent",		(Func<ITuplable,IVariable>) ((x) => new Number(x.ToArray().Length)),
 			"set",		(Func<ITuplable,IVariable>) ((x) => new SetT(x.ToArray())),
@@ -95,7 +94,6 @@ namespace Mondo.MyTypes.MyClasses {
 			";",		(Func<IVariable,IVariable,IVariable>) ((x,y) => y),
 			//"=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { x.Value=y; return y;}),
 			//":=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { 
-			//			Console.WriteLine(":=\ny="+y+" type="+y.GetType()+"clone="+y.Clone()+" type="+y.Clone().GetType());
 			//			x.Value=(IVariable)y.Clone();
 			//			return y;
 			//		}),

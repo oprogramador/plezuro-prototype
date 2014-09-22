@@ -47,9 +47,6 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public object Call(IPrintable p, object[] argss) {
-			Console.WriteLine("dotfunc call");
-			Console.WriteLine("args.len="+argss.Length);
-			foreach(var i in General.Shift(argss, FirstArg)) Console.WriteLine("i: "+i);
 			return Proc.Call( p, General.Shift(argss, FirstArg) ); 
 		}
 
@@ -76,7 +73,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		private static object[] lambdas = {
 			ObjectT.FunctionSymbol,	(Func<IPrintable,DotFunc,ITuplable,object>) 
-				((p,f,a) => { Co.WL("dotlambda a="+a+" f="+f); return f.Call(p, a.ToArray());}),
+				((p,f,a) => f.Call(p, a.ToArray())),
 		};
 		
 		static DotFunc() {

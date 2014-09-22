@@ -37,7 +37,6 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public ListT(IEnumerable ie) :  base(ie) {
 			ID = ObjectContainer.Instance.Add(this);
-			if(ie is object[]) Console.WriteLine("ie.len="+((object[])ie).Length);
 		}
 
 		public override object Clone() {
@@ -82,9 +81,9 @@ namespace Mondo.MyTypes.MyClasses {
 					((p,x,f) => new ListT(x.GroupBy(
 						a => {
 							var bb=Evaluator.Eval(f,p,TupleT.MakeTuplable(a)); 
-							Console.WriteLine("bb="+bb+" type="+bb.GetType()); return bb;
+							return bb;
 						}
-					).Select(a => {var cc=new ListT(a.ToList()); Console.WriteLine("cc="+cc); return cc;} ).ToList()) ),
+					).Select(a => new ListT(a.ToList()) ).ToList()) ),
 			"reverse",	(Func<ListT,ListT>) ((a) => {var b=new ListT(a); b.Reverse(); return b;}),
 			"max",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Max()).Value),
 			"min",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Min()).Value),
@@ -125,7 +124,6 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		private IVariable numIndex(int i) {
-			lib.Co.Log("i="+i+" this[i]="+this[i]+" type="+this[i].GetType(), 2);
 			return (IVariable)(i>=0 ? this[i] : this[Count+i]);
 		}
 

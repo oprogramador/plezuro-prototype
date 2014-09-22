@@ -46,7 +46,6 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public CallFunc Push(object ob) {
-			Console.WriteLine("tomytype ob ="+TypeTrans.toMyType(ob)+" type="+TypeTrans.toMyType(ob));
 			Args = TupleT.Add( Args, TypeTrans.toMyType(ob) );
 			return this;
 		}

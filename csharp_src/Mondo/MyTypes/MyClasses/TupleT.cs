@@ -40,7 +40,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ITuplable MakeTuplable(object[] ar) {
 			if(ar.Length==0) return new EmptyT();
-			else if(ar.Length==1) {lib.Co.Log("mtar[0]="+ar[0]+" type="+ar[0].GetType()); return TypeTrans.toMyType(ar[0]); }
+			else if(ar.Length==1) return TypeTrans.toMyType(ar[0]);
 			else return new TupleT(ar);
 		}
 
@@ -59,8 +59,6 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ITuplable Concat(ITuplable a, ITuplable b) {
 			TupleT ret = new TupleT();
-			Console.WriteLine("a="+General.EnumToString(a.ToArray()));
-			Console.WriteLine("b="+General.EnumToString(b.ToArray()));
 			foreach(var i in a.ToArray()) ret.Add(TypeTrans.toRef(i));
 			foreach(var i in b.ToArray()) ret.Add(TypeTrans.toRef(i));
 			return ret;

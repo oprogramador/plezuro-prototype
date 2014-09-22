@@ -43,13 +43,11 @@ namespace Mondo.MyCollections {
 		}
 
 		public static object tryCall(object ob, IPrintable p, Type t) {
-			Console.WriteLine("trycall ob="+ob+" type="+ob.GetType()+" t="+t);
 			if(ob is DotFunc) if(t != typeof(ICallable)) return ((DotFunc)ob).Call(p, new object[]{});
 			return ob;	
 		}
 
 		public static object tryCall(object ob, IPrintable p) {
-			Console.WriteLine("trycall ob="+ob+" type="+ob.GetType());
 			//if(ob is DotFunc) return ((DotFunc)ob).Call(p, new object[]{});
 			return ob;	
 		}

@@ -87,7 +87,6 @@ namespace Mondo.Engine {
 
 		private void init(string str, IPrintable p, ITuplable args) {
 			try {
-				Console.WriteLine("parser init p="+p);
 				IsCorrectSyntax = true;
 				var tokens = new Tokenizer(str).Output;
 				var convTokens = new TokenConverter(new List<Token>(tokens)).Output;
@@ -98,7 +97,6 @@ namespace Mondo.Engine {
 				Result = new ErrorText(e);
 			}
 			if(ir!=null) ir.Refresh();
-			Console.WriteLine("parser init iscorrect="+IsCorrectSyntax+" res="+Result);
 		}
 
 		private void init(string str, ITextable input, ITextable output, ITuplable args) {
@@ -114,7 +112,6 @@ namespace Mondo.Engine {
 				Result = new ErrorText(e);
 			}
 			if(ir!=null) ir.Refresh();
-			Console.WriteLine("parser init iscorrect="+IsCorrectSyntax+" res="+Result);
 		}
 
 		public static void Stop() {

@@ -35,9 +35,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public DictionaryT(Dictionary<object,object> d) : base() {
-			Console.WriteLine("dictionaryT ctor");
 			foreach(var i in d) {
-				Console.WriteLine("dic ctor key="+i);
 				Add(new StringT((string)i.Key), new StringT((string)i.Value));
 			}
 		}
@@ -45,7 +43,6 @@ namespace Mondo.MyTypes.MyClasses {
 		public DictionaryT(TupleT l) : base() {
 			ID = ObjectContainer.Instance.Add(this);
 			foreach(var i in l) {
-				//Console.WriteLine("i="+i+" type="+i.GetType());
 				if(!(((ReferenceT)i).Value is PairT)) {
 					addFromIE(l);
 					break;
@@ -60,18 +57,15 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public DictionaryT(IEnumerable ie) :  base() {
-			Console.WriteLine("dictionaryT iector");
 			ID = ObjectContainer.Instance.Add(this);
 			addFromIE(ie);
 		}
 
 		private void addFromIE(IEnumerable ie) {
 			object key = null;
-			Console.WriteLine("dictionaryT init");
 			foreach(var i in ie) {
 				if(key==null) key = i;
 				else {
-					Console.WriteLine("key="+key+" value="+i);
 					Add((IVariable)key,(IVariable)i);
 					key = null;
 				}

@@ -64,20 +64,16 @@ namespace Mondo.Engine {
 				if(t.Type != TokenTypes.EndLine) lastType = t.Type;
 				ret.Add(ob);
 			}
-			foreach(var t in ret) Console.WriteLine("[]c="+t);
 			tokens = ret;
 		}
 				
 
 		private void matchFunction(TokenTypes t) {
-			Console.WriteLine("last="+lastType+" isvalue="+lastType.IsValue());
-			Console.WriteLine("t="+t+" isvalue="+t.IsValue());
 			if((t.IsValue() || t==TokenTypes.BracketOpen || t==TokenTypes.CurlyOpen) && (lastType.IsValue() || lastType==TokenTypes.BracketClose))
 				Output.Add( ObjectT.FunctionSymbol );
 		}
 
 		private object matchEndLine() {
-			Console.WriteLine("lastType="+lastType);
 			if(lastType==TokenTypes.Operator || lastType==TokenTypes.BracketOpen || lastType==TokenTypes.SquareOpen) return null;
 			return SymbolMap.MainDelimiter;
 		}
@@ -92,7 +88,6 @@ namespace Mondo.Engine {
 				if(t.Type != TokenTypes.EndLine) lastType = t.Type;
 			}
 			tokens = ret;
-			foreach(var t in ret) Console.WriteLine("emc="+t);
 		}
 
 		private void match() {
@@ -109,12 +104,10 @@ namespace Mondo.Engine {
 					//case TokenTypes.SquareClose:	 	ob = ")";					break;
 					case TokenTypes.EndLine:	 	ob = matchEndLine();		 		break;
 				}
-				Console.WriteLine("ob="+ob);
 				matchFunction(t.Type);
 				if(t.Type != TokenTypes.EndLine) lastType = t.Type;
 				if(ob!=null) Output.Add( ob );
 			}
-			foreach(var t in Output) Console.WriteLine("tc="+t);
 		}
 
 		private bool isNeeded(TokenTypes t)

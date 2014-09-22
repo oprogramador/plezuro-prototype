@@ -68,7 +68,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 
 		private static object[] lambdas = {
-			ObjectT.FunctionSymbol,	(Func<IPrintable,SoftLink,ITuplable,object>) ((p,f,a) => {Co.WL("softlambda"); var ar=a.ToArray(); return f.ToProc(ar).Call(p, ar);}),
+			ObjectT.FunctionSymbol,	(Func<IPrintable,SoftLink,ITuplable,object>) ((p,f,a) => {var ar=a.ToArray(); return f.ToProc(ar).Call(p, ar);}),
 		};
 		
 		static SoftLink() {

@@ -30,7 +30,6 @@ using Mondo.lib;
 namespace Mondo.MyCollections {
 	class SortedSet<T> : SortedDictionary<T,int> {
 		public void Add(T x) {
-			Console.WriteLine("sortedset x="+x);
 			base.Add(x,0);
 		}
 

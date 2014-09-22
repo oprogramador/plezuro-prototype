@@ -138,10 +138,8 @@ namespace Mondo.MyTypes.MyClasses {
 		public string Hash(IPrintable p) {
 			string ret = "";
 			for(int i=0; i<Value.Length; i++) {
-				Console.WriteLine("hash i="+i+" Value[i]="+Value[i]);
 				if(Value[i]=='#') if(i+1<Value.Length) if(Value[i+1]=='{') {
 					ret += toHash(ref i, p);
-					Console.WriteLine("ha");
 					continue;
 				}
 				ret += Value[i];

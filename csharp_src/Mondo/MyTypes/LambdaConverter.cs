@@ -50,11 +50,7 @@ namespace Mondo.MyTypes {
 			//return (Func<ReferenceT>)  (() => new ReferenceT( toMyType( ((Func<ReferenceT>)f)()  ) ));
 			var lambda = (Func<IPrintable,object[],ReferenceT>) ((p,argss) => {
 				var args = new List<object>(argss);
-				Co.Log("fun="+fun,2);
-				Co.Log("vararg="+vararg+" stat="+stat,2);
-				Co.Log("args="+General.EnumToString(argss),2);
 				if(!vararg) for(int i=0; i<args.Count; i++) { 
-					Co.Log("i="+i+" argt="+argt[i+(stat?1:0)],2);
 					//if(argt[i+(stat?1:0)] != typeof(ITuplable)) {
 					//
 						args[i] = TypeTrans.dereference(args[i], argt[i+(stat?1:0)]);
@@ -65,32 +61,16 @@ namespace Mondo.MyTypes {
 				else for(int i=0; i<args.Count; i++) {
 					args[i] = TypeTrans.toRef( TypeTrans.toMyType( args[i]) );
 				}
-				Co.Log("#fun="+fun,2);
-				Co.Log("#vararg="+vararg+" stat="+stat,2);
-				Co.Log("#args="+General.EnumToString(args));
 				if(stat) args.Insert(0,p);
-				Co.Log("##args="+General.EnumToString(args),2);
 				object  res = null;
-				int xxx=20;
-				xxx++;
-				Co.Log("xxx="+xxx,2);
 				try {	
 					var tup = TupleT.MakeTuplable(args.ToArray());
-					Co.Log("tup="+tup,2);
-					foreach(var i in args.ToArray()) Co.Log("args: i="+i+" type="+i.GetType(),2);
-					Co.Log("args.ToArray="+args.ToArray(),2);
-					String strres = ""+res;
 					res	= tupvar ? ((Func<ITuplable,IVariable>)fun).Invoke(tup) : 
 							fun.DynamicInvoke(args.ToArray());
-					Co.Log("xxx="+xxx+" res="+strres+" preres="+res+" type="+res.GetType(),2);
-				} catch(Exception e) {
-					Co.Log("e:"+e,2); 
+				} catch {
 					throw new ArgumentException();
 				}
-				xxx++;
-				Co.Log("rrr",2);
 				if(res is double) TypeTrans.checkInfNaN(res);
-				Co.Log("xxx="+xxx+" res="+res+" type="+res.GetType(),2);
 				return TypeTrans.toRef( toMyType(res) );
 			});
 			return new BuiltinFunc(lambda, argnr, stat, vararg);

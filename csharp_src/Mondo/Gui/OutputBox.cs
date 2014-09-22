@@ -40,7 +40,6 @@ namespace Mondo.Gui {
 		
 		public void ShowError(bool b) {
 			BackColor = b ? errorCol : normalCol;
-			Console.WriteLine("output text="+Text);
 			Refresh();
 		}
 

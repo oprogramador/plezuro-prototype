@@ -34,9 +34,7 @@ namespace Mondo.MyCollections {
 		}
 
 		public SList(IEnumerable ie) {
-			lib.Co.Log("init=", 2);
 			foreach(var item in ie)  {
-				lib.Co.Log("item="+item, 2);
 				Add((T)(item is ICompCloneable ? ((ICompCloneable)item).Clone() : Variable.Convert(item)));
 			}
 		}

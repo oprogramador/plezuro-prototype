@@ -64,8 +64,8 @@ namespace Mondo.Tests {
 			//just4fun();
 			//testGenerics();
 			//testHtml();
-			threads();
-			testGener();
+			//threads();
+			//testGener();
 		}
 
 		private void threads() {

@@ -61,7 +61,6 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public SetT UnionWith(SetT x) {
 			var s = new SetT(this);
-			Console.WriteLine("set="+s);
 			foreach(IVariable i in x)
 			try {
 				s.Add(i);

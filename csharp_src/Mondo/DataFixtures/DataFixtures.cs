@@ -42,10 +42,6 @@ namespace Mondo.DataFixtures {
 				var ar = line.Split('\t');
 				var record = new Dictionary<object,object>();
 				for(int i=0; i+1<ar.Length; i+=2) record[ar[i]] = ar[i+1];
-				Console.WriteLine("record="+record);
-				Console.WriteLine("record.count="+record.Count);
-				Console.WriteLine("ar.length="+ar.Length);
-				foreach(var i in record) Console.WriteLine("key: "+i.Key+" value: "+i.Value);
 				Add(new DictionaryT(record));
 			}
 		}

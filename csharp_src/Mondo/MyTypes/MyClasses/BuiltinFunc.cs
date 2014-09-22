@@ -42,36 +42,6 @@ namespace Mondo.MyTypes.MyClasses {
 		public bool IsVarArg { get; private set; }
 
 		public object Call(IPrintable p, object[] argss) {
-			/*
-			var args = new List<object>(argss);
-			var argt = Proc.GetType().GetGenericArguments();
-			var argnr = argt.Length-1;
-			if(argt[0] == typeof(IPrintable)) argnr--;
-			bool stat = argt[0]==typeof(IPrintable);
-			bool vararg = argt[0]==typeof(ITuplable) && argnr-(stat?1:0)<2;
-			if(vararg) argnr = args.Count;
-			if(!vararg) for(int i=0; i<argnr; i++) {
-				args[i] = TypeTrans.dereference(args[i], argt[i+(stat?1:0)]);
-				args[i] = TypeTrans.tryCall(args[i], p, argt[i+(stat?1:0)]);
-				args[i] = TypeTrans.adaptType(args[i], argt[i+(stat?1:0)]);
-			}
-			else for(int i=0; i<argnr; i++) {
-				args[i] = new ReferenceT( TypeTrans.toMyType( TypeTrans.dereference(args[i],typeof(IVariable))));
-			}
-			//if(argnr>0) if(args[0] is FuncDictionary) args[0] = new BuiltinFunc((Delegate)TypeTrans.fromDic(args[0],((ITuplable)args[1]).ToArray()[0]));
-			if(stat) args.Insert(0,p);
-			object  res = null;
-		       	try {	
-				var tup = new TupleT(args);
-				res	= vararg ? ((Func<ITuplable,IVariable>)Proc).Invoke(tup) : 
-						Proc.DynamicInvoke(args.ToArray());
-			} catch { 
-				throw new ArgumentException();
-			}
-			if(res is double) TypeTrans.checkInfNaN(res);
-			return res;
-			*/
-			Console.WriteLine("call");
 			return Proc(p,argss);
 		}
 

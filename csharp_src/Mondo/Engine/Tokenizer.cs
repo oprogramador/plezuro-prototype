@@ -85,7 +85,6 @@ namespace Mondo.Engine {
 				ret+=StrB[i];
 				if(SymbolMap.FullOperSet.Contains(ret)) prev = ret;
 			}
-			Console.WriteLine("matchoper prev="+prev);
 			i -= ret.Length-prev.Length;
 			return prev;
 		}
@@ -219,7 +218,6 @@ namespace Mondo.Engine {
 				}
 				//dotCpl((TokenTypes)(-1));
 			} catch{ throw; }
-			foreach(var t in Output) Console.WriteLine("t="+t);
 		}
 	}
 }

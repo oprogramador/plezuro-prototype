@@ -61,7 +61,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		private static object[] lambdas = {
 			"chr",		(Func<double,string>) ((x) => ""+(char)x),
-			"sin",		(Func<double,double>) ((x) => {Console.WriteLine("num sin"); return Math.Sin(x);}),
+			"sin",		(Func<double,double>) ((x) => Math.Sin(x)),
 			"cos",		(Func<double,double>) ((x) => Math.Cos(x)),
 			"tan",		(Func<double,double>) ((x) => Math.Tan(x)),
 			"asin",		(Func<double,double>) ((x) => Math.Asin(x)),

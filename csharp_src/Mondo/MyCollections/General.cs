@@ -42,7 +42,6 @@ namespace Mondo.MyCollections {
 				if(!an && bn) return -1;
 				if(an && !bn) return 1;
 				if(!an && !bn) return 0;
-				Console.WriteLine("gener cmp ae="+ae.Current+" be="+be.Current);
 				try {
 					int cmp = CompareDE(ae.Current, be.Current);
 					if(cmp!=0) return cmp;

@@ -46,7 +46,6 @@ namespace Mondo.Engine {
 
 		public Evaluator(ProcedureT list, IPrintable p, ITuplable args)  {
 			try {
-				Console.WriteLine("evaluator ctor list="+list+" p="+p+" args="+args);
 				Parent = p;
 				Args = args;
 				Stream = p!=null ? p.Stream : null;
@@ -121,17 +120,11 @@ namespace Mondo.Engine {
 		}
 
 		void funcMatch(int argnr) {
-			Console.WriteLine("fm");
 			string oper = ((SoftLink)output.Pop()).Value;
-			Console.WriteLine("oper="+oper);
 			object[] args = new object[argnr];
-			Console.WriteLine("argnr="+argnr);
-			Console.WriteLine("output="+output);
 			for(int i=argnr-1; i>=0; i--) args[i] = output.Pop();
-			Console.WriteLine("args="+General.EnumToString(args));
 			var proc = ClassT.GetClass(args).GetMethod(oper).Proc;
 			output.Push( proc.Call(this,args) );
-			Console.WriteLine("called");
 /*	
 			
 			if(token is Delegate) {
@@ -164,7 +157,6 @@ namespace Mondo.Engine {
 /*
 			var aa = output.NthElement(1);
 			object item = map[SymbolMap.ShortOpers[skey]];
-			Console.WriteLine("aa="+aa+" item="+item+" output="+output);
 			output.Push(item);
 			funcMatch();
 			item = map[SymbolMap.AssignOper];
@@ -192,7 +184,6 @@ namespace Mondo.Engine {
 		void internProcess() {
 			try {
 				object key = list.Pop();
-				Console.WriteLine("intern key="+key);
 				string skey = key as string;
 				if(skey!=null) {
 					object item = null;

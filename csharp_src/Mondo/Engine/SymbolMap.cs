@@ -82,8 +82,6 @@ namespace Mondo.Engine {
 			*/
 
 		public static void AddSymbols(List<object> sym) {
-			Console.WriteLine("symbols");
-			foreach(var i in sym) Console.WriteLine("sym: "+i);
 			foreach(var i in sym) Symbols.Add(i);
 		}
 
@@ -205,9 +203,7 @@ namespace Mondo.Engine {
 		};
 
 		public SymbolMap() {
-			Console.WriteLine("SymbolMap ctor");
 			for(int i=0; i<Symbols.Count; i+=2) {
-				Console.WriteLine("sym: "+Symbols[i]);
 				Add((string)Symbols[i], TypeTrans.toRef( TypeTrans.toMyType(Symbols[i+1])) );
 			}
 		}
