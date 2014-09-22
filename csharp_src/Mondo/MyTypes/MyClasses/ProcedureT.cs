@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using Mondo.MyCollections;
 using System.Diagnostics;
+using Mondo.lib;
 
 namespace Mondo.MyTypes.MyClasses {
 	public class ProcedureT : OStack, ICallable  {
@@ -51,8 +52,25 @@ namespace Mondo.MyTypes.MyClasses {
 			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f, p)),
 			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, p, TupleT.MakeTuplable(a.ToArray())) ),
 			"while",	(Func<IPrintable,ProcedureT,ProcedureT,object>) 
-					((p, con, o) => { object ret=new NullType(); 
-						while(p.EvalDyn(con,p).Equals(true)) ret=p.EvalDyn(o,p); return ret; } ),
+					((p, con, o) => { 
+					 	object ret=new NullType(); 
+						while(p.EvalDyn(con,p).Equals(true)) ret=p.EvalDyn(o,p); 
+						return ret; 
+						}),
+			"integral",	(Func<IPrintable,ProcedureT,double,double,double>)
+					((p, f, beg, end) => {
+					 	/*double sum = 0;
+						double n = 10;
+						double del = (end-beg)/n;
+						for(double x=beg; x<end; x+=del) sum += ((Number)p.EvalDyn(f, p, TupleT.MakeTuplable(new Number(x)))).Value;
+						return sum*del;*/
+					 	return new Integral(
+							(Func<double,double>)(x => ((Number)p.EvalDyn(f, p, TupleT.MakeTuplable(new Number(x)))).Value),
+							beg,
+							end,
+							100
+						).Result;
+					}),
 			"time", 	(Func<IPrintable,ProcedureT,double>) 
 						((p,f) => {var w=Stopwatch.StartNew(); p.EvalDyn(f,p); return w.ElapsedMilliseconds;}),
 		};
