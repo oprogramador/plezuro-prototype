@@ -59,7 +59,7 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
 			"get",		(Func<ListT,double,object>) ((a,i) => ((ReferenceT)a[(int)i]).Value ),
 			"len",		(Func<ListT,double>) ((a) => a.Count),
-			SymbolMap.RefSymbol, (Func<ListT,double,object>) ((a,i) => a[(int)i] ),
+			SymbolMap.RefSymbol, (Func<ListT,IVariable,object>) ((a,i) => a.Index(i) ),
 			"each",		(Func<IPrintable,ListT,ProcedureT,object>)
 						((p, ar, f) => { object ret=new NullType();
 						foreach(IVariable i in ar) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(i));

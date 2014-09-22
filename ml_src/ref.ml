@@ -16,4 +16,7 @@ f++;
 e.::printl(); //it prints '2'
 (e===f).::printl(); //it prints 'false'
 
+(1==1).::printl(); //it prints 'true'
+(1===1).::printl(); //it prints 'false'
+
 null
