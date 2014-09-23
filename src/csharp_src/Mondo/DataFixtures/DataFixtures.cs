@@ -48,7 +48,7 @@ namespace Mondo.DataFixtures {
 
 		private DataFixtures() {
 			try {
-				load();
+				//load();
 			} catch(Exception e){
 				Console.WriteLine("error with reading database file e: "+e);
 			}

@@ -1,0 +1,62 @@
+repository:
+        security
+project:
+        - global namespace
+oop:
+        - reflection - package iteration
+        - inner_oop:
+                - better inheritance (collections)
+                - multiple inheritance
+        - evalDyn
+classes:
+        - constructor
+        - inheritance
+        - all_dynamic:
+                - base classes
+                - methods
+                - pools
+        - security
+mathematics:
+bug_fixes:
+        - gui
+        - language
+        - operator precedence
+        - referenceT in order
+function_call:
+        - direct
+        - args to script
+array:
+        - full indexer (like in python), with tuple, with range
+        - range
+variables:
+        - globals
+        - comparison:
+                - by generated value
+        - ASCII:
+                - string -> ASCII tuple
+loops:
+        - while with single procedure
+data:
+        - selectMany
+        - selectIterative
+        - validation
+        - regex
+        - serialization
+        - select with indexer
+types:
+        - dateTime
+operators:
+        - .=
+        - += -= *= /= ^=
+ide:
+        - vim plugin
+        - multithreading (stop)
+        - computing info
+documentation:
+        - full
+        - wiki
+        - examples
+additions:
+        - multithreading
+        - networking
+        - frameworks
