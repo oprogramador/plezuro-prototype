@@ -94,16 +94,6 @@ namespace Mondo.Engine {
 			lastType = (TokenTypes)(-1);		
 			foreach(var t in tokens) {
 				var ob = t.Value;
-				switch(t.Type) {
-					//case TokenTypes.Operator: 		ob = matchOperator(ref i); 			break;
-					//case TokenTypes.Number: 		ob = matchNumber(ref i); 			break;
-					//case TokenTypes.Symbol: 		ob = matchSymbol(ref i); 			break;
-					//case TokenTypes.BracketOpen:	 	ob = "("; i++;	 				break;
-					//case TokenTypes.BracketClose:	 	ob = matchBracketClose(false);			break;
-					//case TokenTypes.SquareOpen:	 	ob = matchSquare();				break;
-					//case TokenTypes.SquareClose:	 	ob = ")";					break;
-					case TokenTypes.EndLine:	 	ob = matchEndLine();		 		break;
-				}
 				matchFunction(t.Type);
 				if(t.Type != TokenTypes.EndLine) lastType = t.Type;
 				if(ob!=null) Output.Add( ob );
@@ -129,7 +119,7 @@ namespace Mondo.Engine {
 				case TokenTypes.OneLineComment: 	return false;
 				case TokenTypes.MultiLineComment: 	return false;
 				case TokenTypes.WhiteSpace:	 	return false;
-				case TokenTypes.EndLine:	 	return true;
+				case TokenTypes.EndLine:	 	return false;
 			}
 			return false;
 		}
