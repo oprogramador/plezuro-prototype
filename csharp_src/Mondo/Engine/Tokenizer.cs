@@ -216,6 +216,8 @@ namespace Mondo.Engine {
 					Output.Add(ob);
 					//if(!(t==TokenTypes.WhiteSpace || t==TokenTypes.OneLineComment || t==TokenTypes.MultiLineComment)) lastType = t;
 				}
+				if(SymbolMap.OpersToBeg.Contains( Output[Output.Count-1].Text ))
+					Output.Add(new Token(SymbolMap.EmptySymbol, TokenTypes.Symbol, SymbolMap.EmptySymbol));
 				//dotCpl((TokenTypes)(-1));
 			} catch{ throw; }
 		}
