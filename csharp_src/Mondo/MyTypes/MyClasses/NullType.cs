@@ -32,6 +32,14 @@ namespace Mondo.MyTypes.MyClasses {
 			ID = ObjectContainer.Instance.Add(this);
 		}
 
+		public override bool Equals(object ob) {
+			return CompareTo(ob)==0;
+		}
+
+		public override int GetHashCode() {
+			return base.GetHashCode();
+		}
+
 		public int CompareTo(object ob) {
 			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;

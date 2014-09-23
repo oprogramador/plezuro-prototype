@@ -79,10 +79,7 @@ namespace Mondo.MyTypes.MyClasses {
 					).ToList()) ),
 			"groupBy",	(Func<IPrintable,ListT,ProcedureT,ListT>)	
 					((p,x,f) => new ListT(x.GroupBy(
-						a => {
-							var bb=Evaluator.Eval(f,p,TupleT.MakeTuplable(a)); 
-							return bb;
-						}
+						a => Evaluator.Eval(f,p,TupleT.MakeTuplable(a))
 					).Select(a => new ListT(a.ToList()) ).ToList()) ),
 			"reverse",	(Func<ListT,ListT>) ((a) => {var b=new ListT(a); b.Reverse(); return b;}),
 			"max",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Max()).Value),

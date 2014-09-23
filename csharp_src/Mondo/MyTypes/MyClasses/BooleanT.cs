@@ -33,7 +33,16 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public int ID { get; private set; }
 
+		public override bool Equals(object ob) {
+			return CompareTo(ob)==0;
+		}
+
+		public override int GetHashCode() {
+			return base.GetHashCode();
+		}
+
 		public int CompareTo(object ob) {
+			if(ob is bool) return Value==(bool)ob ? 0 : (Value ? 1 : -1);
 			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is BooleanT) return Value.CompareTo(((BooleanT)ob).Value);
@@ -75,16 +84,6 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public ClassT GetClass() {
 			return MyClass;
-		}
-
-		public override bool Equals(object ob) {
-			if(ob is bool) return (bool)ob == Value;
-			if(ob is BooleanT) return ((BooleanT)ob).Value == Value;
-			return false;
-		}
-
-		public override int GetHashCode() {
-			return Value ? 1 : 0;
 		}
 	}
 }

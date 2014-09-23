@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using Mondo.MyTypes.MyClasses;
 
 namespace Mondo.Tests {
 	class TestUnit {
