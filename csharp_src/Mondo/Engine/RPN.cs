@@ -58,7 +58,7 @@ namespace Mondo.Engine {
 
 		private void pushOper(object token,int i) {
 			if(SymbolMap.OpersAtBegDefaultValues.ContainsKey(token)) {
-				object val = SymbolMap.OpersAtBegDefaultValues[token];
+				object val = TypeTrans.toMyType( SymbolMap.OpersAtBegDefaultValues[token] );
 				if(i==0) Output.Push(val);
 				else if(SymbolMap.OpersToBeg.Contains(tokens[i-1])) Output.Push(val);
 				else if(tokens[i-1] is string) if(((string)tokens[i-1])=="(") Output.Push(val);

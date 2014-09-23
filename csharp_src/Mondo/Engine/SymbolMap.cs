@@ -190,7 +190,7 @@ namespace Mondo.Engine {
 		};
 
 		public static readonly Dictionary<object,object> OpersAtBegDefaultValues = new Dictionary<object,object>() {
-			{"-",	0},
+			{"-",	0.0},
 		};
 
 		public static readonly List<object> OpersToBeg = new List<object>() {
