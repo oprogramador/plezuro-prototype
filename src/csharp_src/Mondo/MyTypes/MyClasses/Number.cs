@@ -28,6 +28,10 @@ using Mondo.Maths;
 
 namespace Mondo.MyTypes.MyClasses {
 	class Number : Pointer<double>, IVariable {
+		public Number() : base(0) {
+			ID = ObjectContainer.Instance.Add(this);
+		}
+
 		public Number(double x) : base(x) {
 			ID = ObjectContainer.Instance.Add(this);
 		}

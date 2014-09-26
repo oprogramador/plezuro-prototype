@@ -27,6 +27,10 @@ using System.Collections.Generic;
 
 namespace Mondo.MyTypes.MyClasses {
 	class BooleanT : Pointer<bool>, IVariable {
+		public BooleanT() : base(false) {
+			ID = ObjectContainer.Instance.Add(this);
+		}
+
 		public BooleanT(bool x) : base(x) {
 			ID = ObjectContainer.Instance.Add(this);
 		}

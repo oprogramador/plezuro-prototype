@@ -101,7 +101,8 @@ namespace Mondo.MyTypes.MyClasses {
 		protected static object[] lambdas = {
 			"parents",	(Func<ClassT,ListT>) ((c) => new ListT(c.Parents)),
 			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
-			"new",		(Func<ClassT,MyObject>) ((c) => new MyObject(c)),
+			"new",		(Func<ClassT,object>) 
+					((c) => c is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)c).Type) : new MyObject(c)),
 		};
 
 		public virtual ClassT GetClass() {

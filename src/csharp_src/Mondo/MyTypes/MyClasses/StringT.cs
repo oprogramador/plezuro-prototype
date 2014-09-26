@@ -46,6 +46,10 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static Dictionary<char,string> revEscape { get; private set; }
 
+		public StringT() : base("") {
+			ID = ObjectContainer.Instance.Add(this);
+		}
+
 		public StringT(string s) : base(s) {
 			ID = ObjectContainer.Instance.Add(this);
 		}
