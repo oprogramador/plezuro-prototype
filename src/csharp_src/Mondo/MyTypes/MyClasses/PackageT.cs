@@ -67,13 +67,15 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ClassT MyClass;
 
-		protected static object[] lambdas = {
+		public const string ClassName = "Package";
+
+		private static object[] lambdas = {
 			"package",	(Func<PackageT,IVariable>) ((c) => (c.Package!=null ? (IVariable)c.Package : (IVariable)new NullType())),
 		};
 
 		public virtual ClassT GetClass() {
 			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Package", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(PackageT) );
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(PackageT) );
 			return MyClass;
 		}	
 

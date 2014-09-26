@@ -69,6 +69,8 @@ namespace Mondo.MyTypes.MyClasses {
 			"false",	false,
 		};
 
+		public const string ClassName = "Boolean";
+
 		private static object[] lambdas = {
 			"if",	(Func<IPrintable,bool,ProcedureT,ProcedureT,object>) ((p, con, t, f) => p.EvalDyn(con ? t : f, p)),
 			"?",	(Func<bool,PairT,IVariable>) ((c,p) => c ? p.Key : p.Value),
@@ -79,7 +81,7 @@ namespace Mondo.MyTypes.MyClasses {
 		
 		static BooleanT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Boolean", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(BooleanT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(BooleanT) ); 
 		}
 
 		public ClassT GetClass() {

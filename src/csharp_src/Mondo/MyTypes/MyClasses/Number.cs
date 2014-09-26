@@ -67,6 +67,8 @@ namespace Mondo.MyTypes.MyClasses {
 			"e",		Math.E,
 		};
 
+		public const string ClassName = "Number";
+
 		private static object[] lambdas = {
 			"chr",		(Func<double,string>) ((x) => ""+(char)x),
 			"sin",		(Func<double,double>) ((x) => Math.Sin(x)),
@@ -102,7 +104,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		static Number() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Number", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(Number) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(Number) ); 
 		}
 
 		public ClassT GetClass() {

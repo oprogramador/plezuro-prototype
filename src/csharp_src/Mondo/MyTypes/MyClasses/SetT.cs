@@ -110,6 +110,8 @@ namespace Mondo.MyTypes.MyClasses {
 			"db",	DataFixtures.DataFixtures.GetInstance()
 		};
 
+		public const string ClassName = "Set";
+
 		private static object[] lambdas = {
 			"len",		(Func<SetT,double>) ((a) => a.Count),
 			"max",		(Func<SetT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Max()).Value),
@@ -125,7 +127,7 @@ namespace Mondo.MyTypes.MyClasses {
 		
 		static SetT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Set", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(SetT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(SetT) ); 
 		}
 
 		public ClassT GetClass() {

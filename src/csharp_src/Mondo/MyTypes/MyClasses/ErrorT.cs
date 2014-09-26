@@ -72,13 +72,15 @@ namespace Mondo.MyTypes.MyClasses {
 		private static readonly Dictionary<string,Method> myMethods;
 
 
+		public const string ClassName = "Error";
+
 		private static object[] lambdas = {
 			"msg",		(Func<ErrorT,string>) ((x) => ""+x.Exception),
 		};
 		
 		static ErrorT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Error", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ErrorT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ErrorT) ); 
 		}
 
 		public ClassT GetClass() {

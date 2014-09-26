@@ -23,10 +23,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Mondo.MyTypes.MyClasses {
 	public class ClassT : IItem, IVariable {
-		public List<ClassT> Parents{ get; private set; }
+		public List<ClassT> Parents { get; private set; }
 		private Dictionary<string,Method> methods;
 		public string Name{ get; private set; }
 		public PackageT Package{ get; private set; }
@@ -95,14 +96,17 @@ namespace Mondo.MyTypes.MyClasses {
 		public static ClassT MyClass;
 		//private static readonly Dictionary<string,Method> myMethods;
 
+		public const string ClassName = "Class";
+
 		protected static object[] lambdas = {
 			"parents",	(Func<ClassT,ListT>) ((c) => new ListT(c.Parents)),
 			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
+			"new",		(Func<ClassT,MyObject>) ((c) => new MyObject(c)),
 		};
 
 		public virtual ClassT GetClass() {
 			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Class", new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
 			return MyClass;
 		}	
 

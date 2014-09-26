@@ -83,13 +83,15 @@ namespace Mondo.MyTypes.MyClasses {
 		private static readonly Dictionary<string,Method> myMethods;
 
 
+		public const string ClassName = "CallFunc";
+
 		private static object[] lambdas = {
 
 		};
 		
 		static CallFunc() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "CallFunc", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(CallFunc) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(CallFunc) ); 
 		}
 
 		public ClassT GetClass() {

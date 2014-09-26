@@ -79,6 +79,8 @@ namespace Mondo.MyTypes.MyClasses {
 		private static readonly Dictionary<string,Method> myMethods;
 
 
+		public const string ClassName = "DotFunc";
+
 		private static object[] lambdas = {
 			ObjectT.FunctionSymbol,	(Func<IPrintable,DotFunc,ITuplable,object>) 
 				((p,f,a) => f.Call(p, a.ToArray())),
@@ -86,7 +88,7 @@ namespace Mondo.MyTypes.MyClasses {
 		
 		static DotFunc() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "DotFunc", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DotFunc) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DotFunc) ); 
 		}
 
 		public ClassT GetClass() {

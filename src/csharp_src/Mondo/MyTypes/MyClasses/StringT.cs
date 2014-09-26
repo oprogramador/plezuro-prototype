@@ -90,6 +90,8 @@ namespace Mondo.MyTypes.MyClasses {
 		public static readonly ClassT MyClass;
 		private static readonly Dictionary<string,Method> myMethods;
 
+		public const string ClassName = "String";
+
 		private static object[] lambdas = {
 			"len",		(Func<string,double>) ((a) => a.Length),
 			"get",		(Func<string,double,IVariable>) ((a,i) => new StringT(""+a[(int)i])),
@@ -117,7 +119,7 @@ namespace Mondo.MyTypes.MyClasses {
 		
 		static StringT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "String", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(StringT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(StringT) ); 
 			revEscape = escapeChars.ToDictionary(x => x.Value, x => x.Key);
 		}
 

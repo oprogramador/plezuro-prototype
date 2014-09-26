@@ -61,13 +61,15 @@ namespace Mondo.MyTypes.MyClasses {
 			"null",		new NullType(),
 		};
 
+		public const string ClassName = "NullType";
+
 		private static object[] lambdas = {
 
 		};
 		
 		static NullType() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "NullType", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(NullType) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(NullType) ); 
 		}
 
 		public ClassT GetClass() {

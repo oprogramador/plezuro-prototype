@@ -89,6 +89,8 @@ namespace Mondo.MyTypes.MyClasses {
 					});
 		}
 
+		public const string ClassName = "Object";
+
 		private static object[] lambdas = {
 			"class", 	(Func<IVariable,ClassT>) ((x) => x.GetClass()),
 			"print",	(Func<IPrintable,object,object>) ((p,o) => { p.Print( ((IStringable)o).ToString() ); return o; } ),
@@ -138,7 +140,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ClassT StaticGetClass() {
 			if(MyClass==null) MyClass = 
-				new BuiltinClass( "Object", new List<ClassT>(){}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ObjectT) );
+				new BuiltinClass( ClassName, new List<ClassT>(){}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ObjectT) );
 			return MyClass;
 		}
 

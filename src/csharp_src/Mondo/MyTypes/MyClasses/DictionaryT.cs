@@ -29,6 +29,9 @@ using Mondo.Engine;
 
 namespace Mondo.MyTypes.MyClasses {
 	class DictionaryT : SortedDictionary<IVariable,IVariable>, IVariable {
+		public DictionaryT() : base() {
+		}
+
 		public DictionaryT(DictionaryT d) :  base() {
 			ID = ObjectContainer.Instance.Add(this);
 			foreach(var i in d) Add(i.Key,i.Value);
@@ -100,6 +103,8 @@ namespace Mondo.MyTypes.MyClasses {
 		private static readonly Dictionary<string,Method> myMethods;
 
 
+		public const string ClassName = "Dictionary";
+
 		private static object[] lambdas = {
 			SymbolMap.RefSymbol,	(Func<DictionaryT,IVariable,ReferenceT>) ((a,i) => (ReferenceT)a[new ReferenceT(i)] ),
 			"len",		(Func<DictionaryT,double>) ((a) => a.Count),
@@ -111,7 +116,7 @@ namespace Mondo.MyTypes.MyClasses {
 		
 		static DictionaryT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Dictionary", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DictionaryT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DictionaryT) ); 
 		}
 
 		public ClassT GetClass() {

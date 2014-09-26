@@ -34,6 +34,11 @@ namespace Mondo.MyTypes.MyClasses {
 			Pools = p;
 		}
 
+		public MyObject(ClassT c) {
+			Class = c;
+			Pools = new DictionaryT();
+		}
+
 		public override bool Equals(object ob) {
 			return CompareTo(ob)==0;
 		}
@@ -54,7 +59,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public override string ToString() {
-			return "object";
+			return "object of "+Class;
 		}
 
 		IVariable[] ITuplable.ToArray() {

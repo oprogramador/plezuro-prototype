@@ -62,13 +62,15 @@ namespace Mondo.MyTypes.MyClasses {
 			SymbolMap.EmptySymbol,	new EmptyT(),
 		};
 
+		public const string ClassName = "Empty";
+
 		private static object[] lambdas = {
 			SymbolMap.ListSymbol,	(Func<EmptyT,IVariable>) ((x) => new ListT()),
 		};
 		
 		static EmptyT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Empty", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(EmptyT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(EmptyT) ); 
 		}
 
 		public ClassT GetClass() {

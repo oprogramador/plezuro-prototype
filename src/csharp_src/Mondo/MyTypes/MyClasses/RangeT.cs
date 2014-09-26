@@ -70,12 +70,14 @@ namespace Mondo.MyTypes.MyClasses {
 		public static object[] Constants = {
 		};
 
+		public const string ClassName = "Range";
+
 		private static object[] lambdas = {
 		};
 		
 		static RangeT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Range", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(RangeT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(RangeT) ); 
 		}
 
 		public ClassT GetClass() {

@@ -62,13 +62,15 @@ namespace Mondo.MyTypes.MyClasses {
 		private static readonly Dictionary<string,Method> myMethods;
 
 
+		public const string ClassName = "StopPoint";
+
 		private static object[] lambdas = {
 
 		};
 		
 		static StopPoint() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "StopPoint", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(StopPoint) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(StopPoint) ); 
 		}
 
 		public ClassT GetClass() {

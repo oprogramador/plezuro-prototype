@@ -30,15 +30,14 @@ namespace Mondo.MyTypes {
 	class VariableFactory {
 		private static VariableFactory instance;
 		public List<object> Constants { get; private set; }
+		private string @namespace = "Mondo.MyTypes.MyClasses";
 
 		public static VariableFactory GetInstance() {
 			if(instance==null) instance = new VariableFactory();
 			return instance;
 		}
 
-		private VariableFactory() {
-			Constants = new List<object>();
-			string @namespace = "Mondo.MyTypes.MyClasses";
+		private void addConstants() {
 			var q = from t in Assembly.GetExecutingAssembly().GetTypes()
 				where t.IsClass && t.Namespace == @namespace
 				select t;
@@ -48,6 +47,25 @@ namespace Mondo.MyTypes {
 						Constants.Add(i);
 					}
 			});
+		}
+
+		private void addClassNames() {
+			var q = from t in Assembly.GetExecutingAssembly().GetTypes()
+				where t.IsClass && t.Namespace == @namespace
+				select t;
+			q.ToList().ForEach(t => {
+					var name = t.GetField("ClassName");
+					var cla = t.GetField("MyClass");
+					if(name==null || cla==null) return;
+					Constants.Add( name.GetValue(null) );
+					Constants.Add( t.GetField("MyClass").GetValue(null) );
+			});
+		}
+
+		private VariableFactory() {
+			Constants = new List<object>();
+			addConstants();
+			addClassNames();
 		}
 	}
 }

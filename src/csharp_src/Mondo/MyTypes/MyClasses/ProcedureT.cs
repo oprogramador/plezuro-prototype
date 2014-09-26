@@ -47,6 +47,8 @@ namespace Mondo.MyTypes.MyClasses {
 		public static readonly Dictionary<string,Method> myMethods;
 
 
+		public const string ClassName = "Procedure";
+
 		private static object[] lambdas = {
 			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f, p)),
 			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, p, TupleT.MakeTuplable(a.ToArray())) ),
@@ -76,7 +78,7 @@ namespace Mondo.MyTypes.MyClasses {
 		
 		static ProcedureT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Procedure", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ProcedureT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ProcedureT) ); 
 		}
 
 		public override ClassT GetClass() {

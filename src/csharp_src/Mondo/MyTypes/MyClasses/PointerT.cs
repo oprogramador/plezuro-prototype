@@ -60,13 +60,15 @@ namespace Mondo.MyTypes.MyClasses {
 		private static readonly Dictionary<string,Method> myMethods;
 
 
+		public const string ClassName = "Pointer";
+
 		private static object[] lambdas = {
 			"**",	(Func<PointerT,ReferenceT>) ((x) => x.Value),
 		};
 		
 		static PointerT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "Pointer", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(PointerT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(PointerT) ); 
 		}
 
 		public ClassT GetClass() {

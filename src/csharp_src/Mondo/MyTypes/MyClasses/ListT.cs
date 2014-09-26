@@ -55,6 +55,8 @@ namespace Mondo.MyTypes.MyClasses {
 		private static readonly Dictionary<string,Method> myMethods;
 
 
+		public const string ClassName = "List";
+
 		private static object[] lambdas = {
 			"get",		(Func<ListT,double,object>) ((a,i) => ((ReferenceT)a[(int)i]).Value ),
 			"len",		(Func<ListT,double>) ((a) => a.Count),
@@ -100,7 +102,7 @@ namespace Mondo.MyTypes.MyClasses {
 		
 		static ListT() {
 			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( "List", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ListT) ); 
+ 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(ListT) ); 
 		}
 
 		public ClassT GetClass() {
