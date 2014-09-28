@@ -91,10 +91,8 @@ namespace Mondo.MyTypes.MyClasses {
 			return Value;
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
-		public const string ClassName = "String";
+		private static ClassT myClass;
+				public const string ClassName = "String";
 
 		private static object[] lambdas = {
 			"len",		(Func<string,double>) ((a) => a.Length),
@@ -122,14 +120,18 @@ namespace Mondo.MyTypes.MyClasses {
 		};
 		
 		static StringT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(StringT) ); 
 			revEscape = escapeChars.ToDictionary(x => x.Value, x => x.Key);
 		}
 
 		public ClassT GetClass() {
-			return MyClass;
+			return StaticGetClass();
 		}
+
+		public static ClassT StaticGetClass() {
+			if(myClass==null) myClass = 
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(StringT) );
+			return myClass;
+		}	
 
 		class MiniParser : IParseable {
 			public object Parse(string str, ITextable t) {

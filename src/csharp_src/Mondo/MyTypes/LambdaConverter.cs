@@ -31,7 +31,9 @@ namespace Mondo.MyTypes {
 	static class LambdaConverter {
 		public static Dictionary<string,Method> Convert(object[] lambdas) {
 			var ret = new Dictionary<string,Method>();
-			for(int i=0; i<lambdas.Length; i+=2) ret.Add( (string)lambdas[i], toPublicMethod( toMyLambda((Delegate)lambdas[i+1]) ) );
+			for(int i=0; i<lambdas.Length; i+=2) {
+				ret.Add( (string)lambdas[i], toPublicMethod( toMyLambda((Delegate)lambdas[i+1]) ) );
+			}
 			return ret;
 		}
 

@@ -30,11 +30,11 @@ namespace Mondo.MyCollections {
 	public class SList<T> : CList<T>, ICompCloneable where T : ICompCloneable {
 		
 		public SList() : base() {
-
 		}
 
 		public SList(IEnumerable ie) {
 			foreach(var item in ie)  {
+				if(item==null) break;
 				Add((T)(item is ICompCloneable ? ((ICompCloneable)item).Clone() : Variable.Convert(item)));
 			}
 		}

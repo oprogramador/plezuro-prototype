@@ -99,10 +99,8 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
-
+		private static ClassT myClass;
+		
 		public const string ClassName = "Dictionary";
 
 		private static object[] lambdas = {
@@ -114,14 +112,15 @@ namespace Mondo.MyTypes.MyClasses {
 			"<<",		(Func<DictionaryT,PairT,DictionaryT>) ((a,v) => {a.Add((PairT)v.Clone()); return a;} ),
 		};
 		
-		static DictionaryT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(DictionaryT) ); 
+		public ClassT GetClass() {
+			return StaticGetClass();
 		}
 
-		public ClassT GetClass() {
-			return MyClass;
-		}
+		public static ClassT StaticGetClass() {
+			if(myClass==null) myClass = 
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(DictionaryT) );
+			return myClass;
+		}	
 
 		public object ObValue {
 			get { return this; }

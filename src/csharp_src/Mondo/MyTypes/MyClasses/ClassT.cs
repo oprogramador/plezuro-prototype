@@ -24,6 +24,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
 	public class ClassT : IItem, IVariable {
@@ -41,7 +42,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public static ClassT GetClass(object [] args) {
-			return args.Length>0 ? ((IVariable)args[0]).GetClass() : EmptyT.MyClass;
+			return args.Length>0 ? ((IVariable)TypeTrans.dereference(args[0])).GetClass() : EmptyT.StaticGetClass();
 		}
 
 		public override string ToString() {
@@ -49,6 +50,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public Method GetMethod(string name) {
+			Console.WriteLine("className="+Name+" methodName="+name);
 			try {
 				return methods[name];
 			} catch {
@@ -60,6 +62,7 @@ namespace Mondo.MyTypes.MyClasses {
 					}
 				}
 			}
+			Console.WriteLine("className="+Name+" methodName="+name+" noMethodException");
 			throw new NoMethodException();
 		}
 
@@ -93,9 +96,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
-		//private static readonly Dictionary<string,Method> myMethods;
-
+		public static ClassT myClass;
 		public const string ClassName = "Class";
 
 		protected static object[] lambdas = {
@@ -105,10 +106,14 @@ namespace Mondo.MyTypes.MyClasses {
 					((c) => c is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)c).Type) : new MyObject(c)),
 		};
 
-		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
-			return MyClass;
+		public ClassT GetClass() {
+			return StaticGetClass();
+		}
+
+		public static ClassT StaticGetClass() {
+			if(myClass==null) myClass = 
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
+			return myClass;
 		}	
 
 		public object ObValue {

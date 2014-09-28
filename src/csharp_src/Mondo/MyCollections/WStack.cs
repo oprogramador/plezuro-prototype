@@ -27,15 +27,22 @@ using Mondo.MyTypes.MyClasses;
 
 namespace Mondo.MyCollections {
 	public class WStack<T> : Stack<T>, IVariable {
-		public static readonly ClassT MyClass = new BuiltinClass( "WStack", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(WStack<T>) ); 
+		public const string ClassName = "WStack";
+		private static ClassT myClass;
 
-		private static readonly Dictionary<string,Method> myMethods = new Dictionary<string,Method>() {
+		private static object[] lambdas = {
 
 		};
-
+	
 		public virtual ClassT GetClass() {
-			return MyClass;
+			return StaticGetClass();
 		}
+
+		public static ClassT StaticGetClass() {
+			if(myClass==null) myClass = 
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(TupleT) );
+			return myClass;
+		}	
 
 		public object ObValue {
 			get { return this; }

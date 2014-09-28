@@ -65,10 +65,8 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
-
-		public static object[] Constants = {
+		private static ClassT myClass;
+				public static object[] Constants = {
 			"true",		true,
 			"false",	false,
 		};
@@ -83,13 +81,14 @@ namespace Mondo.MyTypes.MyClasses {
 			"!",	(Func<bool,bool>) ((x) => !x),
 		};
 		
-		static BooleanT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(BooleanT) ); 
+		public ClassT GetClass() {
+			return StaticGetClass();
 		}
 
-		public ClassT GetClass() {
-			return MyClass;
-		}
+		public static ClassT StaticGetClass() {
+			if(myClass==null) myClass = 
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(BooleanT) );
+			return myClass;
+		}	
 	}
 }

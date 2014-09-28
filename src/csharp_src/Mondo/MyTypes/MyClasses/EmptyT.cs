@@ -19,7 +19,7 @@
  * 
  * 
  */
- 
+
 
 using System;
 using System.Collections.Generic;
@@ -55,8 +55,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{};
 		}
 
-		public static readonly ClassT MyClass;
-		private static readonly Dictionary<string,Method> myMethods;
+		private static ClassT myClass;
 
 		public static object[] Constants = {
 			SymbolMap.EmptySymbol,	new EmptyT(),
@@ -67,15 +66,16 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
 			SymbolMap.ListSymbol,	(Func<EmptyT,IVariable>) ((x) => new ListT()),
 		};
-		
-		static EmptyT() {
-			myMethods = LambdaConverter.Convert( lambdas );
- 			MyClass = new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(EmptyT) ); 
-		}
 
 		public ClassT GetClass() {
-			return MyClass;
+			return StaticGetClass();
 		}
+
+		public static ClassT StaticGetClass() {
+			if(myClass==null) myClass = 
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(EmptyT) );
+			return myClass;
+		}	
 
 		public object ObValue {
 			get { return this; }

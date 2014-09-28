@@ -243,15 +243,22 @@ namespace Mondo.Engine {
 			return new IVariable[]{this};
 		}
 
-		public static readonly ClassT MyClass = new BuiltinClass( "Evaluator", new List<ClassT>(){ObjectT.MyClass}, myMethods, PackageT.Lang, typeof(Evaluator) ); 
+		private static ClassT myClass;
+		public const string ClassName = "Evaluator";
 
-		private static readonly Dictionary<string,Method> myMethods = new Dictionary<string,Method>() {
+		private static object[] lambdas = {
 
 		};
-
+		
 		public ClassT GetClass() {
-			return MyClass;
+			return StaticGetClass();
 		}
+
+		public static ClassT StaticGetClass() {
+			if(myClass==null) myClass = 
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(NullType) );
+			return myClass;
+		}	
 
 		public object ObValue {
 			get { return this; }

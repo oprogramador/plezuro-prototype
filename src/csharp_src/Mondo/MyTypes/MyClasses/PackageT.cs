@@ -65,7 +65,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
+		public static ClassT myClass;
 
 		public const string ClassName = "Package";
 
@@ -74,9 +74,9 @@ namespace Mondo.MyTypes.MyClasses {
 		};
 
 		public virtual ClassT GetClass() {
-			if(MyClass==null) MyClass = 
-				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.MyClass}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(PackageT) );
-			return MyClass;
+			if(myClass==null) myClass = 
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(PackageT) );
+			return myClass;
 		}	
 
 		public object ObValue {

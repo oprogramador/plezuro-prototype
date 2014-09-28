@@ -61,8 +61,7 @@ namespace Mondo.MyTypes.MyClasses {
 			return new IVariable[]{this};
 		}
 
-		public static ClassT MyClass;
-		//private static readonly Dictionary<string,Method> myMethods;
+		private static ClassT myClass;
 
 		private static object assignLambdaMaker(bool isClone) {
 			var cloneF = (Func<object,IVariable>) ((x) => (IVariable)(isClone ? ((IVariable)x).Clone() : x));
@@ -134,14 +133,10 @@ namespace Mondo.MyTypes.MyClasses {
 			return ret;
 		}
 
-		static ObjectT() {
-			StaticGetClass();
-		}
-
 		public static ClassT StaticGetClass() {
-			if(MyClass==null) MyClass = 
+			if(myClass==null) myClass = 
 				new BuiltinClass( ClassName, new List<ClassT>(){}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ObjectT) );
-			return MyClass;
+			return myClass;
 		}
 
 		public ClassT GetClass() {
