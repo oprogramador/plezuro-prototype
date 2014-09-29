@@ -117,6 +117,7 @@ namespace Mondo.MyTypes.MyClasses {
 						}),
 			"#",	(Func<IPrintable,StringT,object>) ((p,t) => t.Hash(p) ),
 			"=~",	(Func<string,string,bool>) ((r,t) => new Regex(r).IsMatch(t)),
+			"!~",	(Func<string,string,bool>) ((r,t) => !new Regex(r).IsMatch(t)),
 		};
 		
 		static StringT() {

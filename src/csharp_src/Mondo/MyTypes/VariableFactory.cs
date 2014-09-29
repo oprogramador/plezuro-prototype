@@ -55,10 +55,10 @@ namespace Mondo.MyTypes {
 				select t;
 			q.ToList().ForEach(t => {
 					var name = t.GetField("ClassName");
-					var cla = t.GetField("MyClass");
+					var cla = t.GetMethod("StaticGetClass");
 					if(name==null || cla==null) return;
 					Constants.Add( name.GetValue(null) );
-					Constants.Add( t.GetField("MyClass").GetValue(null) );
+					Constants.Add( cla.Invoke(null, null) );
 			});
 		}
 
