@@ -1,5 +1,5 @@
 /*
- * PairT.cs
+ * Method.cs
  * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -25,17 +25,16 @@ using System;
 using System.Collections.Generic;
 
 namespace Mondo.MyTypes.MyClasses {
-	public class PairT : IVariable {
-		public readonly IVariable Key;
-		public IVariable Value { get; set; }
-
-		public PairT(IVariable k,IVariable v) {
-			ID = ObjectContainer.Instance.Add(this);
-			Key = k;
-			Value = v;
-		}
-
+	public class Method : IVariable {
 		public int ID { get; private set; }
+		public ICallable Proc { get; private set; }
+		public AccessModifier Access { get; private set; }
+
+		public Method(ICallable proc, AccessModifier access) {
+			ID = ObjectContainer.Instance.Add(this);
+			Proc = proc;
+			Access = access;
+		}
 
 		public override bool Equals(object ob) {
 			return CompareTo(ob)==0;
@@ -48,17 +47,11 @@ namespace Mondo.MyTypes.MyClasses {
 		public int CompareTo(object ob) {
 			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
-			if(ob is PairT) {
-				pre = Key.CompareTo(((PairT)ob).Key);
-				if(pre!=0) return pre;
-				pre = Value.CompareTo(((PairT)ob).Value);
-				return pre;
-			}
 			return 0;
 		}
 
 		public object Clone() {
-			return new PairT(Key,Value);
+			return new Method(Proc, Access);
 		}
 
 		IVariable[] ITuplable.ToArray() {
@@ -66,21 +59,20 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		private static ClassT myClass;
-		
-		public const string ClassName = "Pair";
+
+		public const string ClassName = "Method";
 
 		private static object[] lambdas = {
-			"key",		(Func<PairT,IVariable>) ((x) => x.Key),
-			"value",	(Func<PairT,IVariable>) ((x) => x.Value),
+
 		};
-		
+
 		public ClassT GetClass() {
 			return StaticGetClass();
 		}
 
 		public static ClassT StaticGetClass() {
 			if(myClass==null) myClass = 
-				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(PairT) );
+				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(Method) );
 			return myClass;
 		}	
 
@@ -90,7 +82,11 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public override string ToString() {
-			return ""+Key+":"+Value;
+			return "method( proc: "+Proc+", access: "+Access+" )";
 		}
+
+
+
+
 	}
 }

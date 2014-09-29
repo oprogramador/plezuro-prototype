@@ -24,7 +24,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
-using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
 	public class ClassT : IItem, IVariable {
@@ -42,7 +41,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public static ClassT GetClass(object [] args) {
-			return args.Length>0 ? ((IVariable)TypeTrans.dereference(args[0])).GetClass() : EmptyT.StaticGetClass();
+			return args.Length>0 ? ((IVariable)args[0]).GetClass() : EmptyT.StaticGetClass();
 		}
 
 		public override string ToString() {
@@ -50,7 +49,6 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public Method GetMethod(string name) {
-			Console.WriteLine("className="+Name+" methodName="+name);
 			try {
 				return methods[name];
 			} catch {
@@ -62,7 +60,6 @@ namespace Mondo.MyTypes.MyClasses {
 					}
 				}
 			}
-			Console.WriteLine("className="+Name+" methodName="+name+" noMethodException");
 			throw new NoMethodException();
 		}
 

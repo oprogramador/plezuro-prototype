@@ -76,7 +76,7 @@ namespace Mondo.MyTypes.MyClasses {
 		};
 		
 		public ClassT GetClass() {
-			return StaticGetClass();
+			return Value.GetClass();
 		}
 
 		public static ClassT StaticGetClass() {
