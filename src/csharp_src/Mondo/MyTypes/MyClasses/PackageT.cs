@@ -67,6 +67,10 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ClassT myClass;
 
+		public static object[] Constants = {
+			"Lang",		Lang,
+		};
+
 		public const string ClassName = "Package";
 
 		private static object[] lambdas = {
