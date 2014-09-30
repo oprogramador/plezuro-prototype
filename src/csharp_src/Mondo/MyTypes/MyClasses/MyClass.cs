@@ -38,11 +38,8 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		private static Dictionary<string,Method> toDic(DictionaryT dic) {
-			Console.WriteLine("toDic");
 			var ret = new Dictionary<string,Method>();
 			foreach(var i in dic) {
-				Console.WriteLine("key="+i.Key+" type="+TypeTrans.dereference(i.Key).GetType()+
-						" value="+i.Value+" type="+TypeTrans.dereference(i.Value).GetType());
 				var method = TypeTrans.dereference(i.Value);
 				var finalMethod = method is Method ? (Method)method : new Method((ProcedureT)method, new AccessModifier(AccessEnum.Public));
 				ret.Add(((StringT)TypeTrans.dereference(i.Key)).Value, finalMethod);

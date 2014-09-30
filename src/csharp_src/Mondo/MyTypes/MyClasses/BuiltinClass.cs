@@ -31,7 +31,6 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public BuiltinClass(string name, List<ClassT> parents, Dictionary<string,Method> methods, PackageT package, Type type) 
 		: base(name,parents,methods,package) {
-			Console.WriteLine("builtinClass ctor name="+name);
 			Type = type;
 		}	
 
