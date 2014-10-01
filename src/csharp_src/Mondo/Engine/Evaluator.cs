@@ -136,7 +136,6 @@ namespace Mondo.Engine {
 
 		void funcMatch(int argnr) {
 			var outp = TypeTrans.dereference(output.Pop());
-			Console.WriteLine("outp="+outp+" type="+outp.GetType());
 			if(outp is SoftLink) methodMatch(outp, argnr);
 			if(outp is ProcedureT) staticFuncMatch(outp, argnr);
 		}

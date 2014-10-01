@@ -49,7 +49,6 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public Method GetMethod(string name) {
-			Console.WriteLine("method name="+name);
 			try {
 				return methods[name];
 			} catch {
@@ -61,7 +60,6 @@ namespace Mondo.MyTypes.MyClasses {
 					}
 				}
 			}
-			Console.WriteLine("method incorrect name="+name);
 			throw new NoMethodException();
 		}
 
