@@ -119,38 +119,26 @@ namespace Mondo.Engine {
 			else Console.WriteLine(ob);
 		}
 
-		void funcMatch(int argnr) {
-			string oper = ((SoftLink)output.Pop()).Value;
+		void methodMatch(object outp, int argnr) {
+			string oper = ((SoftLink)outp).Value;
 			object[] args = new object[argnr];
 			for(int i=argnr-1; i>=0; i--) args[i] = output.Pop();
 			var proc = ClassT.GetClass(args).GetMethod(oper).Proc;
 			output.Push( proc.Call(this,args) );
-/*	
-			
-			if(token is Delegate) {
-				var argt = token.GetType().GetGenericArguments();
-				var args = new WList<object>();
-				var argnr = argt.Length-1;
-				if(argt[0] == typeof(IPrintable)) argnr--;
-				for(int i=0; i<argnr; i++) args.Shift(output.Pop());
-				token = new CallFunc(new BuiltinFunc((Delegate)token), new TupleT(args));
-			}
-			if(token is FuncDictionary) {
-				var args = new WList<object>();
-				var argnr = ((FuncDictionary)token).Argnr;
-				for(int i=0; i<argnr; i++) args.Shift(output.Pop());
-				object f = null;
-				try {
-					f = TypeTrans.fromDic(token,args[0]);
-				} catch {
-					args[0] = TypeTrans.tryCall( args[0], this );
-					f = TypeTrans.fromDic(token,args[0]);
-				}
-				token = new CallFunc(new BuiltinFunc((Delegate)f), new TupleT(args));
-			}
-			if(!(token is CallFunc)) token = new CallFunc((ICallable)token);
-			output.Push(((CallFunc)token).Call(this));
-		*/		
+		}
+
+		void staticFuncMatch(object outp, int argnr) {
+			var proc = (ProcedureT)outp;
+			object[] args = new object[argnr];
+			for(int i=argnr-1; i>=0; i--) args[i] = output.Pop();
+			output.Push( proc.Call(this,args) );
+		}
+
+		void funcMatch(int argnr) {
+			var outp = TypeTrans.dereference(output.Pop());
+			Console.WriteLine("outp="+outp+" type="+outp.GetType());
+			if(outp is SoftLink) methodMatch(outp, argnr);
+			if(outp is ProcedureT) staticFuncMatch(outp, argnr);
 		}
 
 		void shortOperMatch(string skey) {

@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+
 namespace Mondo.MyTypes.MyClasses {
 	class ErrorT : IVariable {
 		private static readonly Dictionary<Type, string> dic = new Dictionary<Type, string> {
@@ -30,6 +31,7 @@ namespace Mondo.MyTypes.MyClasses {
 			{typeof(InfinityException), "infinity"},
 			{typeof(NaNException), "NaN"},
 			{typeof(ModuleNotFoundException), "module not found"},
+			{typeof(CircularInheritanceException), "circular inheritance"},
 			{typeof(UndefinedException), "undefined"},
 			//{typeof(EmptyArgException), "empty set"},
 			{typeof(NotComparableException), "invalid object type"},
