@@ -1,7 +1,5 @@
 repository:
         security
-project:
-        - global namespace
 oop:
         - reflection - package iteration
         - inner_oop:
@@ -23,7 +21,6 @@ bug_fixes:
         - operator precedence
         - referenceT in order
 function_call:
-        - direct
         - args to script
 array:
         - full indexer (like in python), with tuple, with range
@@ -45,9 +42,11 @@ data:
         - select with indexer
 types:
         - dateTime
+        - integer
 operators:
         - .=
         - += -= *= /= ^=
+        - semicolon correct
 ide:
         - vim plugin
         - multithreading (stop)

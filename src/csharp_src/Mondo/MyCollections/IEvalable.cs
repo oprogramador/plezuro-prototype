@@ -27,7 +27,7 @@ using Mondo.MyTypes.MyClasses;
 
 namespace Mondo.MyCollections {
 	public interface IEvalable {
-		object EvalDyn(ProcedureT list, IPrintable pr, ITuplable args);
-		object EvalDyn(ProcedureT list, IPrintable pr);
+		object EvalDyn(ProcedureT list, ITuplable args);
+		object EvalDyn(ProcedureT list);
 	}
 }

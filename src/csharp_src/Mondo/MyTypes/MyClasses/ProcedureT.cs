@@ -36,7 +36,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public object Call(IPrintable p, object[] args) {
-			return p.EvalDyn(this, p, TupleT.MakeTuplable(args));
+			return p.EvalDyn(this, TupleT.MakeTuplable(args));
 		}
 
 		public override object Clone() {
@@ -49,13 +49,13 @@ namespace Mondo.MyTypes.MyClasses {
 
 		private static object[] lambdas = {
 			ObjectT.FunctionSymbol,	
-					(Func<IPrintable,ProcedureT,ITuplable,object>) ((p,f,a) => p.EvalDyn(f, p, TupleT.MakeTuplable(a.ToArray()))),
-			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f, p)),
-			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, p, TupleT.MakeTuplable(a.ToArray())) ),
+					(Func<IPrintable,ProcedureT,ITuplable,object>) ((p,f,a) => p.EvalDyn(f, TupleT.MakeTuplable(a.ToArray()))),
+			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f)),
+			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, TupleT.MakeTuplable(a.ToArray())) ),
 			"while",	(Func<IPrintable,ProcedureT,ProcedureT,object>) 
 					((p, con, o) => { 
 					 	object ret=new NullType(); 
-						while(p.EvalDyn(con,p).Equals(true)) ret=p.EvalDyn(o,p); 
+						while(p.EvalDyn(con).Equals(true)) ret=p.EvalDyn(o); 
 						return ret; 
 						}),
 			"integral",	(Func<IPrintable,ProcedureT,double,double,double>)
@@ -63,17 +63,17 @@ namespace Mondo.MyTypes.MyClasses {
 					 	/*double sum = 0;
 						double n = 10;
 						double del = (end-beg)/n;
-						for(double x=beg; x<end; x+=del) sum += ((Number)p.EvalDyn(f, p, TupleT.MakeTuplable(new Number(x)))).Value;
+						for(double x=beg; x<end; x+=del) sum += ((Number)p.EvalDyn(f, TupleT.MakeTuplable(new Number(x)))).Value;
 						return sum*del;*/
 					 	return new Integral(
-							(Func<double,double>)(x => ((Number)p.EvalDyn(f, p, TupleT.MakeTuplable(new Number(x)))).Value),
+							(Func<double,double>)(x => ((Number)p.EvalDyn(f, TupleT.MakeTuplable(new Number(x)))).Value),
 							beg,
 							end,
 							100
 						).Result;
 					}),
 			"time", 	(Func<IPrintable,ProcedureT,double>) 
-						((p,f) => {var w=Stopwatch.StartNew(); p.EvalDyn(f,p); return w.ElapsedMilliseconds;}),
+						((p,f) => {var w=Stopwatch.StartNew(); p.EvalDyn(f); return w.ElapsedMilliseconds;}),
 		};
 		
 		public override ClassT GetClass() {

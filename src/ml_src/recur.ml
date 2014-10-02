@@ -1,4 +1,4 @@
-$fac = func({
-	if( get(args,0) <= 0, {args}, {get(args,0) * get(args,0)-1} )
-});
-applyF(fac,[-3])
+$fac = {
+        (args>1).::if({ args*fac(args-1) }, {1})
+};
+fac(100)

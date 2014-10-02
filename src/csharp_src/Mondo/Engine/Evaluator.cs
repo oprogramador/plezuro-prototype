@@ -29,7 +29,7 @@ using Mondo.MyTypes;
 using Mondo.MyTypes.MyClasses;
 
 namespace Mondo.Engine {
-	class Evaluator : IPrintable, IEvalable {
+	class Evaluator : IPrintable {
 		private WStack<object> list;
 		private ProcedureT output;
 		
@@ -84,12 +84,12 @@ namespace Mondo.Engine {
 			return new Evaluator(list, pr, pr.Args).Result;
 		}
 	
-		public object EvalDyn(ProcedureT list, IPrintable pr, ITuplable args) {
-			return new Evaluator(list, pr, args).Result;
+		public object EvalDyn(ProcedureT list, ITuplable args) {
+			return new Evaluator(list, this, args).Result;
 		}	
 
-		public object EvalDyn(ProcedureT list, IPrintable pr) {
-			return new Evaluator(list, pr, pr.Args).Result;
+		public object EvalDyn(ProcedureT list) {
+			return new Evaluator(list, this, Args).Result;
 		}
 
 		public static object Eval(ProcedureT list, IPrintable pr, ITuplable args) {
