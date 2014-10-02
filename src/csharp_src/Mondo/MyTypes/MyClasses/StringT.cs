@@ -100,7 +100,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"len",		(Func<string,double>) ((a) => a.Length),
 			"get",		(Func<string,double,IVariable>) ((a,i) => new StringT(""+a[(int)i])),
 			"reverse",	(Func<string,string>) ((a) => {var c=a.ToCharArray(); Array.Reverse(c); return new string(c);}),
-			"ord",		(Func<string,double>) ((x) => (double)x[0]),
+			"ord",		(Func<string,ITuplable>) ((x) => TupleT.MakeTuplable(new ListT((from ch in x select (double)ch).ToList()).ToArray())),
 			"fromF",	(Func<string,object>) ((x) => { try{ return System.IO.File.ReadAllText(x); }catch{ return new NullType(); }}),
 			"toF",		(Func<string,string,bool>) ((x,f) => { try{ System.IO.File.WriteAllText(f,x); return true; }catch{ return false; }}),
 			"put",		(Func<string,string,bool>) ((f,x) => { try{ System.IO.File.WriteAllText(f,x); return true; }catch{ return false; }}),

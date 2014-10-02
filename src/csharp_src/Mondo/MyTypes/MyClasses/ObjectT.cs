@@ -126,6 +126,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"&&",	(Func<ReferenceT,PointerT>) ((x) => new PointerT(x)),
 			":=",		assignLambdaMaker(true),
 			"=",		assignLambdaMaker(false),
+			"+=",		(Func<IVariable,IVariable,IVariable>) ((x,y) => x ),
 		};
 
 		private static object[] toRefArray(object[] ar) {

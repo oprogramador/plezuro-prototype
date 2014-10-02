@@ -1,4 +1,11 @@
-$fac = {
-        (args>1).::if({ args*fac(args-1) }, {1})
+$facr = {
+        (args>1).::if({ args*facr(args-1) }, {1})
 };
-fac(100)
+$faci = {
+        $i = args;
+        $ret = 1;
+        {i>1}.::while({ ret=ret*i; i-- });
+        ret
+};
+{facr(120)}.::time(),
+{faci(120)}.::time()

@@ -1,2 +1,4 @@
-($x,$y) = args;
-x*y+1
+::printl('args='+args);
+($f,$x,$y) = args;
+x*2+y
+

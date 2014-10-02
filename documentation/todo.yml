@@ -5,7 +5,6 @@ oop:
         - inner_oop:
                 - better inheritance (collections)
                 - multiple inheritance
-        - evalDyn
 classes:
         - constructor
         - inheritance
@@ -20,8 +19,6 @@ bug_fixes:
         - language
         - operator precedence
         - referenceT in order
-function_call:
-        - args to script
 array:
         - full indexer (like in python), with tuple, with range
         - range
@@ -29,10 +26,6 @@ variables:
         - globals
         - comparison:
                 - by generated value
-        - ASCII:
-                - string -> ASCII tuple
-loops:
-        - while with single procedure
 data:
         - selectMany
         - selectIterative
@@ -43,6 +36,9 @@ data:
 types:
         - dateTime
         - integer
+        - parse
+conditions:
+        - if optimization
 operators:
         - .=
         - += -= *= /= ^=

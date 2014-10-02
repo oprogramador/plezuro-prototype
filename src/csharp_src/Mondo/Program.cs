@@ -36,8 +36,10 @@ namespace Mondo.Program {
 		}
 
 		private static void startConsole(string[] args) {
-			var l = new List<object>(args).Skip(1).ToArray();
-			Console.WriteLine( Engine.Parser.Parse(System.IO.File.ReadAllText(args[0]).TrimEnd('\n'), MyTypes.MyClasses.TupleT.MakeTuplable(l)) );
+			string fileName = args[0];
+			args[0] = "'"+args[0]+"'";
+			var l = (from i in args select Engine.Parser.Parse(i)).ToList().ToArray();
+			Console.WriteLine( Engine.Parser.Parse(System.IO.File.ReadAllText(fileName).TrimEnd('\n'), MyTypes.MyClasses.TupleT.MakeTuplable(l)) );
 		}
 
 		public static void Main(string[] args) {

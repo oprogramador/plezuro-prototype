@@ -58,6 +58,12 @@ namespace Mondo.MyTypes.MyClasses {
 						while(p.EvalDyn(con).Equals(true)) ret=p.EvalDyn(o); 
 						return ret; 
 						}),
+			"do",		(Func<IPrintable,ProcedureT,object>) 
+					((p, o) => { 
+					 	object ret=new NullType(); 
+						while((ret = p.EvalDyn(o)).Equals(true));
+						return ret; 
+						}),
 			"integral",	(Func<IPrintable,ProcedureT,double,double,double>)
 					((p, f, beg, end) => {
 					 	/*double sum = 0;

@@ -81,7 +81,7 @@ namespace Mondo.Engine {
 		}
 
 		public static object Eval(ProcedureT list, IPrintable pr) {
-			return new Evaluator(list, pr, pr.Args).Result;
+			return new Evaluator(list, pr, pr!=null ? pr.Args : new EmptyT()).Result;
 		}
 	
 		public object EvalDyn(ProcedureT list, ITuplable args) {
