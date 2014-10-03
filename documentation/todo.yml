@@ -1,7 +1,9 @@
 repository:
         security
 oop:
-        - reflection - package iteration
+        - reflection:
+                - package iteration
+                - .NET access
         - inner_oop:
                 - better inheritance (collections)
                 - multiple inheritance
@@ -13,6 +15,7 @@ classes:
                 - methods
                 - pools
         - security
+        - dynamic documentation
 mathematics:
 bug_fixes:
         - gui

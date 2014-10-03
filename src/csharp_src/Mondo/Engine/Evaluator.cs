@@ -119,25 +119,28 @@ namespace Mondo.Engine {
 			else Console.WriteLine(ob);
 		}
 
-		void methodMatch(object outp, int argnr) {
+		void methodMatch(object outp, object[] args) {
 			string oper = ((SoftLink)outp).Value;
-			object[] args = new object[argnr];
-			for(int i=argnr-1; i>=0; i--) args[i] = output.Pop();
 			var proc = ClassT.GetClass(args).GetMethod(oper).Proc;
 			output.Push( proc.Call(this,args) );
 		}
 
-		void staticFuncMatch(object outp, int argnr) {
+		void staticFuncMatch(object outp, object[] args) {
 			var proc = (ProcedureT)outp;
-			object[] args = new object[argnr];
-			for(int i=argnr-1; i>=0; i--) args[i] = output.Pop();
 			output.Push( proc.Call(this,args) );
 		}
 
 		void funcMatch(int argnr) {
 			var outp = TypeTrans.dereference(output.Pop());
-			if(outp is SoftLink) methodMatch(outp, argnr);
-			if(outp is ProcedureT) staticFuncMatch(outp, argnr);
+			var args = new List<object>();
+			int i=0;
+			try {
+				for(i=argnr-1; i>=0; i--) args.Insert(0,output.Pop());
+			} catch {
+				for(; i>=0; i--) args.Add(new EmptyT());
+			}
+			if(outp is SoftLink) methodMatch(outp, args.ToArray());
+			if(outp is ProcedureT) staticFuncMatch(outp, args.ToArray());
 		}
 
 		void shortOperMatch(string skey) {
