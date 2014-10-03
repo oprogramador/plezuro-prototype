@@ -24,7 +24,8 @@ bug_fixes:
         - referenceT in order
 array:
         - full indexer (like in python), with tuple, with range
-        - range
+function:
+        - default parameters
 variables:
         - globals
         - comparison:
@@ -32,6 +33,7 @@ variables:
 data:
         - selectMany
         - selectIterative
+        - thenBy
         - validation
         - regex
         - serialization
@@ -45,7 +47,6 @@ conditions:
 operators:
         - .=
         - += -= *= /= ^=
-        - semicolon correct
 ide:
         - vim plugin
         - multithreading (stop)

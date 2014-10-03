@@ -58,7 +58,7 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
 			"get",		(Func<ListT,double,object>) ((a,i) => ((ReferenceT)a[(int)i]).Value ),
 			"len",		(Func<ListT,double>) ((a) => a.Count),
-			SymbolMap.RefSymbol, (Func<ListT,IVariable,object>) ((a,i) => a.Index(i) ),
+			SymbolMap.RefSymbol, (Func<ListT,ITuplable,object>) ((a,i) => a.Index(i) ),
 			"each",		(Func<IPrintable,ListT,ProcedureT,object>)
 						((p, ar, f) => { object ret=new NullType();
 						foreach(IVariable i in ar) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(i));
@@ -131,11 +131,29 @@ namespace Mondo.MyTypes.MyClasses {
 			return (IVariable)TupleT.MakeTuplable(list.ToArray());
 		}
 
-		public IVariable Index(IVariable iv) {
+		private IVariable rangeIndex(RangeT r) {
+			var list = new ListT();
+			foreach(var i in r) list.Add(numIndex((int)((Number)i).Value));
+			return (IVariable)TupleT.MakeTuplable(list.ToArray());
+		}
+
+		public IVariable ivarIndex(IVariable iv) {
 			var i = TypeTrans.dereference(iv);
 			if(i is Number) return numIndex((int)((Number)i).Value);
-			if(i is PairT) return pairIndex((int)((Number)((PairT)iv).Key).Value, (int)((Number)((PairT)iv).Value).Value);
+			//if(i is PairT) return pairIndex((int)((Number)((PairT)iv).Key).Value, (int)((Number)((PairT)iv).Value).Value);
+			if(i is RangeT) return rangeIndex((RangeT)i);
 			return null;
+		}
+
+		public IVariable Index(ITuplable it) {
+			Console.WriteLine("Index");
+			var list = new ListT();
+			Console.WriteLine("it="+it);
+			foreach(var i in it.ToArray()) {
+				Console.WriteLine("i="+i+" type="+i.GetType());
+				list.Add(ivarIndex(i));
+			}
+			return (IVariable)TupleT.MakeTuplable(list.ToArray());
 		}
 	}
 }

@@ -21,18 +21,23 @@
  */
  
 
-using Mondo.MyCollections;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Mondo.MyCollections;
+using Mondo.Engine;
 
 namespace Mondo.MyTypes.MyClasses {
-	class RangeT : IVariable {
-		private IStepable beg,end;
+	class RangeT : IVariable, IEnumerable {
+		public double Beg { get; private set; }
+		public double End { get; private set; }
+		public double Step { get; private set; }
 
-		public RangeT(IStepable beg, IStepable end) {
+		public RangeT(double beg, double end, double step) {
 			ID = ObjectContainer.Instance.Add(this);
-			this.beg = beg;
-			this.end = end;
+			Beg = beg;
+			End = end;
+			Step = step;
 		}
 
 		public int ID { get; private set; }
@@ -48,20 +53,32 @@ namespace Mondo.MyTypes.MyClasses {
 		public int CompareTo(object ob) {
 			int pre = ClassT.PreCompare(this,ob);
 			if(pre!=0) return pre;
-			if(ob is RangeT) return beg.CompareTo(((RangeT)ob).beg);
+			if(ob is RangeT) {
+				var obr = (RangeT)ob;
+				pre = Beg.CompareTo(obr.Beg);
+				if(pre!=0) return pre;
+				pre = End.CompareTo(obr.End);
+				if(pre!=0) return pre;
+				pre = Step.CompareTo(obr.Step);
+				if(pre!=0) return pre;
+			}
 			return 0;
 		}
 
 		public object Clone() {
-			return new RangeT(beg,end);
+			return new RangeT(Beg, End, Step);
 		}
 
 		public override string ToString() {
-			return "range";
+			return "range("+Beg+", "+End+", "+Step+")";
 		}
 
 		IVariable[] ITuplable.ToArray() {
 			return new IVariable[]{this};
+		}
+
+		public IEnumerator GetEnumerator() {
+			for(double x=Beg; x<End; x+=Step) yield return new Number(x);
 		}
 
 		private static ClassT myClass;
@@ -71,6 +88,14 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Range";
 
 		private static object[] lambdas = {
+			"beg",	(Func<RangeT,double>) ((x) => x.Beg),
+			"end",	(Func<RangeT,double>) ((x) => x.End),
+			"step",	(Func<RangeT,double>) ((x) => x.Step),
+			"each", (Func<IPrintable,RangeT,ProcedureT,object>) ((p,r,f) => {
+						object ret = new NullType();
+						foreach(var x in r) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(x));
+						return ret;
+					}),	
 		};
 		
 		public ClassT GetClass() {

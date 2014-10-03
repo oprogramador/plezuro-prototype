@@ -72,6 +72,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Number";
 
 		private static object[] lambdas = {
+			"range",	(Func<double,double,double,RangeT>) ((b,e,s) => new RangeT(b,e,s)),
 			"chr",		(Func<double,string>) ((x) => ""+(char)x),
 			"sin",		(Func<double,double>) ((x) => Math.Sin(x)),
 			"cos",		(Func<double,double>) ((x) => Math.Cos(x)),
