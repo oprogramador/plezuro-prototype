@@ -28,7 +28,7 @@ using System.Collections;
 namespace Mondo.MyTypes.MyClasses {
 	public class ClassT : IItem, IVariable {
 		public List<ClassT> Parents { get; private set; }
-		private Dictionary<string,Method> methods;
+		public Dictionary<string,Method> Methods { get; private set; }
 		public string Name{ get; private set; }
 		public PackageT Package{ get; private set; }
 
@@ -36,7 +36,7 @@ namespace Mondo.MyTypes.MyClasses {
 			ID = ObjectContainer.Instance.Add(this);
 			Name = name;
 			Parents = parents;
-			methods = meth;
+			Methods = meth;
 			Package = package;
 		}
 
@@ -50,7 +50,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public Method GetMethod(string name) {
 			try {
-				return methods[name];
+				return Methods[name];
 			} catch {
 				foreach(var p in Parents) {
 					try {
@@ -86,7 +86,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public object Clone() {
-			return new ClassT(Name,Parents,methods,Package);
+			return new ClassT(Name,Parents,Methods,Package);
 		}
 
 		IVariable[] ITuplable.ToArray() {
@@ -97,6 +97,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Class";
 
 		protected static object[] lambdas = {
+			"methods",	(Func<ClassT,DictionaryT>) ((c) => new DictionaryT(c.Methods)),
 			"parents",	(Func<ClassT,ListT>) ((c) => new ListT(c.Parents)),
 			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
 			"new",		(Func<ClassT,object>) 

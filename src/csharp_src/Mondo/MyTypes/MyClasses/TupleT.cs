@@ -82,7 +82,11 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Tuple";
 
 		private static object[] lambdas = {
-
+			"each",		(Func<IPrintable,TupleT,ProcedureT,object>)
+						((p, ar, f) => { object ret=new NullType();
+						foreach(IVariable i in ar) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(i));
+						return ret; 
+					} ),
 		};
 		
 		public ClassT GetClass() {

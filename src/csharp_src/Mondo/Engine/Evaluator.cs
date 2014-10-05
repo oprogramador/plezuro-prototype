@@ -126,7 +126,7 @@ namespace Mondo.Engine {
 		}
 
 		void staticFuncMatch(object outp, object[] args) {
-			var proc = (ProcedureT)outp;
+			var proc = (ICallable)outp;
 			output.Push( proc.Call(this,args) );
 		}
 
@@ -140,7 +140,7 @@ namespace Mondo.Engine {
 				for(; i>=0; i--) args.Add(new EmptyT());
 			}
 			if(outp is SoftLink) methodMatch(outp, args.ToArray());
-			if(outp is ProcedureT) staticFuncMatch(outp, args.ToArray());
+			if(outp is ICallable) staticFuncMatch(outp, args.ToArray());
 		}
 
 		void shortOperMatch(string skey) {

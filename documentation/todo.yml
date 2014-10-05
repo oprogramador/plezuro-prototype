@@ -23,7 +23,7 @@ bug_fixes:
         - operator precedence
         - referenceT in order
 array:
-        - full indexer (like in python), with tuple, with range
+        - full indexer (like in python), with tuple, with range, each
 function:
         - default parameters
 variables:

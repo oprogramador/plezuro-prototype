@@ -43,6 +43,12 @@ namespace Mondo.MyTypes.MyClasses {
 			}
 		}
 
+		public DictionaryT(Dictionary<string,Method> d) : base() {
+			foreach(var i in d) {
+				Add(new ReferenceT(new StringT(i.Key)), new ReferenceT(i.Value));
+			}
+		}
+
 		public DictionaryT(TupleT l) : base() {
 			ID = ObjectContainer.Instance.Add(this);
 			foreach(var i in l) {

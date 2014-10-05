@@ -198,8 +198,29 @@ namespace Mondo.Engine {
 		};
 
 		public static readonly List<object> OpersToBeg = new List<object>() {
-			",",
-			";"
+			";",	
+			":=",
+			"=",
+			",", 	
+			"<->",
+			"<<",
+			">>",	
+			"?",	
+			"|",	
+			"&",	
+			"<=>",	
+			">=",	
+			">",	
+			"<=",	
+			"<",	
+			"!=",	
+			"==",	
+			"===",	
+			"=~",
+			"!~",
+			"..",
+			":",	
+			"+=",
 		};
 
 		public SymbolMap() {
