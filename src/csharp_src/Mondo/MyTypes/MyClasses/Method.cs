@@ -23,9 +23,10 @@
 
 using System;
 using System.Collections.Generic;
+using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
-	public class Method : IVariable {
+	public class Method : IVariable, ICallable {
 		public int ID { get; private set; }
 		public ICallable Proc { get; private set; }
 		public AccessModifier Access { get; private set; }
@@ -34,6 +35,10 @@ namespace Mondo.MyTypes.MyClasses {
 			ID = ObjectContainer.Instance.Add(this);
 			Proc = proc;
 			Access = access;
+		}
+
+		public object Call(IPrintable p, object[] args) {
+			return Proc.Call(p,args);
 		}
 
 		public override bool Equals(object ob) {
@@ -72,7 +77,12 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ClassT StaticGetClass() {
 			if(myClass==null) myClass = 
-				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(Method) );
+				new BuiltinClass(
+						ClassName,
+						new List<ClassT>(){Callable.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(Method) );
 			return myClass;
 		}	
 

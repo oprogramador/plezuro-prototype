@@ -48,8 +48,6 @@ namespace Mondo.MyTypes.MyClasses {
 		public new const string ClassName = "Procedure";
 
 		private static object[] lambdas = {
-			ObjectT.FunctionSymbol,	
-					(Func<IPrintable,ProcedureT,ITuplable,object>) ((p,f,a) => p.EvalDyn(f, TupleT.MakeTuplable(a.ToArray()))),
 			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f)),
 			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, TupleT.MakeTuplable(a.ToArray())) ),
 			"while",	(Func<IPrintable,ProcedureT,ProcedureT,object>) 
@@ -88,7 +86,13 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static new ClassT StaticGetClass() {
 			if(myClass==null) myClass = 
-				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ProcedureT) );
+				new BuiltinClass( 
+						ClassName,
+						new List<ClassT>(){Callable.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(ProcedureT)
+					);
 			return myClass;
 		}	
 

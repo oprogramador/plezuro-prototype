@@ -22,8 +22,6 @@ bug_fixes:
         - language
         - operator precedence
         - referenceT in order
-array:
-        - full indexer (like in python), with tuple, with range, each
 function:
         - default parameters
 variables:

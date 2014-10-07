@@ -74,7 +74,6 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "BuiltinFunc";
 
 		private static object[] lambdas = {
-
 		};
 		
 		public ClassT GetClass() {
@@ -83,7 +82,13 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ClassT StaticGetClass() {
 			if(myClass==null) myClass = 
-				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(BuiltinFunc) );
+				new BuiltinClass(
+						ClassName,
+						new List<ClassT>(){Callable.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(BuiltinFunc)
+					);
 			return myClass;
 		}	
 

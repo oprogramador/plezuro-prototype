@@ -80,8 +80,6 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "DotFunc";
 
 		private static object[] lambdas = {
-			ObjectT.FunctionSymbol,	(Func<IPrintable,DotFunc,ITuplable,object>) 
-				((p,f,a) => f.Call(p, a.ToArray())),
 		};
 		
 		public ClassT GetClass() {
@@ -90,7 +88,13 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ClassT StaticGetClass() {
 			if(myClass==null) myClass = 
-				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(DotFunc) );
+				new BuiltinClass(
+						ClassName,
+						new List<ClassT>(){Callable.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(DotFunc) 
+					);
 			return myClass;
 		}	
 
