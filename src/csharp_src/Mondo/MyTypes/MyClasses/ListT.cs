@@ -127,6 +127,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		private object[] pairIndex(int beg, int end) {
 			var list = new ListT();
+			Console.WriteLine("beg="+beg+" end="+end);
 			for(int i=beg; i<end; i++) list.Add(numIndex(i));
 			return list.ToArray();
 		}
@@ -140,7 +141,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public object ivarIndex(IVariable iv) {
 			var i = TypeTrans.dereference(iv);
 			if(i is Number) return numIndex((int)((Number)i).Value);
-			if(i is PairT) return pairIndex((int)((Number)((PairT)iv).Key).Value, (int)((Number)((PairT)iv).Value).Value);
+			if(i is PairT) return pairIndex((int)((Number)((PairT)i).Key).Value, (int)((Number)((PairT)i).Value).Value);
 			if(i is RangeT) return rangeIndex((RangeT)i);
 			return null;
 		}
