@@ -88,6 +88,14 @@ namespace Mondo.MyTypes.MyClasses {
 					});
 		}
 
+		private static object operMaker(string str) {
+			return (Func<IPrintable,ReferenceT,IVariable,IVariable>)
+					((p,x,y) => (IVariable)x.GetClass().GetMethod("=").Call(p, new object[]{
+						x,
+						x.GetClass().GetMethod(str).Call(p, new object[]{x,y})
+					}));
+		}
+
 		public const string ClassName = "Object";
 
 		private static object[] lambdas = {
@@ -126,7 +134,15 @@ namespace Mondo.MyTypes.MyClasses {
 			"&&",	(Func<ReferenceT,PointerT>) ((x) => new PointerT(x)),
 			":=",		assignLambdaMaker(true),
 			"=",		assignLambdaMaker(false),
-			"+=",		(Func<IVariable,IVariable,IVariable>) ((x,y) => x ),
+			"+=",		operMaker("+"),
+			"-=",		operMaker("-"),
+			"*=",		operMaker("*"),
+			"/=",		operMaker("/"),
+			"^=",		operMaker("^"),
+			"&=",		operMaker("&"),
+			"|=",		operMaker("|"),
+			"%=",		operMaker("%"),
+			".=",		operMaker("."),
 		};
 
 		private static object[] toRefArray(object[] ar) {

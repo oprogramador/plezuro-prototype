@@ -115,6 +115,14 @@ namespace Mondo.Engine {
 			"..",
 			":",	
 			"+=",
+			"-=",
+			"*=",
+			"/=",
+			"^=",
+			"&=",
+			"|=",
+			"%=",
+			".=",
 		};
 
 		private static readonly string[] UniOpers = {

@@ -26,12 +26,14 @@ using System.Collections.Generic;
 
 namespace Mondo.MyTypes.MyClasses {
 	public class PackageT : List<IItem>, IItem, IVariable {
-		public string Name{ get; private set; }
-		public PackageT Package{ get; private set; }
+		public string Name { get; private set; }
+		public PackageT Package { get; private set; }
+		public ListT Items { get; private set; }
 
 		public PackageT(string name, PackageT package) {
 			Name = name;
 			Package = package;
+			Items = new ListT();
 		}
 
 		public static PackageT Lang = new PackageT("Lang", null);
@@ -75,6 +77,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		private static object[] lambdas = {
 			"package",	(Func<PackageT,IVariable>) ((c) => (c.Package!=null ? (IVariable)c.Package : (IVariable)new NullType())),
+			"items",	(Func<PackageT,ListT>) ((p) => p.Items),
 		};
 
 		public virtual ClassT GetClass() {

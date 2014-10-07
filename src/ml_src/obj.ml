@@ -1,15 +1,27 @@
 $Person = 'Person'.::newClass([Object], ::dic(
         'init',{
                 ($ob, $val) = args;
-                ob.::pools() << ('one': (val*2))
+                ob.::pools() << ('age': (val*2))
         },
         '+',{
                 ($ob, $val) = args;
-                (ob.::pools()['one'] = (ob.::pools()['one'] + val))
+                (ob.::pools()['age'] = (ob.::pools()['age'] + val))
         }
   ), Lang);
+
+$Dog = 'Dog'.::newClass([Person], ::dic(
+        'init',{
+               ($ob, $age, $race) = args;
+                Person.::methods()['init'](ob, age);
+                ob.::pools() << ('race': race);
+        }
+  ), Lang);
+
 $p = Person.::new();
 p.::init(13);
-p.::pools()['one']++;
+p.::pools()['age']++;
 p+50;
-p.::pools()
+$d = Dog.::new();
+d.::init(13,'akbash');
+d+4;
+p.::pools(), d.::pools()

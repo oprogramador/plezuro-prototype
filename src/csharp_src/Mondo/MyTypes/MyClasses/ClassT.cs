@@ -38,6 +38,7 @@ namespace Mondo.MyTypes.MyClasses {
 			Parents = parents;
 			Methods = meth;
 			Package = package;
+			package.Items.Add(this);
 		}
 
 		public static ClassT GetClass(object [] args) {
