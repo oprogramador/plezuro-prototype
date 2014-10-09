@@ -103,6 +103,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
 			"new",		(Func<ClassT,object>) 
 					((c) => c is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)c).Type) : new MyObject(c)),
+			"@",		(Func<ClassT,DictionaryT>) ((c) => new DictionaryT(c.Methods)),
 		};
 
 		public ClassT GetClass() {

@@ -22,8 +22,17 @@ bug_fixes:
         - language
         - operator precedence
         - referenceT in order
+error_handling:
+        - info
+        - all errors
+tests:
+        - assert
 function:
         - default parameters
+script:
+        - loading with args
+constants:
+        - change lock
 variables:
         - globals
         - comparison:
@@ -44,7 +53,6 @@ conditions:
         - if optimization
 operators:
         - .=
-        - += -= *= /= ^=
 ide:
         - vim plugin
         - multithreading (stop)

@@ -41,6 +41,8 @@ namespace Mondo.Engine {
 		public const string ListSymbol = "array";
 		public const string RefSymbol = "ref";
 		public const string ArgsSymbol = "args";
+		public const string ThisSymbol = "this";
+		public const string ValsSymbol = "vals";
 
 		private static readonly List<object> Symbols = new List<object>();
 			/*
@@ -99,6 +101,7 @@ namespace Mondo.Engine {
 			"<",	
 			"!=",	
 			"==",	
+			"!==",
 			"===",	
 			"=~",
 			"!~",
@@ -131,7 +134,8 @@ namespace Mondo.Engine {
 			"**",	
 			"#",	
 			"++",	
-			"--",	
+			"--",
+			"@",
 		};
 
 		public static readonly HashSet<string> BiOperSet;

@@ -24,6 +24,7 @@
 using System.Diagnostics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mondo.MyCollections;
 using Mondo.MyTypes;
 using Mondo.MyTypes.MyClasses;
@@ -69,6 +70,9 @@ namespace Mondo.Engine {
 				}
 				LocalVars = new ConcurrentDictionary<string,object>();
 				LocalVars.Add( SymbolMap.ArgsSymbol, Args);
+				var argsList = new List<object>(Args.ToArray());
+				LocalVars.Add( SymbolMap.ThisSymbol, argsList.Count>0 ? TupleT.MakeTuplable(argsList[0]) : new EmptyT());
+				LocalVars.Add( SymbolMap.ValsSymbol, argsList.Count>0 ? TupleT.MakeTuplable(argsList.Skip(1).ToArray()) : new EmptyT());
 				this.list = list.Reverse();
 				output = new ProcedureT();
 				map = Engine.GetInstance().SymbolMap;
