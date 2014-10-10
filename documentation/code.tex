@@ -11,6 +11,7 @@ Gui/Clickable.cs:	public interface Clickable
 Gui/MainWindow.cs:	class MainWindow : Form 
 Gui/VisualSyntax.cs:	class VisualSyntax 
 MyTypes/IStepable.cs:	interface IStepable : IVariable 
+MyTypes/CircularInheritanceException.cs:	class CircularInheritanceException : Exception 
 MyTypes/ITuplable.cs:	public interface ITuplable 
 MyTypes/NotComparableException.cs:	class NotComparableException : Exception 
 MyTypes/InfinityException.cs:	class InfinityException : NumberException 
@@ -23,16 +24,15 @@ MyTypes/AccessModifier.cs:	public enum AccessEnum
 MyTypes/AccessModifier.cs:	public class AccessModifier 
 MyTypes/ModuleNotFoundException.cs:	class ModuleNotFoundException : Exception 
 MyTypes/NaNException.cs:	class NaNException : NumberException 
-MyTypes/Method.cs:	public class Method 
 MyTypes/VariableFactory.cs:	class VariableFactory 
 MyTypes/NumberException.cs:	class NumberException : Exception 
 MyTypes/UndefinedException.cs:	class UndefinedException : Exception 
 MyTypes/MyClasses/ObjectT.cs:	class ObjectT : IVariable 
 MyTypes/MyClasses/BuiltinClass.cs:	class BuiltinClass : ClassT 
 MyTypes/MyClasses/CallFunc.cs:	class CallFunc : IVariable 
-MyTypes/MyClasses/PairT.cs:	class PairT : IVariable 
-MyTypes/MyClasses/RangeT.cs:	class RangeT : IVariable 
-MyTypes/MyClasses/ClassT.cs:	public class ClassT : IItem, IVariable 
+MyTypes/MyClasses/PairT.cs:	public class PairT : IVariable 
+MyTypes/MyClasses/RangeT.cs:	class RangeT : IVariable, IEnumerable 
+MyTypes/MyClasses/ClassT.cs:	public class ClassT : IItem, IVariable, ICallable 
 MyTypes/MyClasses/SoftLink.cs:	class SoftLink : Pointer<string>, IVariable 
 MyTypes/MyClasses/BuiltinFunc.cs:	class BuiltinFunc : IVariable, ICallable  
 MyTypes/MyClasses/ErrorT.cs:	class ErrorT : IVariable 
@@ -41,14 +41,18 @@ MyTypes/MyClasses/ProcedureT.cs:	public class ProcedureT : OStack, ICallable
 MyTypes/MyClasses/BooleanT.cs:	class BooleanT : Pointer<bool>, IVariable 
 MyTypes/MyClasses/ListT.cs:	public class ListT : SList<ICompCloneable>, IVariable 
 MyTypes/MyClasses/TupleT.cs:	public class TupleT : SList<IVariable>, IVariable 
+MyTypes/MyClasses/MyClass.cs:	class MyClass : ClassT 
 MyTypes/MyClasses/PointerT.cs:	class PointerT : Pointer<ReferenceT>, IVariable 
 MyTypes/MyClasses/SetT.cs:	class SetT : SortedSet<IVariable>, IVariable 
+MyTypes/MyClasses/Method.cs:	public class Method : IVariable, ICallable 
+MyTypes/MyClasses/Callable.cs:	class Callable 
 MyTypes/MyClasses/NullType.cs:	class NullType : IVariable 
 MyTypes/MyClasses/StringT.cs:	class StringT : Pointer<string>, IVariable 
 MyTypes/MyClasses/StringT.cs:		class MiniParser : IParseable 
 MyTypes/MyClasses/Number.cs:	class Number : Pointer<double>, IVariable 
+MyTypes/MyClasses/MyObject.cs:	class MyObject : IVariable 
 MyTypes/MyClasses/PackageT.cs:	public class PackageT : List<IItem>, IItem, IVariable 
-MyTypes/MyClasses/DictionaryT.cs:	class DictionaryT : SortedDictionary<IVariable,IVariable>, IVariable 
+MyTypes/MyClasses/DictionaryT.cs:	public class DictionaryT : SortedDictionary<IVariable,IVariable>, IVariable 
 MyTypes/MyClasses/ReferenceT.cs:	public class ReferenceT : Pointer<IVariable>, IVariable, ITypeConvertible 
 MyTypes/MyClasses/DotFunc.cs:	class DotFunc : IVariable, ICallable  
 MyTypes/MyClasses/EmptyT.cs:	class EmptyT : IVariable 
@@ -65,7 +69,7 @@ Engine/StaticParser.cs:	static class StaticParser
 Engine/RPNTypes.cs:	enum RPNTypes 
 Engine/SyntaxException.cs:	class SyntaxException : Exception 
 Engine/RPN.cs:	class RPN 
-Engine/Evaluator.cs:	class Evaluator : IPrintable, IEvalable 
+Engine/Evaluator.cs:	class Evaluator : IPrintable 
 Engine/IOMap.cs:	class IOMap : Dictionary<ITextable, IOutputable>, IRefreshable 
 Engine/TokenConverter.cs:	class TokenConverter 
 Engine/SymbolException.cs:	class SymbolException : Exception 
