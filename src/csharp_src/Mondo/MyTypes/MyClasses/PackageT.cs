@@ -28,12 +28,12 @@ namespace Mondo.MyTypes.MyClasses {
 	public class PackageT : List<IItem>, IItem, IVariable {
 		public string Name { get; private set; }
 		public PackageT Package { get; private set; }
-		public ListT Items { get; private set; }
+		public DictionaryT Items { get; private set; }
 
 		public PackageT(string name, PackageT package) {
 			Name = name;
 			Package = package;
-			Items = new ListT();
+			Items = new DictionaryT();
 		}
 
 		public static PackageT Lang = new PackageT("Lang", null);
@@ -53,7 +53,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public int CompareTo(object ob) {
-			//int pre = ClassT.PreCompare(this,ob);
+			//int pre = ReferenceT.PreCompare(this,ob);
 			//if(pre!=0) return pre;
 			//if(ob is PackageT) return Name.CompareTo(((PackageT)ob).Name);
 			return 0;
@@ -77,7 +77,10 @@ namespace Mondo.MyTypes.MyClasses {
 
 		private static object[] lambdas = {
 			"package",	(Func<PackageT,IVariable>) ((c) => (c.Package!=null ? (IVariable)c.Package : (IVariable)new NullType())),
-			"items",	(Func<PackageT,ListT>) ((p) => p.Items),
+			"items",	(Func<PackageT,DictionaryT>) ((p) => 
+					{foreach(var k in p.Items.Keys)Console.WriteLine("key="+k+" type="+k.GetType());  
+					Console.WriteLine("ob="+p.Items[new StringT("Empty")]);
+					return p.Items;}),
 		};
 
 		public virtual ClassT GetClass() {

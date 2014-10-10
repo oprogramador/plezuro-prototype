@@ -48,9 +48,20 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public int CompareTo(object ob) {
-			int pre = ClassT.PreCompare(this,ob);
+			int pre = ReferenceT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			return Value.CompareTo(((ReferenceT)ob).Value);
+		}
+
+		private static string getClassName(object ob) {
+			var iv = (IVariable)TypeTrans.dereference(ob);
+			if(iv is StringT) return "string";
+			return iv.GetClass().Name;
+		}
+
+		public static int PreCompare(object a, object b) {
+			if(a is IVariable && b is IVariable) return getClassName(a).CompareTo(getClassName(b));
+			return 0;
 		}
 
 		public object Clone() {

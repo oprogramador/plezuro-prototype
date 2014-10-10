@@ -47,7 +47,7 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public int CompareTo(object ob) {
 			if(ob is bool) return Value==(bool)ob ? 0 : (Value ? 1 : -1);
-			int pre = ClassT.PreCompare(this,ob);
+			int pre = ReferenceT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is BooleanT) return Value.CompareTo(((BooleanT)ob).Value);
 			return 0;

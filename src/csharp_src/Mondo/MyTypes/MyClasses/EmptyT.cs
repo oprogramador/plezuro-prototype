@@ -42,7 +42,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public int CompareTo(object ob) {
-			int pre = ClassT.PreCompare(this,ob);
+			int pre = ReferenceT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			return 0;
 		}

@@ -15,11 +15,9 @@ $Dog = 'Dog'.::newClass([Person], ::dic(
         }
   ), Lang);
 
-$p = Person.::new();
-p.::init(13);
+$p = Person(14);
 @p['age']++;
 p+50;
-$d = Dog.::new();
-d.::init(13,'akbash');
+$d = Dog(13,'Akbash');
 d+4;
 @p,@d

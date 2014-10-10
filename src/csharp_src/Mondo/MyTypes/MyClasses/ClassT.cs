@@ -24,21 +24,47 @@
 using System;
 using System.Collections.Generic;
 using System.Collections;
+using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
-	public class ClassT : IItem, IVariable {
-		public List<ClassT> Parents { get; private set; }
-		public Dictionary<string,Method> Methods { get; private set; }
+	public class ClassT : IItem, IVariable, ICallable {
+		public ListT Parents { get; private set; }
+		public DictionaryT Methods { get; private set; }
 		public string Name{ get; private set; }
 		public PackageT Package{ get; private set; }
 
 		public ClassT(string name, List<ClassT> parents, Dictionary<string,Method> meth, PackageT package) {
 			ID = ObjectContainer.Instance.Add(this);
 			Name = name;
+			Parents = new ListT(parents);
+			Methods = new DictionaryT(meth);
+			Package = package;
+			try {
+				package.Items.Add(new ReferenceT(new StringT(name)), this);
+			} catch {}
+		}
+
+		public ClassT(string name, ListT parents, DictionaryT meth, PackageT package) {
+			ID = ObjectContainer.Instance.Add(this);
+			Name = name;
 			Parents = parents;
 			Methods = meth;
 			Package = package;
-			package.Items.Add(this);
+			try {
+				package.Items.Add(new StringT(name), this);
+			} catch {}
+}
+
+		public object Call(IPrintable p, object[] argss) {
+			var ob = (this is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)this).Type) : new MyObject(this));
+			try {
+				var f = GetMethod("init");
+				var ar = new object[argss.Length+1];
+				ar[0] = ob;
+				argss.CopyTo(ar,1);
+				f.Call(p,ar);
+			} catch {}
+			return ob;
 		}
 
 		public static ClassT GetClass(object [] args) {
@@ -51,11 +77,12 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public Method GetMethod(string name) {
 			try {
-				return Methods[name];
+				return (Method)TypeTrans.dereference(Methods[new ReferenceT(new StringT(name))]);
 			} catch {
 				foreach(var p in Parents) {
 					try {
-						return p.GetMethod(name);
+						var pp = (ClassT)TypeTrans.dereference(p);
+						return pp.GetMethod(name);
 					} catch {
 						continue;
 					}
@@ -75,14 +102,9 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public int CompareTo(object ob) {
-			int pre = ClassT.PreCompare(this,ob);
+			int pre = ReferenceT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is ClassT) return Name.CompareTo(((ClassT)ob).Name);
-			return 0;
-		}
-
-		public static int PreCompare(object a, object b) {
-			if(a is IVariable && b is IVariable) return ((IVariable)a).GetClass().Name.CompareTo(((IVariable)b).GetClass().Name);
 			return 0;
 		}
 
@@ -98,8 +120,8 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Class";
 
 		protected static object[] lambdas = {
-			"methods",	(Func<ClassT,DictionaryT>) ((c) => new DictionaryT(c.Methods)),
-			"parents",	(Func<ClassT,ListT>) ((c) => new ListT(c.Parents)),
+			"methods",	(Func<ClassT,DictionaryT>) ((c) => c.Methods),
+			"parents",	(Func<ClassT,ListT>) ((c) => c.Parents),
 			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
 			"new",		(Func<ClassT,object>) 
 					((c) => c is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)c).Type) : new MyObject(c)),
@@ -112,7 +134,13 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public static ClassT StaticGetClass() {
 			if(myClass==null) myClass = 
-				new BuiltinClass( ClassName, new List<ClassT>(){ObjectT.StaticGetClass()}, LambdaConverter.Convert(lambdas), PackageT.Lang, typeof(ClassT) );
+				new BuiltinClass(
+						ClassName,
+						new List<ClassT>(){Callable.StaticGetClass()},
+						LambdaConverter.Convert(lambdas),
+						PackageT.Lang,
+						typeof(ClassT)
+					);
 			return myClass;
 		}	
 

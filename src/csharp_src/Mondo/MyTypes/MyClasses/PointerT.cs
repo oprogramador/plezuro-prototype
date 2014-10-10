@@ -42,7 +42,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public int CompareTo(object ob) {
-			int pre = ClassT.PreCompare(this,ob);
+			int pre = ReferenceT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			if(ob is PointerT) return Value.Value.ID.CompareTo(((PointerT)ob).Value.Value.ID);
 			return Value.Value.CompareTo(((ReferenceT)ob).Value);

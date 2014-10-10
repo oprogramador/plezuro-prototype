@@ -28,7 +28,7 @@ using Mondo.MyCollections;
 using Mondo.Engine;
 
 namespace Mondo.MyTypes.MyClasses {
-	class DictionaryT : SortedDictionary<IVariable,IVariable>, IVariable {
+	public class DictionaryT : SortedDictionary<IVariable,IVariable>, IVariable {
 		public DictionaryT() : base() {
 		}
 
@@ -92,7 +92,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public int CompareTo(object ob) {
-			int pre = ClassT.PreCompare(this,ob);
+			int pre = ReferenceT.PreCompare(this,ob);
 			if(pre!=0) return pre;
 			return General.Compare(this, (IEnumerable)ob); 
 		}
