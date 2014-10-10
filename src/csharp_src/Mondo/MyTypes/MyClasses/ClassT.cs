@@ -40,7 +40,7 @@ namespace Mondo.MyTypes.MyClasses {
 			Methods = new DictionaryT(meth);
 			Package = package;
 			try {
-				package.Items.Add(new ReferenceT(new StringT(name)), this);
+				package.Items.Add(new ReferenceT(new StringT(name)), new ReferenceT(this));
 			} catch {}
 		}
 

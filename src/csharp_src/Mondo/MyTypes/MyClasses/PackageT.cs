@@ -77,10 +77,8 @@ namespace Mondo.MyTypes.MyClasses {
 
 		private static object[] lambdas = {
 			"package",	(Func<PackageT,IVariable>) ((c) => (c.Package!=null ? (IVariable)c.Package : (IVariable)new NullType())),
-			"items",	(Func<PackageT,DictionaryT>) ((p) => 
-					{foreach(var k in p.Items.Keys)Console.WriteLine("key="+k+" type="+k.GetType());  
-					Console.WriteLine("ob="+p.Items[new StringT("Empty")]);
-					return p.Items;}),
+			"items",	(Func<PackageT,DictionaryT>) ((p) => p.Items),
+			"@",		(Func<PackageT,DictionaryT>) ((p) => p.Items),
 		};
 
 		public virtual ClassT GetClass() {
