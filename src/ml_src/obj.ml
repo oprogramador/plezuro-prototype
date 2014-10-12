@@ -4,13 +4,16 @@ $Person = 'Person'.::newClass([Object], ::dic(
         },
         '+',{
                 (@this['age'] += vals)
+        },
+        "str",{
+                "I'm "+(@this['age'])+' years old.'
         }
   ), Lang);
 
 $Dog = 'Dog'.::newClass([Person], ::dic(
         'init',{
                ($age, $race) = vals;
-                @Person['init'](this, age);
+                @(@Lang['Person'])['init'](this, age);
                 @this << ('race': race);
         }
   ), Lang);
@@ -19,5 +22,6 @@ $p = Person(14);
 @p['age']++;
 p+50;
 $d = Dog(13,'Akbash');
-d+4;
+d+3;
+(''+d).::printl();
 @p,@d

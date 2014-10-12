@@ -111,7 +111,13 @@ namespace Mondo.MyTypes.MyClasses {
 						catch{ throw new ModuleNotFoundException(); }
 					}),
 			"eval",		(Func<IPrintable,string,object>) ((p,code) => Parser.Parse(code, p, null) ),
-			"+", 		(Func<string,IVariable,string>) ((x,y) => x+((IStringable)y).ToString() ),
+			"+", 		(Func<IPrintable,string,IVariable,string>) ((p,x,y) => {
+						try {
+							var f = y.GetClass().GetMethod("str");
+							return x+((IStringable)f.Call(p, new object[]{y})).ToString();
+						} catch {}
+						return x+((IStringable)y).ToString();
+					}),
 			"*",		(Func<string,double,string>) ((x,y) => { 
 						var s = new StringBuilder();
 						for(int i=0; i<(int)y; i++) s.Append(x);

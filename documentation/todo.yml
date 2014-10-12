@@ -9,7 +9,8 @@ oop:
                 - multiple inheritance
 classes:
         - constructor
-        - inheritance
+        - inheritance:
+                - set of parents
         - all_dynamic:
                 - base classes
                 - methods
@@ -27,6 +28,10 @@ error_handling:
         - all errors
 tests:
         - assert
+interpreter:
+        - significant optimization
+string:
+        - full indexer
 function:
         - default parameters
 script:
