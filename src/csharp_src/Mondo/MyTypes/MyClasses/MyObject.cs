@@ -22,21 +22,32 @@
  
 
 using System;
+using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
 	class MyObject : IVariable {
 		public  ClassT Class { get; private set; }
 		public DictionaryT Pools { get; private set; }
 		public int ID { get; private set; }
+		private IPrintable pri;
 
-		public MyObject(ClassT c, DictionaryT p) {
+		public MyObject(IPrintable pri, ClassT c, DictionaryT p) {
+			this.pri = pri;
 			Class = c;
 			Pools = p;
 		}
 
-		public MyObject(ClassT c) {
+		public MyObject(IPrintable pri, ClassT c) {
+			this.pri = pri;
 			Class = c;
 			Pools = new DictionaryT();
+		}
+
+		~MyObject() {
+			try {
+				var f = Class.GetMethod("destroy");
+				f.Call(pri, new object[]{this});
+			} catch {}
 		}
 
 		public override bool Equals(object ob) {
@@ -55,7 +66,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public object Clone() {
-			return new MyObject(Class, Pools);
+			return new MyObject(pri, Class, Pools);
 		}
 
 		public override string ToString() {

@@ -1,4 +1,5 @@
-$Person = 'Person'.::newClass([Object], ::dic(
+Lang
+<< 'Person'.::newClass([Object], ::dic(
         'init',{
                 @this << ('age': (vals*2))
         },
@@ -7,21 +8,24 @@ $Person = 'Person'.::newClass([Object], ::dic(
         },
         "str",{
                 "I'm "+(@this['age'])+' years old.'
+        },
+        "destroy",{
+                ::printl('person destroy');
         }
-  ), Lang);
-
-$Dog = 'Dog'.::newClass([Person], ::dic(
+));
+$Per = [@Lang['Person']];
+Lang << 'Dog'.::newClass( Per, ::dic(
         'init',{
                ($age, $race) = vals;
                 @(@Lang['Person'])['init'](this, age);
                 @this << ('race': race);
         }
-  ), Lang);
+));
 
-$p = Person(14);
+$p = (@Lang['Person'](14));
 @p['age']++;
 p+50;
-$d = Dog(13,'Akbash');
+$d = (@Lang['Dog'](13,'Akbash'));
 d+3;
 (''+d).::printl();
 @p,@d

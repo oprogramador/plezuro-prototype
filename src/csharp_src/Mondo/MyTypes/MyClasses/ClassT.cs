@@ -31,7 +31,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public ListT Parents { get; private set; }
 		public DictionaryT Methods { get; private set; }
 		public string Name{ get; private set; }
-		public PackageT Package{ get; private set; }
+		public PackageT Package{ get; set; }
 
 		public ClassT(string name, List<ClassT> parents, Dictionary<string,Method> meth, PackageT package) {
 			ID = ObjectContainer.Instance.Add(this);
@@ -44,19 +44,23 @@ namespace Mondo.MyTypes.MyClasses {
 			} catch {}
 		}
 
+		public ClassT(string name, List<ClassT> parents, Dictionary<string,Method> meth) {
+			ID = ObjectContainer.Instance.Add(this);
+			Name = name;
+			Parents = new ListT(parents);
+			Methods = new DictionaryT(meth);
+		}
+
 		public ClassT(string name, ListT parents, DictionaryT meth, PackageT package) {
 			ID = ObjectContainer.Instance.Add(this);
 			Name = name;
 			Parents = parents;
 			Methods = meth;
 			Package = package;
-			try {
-				package.Items.Add(new StringT(name), this);
-			} catch {}
-}
+		}
 
 		public object Call(IPrintable p, object[] argss) {
-			var ob = (this is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)this).Type) : new MyObject(this));
+			var ob = (this is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)this).Type) : new MyObject(p, this));
 			try {
 				var f = GetMethod("init");
 				var ar = new object[argss.Length+1];
@@ -123,8 +127,8 @@ namespace Mondo.MyTypes.MyClasses {
 			"methods",	(Func<ClassT,DictionaryT>) ((c) => c.Methods),
 			"parents",	(Func<ClassT,ListT>) ((c) => c.Parents),
 			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
-			"new",		(Func<ClassT,object>) 
-					((c) => c is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)c).Type) : new MyObject(c)),
+			"new",		(Func<IPrintable,ClassT,object>) 
+					((p,c) => c is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)c).Type) : new MyObject(p,c)),
 			"@",		(Func<ClassT,DictionaryT>) ((c) => new DictionaryT(c.Methods)),
 		};
 

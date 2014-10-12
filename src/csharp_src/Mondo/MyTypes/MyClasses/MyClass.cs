@@ -27,8 +27,8 @@ using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
 	class MyClass : ClassT {
-		public MyClass(string name, ListT parents, DictionaryT methods, PackageT package)
-		     : base(name, toList(parents), toDic(methods), package) {
+		public MyClass(string name, ListT parents, DictionaryT methods)
+		     : base(name, toList(parents), toDic(methods)) {
 		     }		     
 
 		private static List<ClassT> toList(ListT l) {

@@ -79,6 +79,11 @@ namespace Mondo.MyTypes.MyClasses {
 			"package",	(Func<PackageT,IVariable>) ((c) => (c.Package!=null ? (IVariable)c.Package : (IVariable)new NullType())),
 			"items",	(Func<PackageT,DictionaryT>) ((p) => p.Items),
 			"@",		(Func<PackageT,DictionaryT>) ((p) => p.Items),
+			"<<",		(Func<PackageT,ClassT,PackageT>) ((p,c) => {
+						c.Package = p;
+						p.Items.Add(new ReferenceT(new StringT(c.Name)), new ReferenceT(c));
+						return p;
+					}),	
 		};
 
 		public virtual ClassT GetClass() {

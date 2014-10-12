@@ -95,8 +95,8 @@ namespace Mondo.MyTypes.MyClasses {
 				public const string ClassName = "String";
 
 		private static object[] lambdas = {
-			"newClass",	(Func<string,ListT,DictionaryT,PackageT,ClassT>) 
-					((name, parents, methods, package) => new MyClass(name, parents, methods, package)),
+			"newClass",	(Func<string,ListT,DictionaryT,ClassT>) 
+					((name, parents, methods) => new MyClass(name, parents, methods)),
 			"len",		(Func<string,double>) ((a) => a.Length),
 			"get",		(Func<string,double,IVariable>) ((a,i) => new StringT(""+a[(int)i])),
 			"reverse",	(Func<string,string>) ((a) => {var c=a.ToCharArray(); Array.Reverse(c); return new string(c);}),
