@@ -30,7 +30,7 @@ using System.Text;
 using Mondo.Engine;
 
 namespace Mondo.MyTypes.MyClasses {
-	class StringT : Pointer<string>, IVariable {	
+	class StringT : Pointer<string>, IVariable, IIndexable {	
 		public static readonly Dictionary<string,char> escapeChars = new Dictionary<string,char> {
 			{"\\\\",	'\\'},
 			{"\\\'",	'\''},
@@ -99,6 +99,7 @@ namespace Mondo.MyTypes.MyClasses {
 					((name, parents, methods) => new MyClass(name, parents, methods)),
 			"len",		(Func<string,double>) ((a) => a.Length),
 			"get",		(Func<string,double,IVariable>) ((a,i) => new StringT(""+a[(int)i])),
+			SymbolMap.RefSymbol, (Func<StringT,IVariable,object>) ((a,i) => GeneralIndexer.Index(a,i)),
 			"reverse",	(Func<string,string>) ((a) => {var c=a.ToCharArray(); Array.Reverse(c); return new string(c);}),
 			"ord",		(Func<string,ITuplable>) ((x) => TupleT.MakeTuplable(new ListT((from ch in x select (double)ch).ToList()).ToArray())),
 			"fromF",	(Func<string,object>) ((x) => { try{ return System.IO.File.ReadAllText(x); }catch{ return new NullType(); }}),
@@ -170,6 +171,14 @@ namespace Mondo.MyTypes.MyClasses {
 				ret += Value[i];
 			}
 			return ret;
+		}
+
+		public object At(int i) {
+			return new StringT(""+Value[i]);
+		}
+
+		public int Count {
+			get {return Value.Length;}
 		}
 	}
 }

@@ -93,9 +93,19 @@ namespace Mondo.MyTypes.MyClasses {
 			"step",	(Func<RangeT,double>) ((x) => x.Step),
 			"each", (Func<IPrintable,RangeT,ProcedureT,object>) ((p,r,f) => {
 						object ret = new NullType();
-						foreach(var x in r) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(x));
+						foreach(var x in r) ret = Evaluator.Eval(f,p,TupleT.MakeTuplable(x));
 						return ret;
 					}),	
+			"toList",(Func<RangeT,ListT>) ((x) => {
+						var l = new ListT();
+						foreach(var i in x) l.Add(new ReferenceT((Number)i));
+						return l;
+					}),
+			"toTup",(Func<RangeT,TupleT>) ((x) => {
+						var l = new TupleT();
+						foreach(var i in x) l.Add(new ReferenceT((Number)i));
+						return l;
+					}),
 		};
 		
 		public ClassT GetClass() {

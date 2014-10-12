@@ -30,7 +30,7 @@ using Mondo.Engine;
 using Mondo.lib;
 
 namespace Mondo.MyTypes.MyClasses {
-	public class ListT : SList<ICompCloneable>, IVariable {
+	public class ListT : SList<ICompCloneable>, IVariable, IIndexable {
 		public ListT() :  base() {
 			ID = ObjectContainer.Instance.Add(this);
 		}
@@ -56,9 +56,10 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "List";
 
 		private static object[] lambdas = {
+			"toTup",	(Func<ListT,TupleT>) ((a) => new TupleT(a)),
 			"get",		(Func<ListT,double,object>) ((a,i) => ((ReferenceT)a[(int)i]).Value ),
 			"len",		(Func<ListT,double>) ((a) => a.Count),
-			SymbolMap.RefSymbol, (Func<ListT,IVariable,object>) ((a,i) => a.Index(i) ),
+			SymbolMap.RefSymbol, (Func<ListT,IVariable,object>) ((a,i) => GeneralIndexer.Index(a,i) ),
 			"each",		(Func<IPrintable,ListT,ProcedureT,object>)
 						((p, ar, f) => { object ret=new NullType();
 						foreach(IVariable i in ar) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(i));
@@ -117,49 +118,12 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public override string ToString() {
 			string str = "";
-			foreach(var item in this) str += (str=="" ? "" : ",") +((IVariable)item).ToString();
+			foreach(var item in this) str += (str=="" ? "" : ",") +item;
 			return "["+str+"]";
 		}
 
-		private IVariable numIndex(int i) {
-			return (IVariable)(i>=0 ? this[i] : this[Count+i]);
-		}
-
-		private object[] pairIndex(int beg, int end) {
-			var list = new ListT();
-			Console.WriteLine("beg="+beg+" end="+end);
-			for(int i=beg; i<end; i++) list.Add(numIndex(i));
-			return list.ToArray();
-		}
-
-		private object[] rangeIndex(RangeT r) {
-			var list = new ListT();
-			foreach(var i in r) list.Add(numIndex((int)((Number)i).Value));
-			return list.ToArray();
-		}
-
-		public object ivarIndex(IVariable iv) {
-			var i = TypeTrans.dereference(iv);
-			if(i is Number) return numIndex((int)((Number)i).Value);
-			if(i is PairT) return pairIndex((int)((Number)((PairT)i).Key).Value, (int)((Number)((PairT)i).Value).Value);
-			if(i is RangeT) return rangeIndex((RangeT)i);
-			return null;
-		}
-
-		public object[] listIndex(ListT lt) {
-			var list = new List<object>();
-			foreach(var i in lt.ToArray()) {
-				var ivi = ivarIndex((IVariable)i);
-				if(ivi is object[]) list.AddRange((object[])ivi);
-				else list.Add(ivi);
-			}
-			return list.ToArray();
-		}
-
-		public IVariable Index(IVariable iv) {
-			var i = TypeTrans.dereference(iv);
-			if(i is ListT) return (IVariable)TupleT.MakeTuplable(listIndex((ListT)i));
-			return (IVariable)TupleT.MakeTuplable(ivarIndex((IVariable)i));
+		public object At(int i) {
+			return this[i];
 		}
 	}
 }

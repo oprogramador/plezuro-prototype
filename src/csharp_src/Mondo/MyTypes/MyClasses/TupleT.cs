@@ -108,7 +108,9 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public override string ToString() {
 			string str = "";
-			foreach(var item in this) str += (str=="" ? "" : ",") +((IStringable)item).ToString();
+			foreach(var item in this) {
+				str += (str=="" ? "" : ",") +item;
+			}
 			return "("+str+")";
 		}
  

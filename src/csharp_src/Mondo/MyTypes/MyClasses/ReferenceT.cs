@@ -96,8 +96,12 @@ namespace Mondo.MyTypes.MyClasses {
 			return myClass;
 		}	
 
-		string IStringable.ToString() {
+		public override string ToString() {
 			return ""+Value;
+		}
+
+		string IStringable.ToString() {
+			return ((IStringable)Value).ToString();
 		}
 
 		public object Convert() {

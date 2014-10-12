@@ -17,6 +17,7 @@ classes:
                 - pools
         - security
         - dynamic documentation
+        - shorter methods call
 mathematics:
 bug_fixes:
         - gui
@@ -66,6 +67,7 @@ documentation:
         - full
         - wiki
         - examples
+        - alphabetical order of methods, also in code
 additions:
         - multithreading
         - networking

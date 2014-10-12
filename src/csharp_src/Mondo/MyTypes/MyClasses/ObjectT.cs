@@ -108,6 +108,11 @@ namespace Mondo.MyTypes.MyClasses {
 			"lent",		(Func<ITuplable,IVariable>) ((x) => new Number(x.ToArray().Length)),
 			"set",		(Func<ITuplable,IVariable>) ((x) => new SetT(x.ToArray())),
 			"dic",		(Func<ITuplable,IVariable>) ((x) => new DictionaryT(x.ToArray())),
+			"toS",		(Func<ITuplable,string>) ((x) => {
+						var ret = "";
+						foreach(var i in x.ToArray()) ret += ((IStringable)i).ToString();
+						return ret;
+					}),
 			"@",	 	(Func<MyObject,DictionaryT>) ((o) => o.Pools),
 			DotSymbol,	(Func<IVariable,SoftLink,DotFunc>) ((x,f) => new DotFunc(f.ToProc(x), x)),
 			";",		(Func<IVariable,IVariable,IVariable>) ((x,y) => y),
