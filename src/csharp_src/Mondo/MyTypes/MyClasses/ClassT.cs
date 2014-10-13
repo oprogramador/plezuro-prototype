@@ -124,6 +124,8 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Class";
 
 		protected static object[] lambdas = {
+			"get",		(Func<ClassT,string,ReferenceT>) ((c,n) => (ReferenceT)c.Methods[new ReferenceT(new StringT("get-"+n))]),
+			"set",		(Func<ClassT,string,ReferenceT>) ((c,n) => (ReferenceT)c.Methods[new ReferenceT(new StringT("set-"+n))]),
 			"methods",	(Func<ClassT,DictionaryT>) ((c) => c.Methods),
 			"parents",	(Func<ClassT,ListT>) ((c) => c.Parents),
 			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),

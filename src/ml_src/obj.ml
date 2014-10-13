@@ -6,6 +6,12 @@ Lang
         '+',{
                 (@this['age'] += vals)
         },
+        "get-age",{
+                @this['age']
+        },
+        "set-age",{
+                @this['age'] = vals
+        },
         "str",{
                 "I'm "+(@this['age'])+' years old.'
         },
@@ -28,4 +34,5 @@ p+50;
 $d = (@Lang['Dog'](13,'Akbash'));
 d+3;
 (''+d).::printl();
+((@Lang['Person']).::set('age'))(d,100);
 @p,@d
