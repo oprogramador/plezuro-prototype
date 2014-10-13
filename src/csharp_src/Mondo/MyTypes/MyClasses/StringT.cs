@@ -107,9 +107,15 @@ namespace Mondo.MyTypes.MyClasses {
 			"put",		(Func<string,string,bool>) ((f,x) => { try{ System.IO.File.WriteAllText(f,x); return true; }catch{ return false; }}),
 			"putA",		(Func<string,string,bool>) ((f,x) => { try{ System.IO.File.AppendAllText(f,x); return true; }catch{ return false; }}),
 			"append",	(Func<string,string,bool>) ((x,f) => { try{ System.IO.File.AppendAllText(f,x); return true; }catch{ return false; }}),
-			"load",		(Func<IPrintable,string,object>) 
-					((p,x) => { try{ return Parser.Parse(System.IO.File.ReadAllText(x).TrimEnd('\n'), p, null); } 
-						catch{ throw new ModuleNotFoundException(); }
+			"load",		(Func<IPrintable,string,ListT,object>) 
+					((p,x,args) => { 
+					 		try {
+						       		args = (ListT)args.Clone();
+								args.Insert(0,new StringT( System.IO.Path.GetFileName(x) ));	
+								return Parser.Parse(System.IO.File.ReadAllText(x), p, TupleT.MakeTuplable(args.ToArray()));
+							} catch{ 
+								throw new ModuleNotFoundException();
+							}
 					}),
 			"eval",		(Func<IPrintable,string,object>) ((p,code) => Parser.Parse(code, p, null) ),
 			"+", 		(Func<IPrintable,string,IVariable,string>) ((p,x,y) => {

@@ -8,7 +8,6 @@ oop:
                 - better inheritance (collections)
                 - multiple inheritance
 classes:
-        - constructor
         - inheritance:
                 - set of parents
         - all_dynamic:
@@ -18,6 +17,9 @@ classes:
         - security
         - dynamic documentation
         - shorter methods call
+        - contraints
+        - getter/setter
+        - access modifiers
 mathematics:
 bug_fixes:
         - gui
@@ -31,12 +33,8 @@ tests:
         - assert
 interpreter:
         - significant optimization
-string:
-        - full indexer
 function:
         - default parameters
-script:
-        - loading with args
 constants:
         - change lock
 variables:
