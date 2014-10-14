@@ -17,8 +17,10 @@ classes:
         - security
         - dynamic documentation
         - shorter methods call
-        - contraints
-        - getter/setter
+        - constraints:
+                - regex
+                - type
+        - getter/setter (ex. public set, private get)
         - access modifiers
 mathematics:
 bug_fixes:
@@ -37,6 +39,7 @@ function:
         - default parameters
 constants:
         - change lock
+        - own constants
 variables:
         - globals
         - comparison:
@@ -45,14 +48,14 @@ data:
         - selectMany
         - selectIterative
         - thenBy
-        - validation
-        - regex
         - serialization
         - select with indexer
 types:
         - dateTime
         - integer
         - parse
+        - set:
+                - shorter expression
 conditions:
         - if optimization
 operators:

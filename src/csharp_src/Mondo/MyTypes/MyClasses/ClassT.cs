@@ -32,6 +32,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public DictionaryT Methods { get; private set; }
 		public string Name{ get; private set; }
 		public PackageT Package{ get; set; }
+		private Dictionary<Method,List<ICallable>> constraints;
 
 		public ClassT(string name, List<ClassT> parents, Dictionary<string,Method> meth, PackageT package) {
 			ID = ObjectContainer.Instance.Add(this);
@@ -57,6 +58,10 @@ namespace Mondo.MyTypes.MyClasses {
 			Parents = parents;
 			Methods = meth;
 			Package = package;
+		}
+
+		private void loadConstraints() {
+
 		}
 
 		public object Call(IPrintable p, object[] argss) {
