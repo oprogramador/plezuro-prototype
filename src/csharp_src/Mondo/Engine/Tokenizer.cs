@@ -67,9 +67,9 @@ namespace Mondo.Engine {
 			if(General.Converges( StrB, SoftLinkSymbol, i )) return TokenTypes.SoftLink;
 			if(General.Converges( StrB, OneLineCommentSymbol, i ))  return TokenTypes.OneLineComment;
 			if(General.Converges( StrB, MultiLineCommentOpenSymbol, i )) return TokenTypes.MultiLineComment;
-			if(General.Converges( StrB, OneStringSymbol, i )) return TokenTypes.OneString;
-			if(General.Converges( StrB, BiStringSymbol, i )) return TokenTypes.BiString;
 			if(General.Converges( StrB, TriStringSymbol, i )) return TokenTypes.TriString;
+			if(General.Converges( StrB, BiStringSymbol, i )) return TokenTypes.BiString;
+			if(General.Converges( StrB, OneStringSymbol, i )) return TokenTypes.OneString;
 			if(Char.IsWhiteSpace(StrB[i])) {
 				if(StrB[i]!='\n') return TokenTypes.WhiteSpace;
 				return TokenTypes.EndLine;

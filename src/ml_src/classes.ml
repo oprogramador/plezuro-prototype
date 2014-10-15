@@ -7,6 +7,10 @@ $a = 0b11011; //binary
 //string
 $b = 'aaaaaaaaaaaaaaaaaa';
 $c = "wfefwfwf";
+$cc = '''xxx
+yyy
+
+zzz''';
 
 //list
 $d = [1,2,3,4];
@@ -33,4 +37,4 @@ $k = 3:4;
 //procedure
 $l = {1+2}
 
-(x,y,z,a,b,c,d,e,f,g,h,i,j,k,l)
+(x,y,z,a,b,c,cc,d,e,f,g,h,i,j,k,l)
