@@ -34,6 +34,8 @@ namespace Mondo.MyCollections {
 		SquareClose,
 		CurlyOpen,
 		CurlyClose,
+		DollarOpen,
+		HashOpen,
 		OneString,
 		BiString,
 		TriString,

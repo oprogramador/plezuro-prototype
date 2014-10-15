@@ -39,6 +39,8 @@ namespace Mondo.Engine {
 		public const string MainDelimiter = ";";
 		public const string EmptySymbol = "empty";
 		public const string ListSymbol = "array";
+		public const string SetSymbol = "set";
+		public const string DicSymbol = "dic";
 		public const string RefSymbol = "ref";
 		public const string ArgsSymbol = "args";
 		public const string ThisSymbol = "this";

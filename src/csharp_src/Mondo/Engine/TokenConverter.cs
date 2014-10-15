@@ -45,6 +45,11 @@ namespace Mondo.Engine {
 			match();
 		}
 
+		private Token matchFunc(List<Token> output, string symbol) {
+			output.Add( new Token(Tokenizer.SoftLinkSymbol+symbol, TokenTypes.Symbol, new SoftLink(symbol)) );
+			return new Token("(", TokenTypes.BracketOpen, "(");
+		}
+
 		private Token matchSquare(List<Token> output) {
 			if(lastType<0 || lastType==TokenTypes.Operator || lastType==TokenTypes.BracketOpen) {
 				output.Add( new Token(ListFullSymbol, TokenTypes.Symbol, new SoftLink(SymbolMap.ListSymbol)) );
@@ -60,6 +65,8 @@ namespace Mondo.Engine {
 			foreach(var t in tokens) {
 				var ob = t;
 				if(t.Type == TokenTypes.SquareOpen) ob = matchSquare(ret);
+				if(t.Type == TokenTypes.DollarOpen) ob = matchFunc(ret, SymbolMap.SetSymbol);
+				if(t.Type == TokenTypes.HashOpen) ob = matchFunc(ret, SymbolMap.DicSymbol);
 				if(t.Type == TokenTypes.SquareClose) ob = new Token(")", TokenTypes.BracketClose, ")");
 				if(t.Type != TokenTypes.EndLine) lastType = t.Type;
 				ret.Add(ob);
@@ -112,6 +119,8 @@ namespace Mondo.Engine {
 				case TokenTypes.SquareClose:	 	return true;
 				case TokenTypes.CurlyOpen:	 	return true;
 				case TokenTypes.CurlyClose:	 	return true;
+				case TokenTypes.DollarOpen:	 	return true;
+				case TokenTypes.HashOpen:	 	return true;
 				case TokenTypes.OneString: 		return true;
 				case TokenTypes.BiString: 		return true;
 				case TokenTypes.TriString: 		return true;

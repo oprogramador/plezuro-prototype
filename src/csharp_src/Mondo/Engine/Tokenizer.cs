@@ -44,6 +44,8 @@ namespace Mondo.Engine {
 		public static readonly string OneStringSymbol = "'";
 		public static readonly string BiStringSymbol = "\"";
 		public static readonly string TriStringSymbol = "'''";
+		public static readonly string DollarSymbol = "$[";
+		public static readonly string HashSymbol = "#[";
 
 		private StringBuilder StrB;
 		public List<Token> Output { get; private set; }
@@ -55,6 +57,8 @@ namespace Mondo.Engine {
 		}
 
 		private TokenTypes detectType(int i) {
+			if(General.Converges( StrB, DollarSymbol, i )) return TokenTypes.DollarOpen;
+			if(General.Converges( StrB, HashSymbol, i )) return TokenTypes.HashOpen;
 			if(Char.IsLetter(StrB[i]) || "_$".IndexOf(StrB[i])>=0) return TokenTypes.Symbol;
 			if(Char.IsDigit(StrB[i])) return TokenTypes.Number;
 			//if(StrB[i]=='.') return TokenTypes.Dot;
@@ -191,6 +195,8 @@ namespace Mondo.Engine {
 				case TokenTypes.SquareClose:	 	ob = "]"; i++;					break;
 				case TokenTypes.CurlyOpen:	 	ob = "{"; i++;					break;
 				case TokenTypes.CurlyClose:	 	ob = "}"; i++;					break;
+				case TokenTypes.DollarOpen:	 	ob = DollarSymbol; i+=DollarSymbol.Length;	break;
+				case TokenTypes.HashOpen:	 	ob = HashSymbol; i+=HashSymbol.Length;		break;
 				case TokenTypes.OneString: 		ob = matchString(ref i, OneStringSymbol, false);break;
 				case TokenTypes.BiString: 		ob = matchString(ref i, BiStringSymbol, false);	break;
 				case TokenTypes.TriString: 		ob = matchString(ref i, TriStringSymbol, true);	break;

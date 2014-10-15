@@ -106,8 +106,8 @@ namespace Mondo.MyTypes.MyClasses {
 			SymbolMap.ListSymbol,	(Func<ITuplable,IVariable>) ((x) => new ListT(x.ToArray())),
 			"clone",	(Func<IVariable,IVariable>) ((x) => (IVariable)x.Clone()),
 			"lent",		(Func<ITuplable,IVariable>) ((x) => new Number(x.ToArray().Length)),
-			"set",		(Func<ITuplable,IVariable>) ((x) => new SetT(x.ToArray())),
-			"dic",		(Func<ITuplable,IVariable>) ((x) => new DictionaryT(x.ToArray())),
+			SymbolMap.SetSymbol,	(Func<ITuplable,IVariable>) ((x) => new SetT(x.ToArray())),
+			SymbolMap.DicSymbol,	(Func<ITuplable,IVariable>) ((x) => new DictionaryT(x.ToArray())),
 			"toS",		(Func<ITuplable,string>) ((x) => {
 						var ret = "";
 						foreach(var i in x.ToArray()) ret += ((IStringable)i).ToString();
