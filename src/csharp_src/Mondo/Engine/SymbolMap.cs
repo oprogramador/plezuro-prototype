@@ -145,6 +145,8 @@ namespace Mondo.Engine {
 		public static readonly HashSet<string> FullOperSet;
 
 		public static HashSet<string> RightToLeft = new HashSet<string>() {
+			":=",
+			"=",
 			"^",
 			"^^",
 		};

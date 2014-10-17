@@ -26,9 +26,10 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Mondo.MyCollections;
+using Mondo.Engine;
 
 namespace Mondo.MyTypes.MyClasses {
-	class SetT : SortedSet<IVariable>, IVariable {
+	public class SetT : SortedSet<IVariable>, IVariable {
 		public SetT() :  base() {
 			ID = ObjectContainer.Instance.Add(this);
 		}
@@ -139,9 +140,9 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public override string ToString() {
-			string ret = "{";
-			foreach(var i in this) ret += (ret=="{" ? "" : ",")+i;
-			ret += "}";
+			string ret = "";
+			foreach(var i in this) ret += (ret=="" ? "" : ",")+i;
+			ret = Tokenizer.SetSymbol + ret + "]";
 			return ret;
 		}
 	}

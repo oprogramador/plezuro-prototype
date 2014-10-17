@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.29)  10 OCT 2014 13:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.5.29)  17 OCT 2014 10:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -618,7 +618,7 @@ LaTeX Info: Redefining \nameref on input line 113.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<logo.png, id=92, 642.4pt x 120.45pt>
+<logo.png, id=104, 642.4pt x 120.45pt>
 File: logo.png Graphic file (type png)
  <use logo.png>
 Package pdftex.def Info: logo.png used on input line 125.
@@ -674,8 +674,8 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 3.
 )
 (../src/ml_src/comments.ml) [2] (../src/ml_src/var.ml) (../src/ml_src/ref.ml)
-(../src/ml_src/classes.ml [3]) (../src/ml_src/tuple.ml) (../src/ml_src/if.ml)
-(../src/ml_src/loop.ml [4]) (../src/ml_src/proc.ml
+(../src/ml_src/classes.ml [3]) (../src/ml_src/index.ml) (../src/ml_src/tuple.ml
+) (../src/ml_src/if.ml) [4] (../src/ml_src/loop.ml) (../src/ml_src/proc.ml
 Overfull \hbox (16.24992pt too wide) in paragraph at lines 10--11
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
@@ -683,51 +683,58 @@ Overfull \hbox (16.24992pt too wide) in paragraph at lines 10--11
  []
 
 ) (../src/ml_src/file.ml) (../src/ml_src/html.ml)
-Overfull \hbox (232.25212pt too wide) in paragraph at lines 2--294
+Overfull \hbox (232.25212pt too wide) in paragraph at lines 2--300
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
 ][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-[5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
+(../src/ml_src/obj.ml [5]) [6] [7] [8] [9] [10] [11] [12] [13] [14] [15]
+[16] [17] [18]
 File: code.tex  (verbatim)
- [18]
-Overfull \hbox (102.48999pt too wide) in paragraph at lines 1413--1413
+ [19]
+Overfull \hbox (18.49072pt too wide) in paragraph at lines 1438--1438
+[]\OT4/cmtt/m/n/10 MyTypes/MyClasses/ListT.cs: public class ListT : SList<IComp
+Cloneable>, IVariable, IIndexable[] 
+ []
+
+
+Overfull \hbox (102.48999pt too wide) in paragraph at lines 1438--1438
 []\OT4/cmtt/m/n/10 MyTypes/MyClasses/DictionaryT.cs: public class DictionaryT :
  SortedDictionary<IVariable,IVariable>, IVariable[] 
  []
 
 
-Overfull \hbox (86.74013pt too wide) in paragraph at lines 1413--1413
+Overfull \hbox (86.74013pt too wide) in paragraph at lines 1438--1438
 []\OT4/cmtt/m/n/10 MyTypes/MyClasses/ReferenceT.cs: public class ReferenceT : P
 ointer<IVariable>, IVariable, ITypeConvertible[] 
  []
 
-
-Overfull \hbox (2.74086pt too wide) in paragraph at lines 1413--1413
+[20]
+Overfull \hbox (2.74086pt too wide) in paragraph at lines 1438--1438
 []\OT4/cmtt/m/n/10 MyCollections/ICompCloneable.cs: public interface ICompClone
 able : IComparable, ICloneable[] 
  []
 
-[19]
-Overfull \hbox (39.49054pt too wide) in paragraph at lines 1413--1413
+
+Overfull \hbox (39.49054pt too wide) in paragraph at lines 1438--1438
 []\OT4/cmtt/m/n/10 MyCollections/SList.cs: public class SList<T> : CList<T>, IC
 ompCloneable where T : ICompCloneable[] 
  []
 
 
-Overfull \hbox (123.4898pt too wide) in paragraph at lines 1413--1413
+Overfull \hbox (123.4898pt too wide) in paragraph at lines 1438--1438
 []\OT4/cmtt/m/n/10 MyCollections/ConcurrentDictionary.cs: public class Concurre
 ntDictionary<TKey, TValue> : Dictionary<TKey, TValue>[] 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1415.
-[20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1415.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1440.
+[21]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1440.
  (./documentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1415.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1415.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1440.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1440.
 
 
 
@@ -736,18 +743,18 @@ Package rerunfilecheck Warning: File `documentation.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `documentation.out':
-(rerunfilecheck)             Before: BDB0C617E725C1FFBACE3B4A42101057;1808
-(rerunfilecheck)             After:  7E0A794413F0DC65BB4382199021904A;1822.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1415.
+(rerunfilecheck)             Before: 056799B74DCF5E02946540283B7A7CB5;2100
+(rerunfilecheck)             After:  CE077EAADFF6FEB0BCD43D551208CDC6;2087.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1440.
  ) 
 Here is how much of TeX's memory you used:
- 8552 strings out of 493304
- 120761 string characters out of 6139871
- 231830 words of memory out of 5000000
- 11685 multiletter control sequences out of 15000+600000
+ 8640 strings out of 493304
+ 122004 string characters out of 6139871
+ 236830 words of memory out of 5000000
+ 11714 multiletter control sequences out of 15000+600000
  11145 words of font info for 32 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 29i,6n,40p,256b,1831s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,6n,40p,259b,1831s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/plit.enc}{/usr/share/texliv
 e/texmf-dist/fonts/enc/dvips/pl/plms.enc}{/usr/share/texlive/texmf-dist/fonts/e
 nc/dvips/pl/plrm.enc}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/pl/pltt.enc
@@ -761,10 +768,10 @@ xlive/texmf-dist/fonts/type1/public/pl/plr17.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/pl/plsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/pl/plti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/pl/pltt10.
 pfb>
-Output written on documentation.pdf (20 pages, 120989 bytes).
+Output written on documentation.pdf (21 pages, 126185 bytes).
 PDF statistics:
- 420 PDF objects out of 1000 (max. 8388607)
- 382 compressed objects within 4 object streams
- 190 named destinations out of 1000 (max. 500000)
- 182 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 499 PDF objects out of 1000 (max. 8388607)
+ 459 compressed objects within 5 object streams
+ 244 named destinations out of 1000 (max. 500000)
+ 206 words of extra memory for PDF output out of 10000 (max. 10000000)
 

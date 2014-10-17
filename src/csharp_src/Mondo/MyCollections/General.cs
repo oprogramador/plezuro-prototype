@@ -27,10 +27,10 @@ using System;
 using System.Collections.Generic;
 namespace Mondo.MyCollections {
 	static class General {
-		public static string EnumToString(IEnumerable ie) {
+		public static string EnumToString(IEnumerable ie, string delim=", ") {
 			string str = "";
-			foreach(var item in ie) str += (str=="" ? "" : ",") +item;
-			return "["+str+"]";
+			foreach(var item in ie) str += (str=="" ? "" : delim) +item;
+			return "{"+str+"}";
 		}
 
 		public static int Compare(IEnumerable a, IEnumerable b) {

@@ -28,7 +28,7 @@ using System.Linq;
 using Mondo.lib;
 
 namespace Mondo.MyCollections {
-	class SortedSet<T> : SortedDictionary<T,int> {
+	public class SortedSet<T> : SortedDictionary<T,int> {
 		public void Add(T x) {
 			base.Add(x,0);
 		}

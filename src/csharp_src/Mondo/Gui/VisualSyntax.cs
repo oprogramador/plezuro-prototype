@@ -37,6 +37,8 @@ namespace Mondo.Gui {
 			{TokenTypes.SquareClose, Color.Black},
 			{TokenTypes.CurlyOpen, Color.Blue},
 			{TokenTypes.CurlyClose, Color.Blue},
+			{TokenTypes.DollarOpen, Color.Black},
+			{TokenTypes.HashOpen, Color.Black},
 			{TokenTypes.OneString, Color.Orange},
 			{TokenTypes.BiString, Color.Orange},
 			{TokenTypes.TriString, Color.Yellow},

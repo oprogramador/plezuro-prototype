@@ -39,15 +39,15 @@ MyTypes/MyClasses/ErrorT.cs:	class ErrorT : IVariable
 MyTypes/MyClasses/StopPoint.cs:	class StopPoint : IVariable 
 MyTypes/MyClasses/ProcedureT.cs:	public class ProcedureT : OStack, ICallable  
 MyTypes/MyClasses/BooleanT.cs:	class BooleanT : Pointer<bool>, IVariable 
-MyTypes/MyClasses/ListT.cs:	public class ListT : SList<ICompCloneable>, IVariable 
+MyTypes/MyClasses/ListT.cs:	public class ListT : SList<ICompCloneable>, IVariable, IIndexable 
 MyTypes/MyClasses/TupleT.cs:	public class TupleT : SList<IVariable>, IVariable 
 MyTypes/MyClasses/MyClass.cs:	class MyClass : ClassT 
 MyTypes/MyClasses/PointerT.cs:	class PointerT : Pointer<ReferenceT>, IVariable 
-MyTypes/MyClasses/SetT.cs:	class SetT : SortedSet<IVariable>, IVariable 
+MyTypes/MyClasses/SetT.cs:	public class SetT : SortedSet<IVariable>, IVariable 
 MyTypes/MyClasses/Method.cs:	public class Method : IVariable, ICallable 
 MyTypes/MyClasses/Callable.cs:	class Callable 
 MyTypes/MyClasses/NullType.cs:	class NullType : IVariable 
-MyTypes/MyClasses/StringT.cs:	class StringT : Pointer<string>, IVariable 
+MyTypes/MyClasses/StringT.cs:	class StringT : Pointer<string>, IVariable, IIndexable 
 MyTypes/MyClasses/StringT.cs:		class MiniParser : IParseable 
 MyTypes/MyClasses/Number.cs:	class Number : Pointer<double>, IVariable 
 MyTypes/MyClasses/MyObject.cs:	class MyObject : IVariable 
@@ -56,6 +56,7 @@ MyTypes/MyClasses/DictionaryT.cs:	public class DictionaryT : SortedDictionary<IV
 MyTypes/MyClasses/ReferenceT.cs:	public class ReferenceT : Pointer<IVariable>, IVariable, ITypeConvertible 
 MyTypes/MyClasses/DotFunc.cs:	class DotFunc : IVariable, ICallable  
 MyTypes/MyClasses/EmptyT.cs:	class EmptyT : IVariable 
+MyTypes/IIndexable.cs:	interface IIndexable 
 MyTypes/ICallable.cs:	public interface ICallable : IComparable 
 MyTypes/ObjectContainer.cs:	class ObjectContainer : List<IVariable> 
 MyTypes/Variable.cs:	static class Variable 
@@ -85,6 +86,7 @@ lib/HtmlDicTable.cs:	class HtmlDicTable : HtmlTable
 lib/HtmlTableFactory.cs:	static class HtmlTableFactory 
 DataFixtures/DataFixtures.cs:	class DataFixtures : SetT 
 MyCollections/ICompCloneable.cs:	public interface ICompCloneable : IComparable, ICloneable 
+MyCollections/GeneralIndexer.cs:	static class GeneralIndexer 
 MyCollections/Pointer.cs:	public class Pointer<T> 
 MyCollections/IEvalable.cs:	public interface IEvalable 
 MyCollections/TokenTypes.cs:	public enum TokenTypes 
@@ -96,7 +98,7 @@ MyCollections/WStack.cs:	public class WStack<T> : Stack<T>, IVariable
 MyCollections/IValuable.cs:	interface IValuable 
 MyCollections/IParseable.cs:	interface IParseable 
 MyCollections/SList.cs:	public class SList<T> : CList<T>, ICompCloneable where T : ICompCloneable 
-MyCollections/SortedSet.cs:	class SortedSet<T> : SortedDictionary<T,int> 
+MyCollections/SortedSet.cs:	public class SortedSet<T> : SortedDictionary<T,int> 
 MyCollections/General.cs:	static class General 
 MyCollections/EmptyArgException.cs:	class EmptyArgException : Exception 
 MyCollections/CList.cs:	public class CList<T> : WList<T> where T: IComparable 

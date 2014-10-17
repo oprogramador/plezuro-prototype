@@ -35,6 +35,10 @@ namespace Mondo.MyTypes.MyClasses {
 		public ProcedureT(ProcedureT f) :  base(f) {
 		}
 
+		public override string ToString() {
+			return General.EnumToString(this,"\n");
+		}
+
 		public object Call(IPrintable p, object[] args) {
 			return p.EvalDyn(this, TupleT.MakeTuplable(args));
 		}

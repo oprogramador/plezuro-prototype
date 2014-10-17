@@ -1,6 +1,6 @@
 /*
  * Integral.cs
- * Copyright 2014 Daniel Mikulski
+ * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,12 +28,10 @@ namespace Mondo.lib {
 		public double Result { get; private set; }
 
 		public Integral(Func<double,double> f, double beg, double end, int n) {
-			double dx,s = 0;
-			dx= (end-beg)/n;
-			for( double x = beg; x < end; x+=dx ) 
-				s += f( x );
-			s *= dx;
-			Result = s;
+			double sum = 0;
+			double step = (end-beg)/n;
+			for(double x=beg; x<end; x+=step) sum += f(x);
+			Result = sum*step;
 		}
 	}
 }

@@ -27,11 +27,11 @@ using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
 	class MyClass : ClassT {
-		public MyClass(string name, ListT parents, DictionaryT methods)
-		     : base(name, toList(parents), toDic(methods)) {
+		public MyClass(string name, SetT parents, DictionaryT methods)
+		     : base(name, toSet(parents), toDic(methods)) {
 		     }		     
 
-		private static List<ClassT> toList(ListT l) {
+		private static List<ClassT> toSet(SetT l) {
 			var ret = new List<ClassT>();
 			foreach(var i in l) ret.Add((ClassT)TypeTrans.dereference(i));
 			return ret;

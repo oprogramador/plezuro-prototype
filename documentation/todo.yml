@@ -10,9 +10,11 @@ oop:
 classes:
         - inheritance:
                 - set of parents
+                - automatic inheritance from Object
         - all_dynamic:
                 - base classes
                 - methods
+                - inherited methods
                 - pools
         - security
         - dynamic documentation
@@ -23,6 +25,8 @@ classes:
         - getter/setter (ex. public set, private get)
         - access modifiers
 mathematics:
+fixtures:
+        - random
 bug_fixes:
         - gui
         - language
@@ -51,11 +55,12 @@ data:
         - serialization
         - select with indexer
 types:
+        - string:
+                - mutable
+                - immutable
         - dateTime
         - integer
         - parse
-        - set:
-                - shorter expression
 conditions:
         - if optimization
 operators:
@@ -64,12 +69,15 @@ ide:
         - vim plugin
         - multithreading (stop)
         - computing info
+compilation:
+        - to exe
 documentation:
         - full
         - wiki
         - examples
         - alphabetical order of methods, also in code
 additions:
+        - gui
         - multithreading
         - networking
         - frameworks

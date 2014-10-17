@@ -52,6 +52,9 @@ namespace Mondo.MyTypes {
 			//return (Func<ReferenceT>)  (() => new ReferenceT( toMyType( ((Func<ReferenceT>)f)()  ) ));
 			var lambda = (Func<IPrintable,object[],ReferenceT>) ((p,argss) => {
 				var args = new List<object>(argss);
+				//Console.WriteLine("\n\nfun="+fun);
+				//Console.WriteLine("lambda vararg="+vararg+" stat="+stat+" tupvar="+tupvar);
+				//Console.WriteLine("args="+General.EnumToString(args));
 				if(!vararg) for(int i=0; i<args.Count; i++) { 
 					//if(argt[i+(stat?1:0)] != typeof(ITuplable)) {
 					//
@@ -64,12 +67,17 @@ namespace Mondo.MyTypes {
 					args[i] = TypeTrans.toRef( TypeTrans.toMyType( args[i]) );
 				}
 				if(stat) args.Insert(0,p);
+				//Console.WriteLine("args="+General.EnumToString(args));
+				//Console.WriteLine("args.to_a="+General.EnumToString(args.ToArray()));
 				object  res = null;
 				try {	
 					var tup = TupleT.MakeTuplable(args.ToArray());
+					//Console.WriteLine("tup="+tup);
 					res	= tupvar ? ((Func<ITuplable,IVariable>)fun).Invoke(tup) : 
 							fun.DynamicInvoke(args.ToArray());
-				} catch {
+					//Console.WriteLine("res="+res);
+				} catch(Exception e) {
+					Console.WriteLine("e="+e);
 					throw new ArgumentException();
 				}
 				if(res is double) TypeTrans.checkInfNaN(res);

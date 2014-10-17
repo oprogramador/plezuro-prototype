@@ -28,7 +28,7 @@ using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
 	public class ClassT : IItem, IVariable, ICallable {
-		public ListT Parents { get; private set; }
+		public SetT Parents { get; private set; }
 		public DictionaryT Methods { get; private set; }
 		public string Name{ get; private set; }
 		public PackageT Package{ get; set; }
@@ -37,7 +37,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public ClassT(string name, List<ClassT> parents, Dictionary<string,Method> meth, PackageT package) {
 			ID = ObjectContainer.Instance.Add(this);
 			Name = name;
-			Parents = new ListT(parents);
+			Parents = new SetT(parents);
 			Methods = new DictionaryT(meth);
 			Package = package;
 			try {
@@ -48,11 +48,11 @@ namespace Mondo.MyTypes.MyClasses {
 		public ClassT(string name, List<ClassT> parents, Dictionary<string,Method> meth) {
 			ID = ObjectContainer.Instance.Add(this);
 			Name = name;
-			Parents = new ListT(parents);
+			Parents = new SetT(parents);
 			Methods = new DictionaryT(meth);
 		}
 
-		public ClassT(string name, ListT parents, DictionaryT meth, PackageT package) {
+		public ClassT(string name, SetT parents, DictionaryT meth, PackageT package) {
 			ID = ObjectContainer.Instance.Add(this);
 			Name = name;
 			Parents = parents;
@@ -129,10 +129,10 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Class";
 
 		protected static object[] lambdas = {
-			"get",		(Func<ClassT,string,ReferenceT>) ((c,n) => (ReferenceT)c.Methods[new ReferenceT(new StringT("get-"+n))]),
-			"set",		(Func<ClassT,string,ReferenceT>) ((c,n) => (ReferenceT)c.Methods[new ReferenceT(new StringT("set-"+n))]),
+			//"get",		(Func<ClassT,string,ReferenceT>) ((c,n) => (ReferenceT)c.Methods[new ReferenceT(new StringT("get-"+n))]),
+			//"set",		(Func<ClassT,string,ReferenceT>) ((c,n) => (ReferenceT)c.Methods[new ReferenceT(new StringT("set-"+n))]),
 			"methods",	(Func<ClassT,DictionaryT>) ((c) => c.Methods),
-			"parents",	(Func<ClassT,ListT>) ((c) => c.Parents),
+			"parents",	(Func<ClassT,SetT>) ((c) => c.Parents),
 			"package",	(Func<ClassT,PackageT>) ((c) => c.Package),
 			"new",		(Func<IPrintable,ClassT,object>) 
 					((p,c) => c is BuiltinClass ? Activator.CreateInstance(((BuiltinClass)c).Type) : new MyObject(p,c)),

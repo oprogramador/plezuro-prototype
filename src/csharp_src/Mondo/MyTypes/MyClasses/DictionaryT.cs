@@ -134,9 +134,9 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public override string ToString() {
-			string ret = "{";
-			foreach(var i in Keys) ret += (ret=="{" ? "" : ", ")+TypeTrans.dereference(i)+":"+TypeTrans.dereference(this[i]);
-			ret += "}";
+			string ret = "";
+			foreach(var i in Keys) ret += (ret=="" ? "" : ", ")+TypeTrans.dereference(i)+":"+TypeTrans.dereference(this[i]);
+			ret = Tokenizer.DicSymbol + ret + "]";
 			return ret;
 		}
 	}
