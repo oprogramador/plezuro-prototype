@@ -45,6 +45,11 @@ namespace Mondo.Engine {
 		public const string ArgsSymbol = "args";
 		public const string ThisSymbol = "this";
 		public const string ValsSymbol = "vals";
+		public static readonly string[] ArgsSymbolList = {
+			"first",
+			"second",
+			"third",
+		};
 
 		private static readonly List<object> Symbols = new List<object>();
 			/*

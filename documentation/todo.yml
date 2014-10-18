@@ -9,7 +9,6 @@ oop:
                 - multiple inheritance
 classes:
         - inheritance:
-                - set of parents
                 - automatic inheritance from Object
         - all_dynamic:
                 - base classes
@@ -22,9 +21,12 @@ classes:
         - constraints:
                 - regex
                 - type
+        - triggers
         - getter/setter (ex. public set, private get)
         - access modifiers
 mathematics:
+        - linear algebra
+        - numpy and scipy equivalent
 fixtures:
         - random
 bug_fixes:
@@ -41,6 +43,7 @@ interpreter:
         - significant optimization
 function:
         - default parameters
+        - first, second... argument
 constants:
         - change lock
         - own constants
@@ -54,6 +57,8 @@ data:
         - thenBy
         - serialization
         - select with indexer
+        - database:
+                - mysql binding
 types:
         - string:
                 - mutable
@@ -61,11 +66,15 @@ types:
         - dateTime
         - integer
         - parse
+        - list:
+                - all to selected index
 conditions:
         - if optimization
 operators:
         - .=
 ide:
+        - autocompleting
+        - html editor
         - vim plugin
         - multithreading (stop)
         - computing info
@@ -77,7 +86,17 @@ documentation:
         - examples
         - alphabetical order of methods, also in code
 additions:
+        - new programming paradigms (ex. for prime numbers)
         - gui
+        - console:
+                - standard input
         - multithreading
         - networking
         - frameworks
+        - translation to other languages
+        - bindings to other languages libraries
+scripts:
+        - tetris
+        - snake
+        - calculator
+        - clock
