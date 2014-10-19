@@ -19,7 +19,7 @@
  * 
  * 
  */
- 
+
 
 using System;
 using System.Collections.Generic;using Mondo.MyTypes;
@@ -43,29 +43,30 @@ namespace Mondo.MyCollections {
 		}
 
 		public static object tryCall(object ob, IPrintable p, Type t) {
-			if(ob is DotFunc) if(t != typeof(ICallable)) return ((DotFunc)ob).Call(p, new object[]{});
+			if(ob is DotFunc) if(t != typeof(ICallable)) return dereference(((DotFunc)ob).Call(p, new object[]{}));
 			return ob;	
 		}
 
 		public static object tryCall(object ob, IPrintable p) {
-			//if(ob is DotFunc) return ((DotFunc)ob).Call(p, new object[]{});
+			var dob = dereference(ob);
+			if(dob is DotFunc) return dereference(((DotFunc)dob).Call(p, new object[]{}));
 			return ob;	
 		}
 
-/*
-		public static object fromDic(object ob, object key) {
-			if(ob is FuncDictionary) try {
-				ob = ((FuncDictionary)ob)[ReferenceT.GetType(toSymbolMapType(key))];
-			} catch {
-				try {
-					ob = ((FuncDictionary)ob)[toMyStrictType(key).GetType()];
-				} catch {
-					ob = ((FuncDictionary)ob)[typeof(DefaultType)];
-				}
-			}
-			return ob;
-		}
-*/
+		/*
+		   public static object fromDic(object ob, object key) {
+		   if(ob is FuncDictionary) try {
+		   ob = ((FuncDictionary)ob)[ReferenceT.GetType(toSymbolMapType(key))];
+		   } catch {
+		   try {
+		   ob = ((FuncDictionary)ob)[toMyStrictType(key).GetType()];
+		   } catch {
+		   ob = ((FuncDictionary)ob)[typeof(DefaultType)];
+		   }
+		   }
+		   return ob;
+		   }
+		   */
 
 		public static object adaptType(object ob, Type t) {
 			if(ob is Number) if(t == typeof(double)) return ((Number)ob).Value;

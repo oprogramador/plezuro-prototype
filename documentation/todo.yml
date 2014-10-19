@@ -17,7 +17,6 @@ classes:
                 - pools
         - security
         - dynamic documentation
-        - shorter methods call
         - constraints:
                 - regex
                 - type
@@ -41,7 +40,6 @@ interpreter:
         - significant optimization
 function:
         - default parameters
-        - first, second... argument
 constants:
         - change lock
         - own constants

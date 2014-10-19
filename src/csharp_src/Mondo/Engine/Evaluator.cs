@@ -128,7 +128,13 @@ namespace Mondo.Engine {
 
 		void methodMatch(object outp, object[] args) {
 			string oper = ((SoftLink)outp).Value;
-			var proc = ClassT.GetClass(args).GetMethod(oper).Proc;
+			ICallable proc;
+		       	try {
+				proc = ClassT.GetClass(args).GetMethod(oper).Proc;
+			} catch {
+				if(args.Length>0) args[0] = TypeTrans.tryCall(args[0], this);
+				proc = ClassT.GetClass(args).GetMethod(oper).Proc;
+			}
 			output.Push( proc.Call(this,args) );
 		}
 
@@ -215,7 +221,7 @@ namespace Mondo.Engine {
 			while(list.Count>0) {
 				internProcess();
 			}
-			Result = TypeTrans.toMyType( /*TypeTrans.tryCall(*/ TypeTrans.dereference(output.Pop())/*, this)*/ );
+			Result = TypeTrans.toMyType( TypeTrans.tryCall( TypeTrans.dereference(output.Pop()), this) );
 		}
 		
 		public override bool Equals(object ob) {

@@ -59,7 +59,7 @@ namespace Mondo.MyTypes {
 					//if(argt[i+(stat?1:0)] != typeof(ITuplable)) {
 					//
 						args[i] = TypeTrans.dereference(args[i], argt[i+(stat?1:0)]);
-						//args[i] = TypeTrans.tryCall(args[i], p, argt[i+(stat?1:0)]);
+						args[i] = TypeTrans.tryCall(args[i], p, argt[i+(stat?1:0)]);
 						args[i] = TypeTrans.adaptType(args[i], argt[i+(stat?1:0)]);
 					//}
 				}

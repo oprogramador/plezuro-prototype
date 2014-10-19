@@ -22,7 +22,8 @@
  
 
 using System;
-using System.Collections.Generic;using System.Text;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.RegularExpressions;
 using Mondo.MyCollections;
 using Mondo.MyTypes;
@@ -88,6 +89,10 @@ namespace Mondo.Engine {
 			for(;i<StrB.Length && !Char.IsDigit(StrB[i]) && !Char.IsLetter(StrB[i]) && "_$".IndexOf(StrB[i])<0; i++) {
 				ret+=StrB[i];
 				if(SymbolMap.FullOperSet.Contains(ret)) prev = ret;
+			}
+			if(prev == ObjectT.DotSymbol) if(!General.Converges(StrB, SoftLinkSymbol, i-SoftLinkSymbol.Length)) {
+				StrB.Insert(i, SoftLinkSymbol);
+				Console.WriteLine("i="+i+" strb="+StrB);
 			}
 			i -= ret.Length-prev.Length;
 			return prev;
