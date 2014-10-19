@@ -27,8 +27,6 @@ classes:
 mathematics:
         - linear algebra
         - numpy and scipy equivalent
-fixtures:
-        - random
 bug_fixes:
         - gui
         - language

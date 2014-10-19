@@ -23,8 +23,19 @@
 
 using System;
 
-namespace Mondo.MyCollections {
-	class MyRandom {
+namespace Mondo.MyTypes.MyClasses {
+	class MyRandom : Number {
+		private static Random random = new Random();
 
+		public override double Value {
+			get {
+				return random.NextDouble();
+			}
+			set {}
+		}
+
+		public static new object[] Constants = {
+			"rand",	new MyRandom(),
+		};
 	}
 }

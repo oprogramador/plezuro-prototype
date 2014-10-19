@@ -25,7 +25,7 @@ using System;
 using System.Collections.Generic;
 namespace Mondo.MyCollections {
 	public class Pointer<T> {
-		public T Value {
+		public virtual T Value {
 			get;
 			set;
 		}

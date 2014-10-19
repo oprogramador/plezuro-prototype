@@ -1,2 +1,1 @@
-($x,$y) = vals;
-x*2+y
+first*2+second, rand, rand
