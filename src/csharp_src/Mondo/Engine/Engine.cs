@@ -23,11 +23,13 @@
 
 using System;
 using System.Collections.Generic;
+
 namespace Mondo.Engine {
 	class Engine {
 		private static Engine instance;
 		public SymbolMap SymbolMap { get; private set; }
 		public IOMap IOMap { get; private set; }
+		public static readonly Random Random = new Random();
 
 		private Engine() {
 			SymbolMap = new SymbolMap();

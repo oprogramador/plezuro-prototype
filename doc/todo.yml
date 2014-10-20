@@ -36,6 +36,7 @@ error_handling:
         - all errors
 tests:
         - assert
+        - unit tests with script files
 interpreter:
         - significant optimization
 function:
@@ -59,6 +60,8 @@ types:
         - string:
                 - mutable
                 - immutable
+                - methods:
+                        - random
         - dateTime
         - integer
         - parse
@@ -67,7 +70,7 @@ types:
 conditions:
         - if optimization
 operators:
-        - .=
+        - .= (without cloning)
 ide:
         - autocompleting
         - html editor

@@ -92,7 +92,6 @@ namespace Mondo.Engine {
 			}
 			if(prev == ObjectT.DotSymbol) if(!General.Converges(StrB, SoftLinkSymbol, i-SoftLinkSymbol.Length)) {
 				StrB.Insert(i, SoftLinkSymbol);
-				Console.WriteLine("i="+i+" strb="+StrB);
 			}
 			i -= ret.Length-prev.Length;
 			return prev;

@@ -22,10 +22,11 @@
  
 
 using System;
+using Mondo.Engine;
 
 namespace Mondo.MyTypes.MyClasses {
 	class MyRandom : Number {
-		private static Random random = new Random();
+		private static Random random = Engine.Engine.Random;
 
 		public override double Value {
 			get {

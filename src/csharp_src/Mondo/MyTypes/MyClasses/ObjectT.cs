@@ -71,21 +71,23 @@ namespace Mondo.MyTypes.MyClasses {
 					if(x.Length<1) return xx;
 					var yall = new List<object>(yy.ToArray()).Select((i) => ((IVariable)i).Clone()).ToList();
 					if(yall.Count>x.Length) {
-					var y = yall.Take(x.Length-1).ToArray();
-					var ylast = new TupleT(yall.Skip(x.Length-1));
-					for(int i=0; i<x.Length-1; i++) {
-					((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
-					}
-					((ReferenceT)x[x.Length-1]).Value = ylast;
+						var y = yall.Take(x.Length-1).ToArray();
+						var ylast = new TupleT(yall.Skip(x.Length-1));
+						for(int i=0; i<x.Length-1; i++) {
+							((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
+						}
+						((ReferenceT)x[x.Length-1]).Value = ylast;
 					} else {
-					var y = yall.ToArray();
-					for(int i=0; i<yall.Count; i++) {
-					((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
-					}
-					for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());
+						var y = yall.ToArray();
+						for(int i=0; i<yall.Count; i++) {
+							Console.WriteLine("i="+i+" x="+x[i]+" type="+x[i].GetType()+" y="+y[i]+" type="+y[i].GetType());
+							((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
+							Console.WriteLine("x.val="+((ReferenceT)x[i]).Value);
+						}
+						for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());
 					}
 					return xx;
-					});
+				});
 		}
 
 		private static object operMaker(string str) {
@@ -121,7 +123,7 @@ namespace Mondo.MyTypes.MyClasses {
 			//			x.Value=(IVariable)y.Clone();
 			//			return y;
 			//		}),
-			",", 		(Func<ITuplable,ITuplable,ITuplable>) ((a,b) => TupleT.Concat(a,b)),
+			",", 		(Func<IPrintable,ITuplable,ITuplable,ITuplable>) ((p,a,b) => TupleT.Concat(null,a,b)),
 			"<->",		(Func<ReferenceT,ReferenceT,ReferenceT>) ((a,b) => { 
 					var c=a.Value;
 					a.Value=b.Value;

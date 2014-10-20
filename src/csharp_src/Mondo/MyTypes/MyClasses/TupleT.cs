@@ -57,10 +57,10 @@ namespace Mondo.MyTypes.MyClasses {
 			return (TupleT)Concat(st,typeof(TupleT));
 		}
 
-		public static ITuplable Concat(ITuplable a, ITuplable b) {
+		public static ITuplable Concat(IPrintable p, ITuplable a, ITuplable b) {
 			TupleT ret = new TupleT();
-			foreach(var i in a.ToArray()) ret.Add(TypeTrans.toRef(i));
-			foreach(var i in b.ToArray()) ret.Add(TypeTrans.toRef(i));
+			foreach(var i in a.ToArray()) ret.Add((IVariable)TypeTrans.tryCall(TypeTrans.toRef(i), p));
+			foreach(var i in b.ToArray()) ret.Add((IVariable)TypeTrans.tryCall(TypeTrans.toRef(i), p));
 			return ret;
 		}
 
