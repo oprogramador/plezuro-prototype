@@ -29,7 +29,12 @@ namespace Mondo.MyTypes.MyClasses {
 	class MyClass : ClassT {
 		public MyClass(string name, SetT parents, DictionaryT methods)
 		     : base(name, toSet(parents), toDic(methods)) {
-		     }		     
+			makeParents();
+		}		     
+
+		private void makeParents() {
+			if(Parents.Count==0) Parents.Add(ObjectT.StaticGetClass());
+		}
 
 		private static List<ClassT> toSet(SetT l) {
 			var ret = new List<ClassT>();
