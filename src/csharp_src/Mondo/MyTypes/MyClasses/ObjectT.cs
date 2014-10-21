@@ -80,9 +80,7 @@ namespace Mondo.MyTypes.MyClasses {
 					} else {
 						var y = yall.ToArray();
 						for(int i=0; i<yall.Count; i++) {
-							Console.WriteLine("i="+i+" x="+x[i]+" type="+x[i].GetType()+" y="+y[i]+" type="+y[i].GetType());
 							((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
-							Console.WriteLine("x.val="+((ReferenceT)x[i]).Value);
 						}
 						for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());
 					}
@@ -123,7 +121,7 @@ namespace Mondo.MyTypes.MyClasses {
 			//			x.Value=(IVariable)y.Clone();
 			//			return y;
 			//		}),
-			",", 		(Func<IPrintable,ITuplable,ITuplable,ITuplable>) ((p,a,b) => TupleT.Concat(null,a,b)),
+			",", 		(Func<IPrintable,ITuplable,ITuplable,ITuplable>) ((p,a,b) => TupleT.Concat(p,a,b)),
 			"<->",		(Func<ReferenceT,ReferenceT,ReferenceT>) ((a,b) => { 
 					var c=a.Value;
 					a.Value=b.Value;

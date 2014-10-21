@@ -46,15 +46,15 @@ namespace Mondo.MyTypes {
 			var argnr = argt.Length-1;
 			if(argt[0] == typeof(IPrintable)) argnr--;
 			bool stat = argt[0]==typeof(IPrintable);
-			bool vararg = argt[0]==typeof(ITuplable);// && argnr-(stat?1:0)<2;
+			bool vararg = argt[stat?1:0]==typeof(ITuplable);// && argnr-(stat?1:0)<2;
 			bool tupvar = false;
 			if(argt.Length==2) if(argt[0]==typeof(ITuplable) && argt[1]==typeof(IVariable)) tupvar = true;
 			//return (Func<ReferenceT>)  (() => new ReferenceT( toMyType( ((Func<ReferenceT>)f)()  ) ));
 			var lambda = (Func<IPrintable,object[],ReferenceT>) ((p,argss) => {
 				var args = new List<object>(argss);
-				Console.WriteLine("\n\nfun="+fun);
-				Console.WriteLine("lambda vararg="+vararg+" stat="+stat+" tupvar="+tupvar);
-				Console.WriteLine("args="+General.EnumToString(args));
+				//Console.WriteLine("\n\nfun="+fun);
+				//Console.WriteLine("lambda vararg="+vararg+" stat="+stat+" tupvar="+tupvar);
+				//Console.WriteLine("args="+General.EnumToString(args));
 				if(!vararg) for(int i=0; i<args.Count; i++) { 
 					//if(argt[i+(stat?1:0)] != typeof(ITuplable)) {
 					//
@@ -67,15 +67,16 @@ namespace Mondo.MyTypes {
 					args[i] = TypeTrans.toRef( TypeTrans.toMyType( args[i]) );
 				}
 				if(stat) args.Insert(0,p);
-				Console.WriteLine("args="+General.EnumToString(args));
-				Console.WriteLine("args.to_a="+General.EnumToString(args.ToArray()));
+				//Console.WriteLine("args="+General.EnumToString(args));
+				//Console.WriteLine("args.to_a="+General.EnumToString(args.ToArray()));
 				object  res = null;
 				try {	
 					var tup = TupleT.MakeTuplable(args.ToArray());
-					Console.WriteLine("tup="+tup);
+					//Console.WriteLine("tup="+tup);
 					res	= tupvar ? ((Func<ITuplable,IVariable>)fun).Invoke(tup) : 
 							fun.DynamicInvoke(args.ToArray());
-					Console.WriteLine("res="+res);
+					//Console.WriteLine("res="+res);
+					//Console.WriteLine("args="+General.EnumToString(args));
 				} catch(Exception e) {
 					Console.WriteLine("e="+e);
 					throw new ArgumentException();

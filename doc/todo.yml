@@ -38,7 +38,10 @@ tests:
         - assert
         - unit tests with script files
 interpreter:
-        - significant optimization
+        - optimization:
+                - conditions guessing
+                - better intermediate code
+                - native code
 function:
         - default parameters
 constants:
@@ -67,8 +70,6 @@ types:
         - parse
         - list:
                 - all to selected index
-conditions:
-        - if optimization
 operators:
         - .= (without cloning)
 ide:
