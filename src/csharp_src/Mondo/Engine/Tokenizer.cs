@@ -47,6 +47,10 @@ namespace Mondo.Engine {
 		public static readonly string TriStringSymbol = "'''";
 		public static readonly string SetSymbol = "$[";
 		public static readonly string DicSymbol = "#[";
+		public static readonly HashSet<string> DotSymbols = new HashSet<string>() {
+			".",
+			".=",
+		};
 
 		private StringBuilder StrB;
 		public List<Token> Output { get; private set; }
@@ -90,7 +94,7 @@ namespace Mondo.Engine {
 				ret+=StrB[i];
 				if(SymbolMap.FullOperSet.Contains(ret)) prev = ret;
 			}
-			if(prev == ObjectT.DotSymbol) if(!General.Converges(StrB, SoftLinkSymbol, i-SoftLinkSymbol.Length)) {
+			if(DotSymbols.Contains(prev)) if(!General.Converges(StrB, SoftLinkSymbol, i-SoftLinkSymbol.Length)) {
 				StrB.Insert(i, SoftLinkSymbol);
 			}
 			i -= ret.Length-prev.Length;
