@@ -86,10 +86,10 @@ namespace Mondo.MyTypes.MyClasses {
 			"max",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Max()).Value),
 			"min",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Min()).Value),
 			"median",	(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Median()).Value),
-			"remove",	(Func<ListT,double,ListT>) ((x,i) => {var y=(ListT)x.Clone(); y.RemoveAt((int)i); return y;}),
+			"remove",	(Func<ListT,double,ListT>) ((x,i) => {x.RemoveAt((int)i); return x;}),
 			"toSet",	(Func<ListT,IVariable>) ((x) => new SetT(x)),
 			"html",		(Func<ListT,string>) ((x) => HtmlTableFactory.Create(x).SetBorder(2).Generate()),
-			"<<",		(Func<ListT,IVariable,ListT>) ((a,v) => {a.Add((IVariable)v.Clone()); return a;} ),
+			"<<",		(Func<ListT,IVariable,ListT>) ((a,v) => {a.Add(v); return a;} ),
 			">>",		(Func<ListT,ReferenceT,ListT>) ((a,v) => {v.Value=(IVariable)a.Pop(); return a;} ),
 			"+",		(Func<ListT,ListT,ListT>) ((x,y) => (ListT)x.Concat(y)),
 			"*",		(Func<ListT,double,ListT>) ((x,y) => { 

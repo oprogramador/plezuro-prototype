@@ -73,7 +73,7 @@ namespace Mondo.Engine {
 				var argsList = new List<object>(Args.ToArray());
 				LocalVars.Add( SymbolMap.ThisSymbol, argsList.Count>0 ? TupleT.MakeTuplable(argsList[0]) : new EmptyT());
 				LocalVars.Add( SymbolMap.ValsSymbol, argsList.Count>1 ? TupleT.MakeTuplable(argsList.Skip(1).ToArray()) : new EmptyT());
-				for(int i=1; i<argsList.Count; i++) LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], argsList[i]);
+				for(int i=1; i<argsList.Count && i<SymbolMap.ArgsSymbolList.Length-1; i++) LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], argsList[i]);
 				for(int i = argsList.Count+1; i<SymbolMap.ArgsSymbolList.Length+1 && i>=1; i++)
 					LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], new EmptyT());
 				this.list = list.Reverse();
@@ -156,20 +156,6 @@ namespace Mondo.Engine {
 			if(outp is ICallable) staticFuncMatch(outp, args.ToArray());
 		}
 
-		void shortOperMatch(string skey) {
-/*
-			var aa = output.NthElement(1);
-			object item = map[SymbolMap.ShortOpers[skey]];
-			output.Push(item);
-			funcMatch();
-			item = map[SymbolMap.AssignOper];
-			output.Insert(1,aa);
-			output.Push(item);
-			funcMatch();
-			list.Pop();
-*/
-		}
-
 		private object findVar(string key) {
 			object item = null;
 			IPrintable pri = this;
@@ -200,7 +186,6 @@ namespace Mondo.Engine {
 						item = findVar(skey);
 					} catch {
 						try {
-							shortOperMatch(skey);
 							return;
 						} catch {
 							throw new SymbolException(skey);

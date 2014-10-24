@@ -80,6 +80,8 @@ documentation:
         - wiki
         - examples
         - alphabetical order of methods, also in code
+language:
+        - embedded native code in C
 additions:
         - new programming paradigms (ex. for prime numbers)
         - gui

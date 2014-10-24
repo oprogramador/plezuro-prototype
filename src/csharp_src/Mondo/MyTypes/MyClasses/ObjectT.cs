@@ -32,6 +32,7 @@ namespace Mondo.MyTypes.MyClasses {
 	class ObjectT : IVariable {
 		public static readonly string FunctionSymbol = "^^";
 		public static readonly string DotSymbol = ".";
+		public static readonly string DotEqualSymbol = ".=";
 
 		public ObjectT() {
 			ID = ObjectContainer.Instance.Add(this);
@@ -115,6 +116,7 @@ namespace Mondo.MyTypes.MyClasses {
 					}),
 			"@",	 	(Func<MyObject,DictionaryT>) ((o) => o.Pools),
 			DotSymbol,	(Func<IVariable,SoftLink,DotFunc>) ((x,f) => new DotFunc(f.ToProc(x), x)),
+			DotEqualSymbol,	operMaker(DotSymbol),
 			";",		(Func<IVariable,IVariable,IVariable>) ((x,y) => y),
 			//"=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { x.Value=y; return y;}),
 			//":=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { 
@@ -149,7 +151,6 @@ namespace Mondo.MyTypes.MyClasses {
 			"&=",		operMaker("&"),
 			"|=",		operMaker("|"),
 			"%=",		operMaker("%"),
-			".=",		operMaker("."),
 		};
 
 		private static object[] toRefArray(object[] ar) {

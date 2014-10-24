@@ -48,8 +48,8 @@ namespace Mondo.Engine {
 		public static readonly string SetSymbol = "$[";
 		public static readonly string DicSymbol = "#[";
 		public static readonly HashSet<string> DotSymbols = new HashSet<string>() {
-			".",
-			".=",
+			ObjectT.DotSymbol,
+			ObjectT.DotEqualSymbol,
 		};
 
 		private StringBuilder StrB;
