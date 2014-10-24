@@ -80,6 +80,8 @@ documentation:
         - wiki
         - examples
         - alphabetical order of methods, also in code
+compilation:
+        - also in visual studio
 language:
         - embedded native code in C
 additions:

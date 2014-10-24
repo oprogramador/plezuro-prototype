@@ -99,6 +99,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"^",		(Func<double,double,double>) ((x,y) => Math.Pow(x,y)),
 			"++",		(Func<ReferenceT, object>) ((x) => { ((Number)x.Value).Value++; return x; }),
 			"--",		(Func<ReferenceT, object>) ((x) => { ((Number)x.Value).Value--; return x; }),
+			"..",		(Func<double,double,RangeT>) ((x,y) => new RangeT(x,y,1)),
 		};
 
 		private object convertLambda(object f) {

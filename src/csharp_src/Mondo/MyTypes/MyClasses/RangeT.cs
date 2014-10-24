@@ -106,6 +106,7 @@ namespace Mondo.MyTypes.MyClasses {
 						foreach(var i in x) l.Add(new ReferenceT((Number)i));
 						return l;
 					}),
+			"..",		(Func<RangeT,double,RangeT>) ((r,x) => new RangeT(r.Beg, r.End, x)),
 		};
 		
 		public ClassT GetClass() {
