@@ -53,9 +53,10 @@ data:
         - selectIterative
         - thenBy
         - serialization
-        - select with indexer
+        - *select with indexer
         - database:
                 - mysql binding
+        - load data with separator
 types:
         - string:
                 - mutable
@@ -84,11 +85,16 @@ compilation:
         - also in visual studio
 language:
         - embedded native code in C
+        - translation to C
+        - syntax:
+                - *if without else
+                - *while, if ... shorter
+                - *elif
 additions:
         - new programming paradigms (ex. for prime numbers)
         - gui
         - console:
-                - standard input
+                - *standard input
         - multithreading
         - networking
         - frameworks
@@ -99,3 +105,4 @@ scripts:
         - snake
         - calculator
         - clock
+        - *labyrinth

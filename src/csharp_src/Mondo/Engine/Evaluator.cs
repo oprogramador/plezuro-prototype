@@ -185,11 +185,11 @@ namespace Mondo.Engine {
 					try {
 						item = findVar(skey);
 					} catch {
-						try {
-							return;
-						} catch {
+						//try {
+						//	return;
+						//} catch {
 							throw new SymbolException(skey);
-						}
+						//}
 					}
 					output.Push(item);
 				}
