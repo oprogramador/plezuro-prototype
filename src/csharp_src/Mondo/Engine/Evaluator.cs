@@ -73,8 +73,9 @@ namespace Mondo.Engine {
 				var argsList = new List<object>(Args.ToArray());
 				LocalVars.Add( SymbolMap.ThisSymbol, argsList.Count>0 ? TupleT.MakeTuplable(argsList[0]) : new EmptyT());
 				LocalVars.Add( SymbolMap.ValsSymbol, argsList.Count>1 ? TupleT.MakeTuplable(argsList.Skip(1).ToArray()) : new EmptyT());
-				for(int i=1; i<argsList.Count && i<SymbolMap.ArgsSymbolList.Length-1; i++) LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], argsList[i]);
-				for(int i = argsList.Count+1; i<SymbolMap.ArgsSymbolList.Length+1 && i>=1; i++)
+				int i=1;
+				for(; i<argsList.Count && i<SymbolMap.ArgsSymbolList.Length+1; i++) LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], argsList[i]);
+				for(; i<SymbolMap.ArgsSymbolList.Length+1; i++)
 					LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], new EmptyT());
 				this.list = list.Reverse();
 				output = new ProcedureT();

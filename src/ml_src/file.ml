@@ -1,3 +1,2 @@
-$txt = 'abc.txt'.::fromF();
-
-'xyz.txt'.::toF($txt*20)
+$txt = 'abc.txt'.fromF;
+{txt.class==String}.if({ (txt*20).toF('xyz.txt') })

@@ -30,6 +30,7 @@ bug_fixes:
 error_handling:
         - info
         - all errors
+        - exceptions
 tests:
         - assert
         - unit tests with script files
@@ -88,7 +89,6 @@ language:
         - embedded native code in C
         - translation to C
         - syntax:
-                - *if without else
                 - *while, if ... shorter
                 - *elif
 additions:

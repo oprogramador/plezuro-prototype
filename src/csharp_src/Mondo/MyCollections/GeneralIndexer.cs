@@ -32,14 +32,6 @@ namespace Mondo.MyCollections {
 			return (IVariable)(i>=0 ? ii.At(i) : ii.At(ii.Count+i));
 		}
 
-		private static object[] pairIndex(IIndexable ii, int beg, int end) {
-			var list = new ListT();
-			if(beg<end) for(int i=beg; i<end; i++) {
-				list.Add(numIndex(ii, i));
-			}
-			return list.ToArray();
-		}
-
 		private static object[] rangeIndex(IIndexable ii, RangeT r) {
 			var list = new ListT();
 			foreach(var i in r) list.Add(numIndex(ii, (int)((Number)i).Value));
@@ -49,7 +41,6 @@ namespace Mondo.MyCollections {
 		public static object ivarIndex(IIndexable ii, IVariable iv) {
 			var i = TypeTrans.dereference(iv);
 			if(i is Number) return numIndex(ii, (int)((Number)i).Value);
-			if(i is PairT) return pairIndex(ii, (int)((Number)((PairT)i).Key).Value, (int)((Number)((PairT)i).Value).Value);
 			if(i is RangeT) return rangeIndex(ii, (RangeT)i);
 			return null;
 		}
