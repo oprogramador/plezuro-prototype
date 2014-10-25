@@ -54,6 +54,13 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
 			"apply",	(Func<IPrintable,ProcedureT,object>) ((p, f) => p.EvalDyn(f)),
 			"applyF",	(Func<IPrintable,ProcedureT,ListT,object>) ((p, f, a) => p.EvalDyn(f, TupleT.MakeTuplable(a.ToArray())) ),
+			"if",		(Func<IPrintable,ProcedureT,ProcedureT,object>) 
+					((p, con, o) => { 
+					 	IVariable res = new NullType(); 
+						bool b = p.EvalDyn(con).Equals(true); 
+						if(b) res = (IVariable)p.EvalDyn(o); 
+						return new IfObject(b,res); 
+						}),
 			"while",	(Func<IPrintable,ProcedureT,ProcedureT,object>) 
 					((p, con, o) => { 
 					 	object ret=new NullType(); 

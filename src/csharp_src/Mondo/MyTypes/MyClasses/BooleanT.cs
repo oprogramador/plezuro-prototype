@@ -19,7 +19,7 @@
  * 
  * 
  */
- 
+
 
 using Mondo.MyCollections;
 using System;
@@ -66,7 +66,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		private static ClassT myClass;
-				public static object[] Constants = {
+		public static object[] Constants = {
 			"true",		true,
 			"false",	false,
 		};
@@ -74,13 +74,12 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Boolean";
 
 		private static object[] lambdas = {
-			"if",	(Func<IPrintable,bool,ProcedureT,ProcedureT,object>) ((p, con, t, f) => p.EvalDyn(con ? t : f)),
 			"?",	(Func<bool,PairT,IVariable>) ((c,p) => c ? p.Key : p.Value),
 			"|",	(Func<bool,bool,bool>) ((x,y) => x||y),
 			"&",	(Func<bool,bool,bool>) ((x,y) => x&&y),
 			"!",	(Func<bool,bool>) ((x) => !x),
 		};
-		
+
 		public ClassT GetClass() {
 			return StaticGetClass();
 		}
