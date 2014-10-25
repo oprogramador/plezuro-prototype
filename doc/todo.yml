@@ -57,6 +57,7 @@ data:
         - database:
                 - mysql binding
         - load data with separator
+        - json encode/decode
 types:
         - string:
                 - mutable
