@@ -18,7 +18,7 @@ classes:
                 - type
         - triggers
         - getter/setter (ex. public set, private get)
-        - access modifiers
+        - *access modifiers
 mathematics:
         - linear algebra
         - numpy and scipy equivalent
@@ -27,6 +27,7 @@ bug_fixes:
         - language
         - operator precedence
         - referenceT in order
+        - reference
 error_handling:
         - info
         - all errors
@@ -89,8 +90,7 @@ language:
         - embedded native code in C
         - translation to C
         - syntax:
-                - *while, if ... shorter
-                - *elif
+                - *while shorter
 additions:
         - new programming paradigms (ex. for prime numbers)
         - gui

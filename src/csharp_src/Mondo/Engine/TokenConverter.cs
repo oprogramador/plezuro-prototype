@@ -51,7 +51,11 @@ namespace Mondo.Engine {
 		}
 
 		private Token matchSquare(List<Token> output) {
-			if(lastType<0 || lastType==TokenTypes.Operator || lastType==TokenTypes.BracketOpen) {
+			if(lastType<0 || 
+					lastType==TokenTypes.Operator || 
+					lastType==TokenTypes.BracketOpen || 
+					lastType==TokenTypes.SquareOpen || 
+					lastType==TokenTypes.CurlyOpen) {
 				output.Add( new Token(ListFullSymbol, TokenTypes.Symbol, new SoftLink(SymbolMap.ListSymbol)) );
 				return new Token("(", TokenTypes.BracketOpen, "(");
 			}
