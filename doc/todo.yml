@@ -91,6 +91,7 @@ language:
         - translation to C
         - syntax:
                 - *while shorter
+        - debugger
 additions:
         - new programming paradigms (ex. for prime numbers)
         - gui

@@ -60,7 +60,8 @@ namespace Mondo.Engine {
 				return new Token("(", TokenTypes.BracketOpen, "(");
 			}
 			output.Add( new Token(ObjectT.DotSymbol, TokenTypes.Operator, ObjectT.DotSymbol) );
-			return new Token(RefFullSymbol, TokenTypes.Symbol, new SoftLink(SymbolMap.RefSymbol));
+			output.Add(new Token(RefFullSymbol, TokenTypes.Symbol, new SoftLink(SymbolMap.RefSymbol)));
+			return new Token("(", TokenTypes.BracketOpen, "(");
 		}
 
 		private void matchSquares() {

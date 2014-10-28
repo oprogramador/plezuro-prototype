@@ -33,6 +33,7 @@ namespace Mondo.MyCollections {
 		IPrintable Parent{ get; }
 		ITextable Stream{ get; }
 		ITuplable Args{ get; }
+		object FindVar(string key);
 		bool Clear();
 		ConcurrentDictionary<string,object> LocalVars{ get; }
 	}

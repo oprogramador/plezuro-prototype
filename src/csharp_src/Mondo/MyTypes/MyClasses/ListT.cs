@@ -94,7 +94,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"+",		(Func<ListT,ListT,ListT>) ((x,y) => (ListT)x.Concat(y)),
 			"*",		(Func<ListT,double,ListT>) ((x,y) => { 
 						var s = new ListT();
-						for(int i=0; i<(int)y; i++) s.AddRange(x);
+						for(int i=0; i<(int)y; i++) s.AddRange((ListT)x.Clone());
 						return s;
 						}),
 		};

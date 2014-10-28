@@ -124,6 +124,9 @@ namespace Mondo.MyTypes.MyClasses {
 							}
 					}),
 			"eval",		(Func<IPrintable,string,object>) ((p,code) => Parser.Parse(code, p, null) ),
+			"dum",		(Func<IPrintable,string,string>) ((p,t) => t+"="+p.FindVar(t)),
+			"dump",		(Func<IPrintable,string,string>) ((p,t) => { var str=t+"="+Parser.Parse(t,p,null); p.Print(str); return str; }),
+			"dumpl",	(Func<IPrintable,string,string>) ((p,t) => { var str=t+"="+Parser.Parse(t,p,null); p.PrintLine(str); return str; }),
 			"+", 		(Func<IPrintable,string,IVariable,string>) ((p,x,y) => {
 						try {
 							var f = y.GetClass().GetMethod("str");

@@ -77,8 +77,8 @@ namespace Mondo.MyTypes {
 							fun.DynamicInvoke(args.ToArray());
 					//Console.WriteLine("res="+res);
 					//Console.WriteLine("args="+General.EnumToString(args));
-				} catch(Exception e) {
-					Console.WriteLine("e="+e);
+				} catch {
+					//Console.WriteLine("e="+e);
 					throw new ArgumentException();
 				}
 				if(res is double) TypeTrans.checkInfNaN(res);

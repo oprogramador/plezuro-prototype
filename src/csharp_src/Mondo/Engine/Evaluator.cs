@@ -157,7 +157,7 @@ namespace Mondo.Engine {
 			if(outp is ICallable) staticFuncMatch(outp, args.ToArray());
 		}
 
-		private object findVar(string key) {
+		public object FindVar(string key) {
 			object item = null;
 			IPrintable pri = this;
 			while(item==null) {
@@ -184,7 +184,7 @@ namespace Mondo.Engine {
 						} catch(Exception e) { Console.WriteLine("e: "+e); }
 					}
 					try {
-						item = findVar(skey);
+						item = FindVar(skey);
 					} catch {
 						//try {
 						//	return;
