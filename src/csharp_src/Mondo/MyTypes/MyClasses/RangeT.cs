@@ -96,6 +96,14 @@ namespace Mondo.MyTypes.MyClasses {
 						foreach(var x in r) ret = Evaluator.Eval(f,p,TupleT.MakeTuplable(x));
 						return ret;
 					}),	
+			"eachi", (Func<IPrintable,RangeT,ReferenceT,ProcedureT,object>) ((p,r,ii,f) => {
+						object ret = new NullType();
+						foreach(var x in r) {
+							ii.Value = (IVariable)x;
+							ret = Evaluator.Eval(f,p,TupleT.MakeTuplable(ii));
+						}
+						return ret;
+					}),	
 			"toList",(Func<RangeT,ListT>) ((x) => {
 						var l = new ListT();
 						foreach(var i in x) l.Add(new ReferenceT((Number)i));

@@ -91,8 +91,8 @@ language:
         - translation to C
         - syntax:
                 - *while shorter
+                - *loop with indexer
         - debugger
-additions:
         - new programming paradigms (ex. for prime numbers)
         - gui
         - console:
