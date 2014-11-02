@@ -60,6 +60,10 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public static int PreCompare(object a, object b) {
+			if(b is bool) {
+				if(!(a is BooleanT || a is ReferenceT)) return 1;
+				if(a is ReferenceT) if(!(((ReferenceT)a).Value is BooleanT)) return 1;
+			}
 			if(a is IVariable && b is IVariable) return getClassName(a).CompareTo(getClassName(b));
 			return 0;
 		}

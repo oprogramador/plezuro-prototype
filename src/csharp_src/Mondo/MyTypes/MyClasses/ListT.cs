@@ -89,7 +89,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"remove",	(Func<ListT,double,ListT>) ((x,i) => {x.RemoveAt((int)i); return x;}),
 			"toSet",	(Func<ListT,IVariable>) ((x) => new SetT(x)),
 			"html",		(Func<ListT,string>) ((x) => HtmlTableFactory.Create(x).SetBorder(2).Generate()),
-			"<<",		(Func<ListT,IVariable,ListT>) ((a,v) => {a.Add(v); return a;} ),
+			"<<",		(Func<ListT,IVariable,ListT>) ((a,v) => {a.Add(new ReferenceT(v)); return a;} ),
 			">>",		(Func<ListT,ReferenceT,ListT>) ((a,v) => {v.Value=(IVariable)a.Pop(); return a;} ),
 			"+",		(Func<ListT,ListT,ListT>) ((x,y) => (ListT)x.Concat(y)),
 			"*",		(Func<ListT,double,ListT>) ((x,y) => { 

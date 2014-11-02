@@ -107,4 +107,4 @@ scripts:
         - snake
         - calculator
         - clock
-        - *labyrinth
+        - *labyrinth game
