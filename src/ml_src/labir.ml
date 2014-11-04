@@ -8,7 +8,7 @@ $maze = {
         }.else{
                 $max = [x,y].max+1;
                 horiz := [[false]*max]*(x+1);
-                verti := [[false]*max]*(y+1); 
+                verti := [[false]*max]*(x+1); 
                 $here := [(rand*x).floor, (rand*y).floor];
                 $path := [here];
                 $unvisited = [0]*(x+2);
