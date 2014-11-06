@@ -40,6 +40,7 @@ interpreter:
                 - conditions guessing
                 - better intermediate code
                 - native code
+        - interactive shell
 function:
         - default parameters
 constants:
@@ -69,6 +70,9 @@ types:
         - parse
         - list:
                 - all to selected index
+        - containers:
+                - list:
+                        - constraints
 operators:
         - .= (without cloning)
 ide:

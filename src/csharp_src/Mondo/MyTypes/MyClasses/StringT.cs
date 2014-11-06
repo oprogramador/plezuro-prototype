@@ -27,6 +27,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Text;
+using System.Diagnostics;
 using Mondo.Engine;
 
 namespace Mondo.MyTypes.MyClasses {
@@ -127,6 +128,30 @@ namespace Mondo.MyTypes.MyClasses {
 			"dum",		(Func<IPrintable,string,string>) ((p,t) => t+"="+p.FindVar(t)),
 			"dump",		(Func<IPrintable,string,string>) ((p,t) => { var str=t+"="+Parser.Parse(t,p,null); p.Print(str); return str; }),
 			"dumpl",	(Func<IPrintable,string,string>) ((p,t) => { var str=t+"="+Parser.Parse(t,p,null); p.PrintLine(str); return str; }),
+			"sys",		(Func<string,ListT>) ((cmd) => {
+						var proc = new Process();
+						proc.EnableRaisingEvents=false; 
+						int ind = cmd.IndexOf(' ');
+						proc.StartInfo = ind>=0 ?
+							new ProcessStartInfo(cmd.Substring(0, ind), cmd.Substring(ind+1))
+							: new ProcessStartInfo(cmd, "");
+						proc.StartInfo.RedirectStandardOutput = true;
+						proc.StartInfo.RedirectStandardError = true;
+						proc.StartInfo.UseShellExecute = false;
+						proc.Start();
+						var outp = "";
+						var err = "";
+						using (System.IO.StreamReader myOutput = proc.StandardOutput) {
+							outp += myOutput.ReadToEnd();
+						}
+					    	using (System.IO.StreamReader myError = proc.StandardError) {
+							err = myError.ReadToEnd();
+						}
+						return new ListT(new object[]{
+								new ReferenceT(new StringT(outp)),
+								new ReferenceT(new StringT(err))
+								});
+					}),
 			"+", 		(Func<IPrintable,string,IVariable,string>) ((p,x,y) => {
 						try {
 							var f = y.GetClass().GetMethod("str");

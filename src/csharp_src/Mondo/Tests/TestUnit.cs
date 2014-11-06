@@ -19,7 +19,7 @@
  * 
  * 
  */
- 
+
 
 using System;
 using System.Collections.Generic;
@@ -34,6 +34,16 @@ namespace Mondo.Tests {
 			//testHtml();
 			//threads();
 			//testGener();
+			//cmd();
+		}
+
+		private void cmd() {
+			System.Diagnostics.Process proc = new System.Diagnostics.Process();
+			proc.EnableRaisingEvents=false; 
+			proc.StartInfo.FileName = "bash";
+			proc.StartInfo.Arguments = "-c 'x=5;((x++));echo $x'";
+			proc.Start();
+			proc.WaitForExit();
 		}
 
 		private void threads() {
