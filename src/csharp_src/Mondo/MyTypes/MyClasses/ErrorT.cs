@@ -31,6 +31,7 @@ namespace Mondo.MyTypes.MyClasses {
 			{typeof(InfinityException), "infinity"},
 			{typeof(NaNException), "NaN"},
 			{typeof(ModuleNotFoundException), "module not found"},
+			{typeof(CommandNotFoundException), "command not found"},
 			{typeof(CircularInheritanceException), "circular inheritance"},
 			{typeof(UndefinedException), "undefined"},
 			//{typeof(EmptyArgException), "empty set"},
