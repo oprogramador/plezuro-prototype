@@ -102,11 +102,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"get",		(Func<string,double,IVariable>) ((a,i) => new StringT(""+a[(int)i])),
 			SymbolMap.RefSymbol, (Func<StringT,IVariable,object>) ((a,i) => GeneralIndexer.Index(a,i)),
 			"shuffle",	(Func<string,string>) ((x) => new string(x.ToCharArray().OrderBy(s => (Engine.Engine.Random.Next(2) % 2) == 0).ToArray())),
-			"rand",		(Func<string,double,string>) ((t,n) => {
-						var ret = "";
-						for(int i=0; i<n; i++) ret += t[Engine.Engine.Random.Next(t.Length)];
-						return ret;
-					}),
+			"rand",		(Func<string,double,string>) ((t,n) => lib.SString.Rand(t,(int)n)),
 			"reverse",	(Func<string,string>) ((a) => {var c=a.ToCharArray(); Array.Reverse(c); return new string(c);}),
 			"ord",		(Func<string,ITuplable>) ((x) => TupleT.MakeTuplable(new ListT((from ch in x select (double)ch).ToList()).ToArray())),
 			"fromF",	(Func<string,object>) ((x) => { try{ return System.IO.File.ReadAllText(x); }catch{ return new NullType(); }}),

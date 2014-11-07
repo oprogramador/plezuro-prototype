@@ -28,6 +28,16 @@ using Mondo.lib;
 
 namespace Mondo.MyTypes.MyClasses {
 	public class ReferenceT : Pointer<IVariable>, IVariable, ITypeConvertible {
+		public bool IsLocked { get; private set; }
+		private string criptoKey;
+		private IVariable _value;
+		public override IVariable Value {
+			get { return _value; }
+			set {
+				if(!IsLocked) _value = value;
+			}
+		}
+
 		public ReferenceT(IVariable iv) :  base(iv) {
 			ID = ObjectContainer.Instance.Add(this);
 		}
@@ -110,6 +120,18 @@ namespace Mondo.MyTypes.MyClasses {
 
 		public object Convert() {
 			return Value;
+		}
+
+		public string Lock() {
+			Console.WriteLine("lock");
+			IsLocked = true;
+			var key = SString.Rand("0123456789",120);
+			criptoKey = MyCrypto.Sha256(key);
+			return key;
+		}
+
+		public void Unlock(string key) {
+			if(MyCrypto.Sha256(key).Equals( criptoKey )) IsLocked = false;
 		}
 	}
 }

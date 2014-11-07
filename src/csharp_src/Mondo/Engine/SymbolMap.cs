@@ -95,6 +95,7 @@ namespace Mondo.Engine {
 			":=",
 			"=",
 			",", 	
+			"~~",
 			"<->",
 			"<<",
 			">>",	
@@ -143,6 +144,7 @@ namespace Mondo.Engine {
 			"++",	
 			"--",
 			"@",
+			"~",
 		};
 
 		public static readonly HashSet<string> BiOperSet;
@@ -199,20 +201,6 @@ namespace Mondo.Engine {
 		}
 
 		public static readonly string AssignOper = "=";
-
-	/*
-		public static readonly Dictionary<string,string> ShortOpers = new Dictionary<string,string>() {
-			{"+=",	"+"},
-			{"-=",	"-"},
-			{"*=",	"*"},
-			{"/=",	"/"},
-			{"%=",	"%"},
-			{"&=",	"&"},
-			{"|=",	"|"},
-			{"^=",	"^"},
-			{".=",	"."},
-		};
-	*/
 
 		public static readonly Dictionary<object,object> OpersAtBegDefaultValues = new Dictionary<object,object>() {
 			{"-",	0.0},

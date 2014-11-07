@@ -114,6 +114,8 @@ namespace Mondo.MyTypes.MyClasses {
 						foreach(var i in x.ToArray()) ret += ((IStringable)i).ToString();
 						return ret;
 					}),
+			"~",		(Func<ReferenceT,string>) ((x) => { Console.WriteLine("prelock"); return x.Lock();}),
+			"~~",		(Func<ReferenceT,string,ReferenceT>) ((x,k) => { Console.WriteLine("preunlock"); x.Unlock(k); return x;}),
 			"@",	 	(Func<MyObject,DictionaryT>) ((o) => o.Pools),
 			DotSymbol,	(Func<IVariable,SoftLink,DotFunc>) ((x,f) => new DotFunc(f.ToProc(x), x)),
 			DotEqualSymbol,	operMaker(DotSymbol),

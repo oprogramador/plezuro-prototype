@@ -47,6 +47,8 @@ constants:
         - change lock
         - own constants
         - object pools
+        - with method, not operator
+        - method isLocked
 variables:
         - globals
         - comparison:
@@ -101,7 +103,9 @@ language:
         - gui
         - console:
                 - *standard input
-        - multithreading
+        - multithreading:
+                - thread_safe:
+                        - lock
         - networking
         - frameworks
         - translation to other languages
