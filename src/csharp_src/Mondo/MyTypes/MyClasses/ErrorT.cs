@@ -95,7 +95,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public override string ToString() {
-			return "Error: "+(dic.ContainsKey(Exception.GetType()) ? dic[Exception.GetType()] : "");
+			return "Error: "+(dic.ContainsKey(Exception.GetType()) ? dic[Exception.GetType()] : Exception.Message);
 		}
 	}
 }

@@ -115,6 +115,7 @@ namespace Mondo.MyTypes.MyClasses {
 					 		try {
 						       		args = (ListT)args.Clone();
 								args.Insert(0,new StringT( System.IO.Path.GetFileName(x) ));	
+								Console.WriteLine("text="+System.IO.File.ReadAllText(x));
 								return Parser.Parse(System.IO.File.ReadAllText(x), p, TupleT.MakeTuplable(args.ToArray()));
 							} catch{ 
 								throw new ModuleNotFoundException();
@@ -149,7 +150,6 @@ namespace Mondo.MyTypes.MyClasses {
 									new ReferenceT(new StringT(err))
 							});
 						} catch {
-							Console.WriteLine("qqqqqqqqqqqqqqq");
 							return new ErrorT(new CommandNotFoundException());
 						}
 					}),

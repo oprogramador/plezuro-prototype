@@ -25,7 +25,7 @@ using System;
 using System.Collections.Generic;
 namespace Mondo.Engine {
 	class SymbolException : Exception {
-		public SymbolException(string msg) : base("Error, symbol '"+msg+"' not found.") {
+		public SymbolException(string msg) : base("symbol '"+msg+"' not found") {
 		}
 	}
 }

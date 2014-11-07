@@ -204,10 +204,14 @@ namespace Mondo.Engine {
 		}
 
 		void process() {
-			while(list.Count>0) {
-				internProcess();
+			try {
+				while(list.Count>0) {
+					internProcess();
+				}
+				Result = TypeTrans.toMyType( TypeTrans.tryCall( TypeTrans.dereference(output.Pop()), this) );
+			} catch(Exception e) {
+				Result = new ErrorT(e);
 			}
-			Result = TypeTrans.toMyType( TypeTrans.tryCall( TypeTrans.dereference(output.Pop()), this) );
 		}
 		
 		public override bool Equals(object ob) {
