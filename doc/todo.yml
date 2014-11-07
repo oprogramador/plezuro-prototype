@@ -68,6 +68,8 @@ types:
         - string:
                 - mutable
                 - immutable
+                - delimiter
+                - join method
         - dateTime
         - integer
         - parse
@@ -91,9 +93,12 @@ documentation:
         - wiki
         - examples
         - alphabetical order of methods, also in code
+        - update
 compilation:
         - also in visual studio
 language:
+        - shorter_code:
+                - method fully without brackets
         - embedded native code in C
         - translation to C
         - syntax:
@@ -110,6 +115,7 @@ language:
         - networking
         - frameworks
         - translation to other languages
+        - compilation to .NET and JVM intermediate code
         - bindings to other languages libraries
 scripts:
         - tetris

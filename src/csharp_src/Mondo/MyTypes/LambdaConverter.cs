@@ -66,6 +66,7 @@ namespace Mondo.MyTypes {
 				else for(int i=0; i<args.Count; i++) {
 					args[i] = TypeTrans.toRef( TypeTrans.toMyType( args[i]) );
 				}
+                                if(!tupvar) for(int i=args.Count; i<argnr; i++) args.Add(null);
 				if(stat) args.Insert(0,p);
 				//Console.WriteLine("args="+General.EnumToString(args));
 				//Console.WriteLine("args.to_a="+General.EnumToString(args.ToArray()));
