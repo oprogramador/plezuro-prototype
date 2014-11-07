@@ -123,15 +123,15 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public string Lock() {
-			Console.WriteLine("lock");
 			IsLocked = true;
 			var key = SString.Rand("0123456789",120);
 			criptoKey = MyCrypto.Sha256(key);
 			return key;
 		}
 
-		public void Unlock(string key) {
+		public ReferenceT Unlock(string key) {
 			if(MyCrypto.Sha256(key).Equals( criptoKey )) IsLocked = false;
+			return this;
 		}
 	}
 }

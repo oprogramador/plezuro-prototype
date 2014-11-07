@@ -145,6 +145,7 @@ namespace Mondo.Engine {
 			"--",
 			"@",
 			"~",
+			"=>",
 		};
 
 		public static readonly HashSet<string> BiOperSet;

@@ -43,6 +43,7 @@ interpreter:
         - interactive shell
 function:
         - default parameters
+        - *shorter args
 constants:
         - change lock
         - own constants
@@ -116,3 +117,4 @@ scripts:
         - calculator
         - clock
         - *labyrinth game
+        - update to newest language version

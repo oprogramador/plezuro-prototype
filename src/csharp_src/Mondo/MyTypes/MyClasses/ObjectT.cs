@@ -64,29 +64,26 @@ namespace Mondo.MyTypes.MyClasses {
 
 		private static ClassT myClass;
 
-		private static object assignLambdaMaker(bool isClone) {
-			var cloneF = (Func<object,IVariable>) ((x) => (IVariable)(isClone ? ((IVariable)x).Clone() : x));
-
-			return (Func<ITuplable,ITuplable,ITuplable>) ((xx,yy) => { 
-					var x = xx.ToArray();
-					if(x.Length<1) return xx;
-					var yall = new List<object>(yy.ToArray()).Select((i) => ((IVariable)i).Clone()).ToList();
-					if(yall.Count>x.Length) {
-						var y = yall.Take(x.Length-1).ToArray();
-						var ylast = new TupleT(yall.Skip(x.Length-1));
-						for(int i=0; i<x.Length-1; i++) {
-							((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
-						}
-						((ReferenceT)x[x.Length-1]).Value = ylast;
-					} else {
-						var y = yall.ToArray();
-						for(int i=0; i<yall.Count; i++) {
-							((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
-						}
-						for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());
-					}
-					return xx;
-				});
+		private static ITuplable assign(ITuplable xx, ITuplable yy, bool isClone) {
+			var cloneF = (Func<object,IVariable>) ((a) => (IVariable)(isClone ? ((IVariable)a).Clone() : a));
+			var x = xx.ToArray();
+			if(x.Length<1) return xx;
+			var yall = new List<object>(yy.ToArray()).Select((i) => ((IVariable)i).Clone()).ToList();
+			if(yall.Count>x.Length) {
+				var y = yall.Take(x.Length-1).ToArray();
+				var ylast = new TupleT(yall.Skip(x.Length-1));
+				for(int i=0; i<x.Length-1; i++) {
+					((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
+				}
+				((ReferenceT)x[x.Length-1]).Value = ylast;
+			} else {
+				var y = yall.ToArray();
+				for(int i=0; i<yall.Count; i++) {
+					((ReferenceT)x[i]).Value = cloneF(TypeTrans.dereference(y[i]));
+				}
+				for(int i=yall.Count; i<x.Length; i++) ((ReferenceT)x[i]).Value = new ErrorT(new UndefinedException());
+			}
+			return xx;
 		}
 
 		private static object operMaker(string str) {
@@ -114,12 +111,14 @@ namespace Mondo.MyTypes.MyClasses {
 						foreach(var i in x.ToArray()) ret += ((IStringable)i).ToString();
 						return ret;
 					}),
-			"~",		(Func<ReferenceT,string>) ((x) => { Console.WriteLine("prelock"); return x.Lock();}),
-			"~~",		(Func<ReferenceT,string,ReferenceT>) ((x,k) => { Console.WriteLine("preunlock"); x.Unlock(k); return x;}),
+			"=>",		(Func<IPrintable,ITuplable,ITuplable>) ((p,x) => assign(x,p.Args,false)),
+			"~",		(Func<ReferenceT,string>) ((x) => x.Lock()),
+			"~~",		(Func<ReferenceT,string,ReferenceT>) ((x,k) => x.Unlock(k)),
 			"@",	 	(Func<MyObject,DictionaryT>) ((o) => o.Pools),
 			DotSymbol,	(Func<IVariable,SoftLink,DotFunc>) ((x,f) => new DotFunc(f.ToProc(x), x)),
 			DotEqualSymbol,	operMaker(DotSymbol),
 			";",		(Func<IVariable,IVariable,IVariable>) ((x,y) => y),
+			//"=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { x.Value=y; return y;}),
 			//"=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { x.Value=y; return y;}),
 			//":=",		(Func<ReferenceT, IVariable, IVariable>) ((x,y) => { 
 			//			x.Value=(IVariable)y.Clone();
@@ -143,8 +142,8 @@ namespace Mondo.MyTypes.MyClasses {
 			"!==",		(Func<IVariable,IVariable,bool>) ((x,y) => x!=y ),
 			"===",		(Func<IVariable,IVariable,bool>) ((x,y) => x==y ),
 			"&&",	(Func<ReferenceT,PointerT>) ((x) => new PointerT(x)),
-			":=",		assignLambdaMaker(true),
-			"=",		assignLambdaMaker(false),
+			":=",		(Func<ITuplable,ITuplable,ITuplable>) ((x,y) => assign(x,y,true)),
+			"=",		(Func<ITuplable,ITuplable,ITuplable>) ((x,y) => assign(x,y,false)),
 			"+=",		operMaker("+"),
 			"-=",		operMaker("-"),
 			"*=",		operMaker("*"),
