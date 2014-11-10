@@ -45,6 +45,7 @@ namespace Mondo.Engine {
 		public const string ArgsSymbol = "args";
 		public const string ThisSymbol = "this";
 		public const string ValsSymbol = "vals";
+		public const string FunSymbol = "thisfun";
 		public static readonly string[] ArgsSymbolList = {
 			"first",
 			"second",
@@ -94,6 +95,15 @@ namespace Mondo.Engine {
 			";",	
 			":=",
 			"=",
+			"+=",
+			"-=",
+			"*=",
+			"/=",
+			"^=",
+			"&=",
+			"|=",
+			"%=",
+			".=",
 			",", 	
 			"~~",
 			"<->",
@@ -125,15 +135,6 @@ namespace Mondo.Engine {
 			},	
 			"..",
 			":",	
-			"+=",
-			"-=",
-			"*=",
-			"/=",
-			"^=",
-			"&=",
-			"|=",
-			"%=",
-			".=",
 		};
 
 		private static readonly string[] UniOpers = {

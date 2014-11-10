@@ -22,6 +22,9 @@ classes:
 mathematics:
         - linear algebra
         - numpy and scipy equivalent
+        - plot:
+                - 2D
+                - 3D
 bug_fixes:
         - gui
         - language
@@ -31,7 +34,8 @@ bug_fixes:
 error_handling:
         - info
         - all errors
-        - exceptions
+        - exceptions:
+            - catch all (including stack overflow)
 tests:
         - assert
         - unit tests with script files
@@ -43,10 +47,9 @@ interpreter:
         - interactive shell
 function:
         - default parameters
-        - *shorter args
+        - *return
 constants:
         - change lock
-        - own constants
         - object pools
         - with method, not operator
         - method isLocked
@@ -54,6 +57,7 @@ variables:
         - globals
         - comparison:
                 - by generated value
+        - full := operator
 data:
         - selectMany
         - selectIterative
@@ -75,6 +79,7 @@ types:
         - parse
         - list:
                 - all to selected index
+                - circular reference bug fix
         - containers:
                 - list:
                         - constraints
@@ -93,7 +98,7 @@ documentation:
         - wiki
         - examples
         - alphabetical order of methods, also in code
-        - update
+        - update to newest language version
 compilation:
         - also in visual studio
 language:
@@ -123,4 +128,5 @@ scripts:
         - calculator
         - clock
         - *labyrinth game
+        - sudoku
         - update to newest language version

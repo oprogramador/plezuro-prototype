@@ -33,6 +33,7 @@ namespace Mondo.Engine {
 	class Evaluator : IPrintable {
 		private WStack<object> list;
 		private ProcedureT output;
+        private IVariable toRes;
 		
 		public ITuplable Args { get; private set; }
 
@@ -70,6 +71,7 @@ namespace Mondo.Engine {
 				}
 				LocalVars = new ConcurrentDictionary<string,object>();
 				LocalVars.Add( SymbolMap.ArgsSymbol, Args);
+				LocalVars.Add( SymbolMap.FunSymbol, new ReferenceT(toRes));
 				var argsList = new List<object>(Args.ToArray());
 				LocalVars.Add( SymbolMap.ThisSymbol, argsList.Count>0 ? TupleT.MakeTuplable(argsList[0]) : new EmptyT());
 				LocalVars.Add( SymbolMap.ValsSymbol, argsList.Count>1 ? TupleT.MakeTuplable(argsList.Skip(1).ToArray()) : new EmptyT());
@@ -205,10 +207,11 @@ namespace Mondo.Engine {
 
 		void process() {
 			try {
-				while(list.Count>0) {
+				while(list.Count>0 && toRes==null) {
 					internProcess();
 				}
-				Result = TypeTrans.toMyType( TypeTrans.tryCall( TypeTrans.dereference(output.Pop()), this) );
+				if(toRes==null) Result = TypeTrans.toMyType( TypeTrans.tryCall( TypeTrans.dereference(output.Pop()), this) );
+                else Result = toRes;
 			} catch(Exception e) {
 				Result = new ErrorT(e);
 			}
@@ -240,7 +243,6 @@ namespace Mondo.Engine {
 		public const string ClassName = "Evaluator";
 
 		private static object[] lambdas = {
-
 		};
 		
 		public ClassT GetClass() {
@@ -263,5 +265,10 @@ namespace Mondo.Engine {
 		public override string ToString() {
 			return "evaluator (args: "+Args+" local: "+General.EnumToString(LocalVars)+" code: "+list+")";
 		}
+
+        public IVariable Return(IVariable iv) {
+            toRes = iv;
+            return iv;
+        }
 	}
 }

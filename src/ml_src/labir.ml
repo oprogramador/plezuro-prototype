@@ -23,9 +23,9 @@ $maze = {
 				[here[0]-1, here[1]], [here[0],here[1]-1]];
 			$neighbors := [];
 			0..4.eachi($j,{
-				{unvisited[potential[j][0]+1][potential[j][1]+1]}.if({
+				{unvisited[potential[j][0]+1][potential[j][1]+1]}.if{
 					neighbors << potential[j]
-				})
+				}
 			});
 			{neighbors.len>0}.if{
 				n--;
@@ -67,7 +67,7 @@ $display = {
 				{0==k%4}.if{
 					{k>0 & m['horiz'][(j-1)/2][k/4-1]}.if{
 						line << ' '
-					}.else({
+					}.else{
 						line << '|'
 					}
 				}.else{
@@ -76,12 +76,12 @@ $display = {
 			}
 		};
 		{0==j}.if{
-			line[1] = line[3] = line[2] = ' '
+			line[1] = line[2] = line[3] = ' '
 		};
 		{m['x']*2-1==j}.if{
 			line[4*m['y']] = ' '
 		};
-		text += (line.join+'\n')
+		text += line.join+'\n'
 	});
 	text
 };

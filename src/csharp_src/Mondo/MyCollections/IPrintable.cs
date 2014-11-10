@@ -36,5 +36,6 @@ namespace Mondo.MyCollections {
 		object FindVar(string key);
 		bool Clear();
 		ConcurrentDictionary<string,object> LocalVars{ get; }
+        IVariable Return(IVariable iv);
 	}
 }

@@ -55,6 +55,8 @@ namespace Mondo.Engine {
 					lastType==TokenTypes.Operator || 
 					lastType==TokenTypes.BracketOpen || 
 					lastType==TokenTypes.SquareOpen || 
+					lastType==TokenTypes.HashOpen || 
+					lastType==TokenTypes.DollarOpen || 
 					lastType==TokenTypes.CurlyOpen) {
 				output.Add( new Token(ListFullSymbol, TokenTypes.Symbol, new SoftLink(SymbolMap.ListSymbol)) );
 				return new Token("(", TokenTypes.BracketOpen, "(");
