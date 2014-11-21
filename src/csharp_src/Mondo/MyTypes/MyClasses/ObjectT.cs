@@ -97,6 +97,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Object";
 
 		private static object[] lambdas = {
+                        "read",         (Func<object,string>) ((o) => Console.ReadLine()),
             "return",   (Func<IPrintable,IVariable,IVariable>) ((p,x) => p.Return(x)),
 			"pools", 	(Func<MyObject,DictionaryT>) ((o) => o.Pools),
 			"class", 	(Func<IVariable,ClassT>) ((x) => x.GetClass()),

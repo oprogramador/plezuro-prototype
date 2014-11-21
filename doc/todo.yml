@@ -1,137 +1,136 @@
 repository:
-        - security
-        - parallel repositories
+    - security
+    - parallel repositories
 oop:
-        - reflection:
-                - package iteration
-                - .NET access
+    - reflection:
+        - package iteration
+        - .NET access
 classes:
-        - all_dynamic:
-                - base classes
-                - methods
-                - inherited methods
-                - pools
-        - security
-        - dynamic documentation
-        - constraints:
-                - regex
-                - type
-        - triggers
-        - getter/setter (ex. public set, private get)
-        - *access modifiers
-        - indexer method
+    - all_dynamic:
+        - base classes
+        - methods
+        - inherited methods
+        - pools
+    - security
+    - dynamic documentation
+    - constraints:
+        - regex
+        - type
+    - triggers
+    - getter/setter (ex. public set, private get)
+    - *access modifiers
+    - indexer method
 mathematics:
-        - linear algebra
-        - numpy and scipy equivalent
-        - plot:
-                - 2D
-                - 3D
+    - linear algebra
+    - numpy and scipy equivalent
+    - plot:
+        - 2D
+        - 3D
 bug_fixes:
-        - gui
-        - language
-        - operator precedence
-        - referenceT in order
-        - reference
+    - gui
+    - language
+    - operator precedence
+    - referenceT in order
+    - reference
 error_handling:
-        - info
-        - all errors
-        - exceptions:
-            - catch all (including stack overflow)
+    - info
+    - all errors
+    - exceptions:
+        - catch all (including stack overflow)
 tests:
-        - assert
-        - unit tests with script files
+    - assert
+    - unit tests with script files
 interpreter:
-        - optimization:
-                - conditions guessing
-                - better intermediate code
-                - native code
-        - interactive shell
+    - optimization:
+        - conditions guessing
+        - better intermediate code
+        - native code
+    - interactive shell
 function:
-        - default parameters
-        - *return
+    - default parameters
+    - *return
 constants:
-        - change lock
-        - object pools
-        - with method, not operator
-        - method isLocked
+    - change lock
+    - object pools
+    - with method, not operator
+    - method isLocked
 variables:
-        - globals
-        - comparison:
-                - by generated value
-        - full := operator
+    - globals
+    - comparison:
+        - by generated value
+    - full := operator
 data:
-        - selectMany
-        - selectIterative
-        - thenBy
-        - serialization
-        - *select with indexer
-        - database:
-                - mysql binding
-        - load data with separator
-        - json encode/decode
-        - csv
+    - selectMany
+    - selectIterative
+    - thenBy
+    - serialization
+    - *select with indexer
+    - database:
+        - mysql binding
+    - load data with separator
+    - json encode/decode
+    - csv
 types:
-        - string:
-                - mutable
-                - immutable
-                - *heredoc
-                - *nowdoc
-                - join method
-        - dateTime
-        - integer
-        - parse
+    - string:
+        - mutable
+        - immutable
+        - *heredoc
+        - *nowdoc
+        - join method
+    - dateTime
+    - integer
+    - parse
+    - list:
+        - all to selected index
+        - circular reference bug fix
+        - find min/max index
+    - containers:
         - list:
-                - all to selected index
-                - circular reference bug fix
-                - find min/max index
-        - containers:
-                - list:
-                        - constraints
+            - constraints
 operators:
-        - .= (without cloning)
+    - .= (without cloning)
 ide:
-        - autocompleting
-        - html editor
-        - vim plugin
-        - multithreading (stop)
-        - computing info
+    - autocompleting
+    - html editor
+    - vim plugin
+    - multithreading (stop)
+    - computing info
 compilation:
-        - to exe
-        - JIT
+    - to exe
+    - JIT
 documentation:
-        - full
-        - wiki
-        - examples
-        - alphabetical order of methods, also in code
-        - update to newest language version
+    - full
+    - wiki
+    - examples
+    - alphabetical order of methods, also in code
+    - update to newest language version
 compilation:
-        - also in visual studio
+    - also in visual studio
 language:
-        - shorter_code:
-                - method fully without brackets
-        - embedded native code in C
-        - translation to C
-        - syntax:
-                - *while shorter
-                - *loop with indexer
-        - debugger
-        - new programming paradigms (ex. for prime numbers)
-        - gui
-        - console:
-                - *standard input
-        - multithreading:
-                - thread_safe:
-                        - lock
-        - networking
-        - frameworks
-        - translation to other languages
-        - compilation to .NET and JVM intermediate code
-        - bindings to other languages libraries
+    - shorter_code:
+        - method fully without brackets
+    - embedded native code in C
+    - translation to C
+    - syntax:
+        - *loop with indexer
+    - debugger
+    - new programming paradigms (ex. for prime numbers)
+    - gui
+    - console:
+        - *standard input
+    - multithreading:
+        - thread_safe:
+            - lock
+    - networking
+    - frameworks
+    - translation to other languages
+    - compilation to .NET and JVM intermediate code
+    - bindings to other languages libraries
 scripts:
-        - tetris
-        - snake
-        - calculator
-        - clock
-        - *labyrinth game
-        - sudoku
-        - update to newest language version
+    - tetris
+    - snake
+    - calculator
+    - clock
+    - *labyrinth game
+    - sudoku
+    - update to newest language version

@@ -35,7 +35,10 @@ namespace Mondo.Tests {
 			//threads();
 			//testGener();
 			//cmd();
+                        console();
 		}
+
+                private void console();
 
 		private void cmd() {
 			System.Diagnostics.Process proc = new System.Diagnostics.Process();
