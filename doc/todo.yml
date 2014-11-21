@@ -62,7 +62,7 @@ variables:
 data:
     - selectMany
     - selectIterative
-    - thenBy
+    - *thenBy
     - serialization
     - *select with indexer
     - database:
@@ -103,7 +103,7 @@ documentation:
     - wiki
     - examples
     - alphabetical order of methods, also in code
-    - update to newest language version
+    - *update to newest language version
 compilation:
     - also in visual studio
 language:
@@ -117,7 +117,7 @@ language:
     - new programming paradigms (ex. for prime numbers)
     - gui
     - console:
-        - *standard input
+        - *standard input (not sure about it)
     - multithreading:
         - thread_safe:
             - lock

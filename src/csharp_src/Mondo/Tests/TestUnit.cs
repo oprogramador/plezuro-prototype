@@ -35,10 +35,17 @@ namespace Mondo.Tests {
 			//threads();
 			//testGener();
 			//cmd();
-                        console();
+            //console();
 		}
 
-                private void console();
+        private void console() {
+            Console.Write("r=");
+            string r = Console.ReadLine();
+            Console.WriteLine("r="+r);
+            Console.Write("y=");
+            string y = Console.ReadLine();
+            Console.WriteLine("y="+y);
+        }
 
 		private void cmd() {
 			System.Diagnostics.Process proc = new System.Diagnostics.Process();

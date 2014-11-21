@@ -132,7 +132,7 @@ namespace Mondo.Engine {
 		void methodMatch(object outp, object[] args) {
 			string oper = ((SoftLink)outp).Value;
 			ICallable proc;
-		       	try {
+            try {
 				proc = ClassT.GetClass(args).GetMethod(oper).Proc;
 			} catch {
 				if(args.Length>0) args[0] = TypeTrans.tryCall(args[0], this);

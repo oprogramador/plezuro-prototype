@@ -61,10 +61,12 @@ namespace Mondo.MyTypes.MyClasses {
 			"len",		(Func<ListT,double>) ((a) => a.Count),
 			SymbolMap.RefSymbol, (Func<ListT,IVariable,object>) ((a,i) => GeneralIndexer.Index(a,i) ),
 			"each",		(Func<IPrintable,ListT,ProcedureT,object>)
-						((p, ar, f) => { object ret=new NullType();
-						foreach(IVariable i in ar) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(i));
-						return ret; 
-					} ),
+						((p, ar, f) => {
+                            object ret=new NullType();
+                            int k = 0;
+						    foreach(IVariable i in ar) ret=Evaluator.Eval(f,p,TupleT.MakeTuplable(new object[]{i, new Number(k++)}));
+						    return ret; 
+					    }),
 			"where",	(Func<IPrintable,ListT,ProcedureT,ListT>) 
 					((p,x,f) => new ListT( x.Where( i => Evaluator.Eval(f,p,TupleT.MakeTuplable(i)).Equals(true) ).ToList() ) ),
 			"map",		(Func<IPrintable,ListT,ProcedureT,ListT>) 
