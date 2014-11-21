@@ -11,6 +11,7 @@ $maze = {
 		verti := [[false]*max]*(x+1); 
 		$here := [(rand*x).floor, (rand*y).floor];
 		$path := [here];
+                'path+[2+4/4]'.dumpl;
 		$unvisited = [0]*(x+2);
 		0..(x+2).eachi($j,{
 			unvisited[j] := [];

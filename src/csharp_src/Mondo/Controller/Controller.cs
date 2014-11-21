@@ -19,12 +19,13 @@
  * 
  * 
  */
- 
+
 
 using System;
 
 namespace Mondo.Controller {
-	class Controller {
-
-	}
+    class Controller {
+        public Controller() {
+        }
+    }
 }

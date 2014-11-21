@@ -19,6 +19,7 @@ classes:
         - triggers
         - getter/setter (ex. public set, private get)
         - *access modifiers
+        - indexer method
 mathematics:
         - linear algebra
         - numpy and scipy equivalent
@@ -68,11 +69,13 @@ data:
                 - mysql binding
         - load data with separator
         - json encode/decode
+        - csv
 types:
         - string:
                 - mutable
                 - immutable
-                - delimiter
+                - *heredoc
+                - *nowdoc
                 - join method
         - dateTime
         - integer
@@ -80,6 +83,7 @@ types:
         - list:
                 - all to selected index
                 - circular reference bug fix
+                - find min/max index
         - containers:
                 - list:
                         - constraints
@@ -93,6 +97,7 @@ ide:
         - computing info
 compilation:
         - to exe
+        - JIT
 documentation:
         - full
         - wiki
