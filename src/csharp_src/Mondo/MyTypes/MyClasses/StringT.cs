@@ -113,9 +113,9 @@ namespace Mondo.MyTypes.MyClasses {
 			"load",		(Func<IPrintable,string,ListT,object>) 
 					((p,x,args) => { 
 					 		try {
-						       		args = (ListT)args.Clone();
+                                if(args==null) args = new ListT();
+                                args = (ListT)args.Clone();
 								args.Insert(0,new StringT( System.IO.Path.GetFileName(x) ));	
-								Console.WriteLine("text="+System.IO.File.ReadAllText(x));
 								return Parser.Parse(System.IO.File.ReadAllText(x), p, TupleT.MakeTuplable(args.ToArray()));
 							} catch{ 
 								throw new ModuleNotFoundException();

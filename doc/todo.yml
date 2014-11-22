@@ -34,6 +34,7 @@ bug_fixes:
     - reference
     - []():
     - loop and increment
+    - source file load
 error_handling:
     - info
     - all errors
