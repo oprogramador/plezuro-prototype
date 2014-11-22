@@ -32,6 +32,8 @@ bug_fixes:
     - operator precedence
     - referenceT in order
     - reference
+    - []():
+    - loop and increment
 error_handling:
     - info
     - all errors
@@ -46,6 +48,7 @@ interpreter:
         - better intermediate code
         - native code
     - interactive shell
+    - eval mode
 function:
     - default parameters
     - *return
@@ -64,7 +67,6 @@ data:
     - selectIterative
     - *thenBy
     - serialization
-    - *select with indexer
     - database:
         - mysql binding
     - load data with separator
@@ -76,7 +78,6 @@ types:
         - immutable
         - *heredoc
         - *nowdoc
-        - join method
     - dateTime
     - integer
     - parse
@@ -100,7 +101,7 @@ compilation:
     - JIT
 documentation:
     - full
-    - wiki
+    - *wiki
     - examples
     - alphabetical order of methods, also in code
     - *update to newest language version
@@ -112,7 +113,6 @@ language:
     - embedded native code in C
     - translation to C
     - syntax:
-        - *loop with indexer
     - debugger
     - new programming paradigms (ex. for prime numbers)
     - gui

@@ -34,6 +34,6 @@ $j = i.::package();
 $k = 3:4;
 
 //procedure
-$l = {1+2}
+$l = {1+2};
 
 (x,y,z,a,b,c,cc,d,e,f,g,h,i,j,k,l)

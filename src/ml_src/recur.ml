@@ -7,5 +7,4 @@ $faci = {
         {i>1}.while({ ret=ret*i; i-- });
         ret
 };
-{facr(120)}.time,
-{faci(120)}.time
+facr(120),faci(120)

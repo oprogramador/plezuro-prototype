@@ -1,2 +1,2 @@
 $txt = 'abc.txt'.fromF;
-{txt.class==String}.if({ (txt*20).toF('xyz.txt') })
+{txt.class==String}.if({ (txt*4).toF('xyz.txt') })

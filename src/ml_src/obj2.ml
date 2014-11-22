@@ -11,6 +11,6 @@ $Car = 'Car'.newClass($[], #[
 ]);
 
 $c = Car(7000);
-$[c,''+c];
+$[c,''+c].printl;
 c.price 900;
 @c
