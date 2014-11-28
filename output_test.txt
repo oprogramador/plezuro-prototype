@@ -1,0 +1,84 @@
+Test 1
+5
+Test 2
+[9,25,51,124,124124]
+Test 3
+args=("args.ml", 3, 8)
+14
+Test 4
+"\0\b\t\n\v\f\r !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþ"
+Test 5
+(2.3E+45, 255, 58, 27, "aaaaaaaaaaaaaaaaaa", "wfefwfwf", "xxx\nyyy\n\nzzz", [1,2,3,4], 2.71828182845905, #[1:2, 3:4], $[3,4,5], Error: infinity, builtinClass Number, package Lang, 3:4, {stop 2
+soft link: +
+2
+1})
+Test 6
+()
+Test 7
+x=24
+x=24
+x=120
+()
+Test 8
+[11,18,21,125,235,2453,5235,15235]
+[21,11,2453,15235,125,235,5235,18]
+[21,15235,125,235,11,2453,18,5235]
+Test 9
+IfObject(True,true)
+zxcv
+zxcv
+zxcv
+zxcv
+Test 10
+true
+<table border="2"><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>4</td><td>5</td></tr></table><table border="2"><tr><td>"city"</td><td>"name"</td><td>"sex"</td></tr><tr><td>"Marseille"</td><td>"Jewwwwwan"</td><td>null</td></tr><tr><td>"Miami"</td><td>"Tom"</td><td>"m"</td></tr></table>
+Test 11
+aa
+cc
+IfObject(True,"cc")
+Test 12
+bcdeaacfil
+(13, 14, 15)
+Test 13
+*   *---*---*---*---*---*---*---*
+|                               |
+*   *---*---*---*---*---*---*   *
+|                       |       |
+*---*---*---*---*---*   *   *---*
+|                   |   |       |
+*   *---*---*---*---*---*---*   *
+|                                
+*---*---*---*---*---*---*---*---*
+
+()
+Test 14
+$[object of class Car,"a car which costs 7000€"]
+#["price":900]
+Test 15
+[2,3,5,7,11,13,17,19]
+Test 16
+23
+Test 17
+(6.68950291344912E+198, 6.68950291344913E+198)
+Test 18
+22
+true
+4
+false
+2
+false
+true
+false
+null
+Test 19
+8
+13
+21
+Test 20
+1
+3
+3
+(3, 5, 6, 1)
+(6, 5, 3, 1)
+Test 21
+17589
