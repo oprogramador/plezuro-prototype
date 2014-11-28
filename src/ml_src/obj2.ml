@@ -1,4 +1,16 @@
-$c = 'src/ml_src/obj2.ml'.load;
+$Car = 'Car'.newClass($[], #[
+        'init', {
+                @this << ('price' : vals)
+        },
+        'str',  {
+                'a car which costs '+(@this['price'])+'€'
+        },
+        'price', {
+                @this['price'] = vals
+        }
+]);
+
+$c = Car(7000);
 $[c,''+c].printl;
 c.price 900;
 @c

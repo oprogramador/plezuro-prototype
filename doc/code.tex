@@ -1,115 +1,120 @@
-Gui/IOPanel.cs:	class IOPanel : Panel 
-Gui/IClickable.cs:	public interface IClickable 
-Gui/InputBox.cs:	class InputBox : IOBox, ITextable 
-Gui/MyItem.cs:	public class MyItem 
-Gui/MyMenu.cs:	public class MyMenu : MainMenu 
-Gui/OutputBox.cs:	class OutputBox : IOBox, IOutputable 
-Gui/FormAdapter.cs:	public class FormAdapter 
-Gui/IOBox.cs:	class IOBox : RichTextBox 
-Gui/MainPanel.cs:	class MainPanel : Panel 
-Gui/Clickable.cs:	public interface Clickable 
-Gui/MainWindow.cs:	class MainWindow : Form 
-Gui/VisualSyntax.cs:	class VisualSyntax 
-MyTypes/IStepable.cs:	interface IStepable : IVariable 
-MyTypes/CircularInheritanceException.cs:	class CircularInheritanceException : Exception 
-MyTypes/ITuplable.cs:	public interface ITuplable 
-MyTypes/NotComparableException.cs:	class NotComparableException : Exception 
-MyTypes/InfinityException.cs:	class InfinityException : NumberException 
-MyTypes/IVariable.cs:	public interface IVariable : ICompCloneable, IStringable, ITuplable 
-MyTypes/LambdaConverter.cs:	static class LambdaConverter 
-MyTypes/IStringable.cs:	public interface IStringable 
-MyTypes/IITem.cs:	public interface IItem : IVariable 
-MyTypes/NoMethodException.cs:	class NoMethodException : Exception 
-MyTypes/AccessModifier.cs:	public enum AccessEnum 
-MyTypes/AccessModifier.cs:	public class AccessModifier 
-MyTypes/ModuleNotFoundException.cs:	class ModuleNotFoundException : Exception 
-MyTypes/NaNException.cs:	class NaNException : NumberException 
-MyTypes/VariableFactory.cs:	class VariableFactory 
-MyTypes/NumberException.cs:	class NumberException : Exception 
-MyTypes/UndefinedException.cs:	class UndefinedException : Exception 
-MyTypes/MyClasses/ObjectT.cs:	class ObjectT : IVariable 
-MyTypes/MyClasses/BuiltinClass.cs:	class BuiltinClass : ClassT 
-MyTypes/MyClasses/CallFunc.cs:	class CallFunc : IVariable 
-MyTypes/MyClasses/PairT.cs:	public class PairT : IVariable 
-MyTypes/MyClasses/RangeT.cs:	class RangeT : IVariable, IEnumerable 
-MyTypes/MyClasses/ClassT.cs:	public class ClassT : IItem, IVariable, ICallable 
-MyTypes/MyClasses/SoftLink.cs:	class SoftLink : Pointer<string>, IVariable 
-MyTypes/MyClasses/BuiltinFunc.cs:	class BuiltinFunc : IVariable, ICallable  
-MyTypes/MyClasses/ErrorT.cs:	class ErrorT : IVariable 
-MyTypes/MyClasses/StopPoint.cs:	class StopPoint : IVariable 
-MyTypes/MyClasses/ProcedureT.cs:	public class ProcedureT : OStack, ICallable  
-MyTypes/MyClasses/BooleanT.cs:	class BooleanT : Pointer<bool>, IVariable 
-MyTypes/MyClasses/ListT.cs:	public class ListT : SList<ICompCloneable>, IVariable, IIndexable 
-MyTypes/MyClasses/TupleT.cs:	public class TupleT : SList<IVariable>, IVariable 
-MyTypes/MyClasses/MyClass.cs:	class MyClass : ClassT 
-MyTypes/MyClasses/PointerT.cs:	class PointerT : Pointer<ReferenceT>, IVariable 
-MyTypes/MyClasses/SetT.cs:	public class SetT : SortedSet<IVariable>, IVariable 
-MyTypes/MyClasses/Method.cs:	public class Method : IVariable, ICallable 
-MyTypes/MyClasses/Callable.cs:	class Callable 
-MyTypes/MyClasses/NullType.cs:	class NullType : IVariable 
-MyTypes/MyClasses/StringT.cs:	class StringT : Pointer<string>, IVariable, IIndexable 
-MyTypes/MyClasses/StringT.cs:		class MiniParser : IParseable 
-MyTypes/MyClasses/Number.cs:	class Number : Pointer<double>, IVariable 
-MyTypes/MyClasses/MyObject.cs:	class MyObject : IVariable 
-MyTypes/MyClasses/PackageT.cs:	public class PackageT : List<IItem>, IItem, IVariable 
-MyTypes/MyClasses/DictionaryT.cs:	public class DictionaryT : SortedDictionary<IVariable,IVariable>, IVariable 
-MyTypes/MyClasses/ReferenceT.cs:	public class ReferenceT : Pointer<IVariable>, IVariable, ITypeConvertible 
-MyTypes/MyClasses/DotFunc.cs:	class DotFunc : IVariable, ICallable  
-MyTypes/MyClasses/EmptyT.cs:	class EmptyT : IVariable 
-MyTypes/IIndexable.cs:	interface IIndexable 
-MyTypes/ICallable.cs:	public interface ICallable : IComparable 
-MyTypes/ObjectContainer.cs:	class ObjectContainer : List<IVariable> 
-MyTypes/Variable.cs:	static class Variable 
-Maths/NumberCalcul.cs:	static class NumberCalcul 
-Engine/IOutputable.cs:	interface IOutputable : ITextable 
-Engine/Tokenizer.cs:	class Tokenizer 
-Engine/SymbolMap.cs:	class SymbolMap : ConcurrentDictionary<string, object> 
-Engine/Engine.cs:	class Engine 
-Engine/ErrorText.cs:	class ErrorText 
-Engine/StaticParser.cs:	static class StaticParser 
-Engine/RPNTypes.cs:	enum RPNTypes 
-Engine/SyntaxException.cs:	class SyntaxException : Exception 
-Engine/RPN.cs:	class RPN 
-Engine/Evaluator.cs:	class Evaluator : IPrintable 
-Engine/IOMap.cs:	class IOMap : Dictionary<ITextable, IOutputable>, IRefreshable 
-Engine/TokenConverter.cs:	class TokenConverter 
-Engine/SymbolException.cs:	class SymbolException : Exception 
-Engine/Parser.cs:	class Parser 
-Program.cs:	class Program 
-lib/HtmlTable.cs:	abstract class HtmlTable 
-lib/SimpleTypeConverter.cs:	static class SimpleTypeConverter 
+lib/Co.cs:	class Co 
 lib/HtmlArrayTable.cs:	class HtmlArrayTable : HtmlTable 
 lib/ITypeConvertible.cs:	interface ITypeConvertible 
-lib/Integral.cs:	class Integral 
-lib/Co.cs:	class Co 
-lib/HtmlDicTable.cs:	class HtmlDicTable : HtmlTable 
 lib/HtmlTableFactory.cs:	static class HtmlTableFactory 
+lib/MyCrypto.cs:	class MyCrypto 
+lib/HtmlDicTable.cs:	class HtmlDicTable : HtmlTable 
+lib/Integral.cs:	class Integral 
+lib/SimpleTypeConverter.cs:	static class SimpleTypeConverter 
+lib/HtmlTable.cs:	abstract class HtmlTable 
+lib/SString.cs:	class SString 
+Engine/StaticParser.cs:	static class StaticParser 
+Engine/Parser.cs:	class Parser 
+Engine/Evaluator.cs:	class Evaluator : IPrintable 
+Engine/IOutputable.cs:	interface IOutputable : ITextable 
+Engine/RPN.cs:	class RPN 
+Engine/Tokenizer.cs:	class Tokenizer 
+Engine/ErrorText.cs:	class ErrorText 
+Engine/Engine.cs:	class Engine 
+Engine/SyntaxException.cs:	class SyntaxException : Exception 
+Engine/IOMap.cs:	class IOMap : Dictionary<ITextable, IOutputable>, IRefreshable 
+Engine/SymbolMap.cs:	class SymbolMap : ConcurrentDictionary<string, object> 
+Engine/SymbolException.cs:	class SymbolException : Exception 
+Engine/RPNTypes.cs:	enum RPNTypes 
+Engine/TokenConverter.cs:	class TokenConverter 
+Program.cs:	class Program 
+Tests/TestUnit.cs:    class TestUnit 
 DataFixtures/DataFixtures.cs:	class DataFixtures : SetT 
-MyCollections/ICompCloneable.cs:	public interface ICompCloneable : IComparable, ICloneable 
+MyTypes/MyClasses/ClassT.cs:	public class ClassT : IItem, IVariable, ICallable 
+MyTypes/MyClasses/DictionaryT.cs:	public class DictionaryT : SortedDictionary<IVariable,IVariable>, IVariable 
+MyTypes/MyClasses/PointerT.cs:	class PointerT : Pointer<ReferenceT>, IVariable 
+MyTypes/MyClasses/DotFunc.cs:	class DotFunc : IVariable, ICallable  
+MyTypes/MyClasses/ErrorT.cs:	class ErrorT : IVariable 
+MyTypes/MyClasses/TupleT.cs:	public class TupleT : SList<IVariable>, IVariable 
+MyTypes/MyClasses/NullType.cs:	class NullType : IVariable 
+MyTypes/MyClasses/Number.cs:	class Number : Pointer<double>, IVariable 
+MyTypes/MyClasses/StringT.cs:	class StringT : Pointer<string>, IVariable, IIndexable 
+MyTypes/MyClasses/StringT.cs:		class MiniParser : IParseable 
+MyTypes/MyClasses/ReferenceT.cs:	public class ReferenceT : Pointer<IVariable>, IVariable, ITypeConvertible 
+MyTypes/MyClasses/MyRandom.cs:	class MyRandom : Number 
+MyTypes/MyClasses/CallFunc.cs:	class CallFunc : IVariable 
+MyTypes/MyClasses/ProcedureT.cs:	public class ProcedureT : OStack, ICallable  
+MyTypes/MyClasses/IfObject.cs:	class IfObject : IVariable 
+MyTypes/MyClasses/StopPoint.cs:	class StopPoint : IVariable 
+MyTypes/MyClasses/PairT.cs:	public class PairT : IVariable 
+MyTypes/MyClasses/SoftLink.cs:	class SoftLink : Pointer<string>, IVariable 
+MyTypes/MyClasses/MyObject.cs:	class MyObject : IVariable 
+MyTypes/MyClasses/BooleanT.cs:	class BooleanT : Pointer<bool>, IVariable 
+MyTypes/MyClasses/EmptyT.cs:	class EmptyT : IVariable 
+MyTypes/MyClasses/RangeT.cs:	class RangeT : IVariable, IEnumerable 
+MyTypes/MyClasses/BuiltinFunc.cs:	class BuiltinFunc : IVariable, ICallable  
+MyTypes/MyClasses/Callable.cs:	class Callable 
+MyTypes/MyClasses/MyClass.cs:	class MyClass : ClassT 
+MyTypes/MyClasses/ObjectT.cs:	class ObjectT : IVariable 
+MyTypes/MyClasses/SetT.cs:	public class SetT : SortedSet<IVariable>, IVariable 
+MyTypes/MyClasses/ListT.cs:	public class ListT : SList<ICompCloneable>, IVariable, IIndexable 
+MyTypes/MyClasses/PackageT.cs:	public class PackageT : List<IItem>, IItem, IVariable 
+MyTypes/MyClasses/Method.cs:	public class Method : IVariable, ICallable 
+MyTypes/MyClasses/BuiltinClass.cs:	class BuiltinClass : ClassT 
+MyTypes/AccessModifier.cs:	public enum AccessEnum 
+MyTypes/AccessModifier.cs:	public class AccessModifier 
+MyTypes/IVariable.cs:	public interface IVariable : ICompCloneable, IStringable, ITuplable 
+MyTypes/IStepable.cs:	interface IStepable : IVariable 
+MyTypes/Variable.cs:	static class Variable 
+MyTypes/ITuplable.cs:	public interface ITuplable 
+MyTypes/VariableFactory.cs:	class VariableFactory 
+MyTypes/CommandNotFoundException.cs:	class CommandNotFoundException : Exception 
+MyTypes/InfinityException.cs:	class InfinityException : NumberException 
+MyTypes/IIndexable.cs:	interface IIndexable 
+MyTypes/IITem.cs:	public interface IItem : IVariable 
+MyTypes/IStringable.cs:	public interface IStringable 
+MyTypes/ObjectContainer.cs:	class ObjectContainer : List<IVariable> 
+MyTypes/NaNException.cs:	class NaNException : NumberException 
+MyTypes/NotComparableException.cs:	class NotComparableException : Exception 
+MyTypes/NumberException.cs:	class NumberException : Exception 
+MyTypes/UndefinedException.cs:	class UndefinedException : Exception 
+MyTypes/CircularInheritanceException.cs:	class CircularInheritanceException : Exception 
+MyTypes/LambdaConverter.cs:	static class LambdaConverter 
+MyTypes/ICallable.cs:	public interface ICallable : IComparable 
+MyTypes/NoMethodException.cs:	class NoMethodException : Exception 
+MyTypes/ModuleNotFoundException.cs:	class ModuleNotFoundException : Exception 
+Gui/MyMenu.cs:	public class MyMenu : MainMenu 
+Gui/FormAdapter.cs:	public class FormAdapter 
+Gui/VisualSyntax.cs:	class VisualSyntax 
+Gui/MainWindow.cs:	class MainWindow : Form 
+Gui/Clickable.cs:	public interface Clickable 
+Gui/IOPanel.cs:	class IOPanel : Panel 
+Gui/IClickable.cs:	public interface IClickable 
+Gui/MainPanel.cs:	class MainPanel : Panel 
+Gui/IOBox.cs:	class IOBox : RichTextBox 
+Gui/MyItem.cs:	public class MyItem 
+Gui/InputBox.cs:	class InputBox : IOBox, ITextable 
+Gui/OutputBox.cs:	class OutputBox : IOBox, IOutputable 
+MyCollections/DefaultType.cs:	class DefaultType 
+MyCollections/WList.cs:	public class WList<T> : List<T> 
+MyCollections/IPrintable.cs:	public interface IPrintable : IEvalable, IVariable 
+MyCollections/EmptyArgException.cs:	class EmptyArgException : Exception 
+MyCollections/CList.cs:	public class CList<T> : WList<T> where T: IComparable 
+MyCollections/OStack.cs:	public class OStack : WStack<object> 
 MyCollections/GeneralIndexer.cs:	static class GeneralIndexer 
+MyCollections/TypeTrans.cs:	public static class TypeTrans 
+MyCollections/SList.cs:	public class SList<T> : CList<T>, ICompCloneable where T : ICompCloneable 
+MyCollections/ConcurrentDictionary.cs:	public class ConcurrentDictionary<TKey, TValue> : Dictionary<TKey, TValue> 
+MyCollections/IParseable.cs:	interface IParseable 
+MyCollections/IValuable.cs:	interface IValuable 
 MyCollections/Pointer.cs:	public class Pointer<T> 
-MyCollections/IEvalable.cs:	public interface IEvalable 
 MyCollections/TokenTypes.cs:	public enum TokenTypes 
 MyCollections/TokenTypes.cs:	public static class TokenTypesExtension 
 MyCollections/Token.cs:	public class Token 
-MyCollections/ITextable.cs:	public interface ITextable 
-MyCollections/TypeTrans.cs:	public static class TypeTrans 
-MyCollections/WStack.cs:	public class WStack<T> : Stack<T>, IVariable 
-MyCollections/IValuable.cs:	interface IValuable 
-MyCollections/IParseable.cs:	interface IParseable 
-MyCollections/SList.cs:	public class SList<T> : CList<T>, ICompCloneable where T : ICompCloneable 
-MyCollections/SortedSet.cs:	public class SortedSet<T> : SortedDictionary<T,int> 
-MyCollections/General.cs:	static class General 
-MyCollections/EmptyArgException.cs:	class EmptyArgException : Exception 
-MyCollections/CList.cs:	public class CList<T> : WList<T> where T: IComparable 
-MyCollections/WList.cs:	public class WList<T> : List<T> 
+MyCollections/IEvalable.cs:	public interface IEvalable 
+MyCollections/ICompCloneable.cs:	public interface ICompCloneable : IComparable, ICloneable 
 MyCollections/NullArg.cs:	class NullArg 
-MyCollections/ConcurrentDictionary.cs:	public class ConcurrentDictionary<TKey, TValue> : Dictionary<TKey, TValue> 
-MyCollections/OStack.cs:	public class OStack : WStack<object> 
-MyCollections/IPrintable.cs:	public interface IPrintable : IEvalable, IVariable 
-MyCollections/DefaultType.cs:	class DefaultType 
+MyCollections/WStack.cs:	public class WStack<T> : Stack<T>, IVariable 
+MyCollections/General.cs:	static class General 
+MyCollections/SortedSet.cs:	public class SortedSet<T> : SortedDictionary<T,int> 
+MyCollections/ITextable.cs:	public interface ITextable 
+Maths/NumberCalcul.cs:	static class NumberCalcul 
 Info/Help.cs:	class Help 
 Info/Info.cs:	class Info 
-Controller/Controller.cs:	class Controller 
 Controller/IRefreshable.cs:	interface IRefreshable 
-Tests/TestUnit.cs:	class TestUnit 
+Controller/Controller.cs:    class Controller 
