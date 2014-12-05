@@ -5,7 +5,7 @@ This is Plezuro programming language.
 
 Documentation: doc/doc_en.pdf
 
-On Wikipedia:
+On Wikipedia: https://en.wikipedia.org/wiki/Plezuro
 
 Interpreter: plezuro.exe
 

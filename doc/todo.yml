@@ -5,7 +5,6 @@ bug_fixes:
     operator_precedence: 'yes'
     reference: 'yes'
     referenceT_in_order: 'yes'
-    source_file_load: 'yes'
 classes:
     access_modifiers: ['*', 'yes']
     all_dynamic:
@@ -28,7 +27,6 @@ compilation:
 compilation:
     also_in_visual_studio: 'yes'
 constants:
-    change_lock: 'yes'
     method: ['yes', 'method instead of operator']
     method_isLocked: 'yes'
     object_pools: 'yes'
@@ -37,7 +35,7 @@ data:
     database:
         mysql_binding: 'yes'
     load_data_with_separator: 'yes'
-    json_encode/decode: 'yes'
+    json_encode_decode: 'yes'
     selectIterative: 'yes'
     selectMany: 'yes'
     serialization: 'yes'
