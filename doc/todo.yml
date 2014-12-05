@@ -1,143 +1,142 @@
-repository:
-    - security
-    - parallel repositories
-oop:
-    - reflection:
-        - package iteration
-        - *.NET access
-classes:
-    - all_dynamic:
-        - base classes
-        - methods
-        - inherited methods
-        - pools
-    - security
-    - dynamic documentation
-    - constraints:
-        - regex
-        - type
-    - triggers:
-        - modification time
-    - getter/setter (ex. public set, private get)
-    - *access modifiers
-    - indexer method
-mathematics:
-    - linear algebra
-    - numpy and scipy equivalent
-    - plot:
-        - 2D
-        - 3D
 bug_fixes:
-    - gui
-    - language
-    - operator precedence
-    - referenceT in order
-    - reference
-    - []():
-    - loop and increment
-    - source file load
-error_handling:
-    - info
-    - all errors
-    - exceptions:
-        - catch all (including stack overflow)
-tests:
-    - assert
-    - unit tests with script files
-interpreter:
-    - optimization:
-        - conditions guessing
-        - better intermediate code
-        - native code
-    - interactive shell
-    - eval mode
-function:
-    - default parameters
-    - *return
+    gui: 'yes'
+    language: 'yes'
+    loop_and_increment: 'yes'
+    operator_precedence: 'yes'
+    reference: 'yes'
+    referenceT_in_order: 'yes'
+    source_file_load: 'yes'
+classes:
+    access_modifiers: ['*', 'yes']
+    all_dynamic:
+        base_classes: 'yes'
+        inherited_methods: 'yes'
+        methods: 'yes'
+        pools: 'yes'
+    constraints:
+        regex: 'yes'
+        type: 'yes'
+    dynamic_documentation: 'yes'
+    getter_setter: ['yes', 'public set, private get']
+    indexer_method: 'yes'
+    security: 'yes'
+    triggers:
+        modification_time: 'yes'
+compilation:
+    JIT: 'yes'
+    to_exe: 'yes'
+compilation:
+    also_in_visual_studio: 'yes'
 constants:
-    - change lock
-    - object pools
-    - with method, not operator
-    - method isLocked
-variables:
-    - globals
-    - comparison:
-        - by generated value
-    - full := operator
+    change_lock: 'yes'
+    method: ['yes', 'method instead of operator']
+    method_isLocked: 'yes'
+    object_pools: 'yes'
 data:
-    - selectMany
-    - selectIterative
-    - *thenBy
-    - serialization
-    - database:
-        - mysql binding
-    - load data with separator
-    - json encode/decode
-    - csv
-types:
-    - string:
-        - mutable
-        - immutable
-        - *heredoc
-        - *nowdoc
-    - dateTime
-    - integer
-    - parse
-    - list:
-        - all to selected index
-        - circular reference bug fix
-        - find min/max index
-    - containers:
-        - list:
-            - constraints
-operators:
-    - .= (without cloning)
-ide:
-    - autocompleting
-    - html editor
-    - vim plugin
-    - multithreading (stop)
-    - computing info
-compilation:
-    - to exe
-    - JIT
+    csv: 'yes'
+    database:
+        mysql_binding: 'yes'
+    load_data_with_separator: 'yes'
+    json_encode/decode: 'yes'
+    selectIterative: 'yes'
+    selectMany: 'yes'
+    serialization: 'yes'
+    thenBy: ['*', 'yes']
 documentation:
-    - full
-    - *wiki
-    - examples
-    - alphabetical order of methods, also in code
-    - *update to newest language version
-compilation:
-    - also in visual studio
+    alphabetical_order_of_methods: ['yes', 'in doc, as well in code']
+    examples: 'yes'
+    full: 'yes'
+    update_to_newest_language_version: ['*', 'yes']
+    wiki: ['*', 'yes']
+error_handling:
+    all_errors: 'yes'
+    exceptions:
+        catch_all: ['yes', 'including stack_overflow']
+    info: 'yes'
+function:
+    default_parameters: 'yes'
+    return: ['*', 'yes']
+ide:
+    autocompleting: 'yes'
+    computing_info: 'yes'
+    html_editor: 'yes'
+    multithreading: ['yes', 'stop']
+    vim_plugin: 'yes'
+interpreter:
+    eval_mode: 'yes'
+    interactive_shell: 'yes'
+    optimization:
+        better_intermediate_code: 'yes'
+        conditions_guessing: 'yes'
+        native_code: 'yes'
 language:
-    - shorter_code:
-        - method fully without brackets
-    - embedded native code in C
-    - translation to C
-    - syntax:
-    - debugger
-    - new programming paradigms (ex. for prime numbers)
-    - gui
-    - console:
-        - *standard input (not sure about it)
-    - multithreading:
-        - thread_safe:
-            - lock
-    - networking
-    - frameworks
-    - image generation
-    - translation to other languages
-    - compilation to .NET and JVM intermediate code
-    - bindings to other languages libraries
+    bindings_to_other_languages_libraries: 'yes'
+    console:
+        standard_input: ['*', 'yes', 'not sure about it']
+    debugger: 'yes'
+    embedded_native_code_in_C: 'yes'
+    frameworks: 'yes'
+    gui: 'yes'
+    image_generation: 'yes'
+    multithreading:
+        thread_safe:
+            lock: 'yes'
+    networking: 'yes'
+    new_programming_paradigms: ['yes', 'ex. for prime numbers']
+    shorter_code:
+        method_fully_without_brackets: 'yes'
+    syntax:
+    translation_to_C: 'yes'
+    translation_to_other_languages: 'yes'
+    compilation_to_.NET_and_JVM_intermediate_code: 'yes'
+mathematics:
+    linear_algebra: 'yes'
+    numpy_and_scipy_equivalent: 'yes'
+    plot:
+        2D: 'yes'
+        3D: 'yes'
+oop:
+    reflection:
+        dot_NET_access: ['*', 'yes']
+        package_iteration: 'yes'
+operators:
+    dot_equal: ['yes', '.=', 'without cloning']
+repository:
+    parallel_repositories: 'yes'
+    security: 'yes'
 scripts:
-    - tetris
-    - snake
-    - calculator
-    - clock
-    - *labyrinth game
-    - sudoku
-    - update to newest language version
-    - Levensthein distance
-    - Sierpiński carpet
-    - md5
-    - crc
+    calculator: 'yes'
+    clock: 'yes'
+    crc: 'yes'
+    labyrinth_game: ['*', 'yes']
+    Levensthein_distance: 'yes'
+    Sierpiński_carpet: 'yes'
+    md5: 'yes'
+    snake: 'yes'
+    sudoku: 'yes'
+    tetris: 'yes'
+    update_to_newest_language_version: 'yes'
+tests:
+    assert: 'yes'
+    unit_tests_with_script_files: 'yes'
+types:
+    containers:
+        list:
+            constraints: 'yes'
+    dateTime: 'yes'
+    integer: 'yes'
+    list:
+        all_to_selected_index: 'yes'
+        circular_reference_bug_fix: 'yes'
+        find_min/max_index: 'yes'
+    parse: 'yes'
+    string:
+        heredoc: ['*', 'yes']
+        immutable: 'yes'
+        mutable: 'yes'
+        nowdoc: ['*', 'yes']
+variables:
+    comparison:
+        by_generated_value: 'yes'
+    full_copy_operator: ['yes', ':=']
+    globals: 'yes'
