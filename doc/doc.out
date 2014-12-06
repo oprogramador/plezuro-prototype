@@ -2,24 +2,25 @@
 \BOOKMARK [1][-]{section.2}{ \040Technical information }{}% 2
 \BOOKMARK [1][-]{section.3}{ \040User interface specification }{}% 3
 \BOOKMARK [2][-]{subsection.3.1}{ \040Short description }{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{ \040Short tutorial }{section.3}% 5
-\BOOKMARK [3][-]{subsubsection.3.2.1}{ \040Simple example }{subsection.3.2}% 6
-\BOOKMARK [3][-]{subsubsection.3.2.2}{ \040Comments }{subsection.3.2}% 7
-\BOOKMARK [3][-]{subsubsection.3.2.3}{ \040Variables }{subsection.3.2}% 8
-\BOOKMARK [3][-]{subsubsection.3.2.4}{ \040Cloning vs reference }{subsection.3.2}% 9
-\BOOKMARK [3][-]{subsubsection.3.2.5}{ \040Built-in classes \(types\) }{subsection.3.2}% 10
-\BOOKMARK [3][-]{subsubsection.3.2.6}{ \040Indexing }{subsection.3.2}% 11
-\BOOKMARK [3][-]{subsubsection.3.2.7}{ \040Tuples }{subsection.3.2}% 12
-\BOOKMARK [3][-]{subsubsection.3.2.8}{ \040Conditional expressions }{subsection.3.2}% 13
-\BOOKMARK [3][-]{subsubsection.3.2.9}{ \040Loops }{subsection.3.2}% 14
-\BOOKMARK [3][-]{subsubsection.3.2.10}{ \040Procedures }{subsection.3.2}% 15
-\BOOKMARK [3][-]{subsubsection.3.2.11}{ \040File operations }{subsection.3.2}% 16
-\BOOKMARK [3][-]{subsubsection.3.2.12}{ \040Html table generation }{subsection.3.2}% 17
-\BOOKMARK [3][-]{subsubsection.3.2.13}{ \040User-defined classes }{subsection.3.2}% 18
-\BOOKMARK [3][-]{subsubsection.3.2.14}{ \040Two argument operators precedence \(from those executed at the end\) }{subsection.3.2}% 19
-\BOOKMARK [3][-]{subsubsection.3.2.15}{ \040One argument operators }{subsection.3.2}% 20
-\BOOKMARK [3][-]{subsubsection.3.2.16}{ \040Built-in packages, classes, methods, operators and constants }{subsection.3.2}% 21
-\BOOKMARK [1][-]{section.4}{ \040Developer specification }{}% 22
-\BOOKMARK [2][-]{subsection.4.1}{ \040How to download, compile and run? }{section.4}% 23
-\BOOKMARK [2][-]{subsection.4.2}{ \040Code }{section.4}% 24
-\BOOKMARK [3][-]{subsubsection.4.2.1}{ \040Files, namespaces \(adequate to directories\), classes, interfaces, enumerations, inheritance }{subsection.4.2}% 25
+\BOOKMARK [2][-]{subsection.3.2}{ \040Main principles }{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{ \040Short tutorial }{section.3}% 6
+\BOOKMARK [3][-]{subsubsection.3.3.1}{ \040Simple example }{subsection.3.3}% 7
+\BOOKMARK [3][-]{subsubsection.3.3.2}{ \040Comments }{subsection.3.3}% 8
+\BOOKMARK [3][-]{subsubsection.3.3.3}{ \040Variables }{subsection.3.3}% 9
+\BOOKMARK [3][-]{subsubsection.3.3.4}{ \040Cloning vs reference }{subsection.3.3}% 10
+\BOOKMARK [3][-]{subsubsection.3.3.5}{ \040Built-in classes \(types\) }{subsection.3.3}% 11
+\BOOKMARK [3][-]{subsubsection.3.3.6}{ \040Indexing }{subsection.3.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.3.7}{ \040Tuples }{subsection.3.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.3.8}{ \040Conditional expressions }{subsection.3.3}% 14
+\BOOKMARK [3][-]{subsubsection.3.3.9}{ \040Loops }{subsection.3.3}% 15
+\BOOKMARK [3][-]{subsubsection.3.3.10}{ \040Procedures }{subsection.3.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.3.11}{ \040File operations }{subsection.3.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.3.12}{ \040Html table generation }{subsection.3.3}% 18
+\BOOKMARK [3][-]{subsubsection.3.3.13}{ \040User-defined classes }{subsection.3.3}% 19
+\BOOKMARK [3][-]{subsubsection.3.3.14}{ \040Two argument operators precedence \(from those executed at the end\) }{subsection.3.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.3.15}{ \040One argument operators }{subsection.3.3}% 21
+\BOOKMARK [3][-]{subsubsection.3.3.16}{ \040Built-in packages, classes, methods, operators and constants }{subsection.3.3}% 22
+\BOOKMARK [1][-]{section.4}{ \040Developer specification }{}% 23
+\BOOKMARK [2][-]{subsection.4.1}{ \040How to download, compile and run? }{section.4}% 24
+\BOOKMARK [2][-]{subsection.4.2}{ \040Code }{section.4}% 25
+\BOOKMARK [3][-]{subsubsection.4.2.1}{ \040Files, namespaces \(adequate to directories\), classes, interfaces, enumerations, inheritance }{subsection.4.2}% 26
