@@ -2,7 +2,7 @@ Plezuro:
     bug_fixes:
         gui: 'yes'
         language: 'yes'
-        loop_and_increment: 'yes'
+        loop_and_increment: ['*', 'yes'] 
         operator_precedence: 'yes'
         reference: 'yes'
         referenceT_in_order: 'yes'
@@ -54,11 +54,12 @@ Plezuro:
         autocompleting: 'yes'
         computing_info: 'yes'
         html_editor: 'yes'
+        infinite_loop_detecting: 'yes'
         multithreading: ['yes', 'stop']
         vim_plugin: 'yes'
     interpreter:
         eval_mode: 'yes'
-        interactive_shell: 'yes'
+        interactive_shell: ['yes', '*']
         optimization:
             better_intermediate_code: 'yes'
             conditions_guessing: 'yes'
@@ -73,6 +74,7 @@ Plezuro:
             standard_input: ['*', 'yes', 'not sure about it']
         debugger: 'yes'
         embedded_native_code_in_C: 'yes'
+        extension_language: 'yes'
         frameworks: 'yes'
         gui: 'yes'
         image_generation: 'yes'
@@ -87,6 +89,8 @@ Plezuro:
         translation_to_C: 'yes'
         translation_to_other_languages: 'yes'
         compilation_to_.NET_and_JVM_intermediate_code: 'yes'
+    loop:
+        times: 'yes'
     mathematics:
         linear_algebra: 'yes'
         numpy_and_scipy_equivalent: 'yes'

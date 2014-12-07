@@ -64,7 +64,10 @@ namespace Mondo.MyTypes.MyClasses {
 			"while",	(Func<IPrintable,ProcedureT,ProcedureT,object>) 
 					((p, con, o) => { 
 					 	object ret=new NullType(); 
-						while(p.EvalDyn(con).Equals(true)) ret=p.EvalDyn(o); 
+						while(true) {
+                                                    if(!p.EvalDyn(con).Equals(true)) break;
+                                                    ret=p.EvalDyn(o);
+                                                }
 						return ret; 
 						}),
 			"do",		(Func<IPrintable,ProcedureT,object>) 
