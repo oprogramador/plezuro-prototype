@@ -7,6 +7,8 @@ Documentation: doc/doc_en.pdf
 
 On Wikipedia: https://en.wikipedia.org/wiki/Plezuro
 
+On Wikibooks: http://en.wikibooks.org/wiki/Plezuro
+
 Interpreter: plezuro.exe
 
 Building script: make.sh

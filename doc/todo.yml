@@ -4,8 +4,9 @@ Plezuro:
         language: 'yes'
         loop_and_increment: ['*', 'yes'] 
         operator_precedence: 'yes'
-        reference: 'yes'
+        full_passing_by_reference: 'yes'
         referenceT_in_order: 'yes'
+        duck_and_not_duck: 'yes'
     classes:
         access_modifiers: ['*', 'yes']
         all_dynamic:
@@ -106,6 +107,7 @@ Plezuro:
     repository:
         parallel_repositories: 'yes'
         security: 'yes'
+        git: 'yes'
     scripts:
         calculator: 'yes'
         clock: 'yes'
