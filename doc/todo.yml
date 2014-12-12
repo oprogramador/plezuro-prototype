@@ -107,7 +107,6 @@ Plezuro:
     repository:
         parallel_repositories: 'yes'
         security: 'yes'
-        git: 'yes'
     scripts:
         calculator: 'yes'
         clock: 'yes'
