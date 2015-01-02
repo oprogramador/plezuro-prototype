@@ -1,0 +1,87 @@
+\documentclass{article}
+\include{begin.tex}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{textgreek}
+
+\begin{document}
+
+\center
+\huge
+Plezuro\\
+The manual
+
+\includegraphics[scale=0.5]{../logo.png}
+
+\pagebreak
+\flushleft
+\normalsize
+
+Plezuro
+
+Plezuro is a programming language created by Piotr Sroczkowski. It enables fast development and is an open source (on license GNU/GPL).
+
+\section{Introduction}
+The main purpose of creating of Plezuro was to enhance the software development process. It was created in 2014 while there existed many other scripting languages. However none of them had enough beautiful syntax to write the large pieces of codes without getting bored. Even Plezuro needs some improvements to achieve its main goals.
+
+\section{Getting started}
+One of the main principles of the Plezuro programming language says the following: "The module, the function and the source file are equivalent one to each other." What does it mean exactly? So you can pass arguments to a module in the same way like to a function and also the module returns a value in the same way like a function.
+
+\subsection{Hello world}
+At the beginning: How can you write the Hello World script in Plezuro? It is so simply:
+
+\begin{lstlisting}
+'Hello World!'
+\end{lstlisting}
+
+Of course, the design of the language could be even simpler like that:
+
+\begin{lstlisting}
+Hello World!
+\end{lstlisting}
+
+But that would be much more like a mark-up language (eventually template language), not programming language. So the previous script is not correct. Moreover there exist other possibilities to write a Hello World script, eg.:
+
+\begin{lstlisting}
+'Hello World!'.printl;
+\end{lstlisting}
+
+In the first script the module just returns a value (string 'Hello World!') and in the last one it prints this string to the standard output and finally returns the empty value (called just 'empty', its symbol: '()').
+
+\subsection{Comments}
+For simplicity the comments are in c++/Java/c$^\sharp$ style. Therefore it enables commenting large blocks of code, in contrary to languages such as python or ruby (Of course you can use multi-line string in both cases but in many situations it outputs an error).
+
+\begin{lstlisting}
+// this is a comment
+/*
+Another comment
+*/
+\end{lstlisting}
+
+\subsection{Variables}
+Like any (including really bizarre ones almost any)
+languages Plezuro is based on using of variables. I bet you already know what a
+variable is (if not it is just a container for a piece of information). So at
+fist occurrence of a variable you should write the dollar sign ('\$') immediately
+before the variable name. The name is in Java style (it allows using any Unicode
+letters, digits and underscore but at the beginning there must not be any
+letter). In the next occurrences the dollar sign is not required. Why do we
+write so many '\$'? It seems like PHP, Perl or bash. The reason is really simple.
+Just for define the variable scope. It is like the 'var' keyword in Javascript
+(or in c♯ in case of local variables) but in Plezuro it is just shorted (one
+character '\$' instead of four ones 'var '). It is really important feature in
+case of short anonymous functions and evaluation of code written in string. So
+let us write some strange example:\\
+
+\$\textalpha=4;\\
+\textalpha+\textalpha\textrm2
+
+
+\section{Built-in types}
+
+\section{Let's code a little bit}
+
+\section{Lists}
+
+
+\end{document}

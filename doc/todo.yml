@@ -1,146 +1,164 @@
-'This line is a git test'
+Legend:
+    important: &u
+    urgent: &uu
+    very_urgent: &uuu
+
 Plezuro:
     bug_fixes:
-        gui: 'yes'
-        language: 'yes'
-        loop_and_increment: ['*', 'yes'] 
-        operator_precedence: 'yes'
-        full_passing_by_reference: 'yes'
-        referenceT_in_order: 'yes'
-        duck_and_not_duck: 'yes'
+        duck_and_not_duck: no
+        full_passing_by_reference: no
+        ide: *u
+        increment_and_list: *u
+        language: no
+        list_reference: *u
+        loop_and_increment: *u 
+        operator_precedence: no
+        referenceT_in_order: no
     classes:
-        access_modifiers: ['*', 'yes']
+        access_modifiers: *u
         all_dynamic:
-            base_classes: 'yes'
-            inherited_methods: 'yes'
-            methods: 'yes'
-            pools: 'yes'
+            base_classes: no
+            inherited_methods: no
+            methods: no
+            pools: no
         constraints:
-            regex: 'yes'
-            type: 'yes'
-        dynamic_documentation: 'yes'
-        getter_setter: ['yes', 'public set, private get']
-        indexer_method: 'yes'
-        security: 'yes'
+            regex: no
+            type: no
+        dynamic_documentation: no
+        getter_setter: [no, 'public set, private get']
+        indexer_method: no
+        security: no
         triggers:
-            modification_time: 'yes'
+            modification_time: no
     constants:
-        method: ['yes', 'method instead of operator']
-        method_isLocked: 'yes'
-        object_pools: 'yes'
+        method: [no, 'method instead of operator']
+        method_isLocked: no
+        object_pools: no
     data:
-        csv: 'yes'
+        csv: no
         database:
-            mysql_binding: 'yes'
-        json_encode_decode: 'yes'
-        load_data_with_separator: 'yes'
-        selectIterative: 'yes'
-        selectMany: 'yes'
-        serialization: 'yes'
-        thenBy: ['*', 'yes']
+            mysql_binding: no
+        json_encode_decode: no
+        load_data_with_separator: no
+        selectIterative: no
+        selectMany: no
+        serialization: no
+        thenBy: *u
     documentation:
-        alphabetical_order_of_methods: ['yes', 'in doc, as well in code']
-        examples: 'yes'
-        full: 'yes'
-        update_to_newest_language_version: ['*', 'yes']
-        wiki: ['*', 'yes']
+        alphabetical_order_of_methods: [no, 'in doc, as well in code']
+        examples: no
+        full: no
+        update_to_newest_language_version: *u
+        wiki: *u
     error_handling:
-        all_errors: 'yes'
+        all_errors: no
         exceptions:
-            catch_all: ['yes', 'including stack_overflow']
-        info: 'yes'
+            catch_all: [no, 'including stack_overflow']
+        info: no
     function:
-        default_parameters: 'yes'
-        return: ['*', 'yes']
+        default_parameters: no
+        return: *u
     ide:
-        autocompleting: 'yes'
-        computing_info: 'yes'
-        html_editor: 'yes'
-        infinite_loop_detecting: 'yes'
-        multithreading: ['yes', 'stop']
-        vim_plugin: 'yes'
+        autocompleting: no
+        computing_info: no
+        html_editor: no
+        infinite_loop_detecting: no
+        multithreading: [no, 'stop']
+        vim_plugin: no
     interpreter:
-        eval_mode: 'yes'
-        interactive_shell: ['yes', '*']
+        eval_mode: no
+        interactive_shell: [no, '*']
         optimization:
-            better_intermediate_code: 'yes'
-            conditions_guessing: 'yes'
-            native_code: 'yes'
+            better_intermediate_code: no
+            conditions_guessing: no
+            native_code: no
     language:
-        bindings_to_other_languages_libraries: 'yes'
+        bindings_to_other_languages_libraries: no
         compilation:
-            also_in_visual_studio: 'yes'
-            JIT: 'yes'
-            to_exe: 'yes'
+            also_in_visual_studio: no
+            JIT: no
+            to_exe: no
         console:
-            standard_input: ['*', 'yes', 'not sure about it']
-        debugger: 'yes'
-        embedded_native_code_in_C: 'yes'
-        extension_language: 'yes'
-        frameworks: 'yes'
-        gui: 'yes'
-        image_generation: 'yes'
+            standard_input: ['*', no, 'not sure about it']
+        debugger: no
+        embedded_native_code_in_C: no
+        extension_language: no
+        frameworks:
+            web:
+                Plezuro_en_kuro:
+                    template_engine:
+                        readonly_mode: no
+                        short_notation: [no, 'html++']
+        gui: no
+        image_generation: no
         multithreading:
             thread_safe:
-                lock: 'yes'
-        networking: 'yes'
-        new_programming_paradigms: ['yes', 'ex. for prime numbers']
+                lock: no
+        networking: no
+        new_programming_paradigms: [no, 'ex. for prime numbers']
         shorter_code:
-            method_fully_without_brackets: 'yes'
+            method_fully_without_brackets: no
         syntax:
-        translation_to_C: 'yes'
-        translation_to_other_languages: 'yes'
-        compilation_to_.NET_and_JVM_intermediate_code: 'yes'
+        translation_to_C: no
+        translation_to_other_languages: no
+        compilation_to_.NET_and_JVM_intermediate_code: no
+        yaml_like: no
     loop:
-        times: 'yes'
+        break: no
+        times: no
     mathematics:
-        linear_algebra: 'yes'
-        numpy_and_scipy_equivalent: 'yes'
+        linear_algebra: no
+        numpy_and_scipy_equivalent: no
         plot:
-            2D: 'yes'
-            3D: 'yes'
+            2D: no
+            3D: no
     oop:
         reflection:
-            dot_NET_access: ['*', 'yes']
-            package_iteration: 'yes'
+            dot_NET_access: *u
+            package_iteration: no
     operators:
-        dot_equal: ['yes', '.=', 'without cloning']
+        dot_equal: [no, '.=', 'without cloning']
     repository:
-        parallel_repositories: 'yes'
-        security: 'yes'
+        parallel_repositories: no
+        security: no
     scripts:
-        calculator: 'yes'
-        clock: 'yes'
-        crc: 'yes'
-        labyrinth_game: ['*', 'yes']
-        Levensthein_distance: 'yes'
-        Sierpiński_carpet: 'yes'
-        md5: 'yes'
-        snake: 'yes'
-        sudoku: 'yes'
-        tetris: 'yes'
-        update_to_newest_language_version: 'yes'
+        calculator: no
+        clock: no
+        crc: no
+        labyrinth_game: *u
+        Levensthein_distance: no
+        Sierpiński_carpet: no
+        md5: no
+        snake: no
+        sudoku: no
+        tetris: no
+        update_to_newest_language_version: no
     tests:
-        assert: 'yes'
-        unit_tests_with_script_files: 'yes'
+        assert: no
+        unit_tests_with_script_files: no
+    todo:
+        automatic_sort: no
+        more_logic_order: no
     types:
         containers:
             list:
-                constraints: 'yes'
-        dateTime: 'yes'
-        integer: 'yes'
+                constraints: no
+                indexing: [*u, 'it should work: a[1,3], not a[[1,3]]']
+        dateTime: no
+        integer: no
         list:
-            all_to_selected_index: 'yes'
-            circular_reference_bug_fix: 'yes'
-            find_min/max_index: 'yes'
-        parse: 'yes'
+            all_to_selected_index: no
+            circular_reference_bug_fix: no
+            find_min/max_index: no
+        parse: no
         string:
-            heredoc: ['*', 'yes']
-            immutable: 'yes'
-            mutable: 'yes'
-            nowdoc: ['*', 'yes']
+            curly_filters: no
+            heredoc: [*u, 'not sure about it']
+            immutable: no
+            mutable: no
+            nowdoc: [*u, 'not sure about it'] 
     variables:
         comparison:
-            by_generated_value: 'yes'
-        full_copy_operator: ['yes', ':=']
-        globals: 'yes'
+            by_generated_value: no
+        full_copy_operator: [no, ':=']
+        globals: no
