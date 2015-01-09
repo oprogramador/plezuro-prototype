@@ -56,24 +56,23 @@ namespace Mondo.Gui {
 		}
 
 		public void ColorIn(List<Token> tokens) {
-			try {
-				myTokens = tokens;
-				int pos = 0;
-				int startCursorPosition = SelectionStart;
-				int selectionLength = SelectionLength;
-				foreach(var t in tokens) {
-					//if(pos+t.Text.Length >= Text.Length) break;
-					Select(pos, pos+t.Text.Length);
-					try{
-						SelectionColor = VisualSyntax.SyntaxColors[t.Type];
-					} catch(Exception e) {
-						Console.WriteLine("color e: "+e);
-					}
-					pos += t.Text.Length;
-				}
-				SelectionStart = startCursorPosition;
-				SelectionLength = selectionLength;
-			} catch {}
+			//try {
+				//myTokens = tokens;
+				//int pos = 0;
+				//int startCursorPosition = SelectionStart;
+				//int selectionLength = SelectionLength;
+				//foreach(var t in tokens) {
+					//Select(pos, pos+t.Text.Length);
+					//try{
+						//SelectionColor = VisualSyntax.SyntaxColors[t.Type];
+					//} catch(Exception e) {
+						//Console.WriteLine("color e: "+e);
+					//}
+					//pos += t.Text.Length;
+				//}
+				//SelectionStart = startCursorPosition;
+				//SelectionLength = selectionLength;
+			//} catch {}
 		}
 
 	}

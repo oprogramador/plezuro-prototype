@@ -65,6 +65,7 @@ Plezuro:
         infinite_loop_detecting: no
         multithreading: [no, 'stop']
         vim_plugin: no
+        independent_from_interpreter: [**u, 'independent apps']
     interpreter:
         eval_mode: no
         interactive_shell: [no, '*']

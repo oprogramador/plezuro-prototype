@@ -57,6 +57,7 @@ namespace Mondo.Program {
 
 		private static void excHandle(object sender, ThreadExceptionEventArgs e) {
 			Console.WriteLine("Program e: "+e);
+                        Engine.Parser.Stop();
 		}
 	}
 }

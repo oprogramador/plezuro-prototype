@@ -42,8 +42,12 @@ namespace Mondo.Engine {
 		}
 
 		public void Refresh() {
-			this[t].Text += par.Str;
-			this[t].ShowError(!par.IsCorrectSyntax);
+			try {
+                            this[t].Text += par.Str;
+                            this[t].ShowError(!par.IsCorrectSyntax);
+			} catch(Exception e) {
+				System.Console.WriteLine("IOMap e: "+e);
+			}
 		}
 	}
 }
