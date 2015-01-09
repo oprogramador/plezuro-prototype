@@ -183,7 +183,7 @@ namespace Mondo.Engine {
 						skey = skey.TrimStart('$');
 						try {
 							LocalVars.TryAdd(skey, new ReferenceT(new NullType())); 
-						} catch(Exception e) { Console.WriteLine("e: "+e); }
+						} catch(Exception e) { Console.WriteLine("Evaluator e: "+e); }
 					}
 					try {
 						item = FindVar(skey);

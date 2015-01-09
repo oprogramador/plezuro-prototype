@@ -7,7 +7,7 @@ Plezuro:
     bug_fixes:
         duck_and_not_duck: no
         full_passing_by_reference: no
-        ide: *u
+        ide: **u
         increment_and_list: *u
         language: no
         list_reference: *u

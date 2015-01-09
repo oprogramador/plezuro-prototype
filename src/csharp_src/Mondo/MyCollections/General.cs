@@ -46,7 +46,7 @@ namespace Mondo.MyCollections {
 					int cmp = CompareDE(ae.Current, be.Current);
 					if(cmp!=0) return cmp;
 				} catch(Exception e) {
-					Console.WriteLine("e: "+e);
+					Console.WriteLine("MyCollections.General e: "+e);
 					return 0;
 				}
 				an = ae.MoveNext();

@@ -51,12 +51,12 @@ namespace Mondo.Program {
 				if(args.Length>0) startConsole(args);
 				else startGui();
 			} catch(Exception e) {
-				System.Console.WriteLine("e: "+e);
+				System.Console.WriteLine("Main e: "+e);
 			}
 		}
 
 		private static void excHandle(object sender, ThreadExceptionEventArgs e) {
-			Console.WriteLine("e: "+e);
+			Console.WriteLine("Program e: "+e);
 		}
 	}
 }
