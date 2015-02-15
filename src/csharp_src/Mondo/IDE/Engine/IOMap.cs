@@ -30,7 +30,7 @@ using System.Diagnostics;
 namespace Mondo.Engine {
 	class IOMap : Dictionary<ITextable, IOutputable>, IRefreshable {
 		private ITextable t;
-                private const string compiler = "plezuro";
+                private Dictionary<ITextable, ITextable> langBoxes = new Dictionary<ITextable, ITextable>();
 
 		public void Process(ITextable t) {
                         this.t = t;
@@ -42,7 +42,7 @@ namespace Mondo.Engine {
                         file.WriteLine(t.Text);
                         file.Close();
 
-                        var cmd = compiler+" "+rand;
+                        var cmd = langBoxes[t].Text+" "+rand;
                         var proc = new Process();
                         proc.EnableRaisingEvents=false; 
                         int ind = cmd.IndexOf(' ');
@@ -59,8 +59,9 @@ namespace Mondo.Engine {
                                 outp += myOutput.ReadToEnd();
                         }
                         using (System.IO.StreamReader myError = proc.StandardError) {
-                                err = myError.ReadToEnd();
+                                err += myError.ReadToEnd();
                         }
+                        System.Console.WriteLine(err);
                         this[t].Text = outp;
 		}
 
@@ -72,5 +73,9 @@ namespace Mondo.Engine {
 				//System.Console.WriteLine("IOMap e: "+e);
 			//}
 		}
+
+                public void setLangBox(ITextable inb, ITextable lb) {
+                    langBoxes[inb] = lb;
+                }
 	}
 }

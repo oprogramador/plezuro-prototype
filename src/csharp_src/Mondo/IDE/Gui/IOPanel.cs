@@ -37,6 +37,7 @@ namespace Mondo.Gui {
 		private int panWid = 50;
 		private int borThick = 12;
 		private Brush borderBrush = Brushes.Maroon;
+                private EmptyBox langBox;
 
 		public IOPanel(MainPanel mp, IOMap map, int x, int y, int w, int h) {
 			this.mp = mp;
@@ -44,7 +45,6 @@ namespace Mondo.Gui {
 			new FormAdapter(this).Adapt(x,y,w,h);
 			inb  = new InputBox(map, borThick, borThick, w-panWid-borThick*2, h/2-borThick);
 			outb = new OutputBox(borThick, h/2, w-panWid-borThick*2, h/2);
-			map.Add(inb,outb);
 			Controls.Add(inb);
 			Controls.Add(outb);
 			controlPanel = new Panel();
@@ -59,6 +59,11 @@ namespace Mondo.Gui {
 			controlPanel.Controls.Add(
 				new FormAdapter(new CheckBox()).AdaptClick( new EventHandler(switchAuto), "Auto", Color.PaleGreen, 0, panWid, panWid, panWid).Control
 				);
+			controlPanel.Controls.Add(
+				new FormAdapter(langBox = new EmptyBox()).Adapt("plezuro", Color.PaleGreen, 0, panWid*3, panWid, panWid).Control
+				);
+			map.Add(inb, outb);
+                        map.setLangBox(inb, langBox);
 			Controls.Add(controlPanel);
 		}
 
@@ -72,6 +77,10 @@ namespace Mondo.Gui {
 
 		public void switchAuto(object sender, EventArgs e) {
 			inb.AutoRefresh = !inb.AutoRefresh;
+		}
+
+		public void changeLang(object sender, EventArgs e) {
+			//inb.AutoRefresh = !inb.AutoRefresh;
 		}
 
 		protected override void OnResize(EventArgs e) {
