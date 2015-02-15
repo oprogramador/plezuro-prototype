@@ -130,9 +130,9 @@ Plezuro:
         Levensthein_distance: no
         Sierpiński_carpet: no
         md5: no
-        snake: no
+        snake: *u
         sudoku: no
-        tetris: no
+        tetris: **u
         update_to_newest_language_version: no
     tests:
         assert: no
