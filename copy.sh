@@ -1,0 +1,11 @@
+mkdir -p src/csharp_src/Mondo/IDE/MyCollections/
+mkdir -p src/csharp_src/Mondo/IDE/Engine/
+mkdir -p src/csharp_src/Mondo/IDE/Controller/
+mkdir -p src/csharp_src/Mondo/IDE/Info/
+cp src/csharp_src/Mondo/Compiler/MyCollections/TokenTypes.cs src/csharp_src/Mondo/IDE/MyCollections/
+cp src/csharp_src/Mondo/Compiler/MyCollections/ITextable.cs src/csharp_src/Mondo/IDE/MyCollections/
+cp src/csharp_src/Mondo/Compiler/MyCollections/Token.cs src/csharp_src/Mondo/IDE/MyCollections/
+cp src/csharp_src/Mondo/Compiler/Engine/IOutputable.cs src/csharp_src/Mondo/IDE/Engine/
+cp src/csharp_src/Mondo/Compiler/Info/Help.cs src/csharp_src/Mondo/IDE/Info/
+cp src/csharp_src/Mondo/Compiler/Info/Info.cs src/csharp_src/Mondo/IDE/Info/
+cp src/csharp_src/Mondo/Compiler/Controller/IRefreshable.cs src/csharp_src/Mondo/IDE/Controller/

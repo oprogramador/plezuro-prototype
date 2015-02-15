@@ -47,7 +47,7 @@ namespace Mondo.Gui {
 		}
 
 		void KeyDownFun(object sender, KeyEventArgs e) {
-			if(e.KeyCode == Keys.F12) Parser.Stop();
+			//if(e.KeyCode == Keys.F12) Parser.Stop();
 			if(AutoRefresh) map.Process(this);
 		}
 

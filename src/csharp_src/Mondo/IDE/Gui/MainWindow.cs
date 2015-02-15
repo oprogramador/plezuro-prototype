@@ -24,7 +24,8 @@
 using System.Windows.Forms;
 using System.Drawing;
 using System;
-using System.Collections.Generic;using Mondo.Engine;
+using System.Collections.Generic;
+using Mondo.Engine;
 
 namespace Mondo.Gui {
 	class MainWindow : Form {

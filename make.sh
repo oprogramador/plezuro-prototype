@@ -1,3 +1,4 @@
+./copy.sh
 if [ $1 = 'c' -o $1 = '' ]; then
     gmcs -pkg:dotnet -out:plezuro.exe `find src/csharp_src/Mondo/Compiler -name '*.cs'` &&
     chmod 775 plezuro.exe &&

@@ -1,5 +1,5 @@
 /*
- * Program.cs
+ * IRefreshable.cs
  * Copyright 2014 pierre (Piotr Sroczkowski) <pierre.github@gmail.com>
  * 
  * This program is free software; you can redistribute it and/or modify
@@ -21,32 +21,10 @@
  */
  
 
-using System.Windows.Forms;
-using System.Diagnostics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Mondo.Gui;
 
-namespace Mondo.Program {
-	class Program {
-		private static void startGui() {
-                        Application.Run(new MainWindow(new Engine.IOMap(), 600, 400));
-		}
-
-		public static void Main(string[] args) {
-			try {
-				Application.ThreadException += new ThreadExceptionEventHandler(excHandle);
-				System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
-				startGui();
-			} catch(Exception e) {
-				System.Console.WriteLine("Main e: "+e);
-			}
-		}
-
-		private static void excHandle(object sender, ThreadExceptionEventArgs e) {
-			Console.WriteLine("Program e: "+e);
-		}
+namespace Mondo.Controller {
+	interface IRefreshable {
+		void Refresh();
 	}
 }

@@ -23,7 +23,8 @@
 
 using System.Drawing;
 using System;
-using System.Collections.Generic;using Mondo.MyCollections;
+using System.Collections.Generic;
+using Mondo.MyCollections;
 
 namespace Mondo.Gui {
 	class VisualSyntax {
