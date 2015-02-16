@@ -37,13 +37,23 @@ namespace Mondo.Program {
 			Console.WriteLine( Engine.Parser.Parse(System.IO.File.ReadAllText(fileName), MyTypes.MyClasses.TupleT.MakeTuplable(l)) );
 		}
 
+                private static void startShell() {
+                    var localVars = new Mondo.MyCollections.ConcurrentDictionary<string,object>();
+                    while(true) {
+                        Console.Write("plezuro>");
+                        var line = Console.ReadLine();
+			Console.WriteLine( Engine.Parser.Parse(line, MyTypes.MyClasses.TupleT.MakeTuplable(new object[]{}), localVars) );
+                    }
+                }
+
 		public static void Main(string[] args) {
 			try {
 				Application.ThreadException += new ThreadExceptionEventHandler(excHandle);
 				System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
 				Engine.Engine.GetInstance();
 				new Tests.TestUnit();
-				startConsole(args);
+				if(args.Length > 0) startConsole(args);
+                                else startShell();
 			} catch(Exception e) {
 				System.Console.WriteLine("Main e: "+e);
 			}

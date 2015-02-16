@@ -33,7 +33,7 @@ namespace Mondo.Engine {
 	class Evaluator : IPrintable {
 		private WStack<object> list;
 		private ProcedureT output;
-        private IVariable toRes;
+                private IVariable toRes;
 		
 		public ITuplable Args { get; private set; }
 
@@ -46,39 +46,41 @@ namespace Mondo.Engine {
 
 		public IVariable Result { get; private set; }
 
-		public Evaluator(ProcedureT list, IPrintable p, ITuplable args)  {
+		public Evaluator(ProcedureT list, IPrintable p, ITuplable args, ConcurrentDictionary<string,object> localVars)  {
 			try {
 				Parent = p;
-				Args = args;
+				Args = args!=null ? args : new EmptyT();
 				Stream = p!=null ? p.Stream : null;
-				init(list);
+				init(list, localVars);
 			} catch{ throw; }
 		}
 
-		public Evaluator(ProcedureT list, ITextable stream, ITuplable args) {
+		public Evaluator(ProcedureT list, ITextable stream, ITuplable args, ConcurrentDictionary<string,object> localVars) {
 			try {
-				Args = args;
+				Args = args!=null ? args : new EmptyT();
 				Stream = stream;
-				init(list);
+				init(list, localVars);
 			} catch{ throw; }
 		}
 
-		private void init(ProcedureT list) {
+		private void init(ProcedureT list, ConcurrentDictionary<string,object> localVars) {
 			try {
 				if(list.Count==0) { 
 					Result = new EmptyT();
 					return;
 				}
-				LocalVars = new ConcurrentDictionary<string,object>();
-				LocalVars.Add( SymbolMap.ArgsSymbol, Args);
-				LocalVars.Add( SymbolMap.FunSymbol, new ReferenceT(toRes));
-				var argsList = new List<object>(Args.ToArray());
-				LocalVars.Add( SymbolMap.ThisSymbol, argsList.Count>0 ? TupleT.MakeTuplable(argsList[0]) : new EmptyT());
-				LocalVars.Add( SymbolMap.ValsSymbol, argsList.Count>1 ? TupleT.MakeTuplable(argsList.Skip(1).ToArray()) : new EmptyT());
-				int i=1;
-				for(; i<argsList.Count && i<SymbolMap.ArgsSymbolList.Length+1; i++) LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], argsList[i]);
-				for(; i<SymbolMap.ArgsSymbolList.Length+1; i++)
-					LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], new EmptyT());
+				LocalVars = localVars!=null ? localVars : new ConcurrentDictionary<string,object>();
+                                if(localVars==null) {
+                                    LocalVars.Add( SymbolMap.ArgsSymbol, Args);
+                                    LocalVars.Add( SymbolMap.FunSymbol, new ReferenceT(toRes));
+                                    var argsList = new List<object>(Args.ToArray());
+                                    LocalVars.Add( SymbolMap.ThisSymbol, argsList.Count>0 ? TupleT.MakeTuplable(argsList[0]) : new EmptyT());
+                                    LocalVars.Add( SymbolMap.ValsSymbol, argsList.Count>1 ? TupleT.MakeTuplable(argsList.Skip(1).ToArray()) : new EmptyT());
+                                    int i=1;
+                                    for(; i<argsList.Count && i<SymbolMap.ArgsSymbolList.Length+1; i++) LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], argsList[i]);
+                                    for(; i<SymbolMap.ArgsSymbolList.Length+1; i++)
+                                            LocalVars.Add( SymbolMap.ArgsSymbolList[i-1], new EmptyT());
+                                }
 				this.list = list.Reverse();
 				output = new ProcedureT();
 				map = Engine.GetInstance().SymbolMap;
@@ -87,31 +89,39 @@ namespace Mondo.Engine {
 
 		}
 
-		public Evaluator(ProcedureT p, ITextable t) : this(p,t,new EmptyT()) {
+		public Evaluator(ProcedureT p, ITextable t) : this(p,t,new EmptyT(),null) {
 		}
 
-		public static object Eval(ProcedureT list, IPrintable pr) {
-			return new Evaluator(list, pr, pr!=null ? pr.Args : new EmptyT()).Result;
-		}
-	
 		public object EvalDyn(ProcedureT list, ITuplable args) {
-			return new Evaluator(list, this, args).Result;
+			return new Evaluator(list, this, args, null).Result;
 		}	
 
 		public object EvalDyn(ProcedureT list) {
-			return new Evaluator(list, this, Args).Result;
+			return new Evaluator(list, this, Args, null).Result;
 		}
 
+		public static object Eval(ProcedureT list, IPrintable pr) {
+			return new Evaluator(list, pr, pr!=null ? pr.Args : new EmptyT(), null).Result;
+		}
+	
 		public static object Eval(ProcedureT list, IPrintable pr, ITuplable args) {
-			return new Evaluator(list, pr, args).Result;
+			return new Evaluator(list, pr, args, null).Result;
 		}
 
 		public static object Eval(ProcedureT list, ITextable stream, ITuplable args) {
-			return new Evaluator(list, stream, args).Result;
+			return new Evaluator(list, stream, args, null).Result;
 		}
 
 		public static object Eval(ProcedureT list, ITextable stream) {
-			return new Evaluator(list, stream).Result;
+			return new Evaluator(list, stream, null, null).Result;
+		}
+
+		public static object EvalWithVars(ProcedureT list, ITuplable args, ConcurrentDictionary<string,object> localVars) {
+			return new Evaluator(list, (ITextable)null, args, localVars).Result;
+		}
+
+		public static object EvalPrintWithVars(ProcedureT list, IPrintable pr, ITuplable args, ConcurrentDictionary<string,object> localVars) {
+			return new Evaluator(list, pr, args, localVars).Result;
 		}
 
 		public bool Clear() {
@@ -132,7 +142,7 @@ namespace Mondo.Engine {
 		void methodMatch(object outp, object[] args) {
 			string oper = ((SoftLink)outp).Value;
 			ICallable proc;
-            try {
+                        try {
 				proc = ClassT.GetClass(args).GetMethod(oper).Proc;
 			} catch {
 				if(args.Length>0) args[0] = TypeTrans.tryCall(args[0], this);
@@ -266,9 +276,9 @@ namespace Mondo.Engine {
 			return "evaluator (args: "+Args+" local: "+General.EnumToString(LocalVars)+" code: "+list+")";
 		}
 
-        public IVariable Return(IVariable iv) {
-            toRes = iv;
-            return iv;
-        }
+                public IVariable Return(IVariable iv) {
+                    toRes = iv;
+                    return iv;
+                }
 	}
 }

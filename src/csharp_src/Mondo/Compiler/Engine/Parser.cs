@@ -45,53 +45,62 @@ namespace Mondo.Engine {
 
 		public bool IsCorrectSyntax { get; private set; }
 
-		public static object Parse(string str, ITextable output) {
-			return new Parser(str,null,output,null).Result;
-		}
+                public static object Parse(string str, ITextable output) {
+                        return new Parser(str,null,output,null,null).Result;
+                }
 		
 		public static object Parse(string str) {
 			return new Parser(str,null,null).Result;
 		}
 
 		public static object Parse(string str, ITuplable args) {
-			return new Parser(str,null,args).Result;
+			return new Parser(str,args,null).Result;
 		}
 
-		public static object Parse(string str, IPrintable p, ITuplable args) {
-			return new Parser(str, p, args).Result;
+		public static object Parse(string str, ITuplable args, ConcurrentDictionary<string,object> localVars) {
+			return new Parser(str, args, localVars).Result;
 		}
+
+		//public static object Parse(string str, ITuplable args) {
+			//return new Parser(str,null,args).Result;
+		//}
+
+                public static object Parse(string str, IPrintable p, ITuplable args) {
+                        return new Parser(str, p, args, null).Result;
+                }
 
 		static Parser() {
 			threads = new List<Thread>();
 		}
 
-		public Parser(string str, IPrintable p, ITuplable args) {
-			init(str,p,args);
-			//var t = new Thread(() => init(str,p,args));
+		public Parser(string str, ITuplable args, ConcurrentDictionary<string,object> localVars) {
+			init(str, args, localVars);
+		}
+
+                public Parser(string str, IPrintable p, ITuplable args, ConcurrentDictionary<string,object> localVars) {
+                        init(str, p, args, localVars);
+                }
+
+                public Parser(string str, ITextable input, ITextable output, ITuplable args, ConcurrentDictionary<string,object> localVars) {
+                        var t = new Thread(() => init(str,input,output,args));
+                        threads.Add(t);
+                        t.Start();
+                }
+
+		//public Parser(IRefreshable ir, string str, ITextable input, ITextable output, ITuplable args, ConcurrentDictionary<string,object> localVars) {
+			//this.ir = ir;
+			//var t = new Thread(() => init(str,input,output,args));
 			//threads.Add(t);
 			//t.Start();
-		}
+		//}
 
-		public Parser(string str, ITextable input, ITextable output, ITuplable args) {
-			var t = new Thread(() => init(str,input,output,args));
-			threads.Add(t);
-			t.Start();
-		}
-
-		public Parser(IRefreshable ir, string str, ITextable input, ITextable output, ITuplable args) {
-			this.ir = ir;
-			var t = new Thread(() => init(str,input,output,args));
-			threads.Add(t);
-			t.Start();
-		}
-
-		private void init(string str, IPrintable p, ITuplable args) {
+		private void init(string str, ITuplable args, ConcurrentDictionary<string,object> localVars) {
 			try {
 				IsCorrectSyntax = true;
 				var tokens = new Tokenizer(str).Output;
 				var convTokens = new TokenConverter(new List<Token>(tokens)).Output;
 				var ws = new RPN(convTokens).Output;
-				Result = args==null ? Evaluator.Eval(ws, p) : Evaluator.Eval(ws, p, args);
+				Result = Evaluator.EvalWithVars(ws, args, localVars);
 			} catch(Exception e) {
 				IsCorrectSyntax = false;
 				Result = new ErrorText(e);
@@ -99,20 +108,34 @@ namespace Mondo.Engine {
 			if(ir!=null) ir.Refresh();
 		}
 
-		private void init(string str, ITextable input, ITextable output, ITuplable args) {
-			try {
-				IsCorrectSyntax = true;
-				var tokens = new Tokenizer(str).Output;
-				if(input!=null) input.ColorIn(tokens);
-				var convTokens = new TokenConverter(new List<Token>(tokens)).Output;
-				var ws = new RPN(convTokens).Output;
-				Result = args==null ? Evaluator.Eval(ws, output) : Evaluator.Eval(ws, output, args);
-			} catch(Exception e) {
-				IsCorrectSyntax = false;
-				Result = new ErrorText(e);
-			}
-			if(ir!=null) ir.Refresh();
-		}
+                private void init(string str, IPrintable p, ITuplable args, ConcurrentDictionary<string,object> localVars) {
+                        try {
+                                IsCorrectSyntax = true;
+                                var tokens = new Tokenizer(str).Output;
+                                var convTokens = new TokenConverter(new List<Token>(tokens)).Output;
+                                var ws = new RPN(convTokens).Output;
+                                Result = Evaluator.EvalPrintWithVars(ws, p, args, localVars);
+                        } catch(Exception e) {
+                                IsCorrectSyntax = false;
+                                Result = new ErrorText(e);
+                        }
+                        if(ir!=null) ir.Refresh();
+                }
+
+                private void init(string str, ITextable input, ITextable output, ITuplable args) {
+                        try {
+                                IsCorrectSyntax = true;
+                                var tokens = new Tokenizer(str).Output;
+                                if(input!=null) input.ColorIn(tokens);
+                                var convTokens = new TokenConverter(new List<Token>(tokens)).Output;
+                                var ws = new RPN(convTokens).Output;
+                                Result = args==null ? Evaluator.Eval(ws, output) : Evaluator.Eval(ws, output, args);
+                        } catch(Exception e) {
+                                IsCorrectSyntax = false;
+                                Result = new ErrorText(e);
+                        }
+                        if(ir!=null) ir.Refresh();
+                }
 
 		public static void Stop() {
 			foreach(var t in threads) t.Abort();
