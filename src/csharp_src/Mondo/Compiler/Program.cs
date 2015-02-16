@@ -41,7 +41,15 @@ namespace Mondo.Program {
                     var localVars = new Mondo.MyCollections.ConcurrentDictionary<string,object>();
                     while(true) {
                         Console.Write("plezuro>");
-                        var line = Console.ReadLine();
+                        //var line = Console.ReadLine();
+                        var line = "";
+                        while(true) {
+                            var ch = Console.ReadKey(true);
+                            if(ch.Key == ConsoleKey.Enter) break;
+                            Console.Write(ch.KeyChar);
+                            line += ch.KeyChar;
+                        }
+                        Console.WriteLine();
 			Console.WriteLine( Engine.Parser.Parse(line, MyTypes.MyClasses.TupleT.MakeTuplable(new object[]{}), localVars) );
                     }
                 }
