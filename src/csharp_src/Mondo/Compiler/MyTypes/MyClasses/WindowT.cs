@@ -34,12 +34,28 @@ namespace Mondo.MyTypes.MyClasses {
                 public DictionaryT Dictionary { get; private set; }
                 public ProcedureT OnKeyPressProc { get; private set; }
                 private IPrintable printable;
-                private ListT drawingSquares;
+                private ListT drawingSquares {
+                    get {
+                       return (ListT)((ReferenceT)Dictionary[new ReferenceT(new StringT("squares"))]).Value;
+                    }
+                    set {}
+                }
+                private int drawingSquaresWidth {
+                    get {
+                        return ((StringT)((ReferenceT)drawingSquares[0]).Value).Value.Length;
+                    }
+                    set {}
+                }
+                public Dictionary<char,Color> Colors = new Dictionary<char,Color>() {
+                    {'r', Color.Red},
+                    {'g', Color.Green},
+                    {'b', Color.Blue},
+                    {'y', Color.Yellow},
+                };
 
-		public WindowT(IPrintable p, DictionaryT dic, ListT ds) {
+		public WindowT(IPrintable p, DictionaryT dic) {
 			ID = ObjectContainer.Instance.Add(this);
                         printable = p;
-                        drawingSquares = ds;
                         Width = (int)((Number)((ReferenceT)dic[new ReferenceT(new StringT("w"))]).Value).Value;
                         Height = (int)((Number)((ReferenceT)dic[new ReferenceT(new StringT("h"))]).Value).Value;
                         OnKeyPressProc = (ProcedureT)((ReferenceT)dic[new ReferenceT(new StringT("keypress"))]).Value;
@@ -65,7 +81,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public object Clone() {
-			return new WindowT(printable, (DictionaryT)Dictionary.Clone(), drawingSquares);
+			return new WindowT(printable, (DictionaryT)Dictionary.Clone());
 		}
 
 		IVariable[] ITuplable.ToArray() {
@@ -79,7 +95,7 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
                         "show", 	(Func<WindowT,bool>) ((x) => {x.Show(); Application.Run(x); return true;}),
                         "close",	(Func<WindowT,bool>) ((x) => {x.Close(); return true;}),
-                        "squares",	(Func<WindowT,ListT,WindowT>) ((w,l) => {w.drawingSquares = l; w.Refresh(); return w;}),
+                        "squares",	(Func<WindowT,ListT,WindowT>) ((w,l) => {w.drawingSquares = l; Console.WriteLine("dra="+w.drawingSquares); w.Refresh(); return w;}),
 		};
 
 		public ClassT GetClass() {
@@ -110,12 +126,15 @@ namespace Mondo.MyTypes.MyClasses {
 
                 private void drawSquares(Graphics g) {
                     Console.WriteLine("ds");
-                    foreach(var row in drawingSquares) {
-                        var str = ((StringT)((ReferenceT)row).Value).Value;
-                        Console.WriteLine("str="+str);
-                        var brush = new SolidBrush(Color.Red);
-                        g.FillRectangle(brush, new Rectangle(20,20,50,80));
-                        brush.Dispose();
+                    int ww = Width/drawingSquaresWidth;
+                    int hh = Height/drawingSquares.Count;
+                    for(int y=0; y<drawingSquares.Count; y++) {
+                        var str = ((StringT)((ReferenceT)drawingSquares[y]).Value).Value;
+                        for(int x=0; x<str.Length; x++) {
+                            var brush = new SolidBrush(Colors[str[x]]);
+                            g.FillRectangle(brush, new Rectangle(x*ww, y*hh, ww, hh));
+                            brush.Dispose();
+                        }
                     }
                 }
 	}
