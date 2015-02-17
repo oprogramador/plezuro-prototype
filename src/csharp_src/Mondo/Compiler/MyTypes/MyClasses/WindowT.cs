@@ -25,21 +25,28 @@ using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using Mondo.Engine;
+using Mondo.MyCollections;
 
 namespace Mondo.MyTypes.MyClasses {
 	class WindowT : Form, IVariable {
 		public int ID { get; private set; }
                 public DictionaryT Dictionary { get; private set; }
+                public ProcedureT OnKeyPressProc { get; private set; }
+                private IPrintable printable;
 
-		public WindowT(DictionaryT dic) {
+		public WindowT(IPrintable p, DictionaryT dic) {
 			ID = ObjectContainer.Instance.Add(this);
+                        printable = p;
                         Width = (int)((Number)((ReferenceT)dic[new ReferenceT(new StringT("w"))]).Value).Value;
                         Height = (int)((Number)((ReferenceT)dic[new ReferenceT(new StringT("h"))]).Value).Value;
-                        Console.WriteLine("dic="+dic+" w="+Width+" h="+Height);
-                        Show();
+                        OnKeyPressProc = (ProcedureT)((ReferenceT)dic[new ReferenceT(new StringT("keypress"))]).Value;
                         Dictionary = dic;
+			KeyPress += new KeyPressEventHandler(onKeyPress);
 		}
 
+		private void onKeyPress(object sender, KeyPressEventArgs e) {
+                    OnKeyPressProc.Call(printable, new object[]{new StringT(""+e.KeyChar)});
+		}
 		public override bool Equals(object ob) {
 			return CompareTo(ob)==0;
 		}
@@ -55,7 +62,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public object Clone() {
-			return new WindowT((DictionaryT)Dictionary.Clone());
+			return new WindowT(printable, (DictionaryT)Dictionary.Clone());
 		}
 
 		IVariable[] ITuplable.ToArray() {
@@ -67,6 +74,7 @@ namespace Mondo.MyTypes.MyClasses {
 		public const string ClassName = "Window";
 
 		private static object[] lambdas = {
+                        "show", 	(Func<WindowT,bool>) ((x) => {x.Show(); Application.Run(x); return true;}),
                         "close",	(Func<WindowT,bool>) ((x) => {x.Close(); return true;}),
 		};
 
