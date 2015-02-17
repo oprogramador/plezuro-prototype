@@ -23,6 +23,7 @@
 
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 using System.Collections.Generic;
 using Mondo.Engine;
 using Mondo.MyCollections;
@@ -33,10 +34,12 @@ namespace Mondo.MyTypes.MyClasses {
                 public DictionaryT Dictionary { get; private set; }
                 public ProcedureT OnKeyPressProc { get; private set; }
                 private IPrintable printable;
+                private ListT drawingSquares;
 
-		public WindowT(IPrintable p, DictionaryT dic) {
+		public WindowT(IPrintable p, DictionaryT dic, ListT ds) {
 			ID = ObjectContainer.Instance.Add(this);
                         printable = p;
+                        drawingSquares = ds;
                         Width = (int)((Number)((ReferenceT)dic[new ReferenceT(new StringT("w"))]).Value).Value;
                         Height = (int)((Number)((ReferenceT)dic[new ReferenceT(new StringT("h"))]).Value).Value;
                         OnKeyPressProc = (ProcedureT)((ReferenceT)dic[new ReferenceT(new StringT("keypress"))]).Value;
@@ -62,7 +65,7 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public object Clone() {
-			return new WindowT(printable, (DictionaryT)Dictionary.Clone());
+			return new WindowT(printable, (DictionaryT)Dictionary.Clone(), drawingSquares);
 		}
 
 		IVariable[] ITuplable.ToArray() {
@@ -76,6 +79,7 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
                         "show", 	(Func<WindowT,bool>) ((x) => {x.Show(); Application.Run(x); return true;}),
                         "close",	(Func<WindowT,bool>) ((x) => {x.Close(); return true;}),
+                        "squares",	(Func<WindowT,ListT,WindowT>) ((w,l) => {w.drawingSquares = l; w.Refresh(); return w;}),
 		};
 
 		public ClassT GetClass() {
@@ -97,5 +101,22 @@ namespace Mondo.MyTypes.MyClasses {
 			return "window()";
 		}
 
+                protected override void OnPaint(PaintEventArgs e) {
+                    var g = this.CreateGraphics();
+                    if(drawingSquares!=null) drawSquares(g);
+                    Console.WriteLine("ds="+drawingSquares);
+                    g.Dispose();
+                }
+
+                private void drawSquares(Graphics g) {
+                    Console.WriteLine("ds");
+                    foreach(var row in drawingSquares) {
+                        var str = ((StringT)((ReferenceT)row).Value).Value;
+                        Console.WriteLine("str="+str);
+                        var brush = new SolidBrush(Color.Red);
+                        g.FillRectangle(brush, new Rectangle(20,20,50,80));
+                        brush.Dispose();
+                    }
+                }
 	}
 }

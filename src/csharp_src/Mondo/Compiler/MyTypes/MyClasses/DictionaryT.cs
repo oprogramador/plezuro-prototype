@@ -115,7 +115,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"contains",	(Func<DictionaryT,IVariable,bool>) ((a,x) => a.ContainsKey(new ReferenceT(x))),
 			"keys",		(Func<DictionaryT,SetT>) ((x) => new SetT(x.Keys)),
 			"remove",	(Func<DictionaryT,IVariable,DictionaryT>) ((x,i) => {var y=(DictionaryT)x.Clone(); y.Remove(new ReferenceT(i)); return y;}),
-                        "window",	(Func<IPrintable,DictionaryT,WindowT>) ((p,x) => new WindowT(p, (DictionaryT)x.Clone())),
+                        "window",	(Func<IPrintable,DictionaryT,WindowT>) ((p,x) => new WindowT(p, (DictionaryT)x.Clone(), null)),
 			"<<",		(Func<DictionaryT,PairT,DictionaryT>) ((a,v) => {a.Add((PairT)v.Clone()); return a;} ),
 		};
 		
