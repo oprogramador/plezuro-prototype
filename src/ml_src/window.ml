@@ -5,4 +5,5 @@ $w = #[
     'keypress', {(args*3).printl},
     'squares', ['gg','rb']
     ].window;
+w.squares(['bbgr', 'ggbb', 'rrgr']);
 w.show

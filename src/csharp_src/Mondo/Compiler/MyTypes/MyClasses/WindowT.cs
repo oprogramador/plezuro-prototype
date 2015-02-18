@@ -38,7 +38,10 @@ namespace Mondo.MyTypes.MyClasses {
                     get {
                        return (ListT)((ReferenceT)Dictionary[new ReferenceT(new StringT("squares"))]).Value;
                     }
-                    set {}
+                    set {
+                        Console.WriteLine("set");
+                        Dictionary[new ReferenceT(new StringT("squares"))] = new ReferenceT(value); 
+                    }
                 }
                 private int drawingSquaresWidth {
                     get {
@@ -95,7 +98,7 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
                         "show", 	(Func<WindowT,bool>) ((x) => {x.Show(); Application.Run(x); return true;}),
                         "close",	(Func<WindowT,bool>) ((x) => {x.Close(); return true;}),
-                        "squares",	(Func<WindowT,ListT,WindowT>) ((w,l) => {w.drawingSquares = l; Console.WriteLine("dra="+w.drawingSquares); w.Refresh(); return w;}),
+                        "squares",	(Func<WindowT,ListT,WindowT>) ((w,l) => {w.Dictionary = null; return w;}),
 		};
 
 		public ClassT GetClass() {
