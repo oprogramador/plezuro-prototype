@@ -1,9 +1,9 @@
 'hello'.printl;
+$squares = ['gg','rb'];
 $w = #[
     'w', 830,
     'h', 470,
-    'keypress', {(args*3).printl},
-    'squares', ['gg','rb']
+    'keypress', {squares=['rgb', 'ggb']},
+    'squares', &&squares
     ].window;
-w.squares(['bbgr', 'ggbb', 'rrgr']);
 w.show

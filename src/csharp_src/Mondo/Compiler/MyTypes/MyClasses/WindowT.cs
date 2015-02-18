@@ -36,11 +36,11 @@ namespace Mondo.MyTypes.MyClasses {
                 private IPrintable printable;
                 private ListT drawingSquares {
                     get {
-                       return (ListT)((ReferenceT)Dictionary[new ReferenceT(new StringT("squares"))]).Value;
+                       return (ListT)((PointerT)((ReferenceT)Dictionary[new ReferenceT(new StringT("squares"))]).Value).Value.Value;
                     }
                     set {
-                        Console.WriteLine("set");
-                        Dictionary[new ReferenceT(new StringT("squares"))] = new ReferenceT(value); 
+                        //Console.WriteLine("set");
+                        //Dictionary[new ReferenceT(new StringT("squares"))] = new ReferenceT(value); 
                     }
                 }
                 private int drawingSquaresWidth {
@@ -98,7 +98,6 @@ namespace Mondo.MyTypes.MyClasses {
 		private static object[] lambdas = {
                         "show", 	(Func<WindowT,bool>) ((x) => {x.Show(); Application.Run(x); return true;}),
                         "close",	(Func<WindowT,bool>) ((x) => {x.Close(); return true;}),
-                        "squares",	(Func<WindowT,ListT,WindowT>) ((w,l) => {w.Dictionary = null; return w;}),
 		};
 
 		public ClassT GetClass() {
@@ -117,13 +116,14 @@ namespace Mondo.MyTypes.MyClasses {
 		}
 
 		public override string ToString() {
-			return "window()";
+			return "window( "+Dictionary+" )";
 		}
 
                 protected override void OnPaint(PaintEventArgs e) {
                     var g = this.CreateGraphics();
                     if(drawingSquares!=null) drawSquares(g);
                     Console.WriteLine("ds="+drawingSquares);
+                    Console.WriteLine("this="+this);
                     g.Dispose();
                 }
 
