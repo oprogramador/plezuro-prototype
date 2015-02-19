@@ -34,16 +34,14 @@ namespace Mondo.MyTypes.MyClasses {
         private System.Timers.Timer timer;
         public int ID { get; private set; }
         public DictionaryT Dictionary { get; private set; }
+        public ProcedureT OnTimeProc { get; private set; }
         public ProcedureT OnKeyPressProc { get; private set; }
         private IPrintable printable;
         private ListT drawingSquares {
             get {
                 return (ListT)((PointerT)((ReferenceT)Dictionary[new ReferenceT(new StringT("squares"))]).Value).Value.Value;
             }
-            set {
-                //Console.WriteLine("set");
-                //Dictionary[new ReferenceT(new StringT("squares"))] = new ReferenceT(value); 
-            }
+            set {}
         }
         private int drawingSquaresWidth {
             get {
@@ -70,16 +68,26 @@ namespace Mondo.MyTypes.MyClasses {
                 timer.Elapsed += onTimeEvent;
                 timer.Enabled = true;
             } catch {}
-            OnKeyPressProc = (ProcedureT)((ReferenceT)dic[new ReferenceT(new StringT("keypress"))]).Value;
+            try {
+                OnTimeProc = (ProcedureT)((ReferenceT)dic[new ReferenceT(new StringT("ontime"))]).Value;
+            } catch {}
+            try {
+                OnKeyPressProc = (ProcedureT)((ReferenceT)dic[new ReferenceT(new StringT("keypress"))]).Value;
+            } catch {}
             Dictionary = dic;
             KeyPress += new KeyPressEventHandler(onKeyPress);
         }
 
         private void onKeyPress(object sender, KeyPressEventArgs e) {
-            OnKeyPressProc.Call(printable, new object[]{new StringT(""+e.KeyChar)});
+            try {
+                OnKeyPressProc.Call(printable, new object[]{new StringT(""+e.KeyChar)});
+            } catch {}
         }
 
         private void onTimeEvent(Object source, ElapsedEventArgs e) {
+            try {
+                OnTimeProc.Call(printable, new object[]{});
+            } catch {}
             Refresh();
         }
 
@@ -137,13 +145,10 @@ namespace Mondo.MyTypes.MyClasses {
             base.OnPaint(e);
             var g = e.Graphics;
             if(drawingSquares!=null) drawSquares(g);
-            Console.WriteLine("ds="+drawingSquares);
-            Console.WriteLine("this="+this);
             g.Dispose();
         }
 
         private void drawSquares(Graphics g) {
-            Console.WriteLine("ds");
             int ww = Width/drawingSquaresWidth;
             int hh = Height/drawingSquares.Count;
             for(int y=0; y<drawingSquares.Count; y++) {
