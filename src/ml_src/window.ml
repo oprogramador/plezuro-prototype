@@ -1,5 +1,5 @@
 'hello'.printl;
-$squares = ['gg','rb'];
+$squares = [['g','g'],['r','b']];
 $w = #[
     'w', 830,
     'h', 470,

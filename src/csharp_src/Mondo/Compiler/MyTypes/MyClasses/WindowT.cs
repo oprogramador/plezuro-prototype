@@ -45,15 +45,15 @@ namespace Mondo.MyTypes.MyClasses {
         }
         private int drawingSquaresWidth {
             get {
-                return ((StringT)((ReferenceT)drawingSquares[0]).Value).Value.Length;
+                return ((ListT)((ReferenceT)drawingSquares[0]).Value).Count;
             }
             set {}
         }
-        public Dictionary<char,Color> Colors = new Dictionary<char,Color>() {
-            {'r', Color.Red},
-                {'g', Color.Green},
-                {'b', Color.Blue},
-                {'y', Color.Yellow},
+        public Dictionary<string,Color> Colors = new Dictionary<string,Color>() {
+            {"r", Color.Red},
+            {"g", Color.Green},
+            {"b", Color.Blue},
+            {"y", Color.Yellow},
         };
 
         public WindowT(IPrintable p, DictionaryT dic) {
@@ -152,9 +152,10 @@ namespace Mondo.MyTypes.MyClasses {
             int ww = Width/drawingSquaresWidth;
             int hh = Height/drawingSquares.Count;
             for(int y=0; y<drawingSquares.Count; y++) {
-                var str = ((StringT)((ReferenceT)drawingSquares[y]).Value).Value;
-                for(int x=0; x<str.Length; x++) {
-                    var brush = new SolidBrush(Colors[str[x]]);
+                var row = (ListT)((ReferenceT)drawingSquares[y]).Value;
+                for(int x=0; x<row.Count; x++) {
+                    var str = ((StringT)((ReferenceT)row[x]).Value).Value;
+                    var brush = new SolidBrush(Colors[str]);
                     g.FillRectangle(brush, new Rectangle(x*ww, y*hh, ww, hh));
                     brush.Dispose();
                 }
