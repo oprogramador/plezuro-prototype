@@ -27,26 +27,31 @@ $moveSnike = {
         'd', [1, 0]
     ];
     $new = [];
-    new << addVec(this[0]);
-    this.each{
-        {first>0}.if{
-            new << this
-        }
-    };
+    $di = first;
+    new << addVec(this[0], directions[first]);
+    new += this;
+    new >> $pop;
+    'new'.dumpl;
     new
 };
-$squares = makeBoard('y',20,6);
-printOnBoard($squares, [1,25,2]);
-$squares = printOnBoard(squares, [#['color', 'r', 'sq', [[0,1], [2,4]]], #['color', 'b', 'sq', [[2,5], [15,3]]]]);
+$snike = [[4,0], [3,0], [2,0], [1,0], [0,0]];
+$squares = makeBoard('y',40,22);
+$squares = printOnBoard(squares, [#['color', 'r', 'sq', [[0,1], [2,4]]], #['color', 'b', 'sq', $snike]]);
 'squares'.dumpl;
+$direction = 'd';
 $w = #[
     'w', 830,
     'h', 470,
-    'time', 50,
+    'time', 500,
     'ontime', {
+        squares = makeBoard('y',40,22);
+        snike = moveSnike(snike, direction);
+        squares = printOnBoard(squares, [#['color', 'b', 'sq', snike]])
     },
     'keypress', {
-        squares=['rgb', 'ggb']
+        {'wasd'.contains(this)}.if{
+            direction = this
+        }
     },
     'squares', &&squares
     ].window;

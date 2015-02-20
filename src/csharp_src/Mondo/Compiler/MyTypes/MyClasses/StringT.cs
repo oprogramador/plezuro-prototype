@@ -100,6 +100,7 @@ namespace Mondo.MyTypes.MyClasses {
 					((name, parents, methods) => new MyClass(name, parents, methods)),
 			"len",		(Func<string,double>) ((a) => a.Length),
 			"get",		(Func<string,double,IVariable>) ((a,i) => new StringT(""+a[(int)i])),
+			"contains", 	(Func<string,string,bool>) ((a,sub) => a.Contains(sub)),
 			SymbolMap.RefSymbol, (Func<StringT,IVariable,object>) ((a,i) => GeneralIndexer.Index(a,i)),
 			"shuffle",	(Func<string,string>) ((x) => new string(x.ToCharArray().OrderBy(s => (Engine.Engine.Random.Next(2) % 2) == 0).ToArray())),
 			"rand",		(Func<string,double,string>) ((t,n) => lib.SString.Rand(t,(int)n)),
