@@ -32,6 +32,7 @@ using Mondo.MyCollections;
 namespace Mondo.MyTypes.MyClasses {
     class WindowT : Form, IVariable {
         private System.Timers.Timer timer;
+        public int TitleBarHeight { get; private set; }
         public int ID { get; private set; }
         public DictionaryT Dictionary { get; private set; }
         public ProcedureT OnTimeProc { get; private set; }
@@ -64,6 +65,7 @@ namespace Mondo.MyTypes.MyClasses {
 
         public WindowT(IPrintable p, DictionaryT dic) {
             ID = ObjectContainer.Instance.Add(this);
+            TitleBarHeight = RectangleToScreen(this.ClientRectangle).Top - Top;
             DoubleBuffered = true;
             printable = p;
             Width = (int)((Number)((ReferenceT)dic[new ReferenceT(new StringT("w"))]).Value).Value;
@@ -157,7 +159,7 @@ namespace Mondo.MyTypes.MyClasses {
 
         private void drawInfo(Graphics g) {
             int ww = Width/drawingSquaresWidth;
-            int hh = Height/drawingSquares.Count;
+            int hh = (Height-TitleBarHeight)/drawingSquares.Count;
             for(int y=0; y<info.Count; y++) {
                 var row = (DictionaryT)((ReferenceT)info[y]).Value;
                 var size = (int)((Number)((ReferenceT)row[new ReferenceT(new StringT("size"))]).Value).Value;
