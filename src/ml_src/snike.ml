@@ -41,6 +41,7 @@ $H = 12;
 $apple;
 $snike;
 $direction;
+$info;
 $eatApple = {
     'eat'.printl;
     snike << apple;
@@ -89,13 +90,21 @@ $w = #[
         snike = moveSnike(snike, direction);
         doReset();
         doApple();
-        squares = printOnBoard(squares, [#['color', 'r', 'sq', [apple]], #['color', 'b', 'sq', snike]])
+        squares = printOnBoard(squares, [#['color', 'r', 'sq', [apple]], #['color', 'b', 'sq', snike]]);
+        info = 'result '+snike.len
     },
     'keypress', {
         {'wasd'.contains(this)}.if{
             direction = this
         }
     },
-    'squares', &&squares
+    'squares', &&squares,
+    'info', [
+        #[
+            'text', &&info,
+            'color', 'b',
+            'size', 16
+        ]
+    ]
     ].window;
 w.show

@@ -37,6 +37,12 @@ namespace Mondo.MyTypes.MyClasses {
         public ProcedureT OnTimeProc { get; private set; }
         public ProcedureT OnKeyPressProc { get; private set; }
         private IPrintable printable;
+        private ListT info {
+            get {
+                return (ListT)((ReferenceT)Dictionary[new ReferenceT(new StringT("info"))]).Value;
+            }
+            set {}
+        }
         private ListT drawingSquares {
             get {
                 return (ListT)((PointerT)((ReferenceT)Dictionary[new ReferenceT(new StringT("squares"))]).Value).Value.Value;
@@ -145,7 +151,28 @@ namespace Mondo.MyTypes.MyClasses {
             base.OnPaint(e);
             var g = e.Graphics;
             if(drawingSquares!=null) drawSquares(g);
+            if(info!=null) drawInfo(g);
             g.Dispose();
+        }
+
+        private void drawInfo(Graphics g) {
+            int ww = Width/drawingSquaresWidth;
+            int hh = Height/drawingSquares.Count;
+            for(int y=0; y<info.Count; y++) {
+                var row = (DictionaryT)((ReferenceT)info[y]).Value;
+                var size = (int)((Number)((ReferenceT)row[new ReferenceT(new StringT("size"))]).Value).Value;
+                var colorstr = (string)((StringT)((ReferenceT)row[new ReferenceT(new StringT("color"))]).Value).Value;
+                string text;
+                try {
+                    text = ((StringT)((PointerT)((ReferenceT)row[new ReferenceT(new StringT("text"))]).Value).Value.Value).Value;
+                } catch {
+                    text = "";
+                }
+                var brush = new SolidBrush(Colors[colorstr]);
+                var font = new Font("Arial", size);
+                g.DrawString(text, font, brush, ww, y*hh, new StringFormat());
+                brush.Dispose();
+            }
         }
 
         private void drawSquares(Graphics g) {
