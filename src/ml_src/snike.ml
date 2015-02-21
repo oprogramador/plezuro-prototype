@@ -31,22 +31,65 @@ $moveSnike = {
     new << addVec(this[0], directions[first]);
     new += this;
     new >> $pop;
-    'new'.dumpl;
     new
 };
-$snike = [[4,0], [3,0], [2,0], [1,0], [0,0]];
-$squares = makeBoard('y',40,22);
-$squares = printOnBoard(squares, [#['color', 'r', 'sq', [[0,1], [2,4]]], #['color', 'b', 'sq', $snike]]);
+$generApple = {
+    [(rand*this).floor, (rand*first).floor]
+};
+$W = 20;
+$H = 12;
+$apple;
+$snike;
+$direction;
+$eatApple = {
+    'eat'.printl;
+    snike << apple;
+    apple = generApple(W,H)
+};
+$checkApple = {
+    snike[0] == apple
+};
+$doApple = {
+    {checkApple()}.if{eatApple()}
+};
+$checkIsOut = {
+    $head = snike[0];
+    head[0]<0 | head[0]>=W | head[1]<0 | head[1]>=H
+};
+$checkEatSelf = {
+    $res = false;
+    (1..(snike.len)).each{
+        $i = snike[this];
+        {i == snike[0]}.if{
+            res = true
+        }
+    };
+    res
+};
+$reset = {
+    direction = 'd';
+    apple = generApple(W,H);
+    snike = [[2,0], [1,0], [0,0]];
+};
+$doReset = {
+    {checkIsOut() | checkEatSelf()}.if{
+        reset()
+    }
+};
+
+$squares = makeBoard('y',W,H);
+$squares = printOnBoard(squares, [#['color', 'r', 'sq', [apple]], #['color', 'b', 'sq', $snike]]);
 'squares'.dumpl;
-$direction = 'd';
 $w = #[
     'w', 830,
     'h', 470,
     'time', 500,
     'ontime', {
-        squares = makeBoard('y',40,22);
+        squares = makeBoard('y',W,H);
         snike = moveSnike(snike, direction);
-        squares = printOnBoard(squares, [#['color', 'b', 'sq', snike]])
+        doReset();
+        doApple();
+        squares = printOnBoard(squares, [#['color', 'r', 'sq', [apple]], #['color', 'b', 'sq', snike]])
     },
     'keypress', {
         {'wasd'.contains(this)}.if{
@@ -56,4 +99,3 @@ $w = #[
     'squares', &&squares
     ].window;
 w.show
-
