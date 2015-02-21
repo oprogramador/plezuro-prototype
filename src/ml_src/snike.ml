@@ -1,4 +1,3 @@
-'hello'.printl;
 /*
 class...
 */
@@ -25,6 +24,9 @@ $directions = #[
     's', [0, 1],
     'd', [1, 0]
 ];
+
+
+
 $moveSnike = {
     $new = [];
     $di = first;
@@ -34,15 +36,14 @@ $moveSnike = {
     new
 };
 $checkNewApple = {
-    (snike, apple) = args;
-    'snike,apple'.dumpl;
+    ($snike, $apple) = args;
     snike.all{this!=apple}
 };
 $tryGenerApple = {
     [(rand*this).floor, (rand*first).floor]
 };
-$W = 40;
-$H = 24;
+$W = 10;
+$H = 8;
 $apple;
 $snike;
 $direction;
@@ -50,13 +51,12 @@ $info;
 $generApple = {
     $val;
     {
-        val = [(rand*this).floor, (rand*first).floor];
-        !checkNewApple(snike, val)
+        val = tryGenerApple(W, H);
+        !(checkNewApple(snike, val))
     }.do;
     val
 };
 $eatApple = {
-    'eat'.printl;
     snike << apple;
     apple = generApple(W,H)
 };
@@ -96,7 +96,6 @@ $isDirCorrect = {
 
 $squares = makeBoard('y',W,H);
 $squares = printOnBoard(squares, [#['color', 'r', 'sq', [apple]], #['color', 'b', 'sq', $snike]]);
-'squares'.dumpl;
 $w = #[
     'w', 830,
     'h', 470,
