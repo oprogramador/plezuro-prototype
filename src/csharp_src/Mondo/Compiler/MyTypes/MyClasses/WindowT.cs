@@ -65,7 +65,8 @@ namespace Mondo.MyTypes.MyClasses {
 
         public WindowT(IPrintable p, DictionaryT dic) {
             ID = ObjectContainer.Instance.Add(this);
-            TitleBarHeight = RectangleToScreen(this.ClientRectangle).Top - Top;
+            TitleBarHeight = SystemInformation.ToolWindowCaptionHeight;
+            Console.WriteLine("he="+TitleBarHeight);
             DoubleBuffered = true;
             printable = p;
             Width = (int)((Number)((ReferenceT)dic[new ReferenceT(new StringT("w"))]).Value).Value;
@@ -179,7 +180,7 @@ namespace Mondo.MyTypes.MyClasses {
 
         private void drawSquares(Graphics g) {
             int ww = Width/drawingSquaresWidth;
-            int hh = Height/drawingSquares.Count;
+            int hh = (Height-TitleBarHeight)/drawingSquares.Count;
             for(int y=0; y<drawingSquares.Count; y++) {
                 var row = (ListT)((ReferenceT)drawingSquares[y]).Value;
                 for(int x=0; x<row.Count; x++) {

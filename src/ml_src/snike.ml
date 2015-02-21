@@ -41,8 +41,8 @@ $checkNewApple = {
 $tryGenerApple = {
     [(rand*this).floor, (rand*first).floor]
 };
-$W = 8;
-$H = 6;
+$W = 40;
+$H = 24;
 $apple;
 $snike;
 $direction;
