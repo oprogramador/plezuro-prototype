@@ -106,6 +106,7 @@ namespace Mondo.MyTypes.MyClasses {
 			"max",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Max()).Value),
 			"min",		(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Min()).Value),
 			"median",	(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Median()).Value),
+			"rand", 	(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x[new Random().Next(x.Count)]).Value),
 			"remove",	(Func<ListT,double,ListT>) ((x,i) => {x.RemoveAt((int)i); return x;}),
 			"toSet",	(Func<ListT,IVariable>) ((x) => new SetT(x)),
 			"html",		(Func<ListT,string>) ((x) => HtmlTableFactory.Create(x).SetBorder(2).Generate()),
