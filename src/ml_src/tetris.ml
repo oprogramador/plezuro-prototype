@@ -6,6 +6,29 @@ $moveTetromino = {
     this.map{addVec(this,directions[dir])}
 };
 
+$replace = {
+    [this[1], -this[0]]
+};
+
+$moveAll = {
+    $vec = first;
+    this.map({addVec(this, vec)})
+};
+
+$invVec = {
+    this.map{-this}
+};
+
+'moveAll([[0,1], [2,4], [5,6]], [2,2])'.dumpl;
+'addVec([3,3], [1,2])'.dumpl;
+'invVec([2,3])'.dumpl;
+
+$rotateTetromino = {
+    $head = this[0];
+    //addVec(this.map{replace(this.map(addVec(this, head.map(-this))))}, head)
+    moveAll(this.map{replace(addVec(this, invVec(head)))}, head)
+};
+
 $tetrominos = [
     [[0,0], [0,1], [0,2], [0,3]],
     [[0,0], [0,1], [1,1], [1,0]],
@@ -13,7 +36,7 @@ $tetrominos = [
     [[0,0], [1,0], [2,0], [2,1]],
     [[0,0], [1,0], [2,0], [0,1]],
     [[1,0], [2,0], [0,1], [1,1]],
-    [[1,0], [0,0], [0,1], [2,1]]
+    [[1,0], [0,0], [1,1], [2,1]]
 ];
 
 $W = 20;
@@ -39,8 +62,15 @@ $w = #[
         $newdir = this;
         {'ad'.contains(newdir)}.if{
             direction = newdir
+        }.else{
+            direction = ''     
         };
-        tetromino = moveTetromino(tetromino, direction);
+        {direction!=''}.if{
+            tetromino = moveTetromino(tetromino, direction)
+        };
+        {newdir=='k'}.if{
+            tetromino = rotateTetromino(tetromino)
+        }
     },
     'squares', &&squares,
     'info', [
