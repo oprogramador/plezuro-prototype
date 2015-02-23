@@ -43,24 +43,44 @@ $generateTetromino = {
     #['color', ['b', 'r', 'g'].rand, 'sq', tetrominos.rand]
 };
 
+
+$fall = {
+    board = printOnBoard(board, [tetromino]);
+    tetromino := generateTetromino();
+};
+
 $W = 20;
-$H = 32;
-$squares = makeBoard('y',W,H);
+$H = 16;
+$board = makeBoard('y',W,H);
+$squares;
+('squares = '+board).eval;
+'squares'.dumpl;
 $tetromino := generateTetromino();
 'tetromino'.dumpl;
 $direction = 'a';
 $info = '';
 
+
+$checkFall = {
+    ($tetromino, $board) = args;
+    !(tetromino.all{$el=this; 'el'.dumpl; '"rgb".contains(board[el[1]][el[0]])!=true'.dumpl; ('rgb'.contains(board[this[1]][this[0]])!=true) & this[1]<H})
+};
+
+
 $w = #[
     'w', 470,
-    'h', 600,
+    'h', 300,
     'time', 500,
     'ontime', {
-        squares = makeBoard('y',W,H);
-        tetromino['sq'] = moveTetromino(tetromino['sq']);
+        ('squares = '+board).eval;
+        $newTetromino = moveTetromino(tetromino['sq']);
         'tetromino'.dumpl;
         squares = printOnBoard(squares, [tetromino]);
-        'squares'.dumpl;
+        {checkFall(newTetromino, board)}.if{ 
+            fall() 
+        }.else{
+            tetromino['sq'] = newTetromino
+        };
         info = 'result: '
     },
     'keypress', {
