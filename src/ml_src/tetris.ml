@@ -6,6 +6,10 @@ $moveTetromino = {
     this.map{addVec(this,directions[dir])}
 };
 
+$checkIsOut = {
+    this.any{this[0]<0 | this[0]>=W | this[1]<0 | this[1]>=H}
+};
+
 $replace = {
     [this[1], -this[0]]
 };
@@ -49,6 +53,8 @@ $fall = {
     tetromino := generateTetromino();
 };
 
+
+
 $W = 20;
 $H = 16;
 $board = makeBoard('y',W,H);
@@ -66,6 +72,13 @@ $checkFall = {
     !(tetromino.all{$el=this; 'el'.dumpl; '"rgb".contains(board[el[1]][el[0]])!=true'.dumpl; ('rgb'.contains(board[this[1]][this[0]])!=true) & this[1]<H})
 };
 
+$reduceLines = {
+    board = board.where{!(this.all{this!='y'})};
+    (0..(H-board.len)).each{
+        board = [['y']*W] + board
+    }
+};
+
 
 $w = #[
     'w', 470,
@@ -81,6 +94,7 @@ $w = #[
         }.else{
             tetromino['sq'] = newTetromino
         };
+        reduceLines();
         info = 'result: '
     },
     'keypress', {

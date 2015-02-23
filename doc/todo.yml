@@ -136,6 +136,7 @@ Plezuro:
         update_to_newest_language_version: no
     tests:
         assert: no
+        unit_test_framework: no
         unit_tests_with_script_files: no
     todo:
         automatic_sort: no

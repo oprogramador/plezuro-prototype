@@ -95,6 +95,16 @@ namespace Mondo.MyTypes.MyClasses {
                                                     }
 						    return true; 
 					    }),
+			"search",   	(Func<IPrintable,ListT,ProcedureT,ListT>)
+						((p, ar, f) => {
+                                                    int k = 0;
+                                                    var res = new ListT();
+						    foreach(IVariable i in ar) {
+                                                        var ret = Evaluator.Eval(f,p,TupleT.MakeTuplable(new object[]{i, new Number(k++)}));
+                                                        if(ret.Equals(true)) res.Add(new ReferenceT(new Number(k-1)));
+                                                    }
+						    return res; 
+					    }),
 			"where",	(Func<IPrintable,ListT,ProcedureT,ListT>) 
 					((p,x,f) => new ListT( x.Where( i => Evaluator.Eval(f,p,TupleT.MakeTuplable(i)).Equals(true) ).ToList() ) ),
 			"map",		(Func<IPrintable,ListT,ProcedureT,ListT>) 
@@ -118,6 +128,21 @@ namespace Mondo.MyTypes.MyClasses {
 			"median",	(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x.Median()).Value),
 			"rand", 	(Func<ListT,IVariable>) ((x) => (IVariable)((ReferenceT)x[new Random().Next(x.Count)]).Value),
 			"remove",	(Func<ListT,double,ListT>) ((x,i) => {x.RemoveAt((int)i); return x;}),
+                        //"removeAll",    (Func<ListT,ListT,ListT>) ((x,y) => {
+                                            //var res = new ListT();
+                                            //var k=0;
+                                            //for(int i=0; i<x.Count; i++) {
+                                                //if(k<y.Count) {
+                                                    //var ele = (int)((Number)((ReferenceT)y[k]).Value).Value;
+                                                    //Console.WriteLine("ii: "+ele+" type="+ele.GetType());
+                                                    //}
+                                                //if(i == y.Count) res.Add(x[i]);
+                                                //else if(i != (int)((Number)((ReferenceT)y[k]).Value).Value) res.Add(x[i]);
+                                                //else k++;
+                                                //Console.WriteLine("res="+res);
+                                                //}
+                                            //return res;
+                                        //}),
 			"toSet",	(Func<ListT,IVariable>) ((x) => new SetT(x)),
 			"html",		(Func<ListT,string>) ((x) => HtmlTableFactory.Create(x).SetBorder(2).Generate()),
                         "join",         (Func<ListT,string,string>) ((x,delim) => {
