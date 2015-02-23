@@ -39,10 +39,14 @@ $tetrominos = [
     [[1,0], [0,0], [1,1], [2,1]]
 ];
 
+$generateTetromino = {
+    #['color', ['b', 'r', 'g'].rand, 'sq', tetrominos.rand]
+};
+
 $W = 20;
 $H = 32;
 $squares = makeBoard('y',W,H);
-$tetromino = tetrominos.rand;
+$tetromino := generateTetromino();
 'tetromino'.dumpl;
 $direction = 'a';
 $info = '';
@@ -53,9 +57,10 @@ $w = #[
     'time', 500,
     'ontime', {
         squares = makeBoard('y',W,H);
-        tetromino = moveTetromino(tetromino);
+        tetromino['sq'] = moveTetromino(tetromino['sq']);
         'tetromino'.dumpl;
-        squares = printOnBoard(squares, [ #['color', 'b', 'sq', tetromino]]);
+        squares = printOnBoard(squares, [tetromino]);
+        'squares'.dumpl;
         info = 'result: '
     },
     'keypress', {
@@ -66,10 +71,10 @@ $w = #[
             direction = ''     
         };
         {direction!=''}.if{
-            tetromino = moveTetromino(tetromino, direction)
+            tetromino['sq'] = moveTetromino(tetromino['sq'], direction)
         };
         {newdir=='k'}.if{
-            tetromino = rotateTetromino(tetromino)
+            tetromino['sq'] = rotateTetromino(tetromino['sq'])
         }
     },
     'squares', &&squares,
