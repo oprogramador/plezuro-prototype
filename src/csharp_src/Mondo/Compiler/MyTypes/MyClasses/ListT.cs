@@ -43,6 +43,16 @@ namespace Mondo.MyTypes.MyClasses {
 			return new ListT(this);
 		}
 
+                public ListT DeepClone() {
+                    var res = new ListT();
+                    foreach(var i in this) {
+                        var el = ((ReferenceT)i).Value;
+                        if(el is ListT) res.Add(new ReferenceT(((ListT)el).DeepClone()));
+                        else res.Add(new ReferenceT((IVariable)el.Clone()));
+                    }
+                    return res;
+                }
+
 		public ListT Concat(ListT st) {
 			return (ListT)Concat(st,typeof(ListT));
 		}
@@ -116,6 +126,7 @@ namespace Mondo.MyTypes.MyClasses {
 						foreach(var i in x.ToArray()) ret += (ret=="" ? "" : delim)+((IStringable)i).ToString();
 						return ret;
 					}),
+                        "deepclone",    (Func<ListT,ListT>) ((x) => x.DeepClone()),
 			"<<",		(Func<ListT,IVariable,ListT>) ((a,v) => {a.Add(new ReferenceT(v)); return a;} ),
 			">>",		(Func<ListT,ReferenceT,ListT>) ((a,v) => {v.Value=(IVariable)a.Pop(); return a;} ),
 			"+",		(Func<ListT,ListT,ListT>) ((x,y) => (ListT)x.Concat(y)),
