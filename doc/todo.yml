@@ -20,7 +20,7 @@ Plezuro:
             base_classes: no
             inherited_methods: no
             methods: no
-            pools: no
+            fields: no
         constraints:
             regex: no
             type: no
