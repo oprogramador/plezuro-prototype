@@ -17,4 +17,4 @@ Interpreter: plezuro.exe
 
 Building script: make.sh
 
-Test unit script: test.sh
+Test script: test.sh
